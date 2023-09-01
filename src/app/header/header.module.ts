@@ -8,6 +8,9 @@ import {MatMenuModule} from "@angular/material/menu";
 import {MatLegacyButtonModule} from "@angular/material/legacy-button";
 import {MatIconModule} from "@angular/material/icon";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {RouterLink, RouterLinkActive} from "@angular/router";
+import {TranslocoPipe} from "@ngneat/transloco";
+import {SharedModule} from "../../shared/shared.module";
 
 
 
@@ -18,15 +21,19 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
   exports: [
     HeaderComponent
   ],
-    imports: [
-        CommonModule,
-        MatSidenavModule,
-        MatOptionModule,
-        MatSelectModule,
-        MatMenuModule,
-        MatLegacyButtonModule,
-        MatIconModule,
-        MatSlideToggleModule
-    ]
+  imports: [
+    CommonModule,
+    MatSidenavModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatMenuModule,
+    MatLegacyButtonModule,
+    MatIconModule,
+    MatSlideToggleModule,
+    RouterLink,
+    TranslocoPipe,
+    SharedModule,
+    RouterLinkActive
+  ]
 })
 export class HeaderModule { }

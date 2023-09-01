@@ -1,5 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {TranslocoService} from "@ngneat/transloco";
+import {HEADER_ROUTES} from "../../../shared/static/header-routes.static";
+import {Route} from "../../../shared/interfaces/route.interface";
 
 @Component({
   selector: 'app-header',
@@ -9,6 +11,7 @@ import {TranslocoService} from "@ngneat/transloco";
 export class HeaderComponent{
   @Output() onSwitchDrawer = new EventEmitter<any>()
   isEng: boolean = true;
+  routes: Route[] = HEADER_ROUTES;
 
   constructor(
     private translocoService: TranslocoService
@@ -17,14 +20,5 @@ export class HeaderComponent{
 
   switchDrawer() {
     this.onSwitchDrawer.emit()
-  }
-
-  setOtherLang() {
-    this.isEng = !this.isEng
-    if(this.isEng) {
-      this.translocoService.setActiveLang('en')
-    } else {
-      this.translocoService.setActiveLang('uk')
-    }
   }
 }
