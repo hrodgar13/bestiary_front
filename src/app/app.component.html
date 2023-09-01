@@ -11,7 +11,9 @@
         {{'Login' | transloco}}
       </button>
       <div>
-        <mat-slide-toggle (toggleChange)="setOtherLang()">{{isEng ? 'EN' : 'UA'}}</mat-slide-toggle>
+        <mat-slide-toggle #languageSwitch (toggleChange)="setOtherLang()" >
+          <span class="text-[#B1A79C]">{{isEng ? 'EN' : 'UA'}}</span>
+        </mat-slide-toggle>
       </div>
     </div>
   </mat-drawer>

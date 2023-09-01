@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
 import {TranslocoService} from "@ngneat/transloco";
 
 interface Route {
@@ -11,7 +11,9 @@ interface Route {
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent{
+  @ViewChild('languageSwitch', {read: ElementRef}) element: ElementRef | undefined;
+
   isEng: boolean = true;
 
   constructor(
@@ -45,7 +47,7 @@ export class AppComponent {
   setOtherLang() {
     this.isEng = !this.isEng
 
-    if(this.isEng) {
+    if (this.isEng) {
       this.translocoService.setActiveLang('en')
     } else {
       this.translocoService.setActiveLang('uk')

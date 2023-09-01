@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSidenavModule} from "@angular/material/sidenav";
 import { TranslocoRootModule } from './transloco-root.module';
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {SharedModule} from "../shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
     BrowserAnimationsModule,
     MatSidenavModule,
     TranslocoRootModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
