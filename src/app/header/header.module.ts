@@ -7,6 +7,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatLegacyButtonModule} from "@angular/material/legacy-button";
 import {MatIconModule} from "@angular/material/icon";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 
 
 
@@ -17,14 +18,15 @@ import {MatIconModule} from "@angular/material/icon";
   exports: [
     HeaderComponent
   ],
-  imports: [
-    CommonModule,
-    MatSidenavModule,
-    MatOptionModule,
-    MatSelectModule,
-    MatMenuModule,
-    MatLegacyButtonModule,
-    MatIconModule
-  ]
+    imports: [
+        CommonModule,
+        MatSidenavModule,
+        MatOptionModule,
+        MatSelectModule,
+        MatMenuModule,
+        MatLegacyButtonModule,
+        MatIconModule,
+        MatSlideToggleModule
+    ]
 })
 export class HeaderModule { }

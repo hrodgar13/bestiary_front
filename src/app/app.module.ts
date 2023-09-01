@@ -7,6 +7,8 @@ import {HttpClientModule} from "@angular/common/http";
 import {HeaderModule} from "./header/header.module";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSidenavModule} from "@angular/material/sidenav";
+import { TranslocoRootModule } from './transloco-root.module';
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import {MatSidenavModule} from "@angular/material/sidenav";
     HttpClientModule,
     HeaderModule,
     BrowserAnimationsModule,
-    MatSidenavModule
+    MatSidenavModule,
+    TranslocoRootModule,
+    MatSlideToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

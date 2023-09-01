@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {TranslocoService} from "@ngneat/transloco";
 
 interface Route {
   route: string;
@@ -11,6 +12,13 @@ interface Route {
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  isEng: boolean = true;
+
+  constructor(
+    private translocoService: TranslocoService
+  ) {
+  }
+
   routes: Route[] = [
     {
       title: 'Home',
@@ -33,4 +41,14 @@ export class AppComponent {
       route: 'equipment'
     },
   ]
+
+  setOtherLang() {
+    this.isEng = !this.isEng
+
+    if(this.isEng) {
+      this.translocoService.setActiveLang('en')
+    } else {
+      this.translocoService.setActiveLang('uk')
+    }
+  }
 }

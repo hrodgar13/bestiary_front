@@ -5,11 +5,14 @@
         <h2 class="text-2xl">VIRIBUS UNITIS</h2>
       </div>
       <div *ngFor="let route of routes">
-        <a routerLink="{{'/' + route.route}}" routerLinkActive="text-[#FFFFFF]" class="text-[#B1A79C] text-xl"> {{route.title}} </a>
+        <a routerLink="{{'/' + route.route}}" routerLinkActive="text-[#FFFFFF]" class="text-[#B1A79C] text-xl"> {{route.title | transloco}} </a>
       </div>
       <button class="p-2 rounded bg-[#E2A23B] playfair-font font-semibold max-w-[50%] my-3">
-        Login
+        {{'Login' | transloco}}
       </button>
+      <div>
+        <mat-slide-toggle (toggleChange)="setOtherLang()">{{isEng ? 'EN' : 'UA'}}</mat-slide-toggle>
+      </div>
     </div>
   </mat-drawer>
   <mat-drawer-content class="primary-bg">
