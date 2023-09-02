@@ -13,11 +13,6 @@ export class HeaderComponent{
   isEng: boolean = true;
   routes: Route[] = HEADER_ROUTES;
 
-  constructor(
-    private translocoService: TranslocoService
-  ) {
-  }
-
   switchDrawer() {
     this.onSwitchDrawer.emit()
   }

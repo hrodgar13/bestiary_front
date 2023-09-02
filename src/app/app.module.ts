@@ -10,6 +10,8 @@ import {MatSidenavModule} from "@angular/material/sidenav";
 import { TranslocoRootModule } from './transloco-root.module';
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {SharedModule} from "../shared/shared.module";
+import {RouterModule} from "@angular/router";
+import {HomeModule} from "./pages/home/home.module";
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import {SharedModule} from "../shared/shared.module";
     MatSidenavModule,
     TranslocoRootModule,
     MatSlideToggleModule,
-    SharedModule
+    RouterModule,
+    SharedModule,
+    HomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

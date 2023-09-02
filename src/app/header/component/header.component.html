@@ -1,4 +1,4 @@
-<div class="flex 768:hidden px-3 py-1 flex-row justify-between">
+<div class="flex 768:hidden px-3 py-1 flex-row justify-between bg-[rgba(0, 0 , 0 ,0.5)]">
   <div>
     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 80 80" fill="none">
       <g clip-path="url(#clip0_2_255)">
@@ -66,7 +66,7 @@
 </div>
 
 
-<div class="items-center hidden 768:flex p-4 justify-between">
+<div class="items-center hidden 768:flex py-4 justify-between mx-[20px] 1280:mx-[100px]">
   <div>
     <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80" fill="none">
       <g clip-path="url(#clip0_2_255)">
@@ -126,10 +126,10 @@
       </defs>
     </svg>
   </div>
-  <div class="flex w-[55%] justify-between items-center">
+  <div class="flex max-w-[550px] px-3 w-full justify-between items-center">
     <div *ngFor="let route of routes">
       <a routerLink="{{'/' + route.route}}" routerLinkActive="text-[#FFFFFF]"
-         class="hover:underline transition text-[#B1A79C] text-xl">{{route.title | transloco}}</a>
+         class="hover:underline link-shadow transition text-[#E2A23B] text-md">{{route.title | transloco}}</a>
     </div>
   </div>
   <div class="flex gap-1 items-center">

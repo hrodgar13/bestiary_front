@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, HostListener, ViewChild} from '@angular/core';
 import {TranslocoService} from "@ngneat/transloco";
 import {HEADER_ROUTES} from "../shared/static/header-routes.static";
 import {Route} from "../shared/interfaces/route.interface";
@@ -8,6 +8,6 @@ import {Route} from "../shared/interfaces/route.interface";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent{
+export class AppComponent {
   routes: Route[] = HEADER_ROUTES
 }
