@@ -1,0 +1,19 @@
+.bestiary-card {
+
+  &:hover {
+    svg {
+      path {
+        fill: #B1A79C;
+      }
+    }
+  }
+}
+
+.bestiary-section {
+  @media (min-width: 768px) {
+    background-image: url('~src/assets/images/bestiary-bg.PNG');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: left;
+  }
+}
