@@ -9,5 +9,5 @@ import {Route} from "../shared/interfaces/route.interface";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  routes: Route[] = HEADER_ROUTES
+
 }

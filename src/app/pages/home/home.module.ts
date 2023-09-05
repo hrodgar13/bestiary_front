@@ -4,6 +4,7 @@ import { HomeComponent } from './home.component';
 import { TierFirstComponent } from './components/tier-first/tier-first.component';
 import { TierBestiaryComponent } from './components/tier-bestiary/tier-bestiary.component';
 import {TranslocoPipe} from "@ngneat/transloco";
+import {HomeRoutingModule} from "./home-routing.module";
 
 
 
@@ -11,11 +12,12 @@ import {TranslocoPipe} from "@ngneat/transloco";
   declarations: [
     HomeComponent,
     TierFirstComponent,
-    TierBestiaryComponent,
+    TierBestiaryComponent
   ],
   imports: [
     CommonModule,
-    TranslocoPipe
+    TranslocoPipe,
+    HomeRoutingModule
   ]
 })
 export class HomeModule { }

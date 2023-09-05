@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {TranslocoService} from "@ngneat/transloco";
 import {HEADER_ROUTES} from "../../../shared/static/header-routes.static";
 import {Route} from "../../../shared/interfaces/route.interface";
 

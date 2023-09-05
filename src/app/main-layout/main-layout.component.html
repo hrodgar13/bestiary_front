@@ -1,0 +1,27 @@
+<mat-drawer-container class="example-container h-full">
+  <mat-drawer #drawer position="end">
+    <div class="p-4 w-full h-full primary-bg flex flex-col gap-3">
+      <div class="playfair-font text-[#E2A23B] font-bold">
+        <h2 class="text-2xl">VIRIBUS UNITIS</h2>
+      </div>
+      <div *ngFor="let route of routes">
+        <a routerLink="{{'/' + route.route}}" routerLinkActive="text-[#FFFFFF]"
+           class="text-[#B1A79C] text-xl"> {{route.title | transloco}} </a>
+      </div>
+      <button class="p-2 rounded bg-[#E2A23B] playfair-font font-semibold max-w-[50%] my-3">
+        {{'Login' | transloco}}
+      </button>
+      <app-switch-lang></app-switch-lang>
+    </div>
+  </mat-drawer>
+  <mat-drawer-content class="primary-bg">
+    <div class="relative">
+      <div class="sticky top-0 z-50  bg-[#00000033]">
+        <app-header (onSwitchDrawer)="drawer.toggle()"></app-header>
+      </div>
+      <div class="mt-[-48px] 768:mt-[-112px] main">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

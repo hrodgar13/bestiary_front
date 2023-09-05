@@ -12,10 +12,12 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {SharedModule} from "../shared/shared.module";
 import {RouterModule} from "@angular/router";
 import {HomeModule} from "./pages/home/home.module";
+import {MainLayoutComponent} from "./main-layout/main-layout.component";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MainLayoutComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +30,7 @@ import {HomeModule} from "./pages/home/home.module";
     MatSlideToggleModule,
     RouterModule,
     SharedModule,
-    HomeModule
+    HomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
