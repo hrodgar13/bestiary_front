@@ -1,5 +1,6 @@
-<div>
-  <mat-slide-toggle (toggleChange)="setOtherLang()" >
-    <span class="text-[#B1A79C]">{{translocoService.getActiveLang() | uppercase}}</span>
-  </mat-slide-toggle>
-</div>
+<mat-select class="p-3 rounded border border-[#E2A23B] switch-lang bg-[#1E232DFF] w-[48px] text-[#E2A23B]"
+            (selectionChange)="setOtherLang($event)" [(value)]="selected">
+  <mat-option class="w-[60px] ml-[5px] p-0 bg-[#1E232DFF] text-[#E2A23B]" [value]="'en'">EN</mat-option>
+  <mat-option class="w-[60px] ml-[5px] p-0 bg-[#1E232DFF] text-[#E2A23B]" [value]="'ua'">UA</mat-option>
+</mat-select>
+

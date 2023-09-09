@@ -14,6 +14,7 @@ import {RouterModule} from "@angular/router";
 import {HomeModule} from "./pages/home/home.module";
 import {MainLayoutComponent} from "./main-layout/main-layout.component";
 import {ApiInterceptor} from "../shared/interceptors/api.interceptor";
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import {ApiInterceptor} from "../shared/interceptors/api.interceptor";
     MainLayoutComponent
   ],
   imports: [
+    MatSelectModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,

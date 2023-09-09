@@ -4,6 +4,8 @@ import { LoaderComponent } from './components/loader/loader.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import { SwitchLangComponent } from './components/switch-lang/switch-lang.component';
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {MatSelectModule} from "@angular/material/select";
+import {MatLegacySelectModule} from "@angular/material/legacy-select";
 
 
 
@@ -19,7 +21,8 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
   imports: [
     CommonModule,
     MatProgressSpinnerModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatLegacySelectModule,
   ]
 })
 export class SharedModule { }

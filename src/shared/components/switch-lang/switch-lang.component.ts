@@ -7,20 +7,15 @@ import {TranslocoService} from "@ngneat/transloco";
   styleUrls: ['./switch-lang.component.scss']
 })
 export class SwitchLangComponent {
-  isEng: boolean = true;
+  showMenu = false
+  selected = 'en';
 
   constructor(
     readonly translocoService: TranslocoService
   ) {
   }
 
-  setOtherLang() {
-    this.isEng = !this.isEng
-
-    if (this.isEng) {
-      this.translocoService.setActiveLang('en')
-    } else {
-      this.translocoService.setActiveLang('uk')
-    }
+  setOtherLang(lang: any) {
+      this.translocoService.setActiveLang(lang.value)
   }
 }

@@ -60,3 +60,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   background: #15181F;
 }
 
+.switch-lang {
+  .mat-select-panel-wrap {
+    border: 1px solid #E2A23B;
+    border-radius: 0.25rem;
+  }
+}
