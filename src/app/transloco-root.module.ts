@@ -10,7 +10,7 @@ import { TranslocoHttpLoader } from './transloco-loader';
   providers: [
       provideTransloco({
         config: {
-          availableLangs: ['en', 'uk'],
+          availableLangs: ['en', 'ua'],
           defaultLang: 'en',
           reRenderOnLangChange: true,
         },
