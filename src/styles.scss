@@ -35,6 +35,7 @@ $bestiary_front-theme: mat.define-light-theme((
 
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Poppins&display=swap');
+@import url('https://db.onlinewebfonts.com/c/51b459eae74df5b00ba922028ccb20be?family=Password');
 
 @tailwind base;
 @tailwind components;
@@ -48,9 +49,14 @@ $bestiary_front-theme: mat.define-light-theme((
   font-family: 'Poppins', sans-serif;
 }
 
+.password-font {
+  font-family: 'Password', sans-serif;
+}
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .primary-bg {
   background: #15181F;
 }
+

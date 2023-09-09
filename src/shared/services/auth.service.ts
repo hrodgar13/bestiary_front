@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable, tap} from "rxjs";
 import {Token} from "../interfaces/token.interface";
 import {RegisterData} from "../interfaces/create-user.interface";
+import {LoginInterface} from "../interfaces/login.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class AuthService {
     this.access_token = this.getTokenFromStorage()
   }
 
-  login(payload) {
+  login(payload: LoginInterface) {
     return this.http.post<Token>('api/auth/signin', payload).pipe(
       tap(
         (

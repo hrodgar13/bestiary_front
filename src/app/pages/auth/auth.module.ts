@@ -3,21 +3,26 @@ import {CommonModule} from '@angular/common';
 import {AuthComponent} from './auth.component';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
-import {RouterModule, RouterOutlet} from "@angular/router";
 import {AuthRoutingModule} from "./auth-routing.module";
-import {BrowserModule} from "@angular/platform-browser";
+import {ReactiveFormsModule} from "@angular/forms";
+import {TranslocoPipe} from "@ngneat/transloco";
+import {LoginService} from "./login.service";
 
 
 @NgModule({
+  providers: [
+    LoginService
+  ],
   declarations: [
     AuthComponent,
     LoginComponent,
     RegisterComponent
   ],
   imports: [
-    BrowserModule,
     CommonModule,
-    AuthRoutingModule
+    AuthRoutingModule,
+    ReactiveFormsModule,
+    TranslocoPipe
   ]
 })
 export class AuthModule {

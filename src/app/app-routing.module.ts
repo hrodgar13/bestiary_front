@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {AuthRoutingModule} from "./pages/auth/auth-routing.module";
 import {MainLayoutComponent} from "./main-layout/main-layout.component";
 
 const routes: Routes = [
@@ -8,7 +7,11 @@ const routes: Routes = [
       path: '',
       component: MainLayoutComponent,
       children: [
-        {path: '', redirectTo: 'home', pathMatch: 'full'},
+        {
+          path: '',
+          redirectTo: 'home',
+          pathMatch: 'full'
+        },
         {
           path: 'home',
           loadChildren: () => import('./pages/home/home.module').then((m) => m.HomeModule)
@@ -24,7 +27,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    AuthRoutingModule,
     RouterModule.forRoot(routes),
   ],
   exports: [RouterModule]
