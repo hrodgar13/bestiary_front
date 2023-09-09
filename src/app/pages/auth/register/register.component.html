@@ -15,25 +15,25 @@
   </div>
   <div class="flex p-3 flex-col items-center justify-between h-full w-full">
     <div>
-      <p class="text-sm text-[#B1A79C] text-center">So you are a new one?</p>
-      <p class="text-xl text-[#B1A79C] text-center">How we can call you?</p>
+      <p class="text-sm text-[#B1A79C] text-center">{{'So you are a new one' | transloco}}?</p>
+      <p class="text-xl text-[#B1A79C] text-center">{{'How we can call you' | transloco}}?</p>
     </div>
     <form class="p-2 w-full flex flex-col gap-5 items-center" [formGroup]="form" (ngSubmit)="submitForm()">
       <div class="w-full">
         <div class="w-full border bg-[#15181F] p-3 border-[#E2A23B]">
           <input formControlName="email" class="input-bg w-full outline-none text-[#B1A79C]" type="email"
-                 placeholder="Email"/>
+                 placeholder="{{'Email' | transloco}}"/>
         </div>
         <div *ngIf="form!.get('email')!.touched && form!.get('email')!.invalid" class="text-red-500">
-          <p *ngIf="form!.get('email')!.hasError('required')">Email is required</p>
-          <p *ngIf="form!.get('email')!.hasError('email')">Email invalid</p>
+          <p *ngIf="form!.get('email')!.hasError('required')">{{'Email is required' | transloco}}</p>
+          <p *ngIf="form!.get('email')!.hasError('email')">{{'Email invalid' | transloco}}</p>
         </div>
       </div>
       <div class="w-full">
         <div class="w-full flex items-center border bg-[#15181F] p-3 border-[#E2A23B]">
           <input formControlName="passwordConfirm" [class]="!showPassword ? 'password-font' : 'poppins-font'"
                  class="input-bg w-full outline-none text-[#B1A79C]" type="text"
-                 placeholder="password"/>
+                 placeholder="{{'Password' | transloco}}"/>
           <div (click)="changeConfirmVisibility()">
             <ng-container *ngIf="!showPassword; else hidePassword">
               <svg width="20px" height="20px" viewBox="0 0 24 24" fill="#E2A23B" xmlns="http://www.w3.org/2000/svg">
@@ -72,15 +72,15 @@
           </div>
         </div>
         <div *ngIf="form!.get('password')!.touched && form!.get('password')!.invalid" class="text-red-500">
-          <p *ngIf="form!.get('password')!.hasError('required')">Email is required</p>
-          <p *ngIf="form!.get('password')!.hasError('minlength')">Password must have 8 symbols at least</p>
+          <p *ngIf="form!.get('password')!.hasError('required')">{{'Password is required' | transloco}}</p>
+          <p *ngIf="form!.get('password')!.hasError('minlength')">{{'Password must have 8 symbols at least' | transloco}}</p>
         </div>
       </div>
       <div class="w-full">
         <div class="w-full flex items-center border bg-[#15181F] p-3 border-[#E2A23B]">
           <input formControlName="password" [class]="!showPasswordConfirm ? 'password-font' : 'poppins-font'"
                  class="input-bg w-full outline-none text-[#B1A79C]" type="text"
-                 placeholder="password confirm"/>
+                 placeholder="{{'Password confirm' | transloco}}"/>
           <div (click)="changeVisibility()">
             <ng-container *ngIf="!showPasswordConfirm; else hidePasswordConfirm">
               <svg width="20px" height="20px" viewBox="0 0 24 24" fill="#E2A23B" xmlns="http://www.w3.org/2000/svg">
@@ -119,12 +119,12 @@
         </div>
         <div *ngIf="form!.get('passwordConfirm')!.touched && form!.get('passwordConfirm')!.invalid"
              class="text-red-500">
-          <p *ngIf="form!.get('passwordConfirm')!.hasError('required')">Email is required</p>
-          <p *ngIf="form!.get('passwordConfirm')!.hasError('minlength')">Password must have 8 symbols at least</p>
+          <p *ngIf="form!.get('passwordConfirm')!.hasError('required')">{{"Password confirm is required" | transloco}}</p>
+          <p *ngIf="form!.get('passwordConfirm')!.hasError('minlength')">{{"Password confirm must have 8 symbols at least" | transloco}}</p>
         </div>
       </div>
       <div *ngIf="form.errors?.['passwordMismatch']" class="text-center">
-        <p class="text-xl text-[#B1A79C]">Passwords doesn't match</p>
+        <p class="text-xl text-[#B1A79C]">{{"Passwords doesn't match" | transloco}}</p>
       </div>
       <button
         class="p-2 768:p-3 768:w-[250px] 768:text-2xl 768:max-w-full 768:mx-0 mx-auto w-[100px] text-[#15181F] rounded bg-[#E2A23B] playfair-font font-semibold max-w-[50%] my-3">
@@ -132,8 +132,8 @@
       </button>
     </form>
     <div class="text-center">
-      <p class="text-sm text-[#B1A79C]">Already registered?</p>
-      <a class="text-xl hover:underline  text-[#E2A23B]" [routerLink]="['../login']">Go to gatekeeper!</a>
+      <p class="text-sm text-[#B1A79C]">{{'Already registered' | transloco}}?</p>
+      <a class="text-xl hover:underline  text-[#E2A23B]" [routerLink]="['../login']">{{'Go to gatekeeper' | transloco}}!</a>
     </div>
   </div>
 </div>
