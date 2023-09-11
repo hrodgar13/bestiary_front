@@ -1,4 +1,5 @@
-<div [@flipInOut] class="mt-[78px] max-w-[300px] h-[520px] 768:mt-[130px] 768:max-w-[420px] w-full flex flex-col items-center w-full m-3 border-[#E2A23B] bg-[#1E232DFF] border">
+<div [@flipInOut]
+     class="mt-[78px] h-[520px] 768:mt-[130px] 768:w-[420px] w-[300px] flex flex-col items-center border-[#E2A23B] bg-[#1E232DFF] border">
   <div class="flex items-center justify-center p-1 w-full">
     <div class="block 768:hidden">
       <svg width="40px" height="40px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
@@ -73,7 +74,8 @@
         </div>
         <div *ngIf="form!.get('password')!.touched && form!.get('password')!.invalid" class="text-red-500">
           <p *ngIf="form!.get('password')!.hasError('required')">{{'Password is required' | transloco}}</p>
-          <p *ngIf="form!.get('password')!.hasError('minlength')">{{'Password must have 8 symbols at least' | transloco}}</p>
+          <p
+            *ngIf="form!.get('password')!.hasError('minlength')">{{'Password must have 8 symbols at least' | transloco}}</p>
         </div>
       </div>
       <div class="w-full">
@@ -119,21 +121,24 @@
         </div>
         <div *ngIf="form!.get('passwordConfirm')!.touched && form!.get('passwordConfirm')!.invalid"
              class="text-red-500">
-          <p *ngIf="form!.get('passwordConfirm')!.hasError('required')">{{"Password confirm is required" | transloco}}</p>
-          <p *ngIf="form!.get('passwordConfirm')!.hasError('minlength')">{{"Password confirm must have 8 symbols at least" | transloco}}</p>
+          <p
+            *ngIf="form!.get('passwordConfirm')!.hasError('required')">{{"Password confirm is required" | transloco}}</p>
+          <p
+            *ngIf="form!.get('passwordConfirm')!.hasError('minlength')">{{"Password confirm must have 8 symbols at least" | transloco}}</p>
         </div>
       </div>
       <div *ngIf="form.errors?.['passwordMismatch']" class="text-center">
         <p class="text-xl text-[#B1A79C]">{{"Passwords doesn't match" | transloco}}</p>
       </div>
       <button
-        class="p-2 768:p-3 768:w-[250px] 768:text-2xl 768:max-w-full 768:mx-0 mx-auto w-[100px] text-[#15181F] rounded bg-[#E2A23B] playfair-font font-semibold max-w-[50%] my-3">
-        <span class="mx-auto">{{'Register' | transloco}}</span>
+        class="p-2 w-full 768:p-3 768:w-[250px] 768:text-2xl 768:max-w-full w-[100px] text-[#15181F] rounded bg-[#E2A23B] playfair-font font-semibold my-3">
+        <span>{{'Register' | transloco}}</span>
       </button>
     </form>
     <div class="text-center">
       <p class="text-sm text-[#B1A79C]">{{'Already registered' | transloco}}?</p>
-      <a class="text-xl hover:underline  text-[#E2A23B]" [routerLink]="['../login']">{{'Go to gatekeeper' | transloco}}!</a>
+      <a class="text-xl hover:underline  text-[#E2A23B]" [routerLink]="['../login']">{{'Go to gatekeeper' | transloco}}
+        !</a>
     </div>
   </div>
 </div>
