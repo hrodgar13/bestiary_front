@@ -27,11 +27,11 @@
   "Password confirm is required": "Password confirm is required",
   "Password confirm must have 8 symbols at least": "Потрібне підтвердження пароля",
   "Passwords doesn't match": "Паролі не збігаються",
-  "Already registered?": "Вже зареєстровані",
-  "Go to gatekeeper!": "До брамника",
+  "Already registered": "Вже зареєстровані",
+  "Go to gatekeeper": "До брамника",
   "Those crypts are made for the mysterious persons": "Ті склепи створені для таємничих осіб",
   "Who you are": "Хто ти",
-  "Don't have an account": "Don't have an account",
+  "Don't have an account": "Немаэ аккаунта",
   "Join an order": "Приєднатися до ордену",
   "Register": "Зареєструватись"
 }
