@@ -66,3 +66,34 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     border-radius: 0.25rem;
   }
 }
+
+.vu-select {
+  .mat-mdc-select-trigger {
+    color: #B1A79C !important;
+
+    .mat-mdc-select-placeholder {
+      color: #B1A79C !important;
+    }
+  }
+}
+
+
+.vu-select.mat-mdc-select-panel {
+  background: #1E232DFF;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+
+  border: 1px solid #E2A23B;
+
+  .mdc-list-item__primary-text {
+    color: #E2A23B;
+  }
+}
+
+.vu-select {
+  svg {
+    path {
+      fill: #E2A23B;
+    }
+  }
+}

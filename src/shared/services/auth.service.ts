@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable, tap} from "rxjs";
-import {Token} from "../interfaces/token.interface";
+import {Token, TokenDecoded} from "../interfaces/token.interface";
 import {RegisterData} from "../interfaces/create-user.interface";
 import {LoginInterface} from "../interfaces/login.interface";
+import jwt_decode from 'jwt-decode'
 
 @Injectable({
   providedIn: 'root'
@@ -67,5 +68,15 @@ export class AuthService {
 
   getTokenFromStorage() {
     return localStorage.getItem('auth-token') ? localStorage.getItem('auth-token') : null
+  }
+
+  isAdminAuthenticated() {
+    if(this.access_token) {
+      const user: TokenDecoded = jwt_decode(this.access_token)
+      //TODO change this if wi will increase amount of roles
+      return user.role === 'ADMIN'
+    }
+
+    return false
   }
 }
