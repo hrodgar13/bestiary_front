@@ -96,4 +96,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
       fill: #E2A23B;
     }
   }
+
+  &.mat-mdc-select-panel {
+    max-width: 90%;
+  }
+}
+
+.mat-mdc-dialog-surface.mdc-dialog__surface {
+  background: transparent!important;
 }

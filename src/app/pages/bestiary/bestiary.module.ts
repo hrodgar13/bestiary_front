@@ -19,6 +19,8 @@ import {HttpClientModule} from "@angular/common/http";
 import { MultiSelectItemComponent } from './create-beast/form-elements/multi-select/multi-select-item/multi-select-item.component';
 import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
 import {SharedModule} from "../../../shared/shared.module";
+import { PropertyModalComponent } from './create-beast/property-modal/property-modal.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 
@@ -37,6 +39,7 @@ import {SharedModule} from "../../../shared/shared.module";
     InputGreenBtnComponent,
     InputNumberComponent,
     MultiSelectItemComponent,
+    PropertyModalComponent,
   ],
   imports: [
     HttpClientModule,
@@ -47,7 +50,8 @@ import {SharedModule} from "../../../shared/shared.module";
     ReactiveFormsModule,
     MatSelectModule,
     MatButtonModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule
   ]
 })
 export class BestiaryModule { }

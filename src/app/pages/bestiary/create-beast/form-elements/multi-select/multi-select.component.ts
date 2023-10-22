@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {selectorData} from "../input-select/input-select.component";
 import {FormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
@@ -23,20 +22,7 @@ export class MultiSelectComponent implements OnInit{
 
   @Input() label!: string;
   @Input() placeholder: string = '';
-  @Input() selectData: selectorData[] = [
-    {
-      value: 0,
-      label: 'Fire'
-    },
-    {
-      value: 1,
-      label: 'Cold'
-    },
-    {
-      value: 2,
-      label: 'Physic'
-    }
-  ]
+  @Input() selectData: any[] = []
   form!: UntypedFormGroup;
 
   @Output() submit = new EventEmitter<Object>
@@ -62,10 +48,6 @@ export class MultiSelectComponent implements OnInit{
 
   onSubmit() {
     if(this.form.invalid) {
-      // console.log()
-      // for(let field of Onthis.form.controls)
-      // // this.snackBar.open(this)
-      //
       return
     }
 
@@ -78,10 +60,11 @@ export class MultiSelectComponent implements OnInit{
     }
 
     this.selectedItems.push(selectedItem)
-    this.submit.emit(this.form.value)
+    this.submit.emit(this.selectedItems)
   }
 
   removeItemFromList($event: number) {
     this.selectedItems.splice(this.selectedItems.findIndex(item => item.value === $event),1)
+    this.submit.emit(this.selectedItems)
   }
 }
