@@ -1,16 +1,44 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {MultiSelect} from "../multi-select.component";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {CreateAttribute} from "../../../../../../../shared/interfaces/creature/create-attribute.interface";
+import {TranslocoService} from "@ngneat/transloco";
+import {DestroySubscription} from "../../../../../../../shared/helpers/destroy-subscribtion";
+import {takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-multi-select-item',
   templateUrl: './multi-select-item.component.html',
   styleUrls: ['./multi-select-item.component.scss']
 })
-export class MultiSelectItemComponent{
-  @Input() selectedItem!: MultiSelect
+export class MultiSelectItemComponent extends DestroySubscription implements OnInit{
+  @Input() id!: number
+  @Input() label!: CreateAttribute
+  @Input() amt!: number
+  @Input() msr!: CreateAttribute
   @Output() deleteItem = new EventEmitter<number>()
 
+  currentLanguageLabel: string = ''
+  currentLanguageMsr = ''
+
+  constructor(
+    private readonly translocoService: TranslocoService
+  ) {
+    super()
+  }
+
+  ngOnInit() {
+    this.translocoService.langChanges$.pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+      this.defineCurrentLanguage(data)
+    })
+  }
+
+  private defineCurrentLanguage(data: string = 'en') {
+    if(data === 'en' || data === 'ua') {
+      this.currentLanguageMsr = this.msr[data]
+      this.currentLanguageLabel = this.label[data]
+    }
+  }
+
   removeElement() {
-    this.deleteItem.emit(this.selectedItem.value)
+    this.deleteItem.emit(this.id)
   }
 }

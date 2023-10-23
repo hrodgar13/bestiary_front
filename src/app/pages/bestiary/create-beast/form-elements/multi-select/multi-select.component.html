@@ -2,16 +2,17 @@
   <form [formGroup]="form" (ngSubmit)="onSubmit()" class="w-full flex items-center gap-2 mb-2">
     <div class="flex items-center gap-2 w-full">
       <app-label-text [label]="'Speeds: '"/>
-      <app-input-select formControlName="value" class="h-[48px] w-full" [placeholder]="placeholder"></app-input-select>
+      <app-input-select [route]="route" formControlName="value" class="h-[48px] max-w-[280px] w-full" [placeholder]="placeholder" (currentSelected)="selectedItemTitleChange($event)"/>
+      <app-input-green-btn [route]="route"/>
     </div>
-    <div *ngIf="amt" class="flex items-center gap-2 w-full">
-      <app-label-text [label]="'amt: '"/>
+    <div *ngIf="amt" class="flex items-center gap-2 w-auto">
+      <app-label-text [label]="'Amt: '"/>
       <app-input-number formControlName="amount" class="h-[48px]" [placeholder]="'0'" />
     </div>
-    <div *ngIf="msr" class="flex items-center gap-2 w-full">
-      <app-label-text [label]="'msr: '"/>
-      <app-input-text formControlName="measure_EN" class="h-[48px] max-w-[60px] w-full" label="msr" placeholder="EN"></app-input-text>
-      <app-input-text formControlName="measure_UA" class="h-[48px] max-w-[60px] w-full" label="msr" placeholder="UA"></app-input-text>
+    <div *ngIf="!staticMeasure" class="flex items-center gap-2 w-auto">
+      <app-label-text [label]="'Msr: '"/>
+      <app-input-text formControlName="measure_EN" class="h-[48px] w-[60px]" label="msr" placeholder="EN"/>
+      <app-input-text formControlName="measure_UA" class="h-[48px] w-[60px]" label="msr" placeholder="UA"/>
     </div>
    <button mat-icon-button type="submit">
       <mat-icon class="text-[#E2A23B]">check_circle</mat-icon>
@@ -19,7 +20,7 @@
   </form>
   <div class="bg-[#15181F] h-[136px] rounded-xl p-4 border-2 border-[#E2A23B]">
     <div class="flex items-start flex-wrap overflow-y-auto gap-2 properties-container max-h-full">
-      <app-multi-select-item *ngFor="let item of selectedItems" [selectedItem]="item" (deleteItem)="removeItemFromList($event)"/>
+      <app-multi-select-item *ngFor="let item of selectedItems" [msr]="item.msr" [amt]="item.amt" [id]="item.id" [label]="item.title" (deleteItem)="removeItemFromList($event)"/>
     </div>
   </div>
 </div>

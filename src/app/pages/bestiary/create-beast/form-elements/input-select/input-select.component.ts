@@ -1,10 +1,11 @@
-import {Component, forwardRef, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, forwardRef, Input, OnInit, Output} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {DestroySubscription} from "../../../../../../shared/helpers/destroy-subscribtion";
 import {takeUntil} from "rxjs";
 import {BestiaryService} from "../../../bestiary.service";
 import {AttributeService} from "../../attribute.service";
 import {TranslocoService} from "@ngneat/transloco";
+import {CreateAttribute} from "../../../../../../shared/interfaces/creature/create-attribute.interface";
 
 
 @Component({
@@ -22,6 +23,8 @@ import {TranslocoService} from "@ngneat/transloco";
 export class InputSelectComponent extends DestroySubscription implements ControlValueAccessor, OnInit{
   @Input() placeholder: string = '';
   @Input() route = ''
+
+  @Output() currentSelected = new EventEmitter<CreateAttribute>()
   selectData: any[] = []
   currentLanguage = this.localeService.getActiveLang()
   _value: any;
@@ -55,6 +58,7 @@ export class InputSelectComponent extends DestroySubscription implements Control
 
     if (newValue !== undefined) {
       this._value = newValue;
+      this.currentSelected.emit(this.selectData.find(item => item.id === newValue)[this.route])
       this.propagateChange(this._value);
     }
   }

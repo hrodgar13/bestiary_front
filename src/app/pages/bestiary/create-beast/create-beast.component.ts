@@ -14,7 +14,9 @@ export class CreateBeastComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.creatureForm = this.formBuilder.group({
 
+    })
   }
 
   writeForm() {
