@@ -21,6 +21,8 @@ import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
 import {SharedModule} from "../../../shared/shared.module";
 import { PropertyModalComponent } from './create-beast/property-modal/property-modal.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import { InputFileComponent } from './create-beast/form-elements/input-file/input-file.component';
+import { StatblockInputComponent } from './create-beast/form-elements/statblock-input/statblock-input.component';
 
 
 
@@ -40,6 +42,8 @@ import {MatDialogModule} from "@angular/material/dialog";
     InputNumberComponent,
     MultiSelectItemComponent,
     PropertyModalComponent,
+    InputFileComponent,
+    StatblockInputComponent,
   ],
   imports: [
     HttpClientModule,
