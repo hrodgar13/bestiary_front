@@ -1,8 +1,7 @@
 <div
-  class="flex-row poppins-font items-center 768:items-start 768:pt-[144px] px-2.5 768:px-[100px] h-full">
-  <div
-    class="flex flex-col relative items-center 768:items-start gap-2 h-full w-full bg-[#1E232DFF] rounded border-2 border-[#E2A23B]">
-    <form class="p-5 flex flex-col gap-6 w-full h-full" [formGroup]="creatureForm">
+  class="flex-row poppins-font items-center 768:items-start 768:pt-[144px] px-2.5 768:px-[100px]">
+  <div class="flex flex-col relative items-center 768:items-start gap-2 h-auto w-full bg-[#1E232DFF] rounded border-2 border-[#E2A23B]">
+    <form class="p-5 flex flex-col gap-6 w-full " [formGroup]="creatureForm">
       <div class="flex items-center gap-3">
         <app-label-text [label]="'Creature name: '"></app-label-text>
         <app-input-text class="h-[48px] w-full max-w-[280px]" [placeholder]="'EN'"></app-input-text>
@@ -49,12 +48,12 @@
             </div>
           </div>
           <div class="w-full">
-            <app-multi-select [route]="'speed'" [placeholder]="'Select speed: '" [amt]="true"
+            <app-multi-select label="Speeds" [route]="'speed'" [placeholder]="'Select speed: '" [amt]="true"
                               [staticMeasure]="{en: 'ft', ua: 'фт'}"/>
           </div>
         </div>
-        <div class="flex image-load w-full h-full min-h-full">
-          <app-input-file class="w-full min-h-full h-full"/>
+        <div class="flex image-load w-full">
+          <app-input-file class="w-full "/>
         </div>
       </div>
       <div class="flex items-center justify-between h-[180px]">
@@ -64,6 +63,36 @@
         <app-statblock-input label="INT" class="max-w-[180px] h-full w-full"/>
         <app-statblock-input label="WIS" class="max-w-[180px] h-full w-full"/>
         <app-statblock-input label="CHA" class="max-w-[180px] h-full w-full"/>
+      </div>
+      <div class="flex gap-x-10 w-full">
+        <div class="w-full flex flex-col gap-4">
+          <app-multi-select [msr]="false" [placeholder]="'Select damage: '" label="Immunities" [route]="'damage'"/>
+          <app-multi-select [msr]="false" [placeholder]="'Select damage: '" label="Recistes" [route]="'damage'"/>
+          <app-multi-select [msr]="false" [placeholder]="'Select damage: '" label="Vulnerabilites" [route]="'damage'"/>
+          <app-multi-select [amt]="true" [staticMeasure]="{en: 'ft', ua: 'фт'}" [placeholder]="'Select Feel: '" label="Feelings" [route]="'feeling'"/>
+          <div class="flex">
+            <div class="flex w-full items-center gap-2">
+              <app-label-text [label]="'Danger Lvl: '"/>
+              <app-input-number class="h-[48px]" placeholder="0"/>
+            </div>
+            <div class="flex w-full items-center gap-2">
+              <app-label-text [label]="'Experience: '"/>
+              <app-input-text class="h-[48px]" placeholder="Experience"/>
+            </div>
+          </div>
+        </div>
+        <div class="w-full flex flex-col gap-4">
+          <app-multi-select [amt]="true" [msr]="false" [unmeasuredAmount]="true" [placeholder]="'Saving throw: '" label="Saving throws" [route]="'saving-throw'"/>
+          <app-multi-select [amt]="true" [msr]="false" [unmeasuredAmount]="true" [placeholder]="'Select Skill: '" label="Skills" [route]="'skill'"/>
+          <app-multi-select [msr]="false" [placeholder]="'Select condition: '" label="Conditions immunities" [route]="'condition'"/>
+          <app-multi-select [amt]="true" [placeholder]="'Select Language: '" [staticMeasure]="{en: 'ft', ua: 'фт'}" label="Langs" [route]="'language'"/>
+          <div class="flex">
+            <div class="flex w-full items-center gap-2">
+              <app-label-text [label]="'Mastery bonus: '"/>
+              <app-input-number class="h-[48px]" placeholder="0"/>
+            </div>
+          </div>
+        </div>
       </div>
       <button (click)="writeForm()">Output</button>
     </form>

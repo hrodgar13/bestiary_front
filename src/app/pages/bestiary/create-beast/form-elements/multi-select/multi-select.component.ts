@@ -18,6 +18,7 @@ export interface MultiSelect {
 export class MultiSelectComponent implements OnInit {
   @Input() route = ''
   @Input() amt = false
+  @Input() msr: boolean = true
   @Input() staticMeasure!: CreateAttribute
 
   @Input() label!: string;
@@ -27,6 +28,7 @@ export class MultiSelectComponent implements OnInit {
   @Output() submit = new EventEmitter<Object>
   selectedItems: MultiSelect[] = [];
   selectedItemTitle!: CreateAttribute;
+  @Input() unmeasuredAmount: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,

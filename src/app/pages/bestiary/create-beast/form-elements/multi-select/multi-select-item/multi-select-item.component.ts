@@ -14,6 +14,8 @@ export class MultiSelectItemComponent extends DestroySubscription implements OnI
   @Input() label!: CreateAttribute
   @Input() amt!: number
   @Input() msr!: CreateAttribute
+  @Input() isStaticMsr: boolean = false
+  @Input() unmeasuredAmount: boolean = false
   @Output() deleteItem = new EventEmitter<number>()
 
   currentLanguageLabel: string = ''

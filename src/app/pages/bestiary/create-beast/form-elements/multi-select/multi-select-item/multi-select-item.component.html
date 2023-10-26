@@ -1,5 +1,5 @@
 <div class="bg-[#15181F] flex items-start rounded-xl text-base border-2 border-[#E2A23B] px-2 text-[#B1A79C] h-auto" (click)="removeElement()">
   <div>
-    {{currentLanguageLabel + ' ' + amt + ' ' + currentLanguageMsr}}
+    {{currentLanguageLabel + ' ' + ((isStaticMsr && currentLanguageMsr) || unmeasuredAmount ? amt : '') + ' ' +(isStaticMsr && currentLanguageMsr ? currentLanguageMsr : '')}}
   </div>
 </div>

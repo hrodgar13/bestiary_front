@@ -1,7 +1,7 @@
 <div class="w-full">
   <form [formGroup]="form" (ngSubmit)="onSubmit()" class="w-full flex items-center gap-2 mb-2">
     <div class="flex items-center gap-2 w-full">
-      <app-label-text [label]="'Speeds: '"/>
+      <app-label-text [label]="label"/>
       <app-input-select [route]="route" formControlName="value" class="h-[48px] max-w-[280px] w-full" [placeholder]="placeholder" (currentSelected)="selectedItemTitleChange($event)"/>
       <app-input-green-btn [route]="route"/>
     </div>
@@ -9,7 +9,7 @@
       <app-label-text [label]="'Amt: '"/>
       <app-input-number formControlName="amount" class="h-[48px]" [placeholder]="'0'" />
     </div>
-    <div *ngIf="!staticMeasure" class="flex items-center gap-2 w-auto">
+    <div *ngIf="!staticMeasure && msr" class="flex items-center gap-2 w-auto">
       <app-label-text [label]="'Msr: '"/>
       <app-input-text formControlName="measure_EN" class="h-[48px] w-[60px]" label="msr" placeholder="EN"/>
       <app-input-text formControlName="measure_UA" class="h-[48px] w-[60px]" label="msr" placeholder="UA"/>
@@ -20,7 +20,7 @@
   </form>
   <div class="bg-[#15181F] h-[136px] rounded-xl p-4 border-2 border-[#E2A23B]">
     <div class="flex items-start flex-wrap overflow-y-auto gap-2 properties-container max-h-full">
-      <app-multi-select-item *ngFor="let item of selectedItems" [msr]="item.msr" [amt]="item.amt" [id]="item.id" [label]="item.title" (deleteItem)="removeItemFromList($event)"/>
+      <app-multi-select-item *ngFor="let item of selectedItems" [unmeasuredAmount]="unmeasuredAmount" [msr]="item.msr" [amt]="item.amt" [id]="item.id" [label]="item.title" [isStaticMsr]="!! staticMeasure" (deleteItem)="removeItemFromList($event)"/>
     </div>
   </div>
 </div>
