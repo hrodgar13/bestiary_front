@@ -19,6 +19,13 @@ export interface CreaturePayload {
   intelligence?: number,
   wisdom?: number,
   charisma?: number,
+  multiSelects: MultiSelectAmount
+  dangerLevel?: number,
+  experience?: string,
+  masteryBonus?: number
+}
+
+export interface MultiSelectAmount {
   [MultiFieldsENUM.immunities]?: OutputMultiSelectData[]
   [MultiFieldsENUM.vulnerabilities]?: OutputMultiSelectData[]
   [MultiFieldsENUM.speeds]?: OutputMultiSelectData[]
@@ -28,9 +35,6 @@ export interface CreaturePayload {
   [MultiFieldsENUM.skills]?: OutputMultiSelectData[]
   [MultiFieldsENUM.conditionsImmunities]?: OutputMultiSelectData[]
   [MultiFieldsENUM.languages]?: OutputMultiSelectData[]
-  dangerLevel?: number,
-  experience?: string,
-  masteryBonus?: number
 }
 
 export enum MultiFieldsENUM {
@@ -54,7 +58,8 @@ export class CreateBeastComponent implements OnInit {
   FieldsEnum = MultiFieldsENUM
 
   creaturePayload: CreaturePayload = {
-    isFinished: false
+    isFinished: false,
+    multiSelects: {}
   }
 
   creatureForm!: UntypedFormGroup;
@@ -112,13 +117,14 @@ export class CreateBeastComponent implements OnInit {
       charisma: this.creatureForm.value.charisma,
       dangerLevel: this.creatureForm.value.dangerLevel,
       experience: this.creatureForm.value.experience,
-      masteryBonus: this.creatureForm.value.masteryBonus
+      masteryBonus: this.creatureForm.value.masteryBonus,
+      multiSelects: this.creaturePayload.multiSelects
     }
 
     console.log(this.creaturePayload)
   }
 
   writeValueToCreature(route: MultiFieldsENUM, $event: OutputMultiSelectData[]) {
-    this.creaturePayload[route] = $event
+    this.creaturePayload.multiSelects[route] = $event
   }
 }
