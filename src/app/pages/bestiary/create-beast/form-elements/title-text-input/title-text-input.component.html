@@ -1,0 +1,26 @@
+<div class="py-6">
+  <div class="flex gap-10 w-full">
+    <div class="w-full">
+      <div class="flex justify-between items-center">
+        <h2
+          class="flex items-center justify-center text-4xl font-semibold playfair-font text-[#E2A23B]">{{blockName}}</h2>
+        <div class="flex items-center gap-2">
+          <app-label-text [label]="'Title EN'"/>
+          <app-input-text class="h-[48px]" [placeholder]="'Title EN'"/>
+        </div>
+      </div>
+      <div class="mt-2 h-[140px]">
+        <app-text-area-input [placeholder]="'Description EN'"/>
+      </div>
+    </div>
+    <div class="w-full">
+      <div class="flex items-center justify-end gap-2">
+        <app-label-text [label]="'Title UA'"/>
+        <app-input-text class="h-[48px]" [placeholder]="'Title UA'"/>
+      </div>
+      <div class="mt-2 h-[140px]">
+        <app-text-area-input [placeholder]="'Description UA'"/>
+      </div>
+    </div>
+  </div>
+</div>
