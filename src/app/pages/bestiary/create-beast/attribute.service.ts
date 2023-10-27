@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {CreateAttribute} from "../../../../shared/interfaces/creature/create-attribute.interface";
+import {CreateTranslationAttribute} from "../../../../shared/interfaces/creature/create-attribute.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ export class AttributeService {
     private http: HttpClient
   ) { }
 
-  createAttribute(route: string, payload: CreateAttribute): Observable<any> {
+  createAttribute(route: string, payload: CreateTranslationAttribute): Observable<any> {
     return this.http.post(`api/${route}`, {[route]: payload})
   }
 

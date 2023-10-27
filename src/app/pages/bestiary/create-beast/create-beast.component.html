@@ -4,35 +4,35 @@
     <form class="p-5 flex flex-col gap-6 w-full " [formGroup]="creatureForm">
       <div class="flex items-center gap-3">
         <app-label-text [label]="'Creature name: '"></app-label-text>
-        <app-input-text class="h-[48px] w-full max-w-[280px]" [placeholder]="'EN'"></app-input-text>
-        <app-input-text class="h-[48px] w-full max-w-[280px]" [placeholder]="'UA'"></app-input-text>
+        <app-input-text formControlName="creatureNameEn" class="h-[48px] w-full max-w-[280px]" [placeholder]="'EN'"></app-input-text>
+        <app-input-text formControlName="creatureNameUa" class="h-[48px] w-full max-w-[280px]" [placeholder]="'UA'"></app-input-text>
       </div>
       <div class="flex gap-3 w-full">
         <div class="flex flex-col items-center gap-3 w-full max-w-[60%]">
           <div class="flex items-center gap-3 w-full">
             <app-label-text [label]="'Alignment: '"/>
-            <app-input-select [route]="'alignment'" class="h-[48px] w-full max-w-[280px]"
+            <app-input-select formControlName="alignment" [route]="'alignment'" class="h-[48px] w-full max-w-[280px]"
                               [placeholder]="'Select Alignment'"/>
             <app-input-green-btn [route]="'alignment'" [title]="'Alignment'"/>
           </div>
           <div class="flex items-center gap-3 w-full">
             <app-label-text [label]="'Type: '"/>
-            <app-input-select [route]="'type'" class="h-[48px] w-full max-w-[280px]" [placeholder]="'Select Type'"/>
+            <app-input-select formControlName="type" [route]="'type'" class="h-[48px] w-full max-w-[280px]" [placeholder]="'Select Type'"/>
             <app-input-green-btn [route]="'type'"/>
           </div>
           <div class="flex items-center gap-3 w-full">
             <app-label-text [label]="'Size: '"/>
-            <app-input-select [route]="'size'" class="h-[48px] w-full max-w-[280px]" [placeholder]="'Select Size'"/>
+            <app-input-select formControlName="size" [route]="'size'" class="h-[48px] w-full max-w-[280px]" [placeholder]="'Select Size'"/>
             <app-input-green-btn [route]="'size'"/>
           </div>
           <div class="flex w-full gap-3">
             <div class="flex gap-3 items-center">
               <app-label-text [label]="'Armor class:'"/>
-              <app-input-number [placeholder]="'0'" class="h-[48px]"></app-input-number>
+              <app-input-number formControlName="armorClass" [placeholder]="'0'" class="h-[48px]"></app-input-number>
             </div>
             <div class="flex gap-3 items-center w-full">
               <app-label-text [label]="'Armor Type:'"/>
-              <app-input-select [route]="'armor-tag'" class="h-[48px] w-full  max-w-[280px]"
+              <app-input-select formControlName="armorTag" [route]="'armor-tag'" class="h-[48px] w-full  max-w-[280px]"
                                 [placeholder]="'Select armor: '"></app-input-select>
               <app-input-green-btn [route]="'armor-tag'"/>
             </div>
@@ -40,15 +40,15 @@
           <div class="flex w-full gap-3">
             <div class="flex gap-3 items-center">
               <app-label-text [label]="'Hits: '"/>
-              <app-input-number [placeholder]="'0'" class="h-[48px]"/>
+              <app-input-number formControlName="hits" [placeholder]="'0'" class="h-[48px]"/>
             </div>
             <div class="flex gap-3 items-center w-full">
               <app-label-text [label]="'Hits in dice:'"/>
-              <app-input-text class="h-[48px] w-full max-w-[280px]" [placeholder]="'Hits in dice: '"/>
+              <app-input-text formControlName="hitsInDice" class="h-[48px] w-full max-w-[280px]" [placeholder]="'Hits in dice: '"/>
             </div>
           </div>
           <div class="w-full">
-            <app-multi-select label="Speeds" [route]="'speed'" [placeholder]="'Select speed: '" [amt]="true"
+            <app-multi-select (listChange)="writeValueToCreature(FieldsEnum.speeds, $event)" label="Speeds" [route]="'speed'" [placeholder]="'Select speed: '" [amt]="true"
                               [staticMeasure]="{en: 'ft', ua: 'фт'}"/>
           </div>
         </div>
@@ -57,39 +57,39 @@
         </div>
       </div>
       <div class="flex items-center justify-between h-[180px]">
-        <app-statblock-input label="STR" class="max-w-[180px] h-full w-full"/>
-        <app-statblock-input label="DEX" class="max-w-[180px] h-full w-full"/>
-        <app-statblock-input label="CON" class="max-w-[180px] h-full w-full"/>
-        <app-statblock-input label="INT" class="max-w-[180px] h-full w-full"/>
-        <app-statblock-input label="WIS" class="max-w-[180px] h-full w-full"/>
-        <app-statblock-input label="CHA" class="max-w-[180px] h-full w-full"/>
+        <app-statblock-input formControlName="strength" label="STR" class="max-w-[180px] h-full w-full"/>
+        <app-statblock-input formControlName="dexterity" label="DEX" class="max-w-[180px] h-full w-full"/>
+        <app-statblock-input formControlName="construction" label="CON" class="max-w-[180px] h-full w-full"/>
+        <app-statblock-input formControlName="intelligence" label="INT" class="max-w-[180px] h-full w-full"/>
+        <app-statblock-input formControlName="wisdom" label="WIS" class="max-w-[180px] h-full w-full"/>
+        <app-statblock-input formControlName="charisma" label="CHA" class="max-w-[180px] h-full w-full"/>
       </div>
       <div class="flex gap-x-10 w-full">
         <div class="w-full flex flex-col gap-4">
-          <app-multi-select [msr]="false" [placeholder]="'Select damage: '" label="Immunities" [route]="'damage'"/>
-          <app-multi-select [msr]="false" [placeholder]="'Select damage: '" label="Recistes" [route]="'damage'"/>
-          <app-multi-select [msr]="false" [placeholder]="'Select damage: '" label="Vulnerabilites" [route]="'damage'"/>
-          <app-multi-select [amt]="true" [staticMeasure]="{en: 'ft', ua: 'фт'}" [placeholder]="'Select Feel: '" label="Feelings" [route]="'feeling'"/>
+          <app-multi-select (listChange)="writeValueToCreature(FieldsEnum.immunities, $event)" [msr]="false" [placeholder]="'Select damage: '" label="Immunities" [route]="'damage'"/>
+          <app-multi-select (listChange)="writeValueToCreature(FieldsEnum.resists, $event)" [msr]="false" [placeholder]="'Select damage: '" label="Resists" [route]="'damage'"/>
+          <app-multi-select (listChange)="writeValueToCreature(FieldsEnum.vulnerabilities, $event)" [msr]="false" [placeholder]="'Select damage: '" label="Vulnerabilities" [route]="'damage'"/>
+          <app-multi-select (listChange)="writeValueToCreature(FieldsEnum.feelings, $event)" [amt]="true" [staticMeasure]="{en: 'ft', ua: 'фт'}" [placeholder]="'Select Feel: '" label="Feelings" [route]="'feeling'"/>
           <div class="flex">
             <div class="flex w-full items-center gap-2">
               <app-label-text [label]="'Danger Lvl: '"/>
-              <app-input-number class="h-[48px]" placeholder="0"/>
+              <app-input-number formControlName="dangerLevel" class="h-[48px]" placeholder="0"/>
             </div>
             <div class="flex w-full items-center gap-2">
               <app-label-text [label]="'Experience: '"/>
-              <app-input-text class="h-[48px]" placeholder="Experience"/>
+              <app-input-text formControlName="experience" class="h-[48px]" placeholder="Experience"/>
             </div>
           </div>
         </div>
         <div class="w-full flex flex-col gap-4">
-          <app-multi-select [amt]="true" [msr]="false" [unmeasuredAmount]="true" [placeholder]="'Saving throw: '" label="Saving throws" [route]="'saving-throw'"/>
-          <app-multi-select [amt]="true" [msr]="false" [unmeasuredAmount]="true" [placeholder]="'Select Skill: '" label="Skills" [route]="'skill'"/>
-          <app-multi-select [msr]="false" [placeholder]="'Select condition: '" label="Conditions immunities" [route]="'condition'"/>
-          <app-multi-select [amt]="true" [placeholder]="'Select Language: '" [staticMeasure]="{en: 'ft', ua: 'фт'}" label="Langs" [route]="'language'"/>
+          <app-multi-select (listChange)="writeValueToCreature(FieldsEnum.savingThrows, $event)" [amt]="true" [msr]="false" [unmeasuredAmount]="true" [placeholder]="'Saving throw: '" label="Saving throws" [route]="'saving-throw'"/>
+          <app-multi-select (listChange)="writeValueToCreature(FieldsEnum.skills, $event)" [amt]="true" [msr]="false" [unmeasuredAmount]="true" [placeholder]="'Select Skill: '" label="Skills" [route]="'skill'"/>
+          <app-multi-select (listChange)="writeValueToCreature(FieldsEnum.conditionsImmunities, $event)" [msr]="false" [placeholder]="'Select condition: '" label="Conditions immunities" [route]="'condition'"/>
+          <app-multi-select (listChange)="writeValueToCreature(FieldsEnum.languages, $event)" [amt]="true" [placeholder]="'Select Language: '" [staticMeasure]="{en: 'ft', ua: 'фт'}" label="Langs" [route]="'language'"/>
           <div class="flex">
             <div class="flex w-full items-center gap-2">
               <app-label-text [label]="'Mastery bonus: '"/>
-              <app-input-number class="h-[48px]" placeholder="0"/>
+              <app-input-number formControlName="masteryBonus" class="h-[48px]" placeholder="0"/>
             </div>
           </div>
         </div>

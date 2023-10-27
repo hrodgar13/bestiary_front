@@ -1,12 +1,19 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {CreateAttribute} from "../../../../../../shared/interfaces/creature/create-attribute.interface";
+import {CreateTranslationAttribute} from "../../../../../../shared/interfaces/creature/create-attribute.interface";
 
 export interface MultiSelect {
   id: number
-  title: CreateAttribute
-  msr: CreateAttribute
+  title: CreateTranslationAttribute
+  msr: CreateTranslationAttribute
+  amt: number
+}
+
+export interface OutputMultiSelectData {
+  id: number
+  title: CreateTranslationAttribute
+  msr: CreateTranslationAttribute
   amt: number
 }
 
@@ -19,15 +26,15 @@ export class MultiSelectComponent implements OnInit {
   @Input() route = ''
   @Input() amt = false
   @Input() msr: boolean = true
-  @Input() staticMeasure!: CreateAttribute
+  @Input() staticMeasure!: CreateTranslationAttribute
 
   @Input() label!: string;
   @Input() placeholder: string = '';
   form!: UntypedFormGroup;
 
-  @Output() submit = new EventEmitter<Object>
+  @Output() listChange = new EventEmitter<OutputMultiSelectData[]>
   selectedItems: MultiSelect[] = [];
-  selectedItemTitle!: CreateAttribute;
+  selectedItemTitle!: CreateTranslationAttribute;
   @Input() unmeasuredAmount: boolean = false;
 
   constructor(
@@ -64,15 +71,15 @@ export class MultiSelectComponent implements OnInit {
     }
 
     this.selectedItems.push(selectedItem)
-    this.submit.emit(this.selectedItems)
+    this.listChange.emit(this.selectedItems)
   }
 
   removeItemFromList($event: number) {
     this.selectedItems.splice(this.selectedItems.findIndex(item => item.id === $event), 1)
-    this.submit.emit(this.selectedItems)
+    this.listChange.emit(this.selectedItems)
   }
 
-  selectedItemTitleChange(event: CreateAttribute) {
+  selectedItemTitleChange(event: CreateTranslationAttribute) {
     this.selectedItemTitle = event
   }
 }

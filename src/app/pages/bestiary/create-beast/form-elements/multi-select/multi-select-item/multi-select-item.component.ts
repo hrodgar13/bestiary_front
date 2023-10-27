@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {CreateAttribute} from "../../../../../../../shared/interfaces/creature/create-attribute.interface";
+import {CreateTranslationAttribute} from "../../../../../../../shared/interfaces/creature/create-attribute.interface";
 import {TranslocoService} from "@ngneat/transloco";
 import {DestroySubscription} from "../../../../../../../shared/helpers/destroy-subscribtion";
 import {takeUntil} from "rxjs";
@@ -11,9 +11,9 @@ import {takeUntil} from "rxjs";
 })
 export class MultiSelectItemComponent extends DestroySubscription implements OnInit{
   @Input() id!: number
-  @Input() label!: CreateAttribute
+  @Input() label!: CreateTranslationAttribute
   @Input() amt!: number
-  @Input() msr!: CreateAttribute
+  @Input() msr!: CreateTranslationAttribute
   @Input() isStaticMsr: boolean = false
   @Input() unmeasuredAmount: boolean = false
   @Output() deleteItem = new EventEmitter<number>()

@@ -17,8 +17,7 @@ import { InputGreenBtnComponent } from './create-beast/form-elements/input-green
 import { InputNumberComponent } from './create-beast/form-elements/input-number/input-number.component';
 import {HttpClientModule} from "@angular/common/http";
 import { MultiSelectItemComponent } from './create-beast/form-elements/multi-select/multi-select-item/multi-select-item.component';
-import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
-import {SharedModule} from "../../../shared/shared.module";
+import { MatSnackBarModule} from "@angular/material/snack-bar";
 import { PropertyModalComponent } from './create-beast/property-modal/property-modal.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import { InputFileComponent } from './create-beast/form-elements/input-file/input-file.component';
@@ -28,7 +27,8 @@ import { StatblockInputComponent } from './create-beast/form-elements/statblock-
 
 @NgModule({
   providers: [
-    BestiaryService
+    BestiaryService,
+    InputTextComponent
   ],
   declarations: [
     CreateBeastComponent,

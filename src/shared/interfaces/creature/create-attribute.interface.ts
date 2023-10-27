@@ -1,4 +1,4 @@
-export interface CreateAttribute {
+export interface CreateTranslationAttribute {
   en: string
   ua: string
 }

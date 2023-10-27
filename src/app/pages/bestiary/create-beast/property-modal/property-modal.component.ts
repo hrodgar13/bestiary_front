@@ -4,7 +4,7 @@ import {DestroySubscription} from "../../../../../shared/helpers/destroy-subscri
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {AttributeService} from "../attribute.service";
 import {takeUntil} from "rxjs";
-import {CreateAttribute} from "../../../../../shared/interfaces/creature/create-attribute.interface";
+import {CreateTranslationAttribute} from "../../../../../shared/interfaces/creature/create-attribute.interface";
 
 export interface MatData {
   route: string,
@@ -42,7 +42,7 @@ export class PropertyModalComponent extends DestroySubscription implements OnIni
       return
     }
 
-    const payload: CreateAttribute = {
+    const payload: CreateTranslationAttribute = {
       en: this.modalForm.get('en')?.value,
       ua: this.modalForm.get('ua')?.value,
     }

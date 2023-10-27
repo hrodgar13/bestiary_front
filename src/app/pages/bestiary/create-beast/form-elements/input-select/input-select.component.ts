@@ -5,7 +5,7 @@ import {takeUntil} from "rxjs";
 import {BestiaryService} from "../../../bestiary.service";
 import {AttributeService} from "../../attribute.service";
 import {TranslocoService} from "@ngneat/transloco";
-import {CreateAttribute} from "../../../../../../shared/interfaces/creature/create-attribute.interface";
+import {CreateTranslationAttribute} from "../../../../../../shared/interfaces/creature/create-attribute.interface";
 
 
 @Component({
@@ -24,7 +24,7 @@ export class InputSelectComponent extends DestroySubscription implements Control
   @Input() placeholder: string = '';
   @Input() route = ''
 
-  @Output() currentSelected = new EventEmitter<CreateAttribute>()
+  @Output() currentSelected = new EventEmitter<CreateTranslationAttribute>()
   selectData: any[] = []
   currentLanguage = this.localeService.getActiveLang()
   _value: any;
