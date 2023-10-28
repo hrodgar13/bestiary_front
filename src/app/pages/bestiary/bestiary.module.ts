@@ -29,39 +29,42 @@ import { TitleTextItemComponent } from './create-beast/form-elements/title-text-
 
 
 @NgModule({
-  providers: [
-    BestiaryService,
-    InputTextComponent
-  ],
-  declarations: [
-    CreateBeastComponent,
-    BestiaryListComponent,
-    InputTextComponent,
-    InputSelectComponent,
-    BorderOutlineComponent,
-    MultiSelectComponent,
-    LabelTextComponent,
-    InputGreenBtnComponent,
-    InputNumberComponent,
-    MultiSelectItemComponent,
-    PropertyModalComponent,
-    InputFileComponent,
-    StatblockInputComponent,
-    TitleTextInputComponent,
-    TextAreaInputComponent,
-    TitleTextItemComponent,
-  ],
-  imports: [
-    HttpClientModule,
-    CommonModule,
-    BestiaryRoutingModule,
-    MatIconModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatSelectModule,
-    MatButtonModule,
-    MatSnackBarModule,
-    MatDialogModule
-  ]
+    providers: [
+        BestiaryService,
+        InputTextComponent
+    ],
+    declarations: [
+        CreateBeastComponent,
+        BestiaryListComponent,
+        InputTextComponent,
+        InputSelectComponent,
+        BorderOutlineComponent,
+        MultiSelectComponent,
+        LabelTextComponent,
+        InputGreenBtnComponent,
+        InputNumberComponent,
+        MultiSelectItemComponent,
+        PropertyModalComponent,
+        InputFileComponent,
+        StatblockInputComponent,
+        TitleTextInputComponent,
+        TextAreaInputComponent,
+        TitleTextItemComponent,
+    ],
+    exports: [
+        BorderOutlineComponent
+    ],
+    imports: [
+        HttpClientModule,
+        CommonModule,
+        BestiaryRoutingModule,
+        MatIconModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatSelectModule,
+        MatButtonModule,
+        MatSnackBarModule,
+        MatDialogModule
+    ]
 })
 export class BestiaryModule { }

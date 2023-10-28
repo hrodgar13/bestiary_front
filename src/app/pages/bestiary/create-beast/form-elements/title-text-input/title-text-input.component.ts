@@ -54,4 +54,9 @@ export class TitleTextInputComponent implements OnInit{
     this.titleTextList.push(titleTextPayload)
     this.listChange.emit(this.titleTextList)
   }
+
+  removeElement($event: TitleTextPayload) {
+    this.titleTextList.splice(this.titleTextList.findIndex(item => item === $event), 1)
+    this.listChange.emit(this.titleTextList)
+  }
 }

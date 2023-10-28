@@ -1,0 +1,11 @@
+<div class="w-[400px] h-[340px] rounded-full">
+  <app-border-outline class="w-full">
+    <div class="flex flex-col items-center justify-around p-4 gap-4 poppins-font w-full">
+      <h2 class="w-full text-3xl text-center text-[#B1A79C]">{{data.message}}</h2>
+      <div class="w-full flex items-center justify-around">
+        <button class="bg-[#E2A23B] h-[48px] w-full max-w-[90px] rounded" mat-button (click)="outputDecision(false)">No</button>
+        <button class="bg-[#E2A23B] h-[48px] w-full max-w-[90px] rounded" (click)="outputDecision(true)">Yes</button>
+      </div>
+    </div>
+  </app-border-outline>
+</div>

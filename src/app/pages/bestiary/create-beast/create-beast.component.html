@@ -1,11 +1,14 @@
 <div
   class="flex-row poppins-font items-center 768:items-start 768:pt-[144px] px-2.5 768:px-[100px]">
-  <div class="flex flex-col relative items-center 768:items-start gap-2 h-auto w-full bg-[#1E232DFF] rounded border-2 border-[#E2A23B]">
+  <div
+    class="flex flex-col relative items-center 768:items-start gap-2 h-auto w-full bg-[#1E232DFF] rounded border-2 border-[#E2A23B]">
     <form class="p-5 flex flex-col gap-6 w-full " [formGroup]="creatureForm">
       <div class="flex items-center gap-3">
         <app-label-text [label]="'Creature name: '"></app-label-text>
-        <app-input-text formControlName="creatureNameEn" class="h-[48px] w-full max-w-[280px]" [placeholder]="'EN'"></app-input-text>
-        <app-input-text formControlName="creatureNameUa" class="h-[48px] w-full max-w-[280px]" [placeholder]="'UA'"></app-input-text>
+        <app-input-text formControlName="creatureNameEn" class="h-[48px] w-full max-w-[280px]"
+                        [placeholder]="'EN'"></app-input-text>
+        <app-input-text formControlName="creatureNameUa" class="h-[48px] w-full max-w-[280px]"
+                        [placeholder]="'UA'"></app-input-text>
       </div>
       <div class="flex gap-3 w-full">
         <div class="flex flex-col items-center gap-3 w-full max-w-[60%]">
@@ -17,12 +20,14 @@
           </div>
           <div class="flex items-center gap-3 w-full">
             <app-label-text [label]="'Type: '"/>
-            <app-input-select formControlName="type" [route]="'type'" class="h-[48px] w-full max-w-[280px]" [placeholder]="'Select Type'"/>
+            <app-input-select formControlName="type" [route]="'type'" class="h-[48px] w-full max-w-[280px]"
+                              [placeholder]="'Select Type'"/>
             <app-input-green-btn [route]="'type'"/>
           </div>
           <div class="flex items-center gap-3 w-full">
             <app-label-text [label]="'Size: '"/>
-            <app-input-select formControlName="size" [route]="'size'" class="h-[48px] w-full max-w-[280px]" [placeholder]="'Select Size'"/>
+            <app-input-select formControlName="size" [route]="'size'" class="h-[48px] w-full max-w-[280px]"
+                              [placeholder]="'Select Size'"/>
             <app-input-green-btn [route]="'size'"/>
           </div>
           <div class="flex w-full gap-3">
@@ -44,11 +49,13 @@
             </div>
             <div class="flex gap-3 items-center w-full">
               <app-label-text [label]="'Hits in dice:'"/>
-              <app-input-text formControlName="hitsInDice" class="h-[48px] w-full max-w-[280px]" [placeholder]="'Hits in dice: '"/>
+              <app-input-text formControlName="hitsInDice" class="h-[48px] w-full max-w-[280px]"
+                              [placeholder]="'Hits in dice: '"/>
             </div>
           </div>
           <div class="w-full">
-            <app-multi-select (listChange)="writeValueToCreature(FieldsEnum.speeds, $event)" label="Speeds" [route]="'speed'" [placeholder]="'Select speed: '" [amt]="true"
+            <app-multi-select (listChange)="writeValueToCreature(FieldsEnum.speeds, $event)" label="Speeds"
+                              [route]="'speed'" [placeholder]="'Select speed: '" [amt]="true"
                               [staticMeasure]="{en: 'ft', ua: 'фт'}"/>
           </div>
         </div>
@@ -66,10 +73,15 @@
       </div>
       <div class="flex gap-x-10 w-full">
         <div class="w-full flex flex-col gap-4">
-          <app-multi-select (listChange)="writeValueToCreature(FieldsEnum.immunities, $event)" [msr]="false" [placeholder]="'Select damage: '" label="Immunities" [route]="'damage'"/>
-          <app-multi-select (listChange)="writeValueToCreature(FieldsEnum.resists, $event)" [msr]="false" [placeholder]="'Select damage: '" label="Resists" [route]="'damage'"/>
-          <app-multi-select (listChange)="writeValueToCreature(FieldsEnum.vulnerabilities, $event)" [msr]="false" [placeholder]="'Select damage: '" label="Vulnerabilities" [route]="'damage'"/>
-          <app-multi-select (listChange)="writeValueToCreature(FieldsEnum.feelings, $event)" [amt]="true" [staticMeasure]="{en: 'ft', ua: 'фт'}" [placeholder]="'Select Feel: '" label="Feelings" [route]="'feeling'"/>
+          <app-multi-select (listChange)="writeValueToCreature(FieldsEnum.immunities, $event)" [msr]="false"
+                            [placeholder]="'Select damage: '" label="Immunities" [route]="'damage'"/>
+          <app-multi-select (listChange)="writeValueToCreature(FieldsEnum.resists, $event)" [msr]="false"
+                            [placeholder]="'Select damage: '" label="Resists" [route]="'damage'"/>
+          <app-multi-select (listChange)="writeValueToCreature(FieldsEnum.vulnerabilities, $event)" [msr]="false"
+                            [placeholder]="'Select damage: '" label="Vulnerabilities" [route]="'damage'"/>
+          <app-multi-select (listChange)="writeValueToCreature(FieldsEnum.feelings, $event)" [amt]="true"
+                            [staticMeasure]="{en: 'ft', ua: 'фт'}" [placeholder]="'Select Feel: '" label="Feelings"
+                            [route]="'feeling'"/>
           <div class="flex">
             <div class="flex w-full items-center gap-2">
               <app-label-text [label]="'Danger Lvl: '"/>
@@ -82,10 +94,17 @@
           </div>
         </div>
         <div class="w-full flex flex-col gap-4">
-          <app-multi-select (listChange)="writeValueToCreature(FieldsEnum.savingThrows, $event)" [amt]="true" [msr]="false" [unmeasuredAmount]="true" [placeholder]="'Saving throw: '" label="Saving throws" [route]="'saving-throw'"/>
-          <app-multi-select (listChange)="writeValueToCreature(FieldsEnum.skills, $event)" [amt]="true" [msr]="false" [unmeasuredAmount]="true" [placeholder]="'Select Skill: '" label="Skills" [route]="'skill'"/>
-          <app-multi-select (listChange)="writeValueToCreature(FieldsEnum.conditionsImmunities, $event)" [msr]="false" [placeholder]="'Select condition: '" label="Conditions immunities" [route]="'condition'"/>
-          <app-multi-select (listChange)="writeValueToCreature(FieldsEnum.languages, $event)" [amt]="true" [placeholder]="'Select Language: '" [staticMeasure]="{en: 'ft', ua: 'фт'}" label="Langs" [route]="'language'"/>
+          <app-multi-select (listChange)="writeValueToCreature(FieldsEnum.savingThrows, $event)" [amt]="true"
+                            [msr]="false" [unmeasuredAmount]="true" [placeholder]="'Saving throw: '"
+                            label="Saving throws" [route]="'saving-throw'"/>
+          <app-multi-select (listChange)="writeValueToCreature(FieldsEnum.skills, $event)" [amt]="true" [msr]="false"
+                            [unmeasuredAmount]="true" [placeholder]="'Select Skill: '" label="Skills"
+                            [route]="'skill'"/>
+          <app-multi-select (listChange)="writeValueToCreature(FieldsEnum.conditionsImmunities, $event)" [msr]="false"
+                            [placeholder]="'Select condition: '" label="Conditions immunities" [route]="'condition'"/>
+          <app-multi-select (listChange)="writeValueToCreature(FieldsEnum.languages, $event)" [amt]="true"
+                            [placeholder]="'Select Language: '" [staticMeasure]="{en: 'ft', ua: 'фт'}" label="Langs"
+                            [route]="'language'"/>
           <div class="flex">
             <div class="flex w-full items-center gap-2">
               <app-label-text [label]="'Mastery bonus: '"/>
@@ -96,7 +115,23 @@
       </div>
       <div>
         <div class="h-[1px] w-full bg-[#E2A23B]"></div>
-        <app-title-text-input/>
+        <app-title-text-input [blockName]="'Abilities'"/>
+        <div class="h-[1px] w-full bg-[#E2A23B]"></div>
+      </div>
+      <div>
+        <div class="h-[1px] w-full bg-[#E2A23B]"></div>
+        <app-title-text-input [blockName]="'Actions'"/>
+        <div class="h-[1px] w-full bg-[#E2A23B]"></div>
+      </div>
+      <div>
+        <div class="h-[1px] w-full bg-[#E2A23B]"></div>
+        <app-title-text-input [blockName]="'Bonus Actions'"/>
+        <div class="h-[1px] w-full bg-[#E2A23B]"></div>
+      </div>
+      <div>
+        <div class="h-[1px] w-full bg-[#E2A23B]"></div>
+        <app-title-text-input [blockName]="'Legendary Actions'"/>
+        <div class="h-[1px] w-full bg-[#E2A23B]"></div>
       </div>
       <button (click)="writeForm()">Output</button>
     </form>

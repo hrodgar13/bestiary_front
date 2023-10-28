@@ -4,7 +4,7 @@
       <div class="w-full">
         <div class="flex justify-between items-center">
           <h2
-            class="flex items-center justify-center text-4xl font-semibold playfair-font text-[#E2A23B]">{{blockName}}</h2>
+            class="flex items-center justify-center text-3xl font-semibold playfair-font text-[#E2A23B]">{{blockName}}</h2>
           <div class="flex items-center gap-2">
             <app-label-text [label]="'Title EN'"/>
             <app-input-text formControlName="titleEN" class="h-[48px]" [placeholder]="'Title EN'"/>
@@ -31,7 +31,7 @@
   <div class="w-full mt-7 h-[200px]">
     <app-border-outline>
       <div class="rounded-xl bg-[#15181F] h-full mx-4 py-4 flex flex-col items-start gap-1 w-full overflow-y-auto properties-container">
-        <app-title-text-item class="w-full" *ngFor="let item of titleTextList" [titleText]="item"/>
+        <app-title-text-item class="w-full" *ngFor="let item of titleTextList" [titleText]="item" (remove)="removeElement($event)"/>
       </div>
     </app-border-outline>
   </div>
