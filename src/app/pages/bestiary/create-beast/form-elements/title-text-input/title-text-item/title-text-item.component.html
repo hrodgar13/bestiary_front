@@ -1,0 +1,6 @@
+<app-border-outline class="w-full h-full">
+  <h2 *ngIf="titleText.title && titleText.description && currentLanguage">
+    {{ titleText.title.en || 'Default Title' }}:
+    {{ titleText.description.en || 'Default Description' }}
+  </h2>
+</app-border-outline>
