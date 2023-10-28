@@ -9,10 +9,12 @@ import {takeUntil} from "rxjs";
   templateUrl: './title-text-item.component.html',
   styleUrls: ['./title-text-item.component.scss']
 })
-export class TitleTextItemComponent extends DestroySubscription implements OnInit{
+export class TitleTextItemComponent extends DestroySubscription implements OnInit {
   @Input() titleText: TitleTextPayload = {}
 
   currentLanguage = this.localeService.getActiveLang()
+  currentLanguageTitle!: string;
+  currentLanguageDescription!: string;
 
   constructor(
     private localeService: TranslocoService
@@ -26,7 +28,20 @@ export class TitleTextItemComponent extends DestroySubscription implements OnIni
 
   private detectLanguageChange() {
     this.localeService.langChanges$.pipe(takeUntil(this.destroyStream$)).subscribe(data => {
-      this.currentLanguage = data
+      this.defineCurrentLanguage(data)
     })
+  }
+
+  private defineCurrentLanguage(data: string = 'en') {
+    if (data === 'en' || data === 'ua') {
+      console.log(this.titleText)
+      if (this.titleText.title) {
+        this.currentLanguageTitle = this.titleText.title[data]
+      }
+      if (this.titleText.description) {
+        this.currentLanguageDescription = this.titleText.description[data]
+      }
+    }
+
   }
 }

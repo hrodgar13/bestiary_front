@@ -1,0 +1,13 @@
+.properties-container::-webkit-scrollbar {
+  width: 5px;
+}
+
+.properties-container::-webkit-scrollbar-track {
+  background: none;
+}
+
+.properties-container::-webkit-scrollbar-thumb {
+  background-color: #E2A23B;
+  border-radius: 20px;
+  margin-left: -5px;
+}

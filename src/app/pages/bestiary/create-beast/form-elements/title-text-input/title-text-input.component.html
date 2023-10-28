@@ -17,10 +17,10 @@
       <div class="w-full">
         <div class="flex items-center justify-end gap-2">
           <app-label-text [label]="'Title UA'"/>
-          <app-input-text class="h-[48px]" [placeholder]="'Title UA'"/>
+          <app-input-text formControlName="titleUA" class="h-[48px]" [placeholder]="'Title UA'"/>
         </div>
         <div class="mt-2 h-[140px]">
-          <app-text-area-input [placeholder]="'Description UA'"/>
+          <app-text-area-input formControlName="descriptionUA" [placeholder]="'Description UA'"/>
         </div>
       </div>
     </div>
@@ -30,8 +30,8 @@
   </form>
   <div class="w-full mt-7 h-[200px]">
     <app-border-outline>
-      <div class="bg-[#15181F]">
-        <app-title-text-item *ngFor="let item of titleTextList" [titleText]="item"/>
+      <div class="rounded-xl bg-[#15181F] h-full mx-4 py-4 flex flex-col items-start gap-1 w-full overflow-y-auto properties-container">
+        <app-title-text-item class="w-full" *ngFor="let item of titleTextList" [titleText]="item"/>
       </div>
     </app-border-outline>
   </div>
