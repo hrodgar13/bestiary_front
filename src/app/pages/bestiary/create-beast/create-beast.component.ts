@@ -25,6 +25,7 @@ export interface CreaturePayload {
   experience?: string,
   masteryBonus?: number
   actionsAbilities: ActionsAndAbilitiesAmount
+  description?: CreateTranslationAttribute
 }
 
 export interface MultiSelectAmount {
@@ -111,7 +112,9 @@ export class CreateBeastComponent implements OnInit {
       charisma: [null],
       dangerLevel: [null],
       experience: [null],
-      masteryBonus: [null]
+      masteryBonus: [null],
+      descriptionEN: [null],
+      descriptionUA: [null]
     })
   }
 
@@ -143,7 +146,11 @@ export class CreateBeastComponent implements OnInit {
       experience: this.creatureForm.value.experience,
       masteryBonus: this.creatureForm.value.masteryBonus,
       multiSelects: this.creaturePayload.multiSelects,
-      actionsAbilities: this.creaturePayload.actionsAbilities
+      actionsAbilities: this.creaturePayload.actionsAbilities,
+      description: {
+        ua: this.creatureForm.value.descriptionUA,
+        en: this.creatureForm.value.descriptionEN
+      }
     }
 
     console.log(this.creaturePayload)

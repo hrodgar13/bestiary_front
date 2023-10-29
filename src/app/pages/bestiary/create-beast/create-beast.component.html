@@ -119,23 +119,28 @@
         <div class="h-[1px] w-full bg-[#E2A23B]"></div>
       </div>
       <div>
-        <div class="h-[1px] w-full bg-[#E2A23B]"></div>
         <app-title-text-input (listChange)="setAbilityOrAction(ActionsAbilitiesENUM.actions, $event)" [blockName]="'Actions'"/>
         <div class="h-[1px] w-full bg-[#E2A23B]"></div>
       </div>
       <div>
-        <div class="h-[1px] w-full bg-[#E2A23B]"></div>
         <app-title-text-input (listChange)="setAbilityOrAction(ActionsAbilitiesENUM.bonusActions, $event)" [blockName]="'Bonus Actions'"/>
         <div class="h-[1px] w-full bg-[#E2A23B]"></div>
       </div>
       <div>
-        <div class="h-[1px] w-full bg-[#E2A23B]"></div>
         <app-title-text-input (listChange)="setAbilityOrAction(ActionsAbilitiesENUM.legendaryActions, $event)" [blockName]="'Legendary Actions'"/>
         <div class="h-[1px] w-full bg-[#E2A23B]"></div>
       </div>
       <div>
         <app-multi-select (listChange)="writeValueToCreature(FieldsEnum.regions, $event)" [msr]="false"
                           [placeholder]="'Select region: '" label="Habitats: " [route]="'region'"/>
+        <div class="h-[1px] w-full bg-[#E2A23B] mt-5"></div>
+      </div>
+      <div>
+        <h2 class="text-[#E2A23B] playfair-font text-3xl">Description</h2>
+        <div class="flex gap-10 w-full mt-2">
+          <app-text-area-input formControlName="descriptionEN" class="w-full h-[200px]" [placeholder]="'EN'"/>
+          <app-text-area-input formControlName="descriptionUA" class="w-full h-[200px]" [placeholder]="'UA'"/>
+        </div>
       </div>
       <button (click)="writeForm()">Output</button>
     </form>
