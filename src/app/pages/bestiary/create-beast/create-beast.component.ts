@@ -37,6 +37,7 @@ export interface MultiSelectAmount {
   [MultiFieldsENUM.skills]?: OutputMultiSelectData[]
   [MultiFieldsENUM.conditionsImmunities]?: OutputMultiSelectData[]
   [MultiFieldsENUM.languages]?: OutputMultiSelectData[]
+  [MultiFieldsENUM.regions]?: OutputMultiSelectData[]
 }
 
 export interface ActionsAndAbilitiesAmount {
@@ -68,6 +69,7 @@ export enum MultiFieldsENUM {
   skills = 'skills',
   conditionsImmunities = 'conditions-immunities',
   languages = 'languages',
+  regions = 'regions'
 }
 
 @Component({

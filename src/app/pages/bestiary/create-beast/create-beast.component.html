@@ -133,6 +133,10 @@
         <app-title-text-input (listChange)="setAbilityOrAction(ActionsAbilitiesENUM.legendaryActions, $event)" [blockName]="'Legendary Actions'"/>
         <div class="h-[1px] w-full bg-[#E2A23B]"></div>
       </div>
+      <div>
+        <app-multi-select (listChange)="writeValueToCreature(FieldsEnum.regions, $event)" [msr]="false"
+                          [placeholder]="'Select region: '" label="Habitats: " [route]="'region'"/>
+      </div>
       <button (click)="writeForm()">Output</button>
     </form>
   </div>
