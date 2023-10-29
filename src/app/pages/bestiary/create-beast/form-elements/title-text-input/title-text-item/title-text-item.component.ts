@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {TitleTextPayload} from "../title-text-input.component";
+import {ActionsAndAbilities} from "../title-text-input.component";
 import {DestroySubscription} from "../../../../../../../shared/helpers/destroy-subscribtion";
 import {TranslocoService} from "@ngneat/transloco";
 import {takeUntil} from "rxjs";
@@ -12,12 +12,12 @@ import {MatDialog} from "@angular/material/dialog";
   styleUrls: ['./title-text-item.component.scss']
 })
 export class TitleTextItemComponent extends DestroySubscription implements OnInit {
-  @Input() titleText: TitleTextPayload = {}
+  @Input() titleText: ActionsAndAbilities = {}
 
   currentLanguage = this.localeService.getActiveLang()
   currentLanguageTitle!: string;
   currentLanguageDescription!: string;
-  @Output() remove = new EventEmitter<TitleTextPayload>
+  @Output() remove = new EventEmitter<ActionsAndAbilities>
 
   constructor(
     private dialog: MatDialog,

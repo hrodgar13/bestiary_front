@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, UntypedFormGroup} from "@angular/forms"
 import {OutputMultiSelectData} from "./form-elements/multi-select/multi-select.component";
 import {CreateTranslationAttribute} from "../../../../shared/interfaces/creature/create-attribute.interface";
+import {ActionsAndAbilities} from "./form-elements/title-text-input/title-text-input.component";
 
 export interface CreaturePayload {
   isFinished: boolean,
@@ -23,6 +24,7 @@ export interface CreaturePayload {
   dangerLevel?: number,
   experience?: string,
   masteryBonus?: number
+  actionsAbilities: ActionsAndAbilitiesAmount
 }
 
 export interface MultiSelectAmount {
@@ -35,6 +37,25 @@ export interface MultiSelectAmount {
   [MultiFieldsENUM.skills]?: OutputMultiSelectData[]
   [MultiFieldsENUM.conditionsImmunities]?: OutputMultiSelectData[]
   [MultiFieldsENUM.languages]?: OutputMultiSelectData[]
+}
+
+export interface ActionsAndAbilitiesAmount {
+  [ActionsAbilitiesENUM.abilities]?: ActionsAndAbilities[],
+  [ActionsAbilitiesENUM.actions]?: ActionsAndAbilities[]
+  [ActionsAbilitiesENUM.bonusActions]?: ActionsAndAbilities[]
+  [ActionsAbilitiesENUM.legendaryActions]?: ActionsAndAbilities[]
+}
+
+// export interface ActionsAndAbilities {
+//   title?: CreateTranslationAttribute
+//   description?: CreateTranslationAttribute
+// }
+
+export enum ActionsAbilitiesENUM{
+  abilities = 'abilities',
+  actions = 'actions',
+  bonusActions = 'bonus-actions',
+  legendaryActions = 'legendary-actions'
 }
 
 export enum MultiFieldsENUM {
@@ -59,7 +80,8 @@ export class CreateBeastComponent implements OnInit {
 
   creaturePayload: CreaturePayload = {
     isFinished: false,
-    multiSelects: {}
+    multiSelects: {},
+    actionsAbilities: {}
   }
 
   creatureForm!: UntypedFormGroup;
@@ -118,7 +140,8 @@ export class CreateBeastComponent implements OnInit {
       dangerLevel: this.creatureForm.value.dangerLevel,
       experience: this.creatureForm.value.experience,
       masteryBonus: this.creatureForm.value.masteryBonus,
-      multiSelects: this.creaturePayload.multiSelects
+      multiSelects: this.creaturePayload.multiSelects,
+      actionsAbilities: this.creaturePayload.actionsAbilities
     }
 
     console.log(this.creaturePayload)
@@ -126,5 +149,11 @@ export class CreateBeastComponent implements OnInit {
 
   writeValueToCreature(route: MultiFieldsENUM, $event: OutputMultiSelectData[]) {
     this.creaturePayload.multiSelects[route] = $event
+  }
+
+  protected readonly ActionsAbilitiesENUM = ActionsAbilitiesENUM;
+
+  setAbilityOrAction(abilities: ActionsAbilitiesENUM, $event: ActionsAndAbilities[]) {
+    this.creaturePayload.actionsAbilities[abilities] = $event
   }
 }

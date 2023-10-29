@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, UntypedFormGroup} from "@angular/forms";
 import {CreateTranslationAttribute} from "../../../../../../shared/interfaces/creature/create-attribute.interface";
 
-export interface TitleTextPayload {
+export interface ActionsAndAbilities {
   title?: CreateTranslationAttribute
   description?: CreateTranslationAttribute
 }
@@ -15,9 +15,9 @@ export interface TitleTextPayload {
 export class TitleTextInputComponent implements OnInit{
   @Input()blockName: string = 'Actions';
 
-  @Output() listChange = new EventEmitter<TitleTextPayload[]>()
+  @Output() listChange = new EventEmitter<ActionsAndAbilities[]>()
 
-  titleTextList: TitleTextPayload[] = []
+  titleTextList: ActionsAndAbilities[] = []
 
   form!: UntypedFormGroup
 
@@ -40,7 +40,7 @@ export class TitleTextInputComponent implements OnInit{
       return
     }
 
-    const titleTextPayload: TitleTextPayload = {
+    const titleTextPayload: ActionsAndAbilities = {
       description: {
         en: this.form.value.descriptionEN,
         ua: this.form.value.descriptionUA
@@ -55,7 +55,7 @@ export class TitleTextInputComponent implements OnInit{
     this.listChange.emit(this.titleTextList)
   }
 
-  removeElement($event: TitleTextPayload) {
+  removeElement($event: ActionsAndAbilities) {
     this.titleTextList.splice(this.titleTextList.findIndex(item => item === $event), 1)
     this.listChange.emit(this.titleTextList)
   }

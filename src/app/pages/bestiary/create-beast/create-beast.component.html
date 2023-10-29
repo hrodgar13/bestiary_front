@@ -115,22 +115,22 @@
       </div>
       <div>
         <div class="h-[1px] w-full bg-[#E2A23B]"></div>
-        <app-title-text-input [blockName]="'Abilities'"/>
+        <app-title-text-input (listChange)="setAbilityOrAction(ActionsAbilitiesENUM.abilities, $event)" [blockName]="'Abilities'"/>
         <div class="h-[1px] w-full bg-[#E2A23B]"></div>
       </div>
       <div>
         <div class="h-[1px] w-full bg-[#E2A23B]"></div>
-        <app-title-text-input [blockName]="'Actions'"/>
+        <app-title-text-input (listChange)="setAbilityOrAction(ActionsAbilitiesENUM.actions, $event)" [blockName]="'Actions'"/>
         <div class="h-[1px] w-full bg-[#E2A23B]"></div>
       </div>
       <div>
         <div class="h-[1px] w-full bg-[#E2A23B]"></div>
-        <app-title-text-input [blockName]="'Bonus Actions'"/>
+        <app-title-text-input (listChange)="setAbilityOrAction(ActionsAbilitiesENUM.bonusActions, $event)" [blockName]="'Bonus Actions'"/>
         <div class="h-[1px] w-full bg-[#E2A23B]"></div>
       </div>
       <div>
         <div class="h-[1px] w-full bg-[#E2A23B]"></div>
-        <app-title-text-input [blockName]="'Legendary Actions'"/>
+        <app-title-text-input (listChange)="setAbilityOrAction(ActionsAbilitiesENUM.legendaryActions, $event)" [blockName]="'Legendary Actions'"/>
         <div class="h-[1px] w-full bg-[#E2A23B]"></div>
       </div>
       <button (click)="writeForm()">Output</button>
