@@ -13,13 +13,10 @@ export class MultiSelectItemComponent extends DestroySubscription implements OnI
   @Input() id!: number
   @Input() label!: CreateTranslationAttribute
   @Input() amt!: number
-  @Input() msr!: CreateTranslationAttribute
-  @Input() isStaticMsr: boolean = false
-  @Input() unmeasuredAmount: boolean = false
+  @Input() msr!: boolean
   @Output() deleteItem = new EventEmitter<number>()
 
   currentLanguageLabel: string = ''
-  currentLanguageMsr = ''
 
   constructor(
     private readonly translocoService: TranslocoService
@@ -35,7 +32,6 @@ export class MultiSelectItemComponent extends DestroySubscription implements OnI
 
   private defineCurrentLanguage(data: string = 'en') {
     if(data === 'en' || data === 'ua') {
-      this.currentLanguageMsr = this.msr[data]
       this.currentLanguageLabel = this.label[data]
     }
   }

@@ -56,7 +56,7 @@
           <div class="w-full">
             <app-multi-select (listChange)="writeValueToCreature(FieldsEnum.speeds, $event)" label="Speeds"
                               [route]="'speed'" [placeholder]="'Select speed: '" [amt]="true"
-                              [staticMeasure]="{en: 'ft', ua: 'фт'}"/>
+                              [msr]="true" [alwaysUseMsr]="true"/>
           </div>
         </div>
         <div class="flex image-load w-full">
@@ -80,7 +80,7 @@
           <app-multi-select (listChange)="writeValueToCreature(FieldsEnum.vulnerabilities, $event)" [msr]="false"
                             [placeholder]="'Select damage: '" label="Vulnerabilities" [route]="'damage'"/>
           <app-multi-select (listChange)="writeValueToCreature(FieldsEnum.feelings, $event)" [amt]="true"
-                            [staticMeasure]="{en: 'ft', ua: 'фт'}" [placeholder]="'Select Feel: '" label="Feelings"
+                            [msr]="true" [placeholder]="'Select Feel: '" label="Feelings"
                             [route]="'feeling'"/>
           <div class="flex">
             <div class="flex w-full items-center gap-2">
@@ -103,7 +103,8 @@
           <app-multi-select (listChange)="writeValueToCreature(FieldsEnum.conditionsImmunities, $event)" [msr]="false"
                             [placeholder]="'Select condition: '" label="Conditions immunities" [route]="'condition'"/>
           <app-multi-select (listChange)="writeValueToCreature(FieldsEnum.languages, $event)" [amt]="true"
-                            [placeholder]="'Select Language: '" [staticMeasure]="{en: 'ft', ua: 'фт'}" label="Langs"
+                            [alwaysUseMsr]="true"
+                            [placeholder]="'Select Language: '" label="Langs"
                             [route]="'language'"/>
           <div class="flex">
             <div class="flex w-full items-center gap-2">

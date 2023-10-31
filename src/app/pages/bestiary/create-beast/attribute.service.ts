@@ -3,9 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {CreateTranslationAttribute} from "../../../../shared/interfaces/creature/create-attribute.interface";
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AttributeService {
 
   constructor(

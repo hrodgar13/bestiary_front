@@ -2,18 +2,12 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {CreateTranslationAttribute} from "../../../../../../shared/interfaces/creature/create-attribute.interface";
+import {CreateAttributeMeasure} from "../../../../../../shared/interfaces/creature/create-attribute-measure.interface";
 
-export interface MultiSelect {
+export interface MultiSelectList {
   id: number
   title: CreateTranslationAttribute
-  msr: CreateTranslationAttribute
-  amt: number
-}
-
-export interface OutputMultiSelectData {
-  id: number
-  title: CreateTranslationAttribute
-  msr: CreateTranslationAttribute
+  msr: boolean
   amt: number
 }
 
@@ -26,14 +20,15 @@ export class MultiSelectComponent implements OnInit {
   @Input() route = ''
   @Input() amt = false
   @Input() msr: boolean = true
-  @Input() staticMeasure!: CreateTranslationAttribute
-
+  @Input() alwaysUseMsr = false
   @Input() label!: string;
   @Input() placeholder: string = '';
   form!: UntypedFormGroup;
 
-  @Output() listChange = new EventEmitter<OutputMultiSelectData[]>
-  selectedItems: MultiSelect[] = [];
+  @Output() listChange = new EventEmitter<CreateAttributeMeasure[]>
+  selectedItems: MultiSelectList[] = [];
+  outputDataList: CreateAttributeMeasure[] = []
+
   selectedItemTitle!: CreateTranslationAttribute;
   @Input() unmeasuredAmount: boolean = false;
 
@@ -44,14 +39,11 @@ export class MultiSelectComponent implements OnInit {
   }
 
   ngOnInit() {
-    const amountValidator = this.amt ? [Validators.required] : null
-    const measureValidator = !!this.staticMeasure ? [Validators.required] : null
 
     this.form = this.formBuilder.group({
       value: [null, [Validators.required]],
-      amount: [null, amountValidator],
-      measure_EN: [this.staticMeasure ? this.staticMeasure.en : null, measureValidator],
-      measure_UA: [this.staticMeasure ? this.staticMeasure.ua : null, measureValidator]
+      amount: [null],
+      measure: [null]
     })
   }
 
@@ -60,26 +52,36 @@ export class MultiSelectComponent implements OnInit {
       return
     }
 
-    const selectedItem: MultiSelect = {
+    const selectedItem: MultiSelectList = {
       id: this.form!.get('value')!.value,
       title: this.selectedItemTitle,
       amt: this.form!.get('amount')!.value,
-      msr: {
-        en: this.staticMeasure ? this.staticMeasure['en'] : this.form!.get('measure_EN')!.value,
-        ua: this.staticMeasure ? this.staticMeasure['ua'] : this.form!.get('measure_UA')!.value
-      }
+      msr: this.form!.get('measure')!.value
     }
 
     this.selectedItems.push(selectedItem)
-    this.listChange.emit(this.selectedItems)
+
+    this.emitListPrerender()
   }
 
   removeItemFromList($event: number) {
     this.selectedItems.splice(this.selectedItems.findIndex(item => item.id === $event), 1)
-    this.listChange.emit(this.selectedItems)
+    this.emitListPrerender()
   }
 
   selectedItemTitleChange(event: CreateTranslationAttribute) {
     this.selectedItemTitle = event
+  }
+
+  private emitListPrerender() {
+    this.outputDataList = this.selectedItems.map(item => {
+        return {
+            amt: item.amt,
+            msr: item.msr,
+            attributeId: item.id
+        }
+    })
+
+    this.listChange.emit(this.outputDataList)
   }
 }

@@ -1,8 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, UntypedFormGroup} from "@angular/forms"
-import {OutputMultiSelectData} from "./form-elements/multi-select/multi-select.component";
 import {CreateTranslationAttribute} from "../../../../shared/interfaces/creature/create-attribute.interface";
 import {ActionsAndAbilities} from "./form-elements/title-text-input/title-text-input.component";
+import {CreateAttributeMeasure} from "../../../../shared/interfaces/creature/create-attribute-measure.interface";
+import {CreatureService} from "./creature.service";
+import {takeUntil} from "rxjs";
+import {DestroySubscription} from "../../../../shared/helpers/destroy-subscribtion";
 
 export interface CreaturePayload {
   isFinished: boolean,
@@ -29,16 +32,16 @@ export interface CreaturePayload {
 }
 
 export interface MultiSelectAmount {
-  [MultiFieldsENUM.immunities]?: OutputMultiSelectData[]
-  [MultiFieldsENUM.vulnerabilities]?: OutputMultiSelectData[]
-  [MultiFieldsENUM.speeds]?: OutputMultiSelectData[]
-  [MultiFieldsENUM.resists]?: OutputMultiSelectData[]
-  [MultiFieldsENUM.feelings]?: OutputMultiSelectData[]
-  [MultiFieldsENUM.savingThrows]?: OutputMultiSelectData[]
-  [MultiFieldsENUM.skills]?: OutputMultiSelectData[]
-  [MultiFieldsENUM.conditionsImmunities]?: OutputMultiSelectData[]
-  [MultiFieldsENUM.languages]?: OutputMultiSelectData[]
-  [MultiFieldsENUM.regions]?: OutputMultiSelectData[]
+  [MultiFieldsENUM.immunities]?: CreateAttributeMeasure[]
+  [MultiFieldsENUM.vulnerabilities]?: CreateAttributeMeasure[]
+  [MultiFieldsENUM.speeds]?: CreateAttributeMeasure[]
+  [MultiFieldsENUM.resists]?: CreateAttributeMeasure[]
+  [MultiFieldsENUM.feelings]?: CreateAttributeMeasure[]
+  [MultiFieldsENUM.savingThrows]?: CreateAttributeMeasure[]
+  [MultiFieldsENUM.skills]?: CreateAttributeMeasure[]
+  [MultiFieldsENUM.conditionsImmunities]?: CreateAttributeMeasure[]
+  [MultiFieldsENUM.languages]?: CreateAttributeMeasure[]
+  [MultiFieldsENUM.regions]?: CreateAttributeMeasure[]
 }
 
 export interface ActionsAndAbilitiesAmount {
@@ -47,11 +50,6 @@ export interface ActionsAndAbilitiesAmount {
   [ActionsAbilitiesENUM.bonusActions]?: ActionsAndAbilities[]
   [ActionsAbilitiesENUM.legendaryActions]?: ActionsAndAbilities[]
 }
-
-// export interface ActionsAndAbilities {
-//   title?: CreateTranslationAttribute
-//   description?: CreateTranslationAttribute
-// }
 
 export enum ActionsAbilitiesENUM{
   abilities = 'abilities',
@@ -78,7 +76,7 @@ export enum MultiFieldsENUM {
   templateUrl: './create-beast.component.html',
   styleUrls: ['./create-beast.component.scss']
 })
-export class CreateBeastComponent implements OnInit {
+export class CreateBeastComponent extends DestroySubscription implements OnInit {
   FieldsEnum = MultiFieldsENUM
 
   creaturePayload: CreaturePayload = {
@@ -89,8 +87,10 @@ export class CreateBeastComponent implements OnInit {
 
   creatureForm!: UntypedFormGroup;
   constructor(
-    private readonly formBuilder: FormBuilder
+    private readonly formBuilder: FormBuilder,
+    private readonly creatureService: CreatureService
   ) {
+    super()
   }
 
   ngOnInit(): void {
@@ -153,10 +153,12 @@ export class CreateBeastComponent implements OnInit {
       }
     }
 
-    console.log(this.creaturePayload)
+    this.creatureService.createCreature(this.creaturePayload).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+      console.log(data)
+    })
   }
 
-  writeValueToCreature(route: MultiFieldsENUM, $event: OutputMultiSelectData[]) {
+  writeValueToCreature(route: MultiFieldsENUM, $event: CreateAttributeMeasure[]) {
     this.creaturePayload.multiSelects[route] = $event
   }
 
