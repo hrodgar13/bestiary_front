@@ -3,6 +3,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {MatData, PropertyModalComponent} from "../../property-modal/property-modal.component";
 import {takeUntil} from "rxjs";
 import {DestroySubscription} from "../../../../../../shared/helpers/destroy-subscribtion";
+import {BestiaryService} from "../../../bestiary.service";
 
 @Component({
   selector: 'app-input-green-btn',
@@ -15,7 +16,8 @@ export class InputGreenBtnComponent extends DestroySubscription{
   @Input() title = ''
 
   constructor(
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private bestiaryService: BestiaryService
   ) {
     super()
   }
@@ -29,7 +31,7 @@ export class InputGreenBtnComponent extends DestroySubscription{
     const dialogRef = this.dialog.open(PropertyModalComponent, {data})
 
     dialogRef.afterClosed().pipe(takeUntil(this.destroyStream$)).subscribe(data => {
-      this.modalClose.emit()
+      this.bestiaryService.greenBtnChange$.next(this.route)
     })
   }
 }

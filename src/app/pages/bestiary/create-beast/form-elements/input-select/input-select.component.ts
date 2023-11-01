@@ -31,7 +31,8 @@ export class InputSelectComponent extends DestroySubscription implements Control
 
   constructor(
     private readonly attrService: AttributeService,
-    private localeService: TranslocoService
+    private localeService: TranslocoService,
+    private bestiaryService: BestiaryService
   ) {
     super();
   }
@@ -39,6 +40,11 @@ export class InputSelectComponent extends DestroySubscription implements Control
   ngOnInit() {
     this.getSelectData()
     this.detectLanguageChange()
+    this.bestiaryService.greenBtnChange$.pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+      if(data === this.route) {
+        this.getSelectData()
+      }
+    })
   }
 
   private propagateChange = (_: any) => {
