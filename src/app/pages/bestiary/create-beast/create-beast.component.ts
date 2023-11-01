@@ -6,6 +6,7 @@ import {CreateAttributeMeasure} from "../../../../shared/interfaces/creature/cre
 import {CreatureService} from "./creature.service";
 import {takeUntil} from "rxjs";
 import {DestroySubscription} from "../../../../shared/helpers/destroy-subscribtion";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 export interface CreaturePayload {
   isFinished: boolean,
@@ -86,9 +87,11 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit 
   }
 
   creatureForm!: UntypedFormGroup;
+  private isFinished = false;
   constructor(
     private readonly formBuilder: FormBuilder,
-    private readonly creatureService: CreatureService
+    private readonly creatureService: CreatureService,
+    private readonly matSnack: MatSnackBar
   ) {
     super()
   }
@@ -116,15 +119,21 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit 
       descriptionEN: [null],
       descriptionUA: [null]
     })
+    setInterval(() => {
+      if(!this.isFinished) {
+        this.writeForm(false)
+      }
+    }, 5 * 60 * 1000)
   }
 
-  writeForm() {
+  writeForm(isFinished: boolean) {
+    this.isFinished = isFinished
     if(this.creatureForm.invalid) {
       return
     }
 
     this.creaturePayload = {
-      isFinished: false,
+      isFinished: this.isFinished,
       creatureName: {
         ua: this.creatureForm.value.creatureNameEn,
         en: this.creatureForm.value.creatureNameUa
@@ -154,7 +163,10 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit 
     }
 
     this.creatureService.createCreature(this.creaturePayload).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
-      console.log(data)
+      this.matSnack.open('Saved','', {
+        duration: 1500,
+        verticalPosition: "top"
+      })
     })
   }
 
