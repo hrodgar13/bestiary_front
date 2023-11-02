@@ -3,6 +3,7 @@ import {NgModule} from "@angular/core";
 import {BestiaryListComponent} from "./bestiary-list/bestiary-list.component";
 import {CreateBeastComponent} from "./create-beast/create-beast.component";
 import {AdminGuard} from "../../../shared/guards/admin.guard";
+import {BeastPageComponent} from "./beast-page/beast-page.component";
 
 const routes: Routes = [
   {
@@ -18,6 +19,10 @@ const routes: Routes = [
   {
     path: 'list',
     component: BestiaryListComponent,
+  },
+  {
+    path: 'list/:id',
+    component: BeastPageComponent
   }
 ];
 

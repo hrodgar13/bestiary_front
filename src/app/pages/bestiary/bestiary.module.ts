@@ -35,6 +35,7 @@ import {CreatureService} from "./create-beast/creature.service";
 import {AttributeService} from "./create-beast/attribute.service";
 import { DangerSeparatorComponent } from './bestiary-list/danger-separator/danger-separator.component';
 import { FiltersModalComponent } from './bestiary-list/filters-modal/filters-modal.component';
+import { BeastPageComponent } from './beast-page/beast-page.component';
 
 
 @NgModule({
@@ -63,6 +64,7 @@ import { FiltersModalComponent } from './bestiary-list/filters-modal/filters-mod
     TitleTextItemComponent,
     DangerSeparatorComponent,
     FiltersModalComponent,
+    BeastPageComponent,
   ],
   exports: [
     BorderOutlineComponent
