@@ -38,5 +38,15 @@
   </div>
   <div class="pt-5">
     <app-danger-separator [dangerLVL]="1"/>
+    <div class="grid grid-cols-3 mx-[100px] pt-5">
+      <div *ngFor="let beast of creaturesList" class="w-full h-[56px] bg-[#1E232D] rounded-xl max-w-[400px] border border-[#E2A23B] flex items-center">
+        <div class="w-16 border-r border-[#E2A23B] flex items-center justify-center text-[#E2A23B] h-full text-3xl">
+          {{beast.creatureDangerLvl ? beast.creatureDangerLvl : '-'}}
+        </div>
+        <div class="text-[#B1A79C] w-full p-3 text-xl poppins-font">
+          {{beast.creatureDangerLvl}}
+        </div>
+      </div>
+    </div>
   </div>
 </div>
