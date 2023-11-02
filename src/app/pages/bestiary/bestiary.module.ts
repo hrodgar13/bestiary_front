@@ -34,6 +34,7 @@ import {TranslocoPipe} from "@ngneat/transloco";
 import {CreatureService} from "./create-beast/creature.service";
 import {AttributeService} from "./create-beast/attribute.service";
 import { DangerSeparatorComponent } from './bestiary-list/danger-separator/danger-separator.component';
+import { FiltersModalComponent } from './bestiary-list/filters-modal/filters-modal.component';
 
 
 @NgModule({
@@ -61,6 +62,7 @@ import { DangerSeparatorComponent } from './bestiary-list/danger-separator/dange
     TextAreaInputComponent,
     TitleTextItemComponent,
     DangerSeparatorComponent,
+    FiltersModalComponent,
   ],
   exports: [
     BorderOutlineComponent

@@ -11,13 +11,13 @@
     </div>
     <div class="filters w-full h-[56px] rounded-xl bg-[#1E232D] text-[#B1A79C] border-2 border-[#E2A23B] flex items-center">
       <div class="w-full flex items-center h-full poppins-font p-2">
-          <input [(ngModel)]="searchInput" class="w-full h-full text-[#B1A79C] bg-transparent outline-0" type="text" placeholder="Search..."/>
+          <input [(ngModel)]="searchInput" (ngModelChange)="setCreatureNameFilter()" class="w-full h-full text-[#B1A79C] bg-transparent outline-0" type="text" placeholder="Search..."/>
           <mat-icon *ngIf="searchInput" (click)="clearInputFilter()" class="text-[#E2A23B]">close</mat-icon>
       </div>
       <div>
 
       </div>
-      <div class="w-full border-l border-[#E2A23B] px-3 h-full cursor-pointer relative py-1 max-w-[230px] flex items-center gap-4">
+      <div (click)="openFilterDialog()" class="w-full border-l border-[#E2A23B] px-3 h-full cursor-pointer relative py-1 max-w-[230px] flex items-center gap-4">
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="24" viewBox="0 0 22 24" fill="none">
           <path d="M3.13743 23.8412C2.8466 23.8412 2.61056 23.6051 2.61056 23.3143V14.6511C2.61056 14.3603 2.8466 14.1243 3.13743 14.1243C3.42827 14.1243 3.66431 14.3603 3.66431 14.6511V23.3143C3.66431 23.6051 3.42853 23.8412 3.13743 23.8412Z" fill="#E2A23B"/>
           <path d="M18.8357 15.7687C18.5448 15.7687 18.3088 15.5327 18.3088 15.2418V0.658711C18.3088 0.367876 18.5448 0.131836 18.8357 0.131836C19.1265 0.131836 19.3625 0.367876 19.3625 0.658711V15.2418C19.3625 15.5329 19.1265 15.7687 18.8357 15.7687Z" fill="#E2A23B"/>
