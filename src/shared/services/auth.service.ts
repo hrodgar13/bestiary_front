@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Observable, tap} from "rxjs";
+import {BehaviorSubject, Observable, tap} from "rxjs";
 import {Token, TokenDecoded} from "../interfaces/token.interface";
 import {RegisterData} from "../interfaces/create-user.interface";
 import {LoginInterface} from "../interfaces/login.interface";
@@ -10,6 +10,8 @@ import jwt_decode from 'jwt-decode'
   providedIn: 'root'
 })
 export class AuthService {
+
+  accessToken$ = new BehaviorSubject<string | null>(null)
 
   private access_token: string | null = null
 
@@ -24,7 +26,6 @@ export class AuthService {
       tap(
         (
           (Token) => {
-            localStorage.setItem('auth-token', Token.access_token)
             this.setToken(Token.access_token)
           }
         )
@@ -37,7 +38,6 @@ export class AuthService {
       tap(
         (
           (Token) => {
-            localStorage.setItem('auth-token', Token.access_token)
             this.setToken(Token.access_token)
           }
         )
@@ -49,7 +49,10 @@ export class AuthService {
     if(access_token) {
       localStorage.setItem('auth-token', access_token)
     }
-    return this.access_token = access_token
+
+    this.accessToken$.next(access_token)
+
+    this.access_token = access_token
   }
 
   getToken(): string | null {
@@ -57,7 +60,8 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    this.getTokenFromStorage()
+    this.access_token = this.getTokenFromStorage()
+
     return !! this.access_token
   }
 

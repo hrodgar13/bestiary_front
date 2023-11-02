@@ -6,6 +6,7 @@ import {LoginInterface} from "../../../../shared/interfaces/login.interface";
 import {DestroySubscription} from "../../../../shared/helpers/destroy-subscribtion";
 import {takeUntil} from "rxjs";
 import {animate, style, transition, trigger} from "@angular/animations";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-login',
@@ -31,7 +32,8 @@ export class LoginComponent extends DestroySubscription implements OnInit{
   constructor(
     private formBuilder: UntypedFormBuilder,
     private router: Router,
-    private authService: LoginService
+    private authService: LoginService,
+    private readonly matSnack: MatSnackBar,
   ) {
     super()
   }
@@ -56,7 +58,14 @@ export class LoginComponent extends DestroySubscription implements OnInit{
       password: this.form.get('password')?.value
     }
 
-    this.authService.login(payload).pipe(takeUntil(this.destroyStream$)).subscribe()
+    this.authService.login(payload).pipe(takeUntil(this.destroyStream$)).subscribe(() => {
+      this.router.navigate(['../'])
+    }, error => {
+      this.matSnack.open(error.error.message, '', {
+        duration: 2000,
+        verticalPosition: "top"
+      } )
+    })
   }
 
   changeVisibility() {

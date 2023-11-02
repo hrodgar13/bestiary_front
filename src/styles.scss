@@ -105,3 +105,22 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-mdc-dialog-surface.mdc-dialog__surface {
   background: transparent!important;
 }
+mat-snack-bar-container {
+  background: #1E232DFF !important;
+  border: 2px solid #E2A23B !important;
+  border-radius: 10px !important;
+
+  .mdc-snackbar__surface {
+    border-radius: 10px !important;
+    background: #1E232DFF !important;
+  }
+}
+
+.mat-mdc-menu-content {
+  background: #1E232DFF !important;
+  border: 2px solid #E2A23B !important;
+
+  .mat-mdc-menu-item-text {
+    color: #B1A79C;
+  }
+}
