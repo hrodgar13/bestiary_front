@@ -55,8 +55,8 @@ export interface ActionsAndAbilitiesAmount {
 export enum ActionsAbilitiesENUM{
   abilities = 'abilities',
   actions = 'actions',
-  bonusActions = 'bonus-actions',
-  legendaryActions = 'legendary-actions'
+  bonusActions = 'bonusActions',
+  legendaryActions = 'legendaryActions'
 }
 
 export enum MultiFieldsENUM {
@@ -65,9 +65,9 @@ export enum MultiFieldsENUM {
   speeds = 'speeds',
   resists = 'resists',
   feelings = 'feelings',
-  savingThrows = 'saving-throws',
+  savingThrows = 'savingThrows',
   skills = 'skills',
-  conditionsImmunities = 'conditions-immunities',
+  conditionsImmunities = 'conditionsImmunities',
   languages = 'languages',
   regions = 'regions'
 }

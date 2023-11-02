@@ -21,4 +21,8 @@ export class BestiaryService {
   getCreatures(): Observable<CreatureListItem[]> {
     return this.apiService.getCreaturesList()
   }
+
+  getCreatureById(id: number) {
+    return this.apiService.getCreatureById(id)
+  }
 }

@@ -6,7 +6,7 @@
                     panelClass="vu-select"
                     (ngModelChange)="onInputChange($event)" [placeholder]="placeholder">
           <mat-option class="text-[#B1A79C] vu-select" [value]="option.id" *ngFor="let option of selectData">
-            {{option[route][currentLanguage]}}
+            {{option['attrName'][currentLanguage]}}
           </mat-option>
         </mat-select>
       </div>

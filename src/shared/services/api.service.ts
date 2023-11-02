@@ -20,4 +20,8 @@ export class ApiService {
   getCreaturesList(): Observable<CreatureListItem[]> {
     return this.http.get<CreatureListItem[]>(`api/creature`);
   }
+
+  getCreatureById(id: number) {
+    return this.http.get<any>(`api/creature/${id}`)
+  }
 }

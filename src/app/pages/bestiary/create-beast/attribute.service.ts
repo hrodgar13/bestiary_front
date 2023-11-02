@@ -11,7 +11,7 @@ export class AttributeService {
   ) { }
 
   createAttribute(route: string, payload: CreateTranslationAttribute): Observable<any> {
-    return this.http.post(`api/${route}`, {[route]: payload})
+    return this.http.post(`api/${route}`, {['attrName']: payload})
   }
 
   getDataForSelect(route: string): Observable<any> {
