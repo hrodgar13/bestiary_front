@@ -2,12 +2,18 @@ import {Component, OnInit} from '@angular/core';
 import {BestiaryService} from "../bestiary.service";
 import {DestroySubscription} from "../../../../shared/helpers/destroy-subscribtion";
 import {takeUntil} from "rxjs";
-
+import {CreateTranslationAttribute} from "../../../../shared/interfaces/creature/create-attribute.interface";
 export interface CreatureListItem {
-  id: number
-  creatureName: string
-  creatureDangerLvl: string
+
+  creatureDangerLvl: number
+  creatures: CreatureListBody[]
 }
+
+interface CreatureListBody {
+  id: number
+  creatureName: CreateTranslationAttribute
+}
+
 
 @Component({
   selector: 'app-bestiary-list',
