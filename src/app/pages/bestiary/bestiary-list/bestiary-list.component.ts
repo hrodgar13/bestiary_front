@@ -8,6 +8,7 @@ import {BestiaryService} from "../bestiary.service";
 })
 export class BestiaryListComponent implements OnInit{
   isAdminAuthenticated = false;
+  searchInput: any;
 
   constructor(
     private readonly bestiaryService: BestiaryService
@@ -17,4 +18,7 @@ export class BestiaryListComponent implements OnInit{
     this.isAdminAuthenticated = this.bestiaryService.isAdmin();
   }
 
+  clearInputFilter() {
+    this.searchInput = ''
+  }
 }
