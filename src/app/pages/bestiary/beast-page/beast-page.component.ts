@@ -11,7 +11,7 @@ export interface Creature {
   alignment: OneAttribute
   armorClass: number
   armorTag: OneAttribute
-  bonusActions: Action
+  bonusActions: Action[]
   charisma: number
   conditionsImmunities: Measure[]
   construction: number
@@ -90,5 +90,11 @@ export class BeastPageComponent extends DestroySubscription implements OnInit{
 
       console.log(this.creature)
     })
+  }
+
+  calculateModificator(income: number): string {
+    const modif = (income - 10) / 2
+
+    return modif < 0 ? `${modif}` : `+${modif}`
   }
 }

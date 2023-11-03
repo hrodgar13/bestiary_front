@@ -1,12 +1,140 @@
-<div
+<div *ngIf="creature"
   class="flex-row poppins-font items-center 768:items-start 768:pt-[144px] px-2.5 768:px-[100px]">
   <div
     class="flex flex-col relative items-center 768:items-start gap-2 h-auto w-full bg-[#1E232DFF] rounded border-2 border-[#E2A23B]">
     <div class="p-5 flex flex-col gap-6 w-full">
-      <div>
-        <p class=""></p>
-        <div>
-
+      <div class="w-full flex justify-between">
+        <p class="playfair-font text-4xl text-[#E2A23B]">{{creature.creatureName['en']}}</p>
+        <app-border-outline class="w-[48px] h-[48px] cursor-pointer">
+          <mat-icon class="mx-auto my-auto text-[#E2A23B]">close</mat-icon>
+        </app-border-outline>
+      </div>
+      <app-border-outline>
+        <div class="w-full poppins-font p-3 bg-[#1E232D] rounded-xl">
+          <p class="text-xl text-[#B1A79C] font-semibold">
+            {{creature.type.attrName['en']}},
+            {{creature.alignment.attrName['en']}},
+            {{creature.size.attrName['en']}}
+          </p>
+        </div>
+      </app-border-outline>
+      <div class="w-full flex poppins-font gap-3 max-h-[280px]">
+        <div class="flex font-medium flex-col gap-6 w-full max-w-[70%]">
+          <div class="text-xl flex items-center gap-1">
+            <p class="text-[#E2A23B]">Armor class:</p>
+            <p class="text-white">{{creature.armorClass}}</p>
+          </div>
+          <div class="text-xl flex items-center gap-1">
+            <p class="text-[#E2A23B]">Hits: </p>
+            <p class="text-white">{{creature.hits}} (<span class="text-[#1DAEFF]">{{creature.hitsInDice}}</span>)</p>
+          </div>
+          <div class="text-xl flex items-center gap-1">
+            <p class="text-[#E2A23B]">Speeds:</p>
+            <p class="text-white" *ngFor="let speed of creature.speeds">{{speed.attribute.attrName['en']}} {{speed.amt}} {{'ft'}}</p>
+          </div>
+          <div class="flex gap-2">
+            <div class="grid grid-rows-2 overflow-hidden text-[#FAFD5D] text-3xl w-[120px] h-[120px] rounded-xl border-2 border-[#FAFD5D]">
+              <div class="bg-[#1C1E25] border-b border-[#FAFD5D] flex items-center justify-center">STR</div>
+              <div class="flex items-center justify-center">{{creature.strength}} (<span class="text-[#1DAEFF]">{{calculateModificator(creature.strength)}}</span>)</div>
+            </div>
+            <div class="grid grid-rows-2 overflow-hidden text-[#FAFD5D] text-3xl w-[120px] h-[120px] rounded-xl border-2 border-[#FAFD5D]">
+              <div class="bg-[#1C1E25] border-b border-[#FAFD5D] flex items-center justify-center">DEX</div>
+              <div class="flex items-center justify-center">{{creature.dexterity}} (<span class="text-[#1DAEFF]">{{calculateModificator(creature.strength)}}</span>)</div>
+            </div>
+            <div class="grid grid-rows-2 overflow-hidden text-[#FAFD5D] text-3xl w-[120px] h-[120px] rounded-xl border-2 border-[#FAFD5D]">
+              <div class="bg-[#1C1E25] border-b border-[#FAFD5D] flex items-center justify-center">CON</div>
+              <div class="flex items-center justify-center">{{creature.construction}} (<span class="text-[#1DAEFF]">{{calculateModificator(creature.strength)}}</span>)</div>
+            </div>
+            <div class="grid grid-rows-2 overflow-hidden text-[#FAFD5D] text-3xl w-[120px] h-[120px] rounded-xl border-2 border-[#FAFD5D]">
+              <div class="bg-[#1C1E25] border-b border-[#FAFD5D] flex items-center justify-center">INT</div>
+              <div class="flex items-center justify-center">{{creature.intelligence}} (<span class="text-[#1DAEFF]">{{calculateModificator(creature.strength)}}</span>)</div>
+            </div>
+            <div class="grid grid-rows-2 overflow-hidden text-[#FAFD5D] text-3xl w-[120px] h-[120px] rounded-xl border-2 border-[#FAFD5D]">
+              <div class="bg-[#1C1E25] border-b border-[#FAFD5D] flex items-center justify-center">WIS</div>
+              <div class="flex items-center justify-center">{{creature.wisdom}} (<span class="text-[#1DAEFF]">{{calculateModificator(creature.strength)}}</span>)</div>
+            </div>
+            <div class="grid grid-rows-2 overflow-hidden text-[#FAFD5D] text-3xl w-[120px] h-[120px] rounded-xl border-2 border-[#FAFD5D]">
+              <div class="bg-[#1C1E25] border-b border-[#FAFD5D] flex items-center justify-center">CHA</div>
+              <div class="flex items-center justify-center">{{creature.charisma}} (<span class="text-[#1DAEFF]">{{calculateModificator(creature.strength)}}</span>)</div>
+            </div>
+          </div>
+        </div>
+        <div class="w-full h-auto max-h-[280px]">
+          <app-border-outline class="relative">
+            <div class="w-full h-full flex items-center justify-center">
+              <img src="assets/images/tarrasque.png" class="w-full h-full object-contain" alt="">
+            </div>
+          </app-border-outline>
+        </div>
+      </div>
+      <div class="w-full flex flex-col gap-5">
+        <div *ngIf="creature.savingThrows && creature.savingThrows.length" class="text-xl flex items-center gap-1">
+          <p class="text-[#E2A23B] text-2xl">Saving throws:</p>
+          <p class="text-white text-2xl" *ngFor="let st of creature.savingThrows">{{st.attribute.attrName['en']}} <span *ngIf="st.amt" class="text-[#1DAEFF]">{{(st.amt > 0 ? '+' + st.amt : st.amt) }}</span></p>
+        </div>
+        <div *ngIf="creature.immunities && creature.immunities.length" class="text-xl flex items-center gap-1">
+          <p class="text-[#E2A23B] text-2xl">Damage immunities:</p>
+          <p class="text-white text-2xl" *ngFor="let im of creature.immunities">{{im.attribute.attrName['en']}}</p>
+        </div>
+        <div *ngIf="creature.resists && creature.resists.length" class="text-xl flex items-center gap-1">
+          <p class="text-[#E2A23B] text-2xl">Damage resists:</p>
+          <p class="text-white text-2xl" *ngFor="let res of creature.resists">{{res.attribute.attrName['en']}}</p>
+        </div>
+        <div *ngIf="creature.vulnerabilities && creature.vulnerabilities.length" class="text-xl flex items-center gap-1">
+          <p class="text-[#E2A23B] text-2xl">Damage resists:</p>
+          <p class="text-white text-2xl" *ngFor="let vul of creature.vulnerabilities">{{vul.attribute.attrName['en']}}</p>
+        </div>
+        <div *ngIf="creature.immunities && creature.immunities.length" class="text-xl flex items-center gap-1">
+          <p class="text-[#E2A23B] text-2xl">Immunities to charmed:</p>
+          <p class="text-white text-2xl" *ngFor="let con of creature.conditionsImmunities">{{con.attribute.attrName['en']}}</p>
+        </div>
+        <div *ngIf="creature.feelings && creature.feelings.length" class="text-xl flex items-center gap-1">
+          <p class="text-[#E2A23B] text-2xl">Senses:</p>
+          <p class="text-white text-2xl" *ngFor="let sens of creature.feelings">{{sens.attribute.attrName['en']}}  <span *ngIf="sens.amt" class="text-[#1DAEFF]">{{(sens.amt > 0 ? '+' + sens.amt : sens.amt) }}</span> {{(sens.isMeasureEnable ? 'ft' : '')}}</p>
+        </div>
+        <div *ngIf="creature.languages && creature.languages.length" class="text-xl flex items-center gap-1">
+          <p class="text-[#E2A23B] text-2xl">Languages:</p>
+          <p class="text-white text-2xl" *ngFor="let lang of creature.languages">{{lang.attribute.attrName['en']}}  <span *ngIf="lang.amt" class="text-[#1DAEFF]">{{(lang.amt > 0 ? '+' + lang.amt : lang.amt) }}</span> {{(lang.isMeasureEnable ? 'ft' : '')}}</p>
+        </div>
+        <div *ngIf="creature.dangerLevel && creature.experience" class="text-xl flex items-center gap-1">
+          <p class="text-[#E2A23B] text-2xl">Challenge level:</p>
+          <p class="text-white text-2xl">{{creature.dangerLevel}} ({{creature.experience}})</p>
+        </div>
+        <div *ngIf="creature.masteryBonus" class="text-xl flex items-center gap-1">
+          <p class="text-[#E2A23B] text-2xl">Mastery bonus:</p>
+          <p class="text-white text-2xl">+{{creature.masteryBonus}}</p>
+        </div>
+      </div>
+      <div class="h-[1px] w-full bg-[#E2A23B]"></div>
+      <div *ngIf="creature.abilities && creature.abilities.length">
+        <p class="playfair-font text-4xl text-[#E2A23B]">Abilities</p>
+        <div *ngFor="let action of creature.abilities" class="text-xl flex items-start gap-1 pt-3">
+          <p class="text-[#E2A23B] text-2xl">{{action.title['en']}}:</p>
+          <p class="text-white text-2xl" >{{action.description['en']}}</p>
+        </div>
+      </div>
+      <div class="h-[1px] w-full bg-[#E2A23B]"></div>
+      <div *ngIf="creature.actions && creature.actions.length">
+        <p class="playfair-font text-4xl text-[#E2A23B]">Actions</p>
+        <div *ngFor="let action of creature.abilities" class="text-xl flex items-start gap-1 pt-3">
+          <p class="text-[#E2A23B] text-2xl">{{action.title['en']}}:</p>
+          <p class="text-white text-2xl" >{{action.description['en']}}</p>
+        </div>
+      </div>
+      <div class="h-[1px] w-full bg-[#E2A23B]"></div>
+      <div *ngIf="creature.bonusActions && creature.bonusActions.length">
+        <p class="playfair-font text-4xl text-[#E2A23B]">Bonus Actions</p>
+        <div *ngFor="let action of creature.abilities" class="text-xl flex items-start gap-1 pt-3">
+          <p class="text-[#E2A23B] text-2xl">{{action.title['en']}}:</p>
+          <p class="text-white text-2xl" >{{action.description['en']}}</p>
+        </div>
+      </div>
+      <div class="h-[1px] w-full bg-[#E2A23B]"></div>
+      <div *ngIf="creature.legendaryActions && creature.legendaryActions.length">
+        <p class="playfair-font text-4xl text-[#E2A23B]">Legendary Actions</p>
+        <div *ngFor="let action of creature.abilities" class="text-xl flex items-start gap-1 pt-3">
+          <p class="text-[#E2A23B] text-2xl">{{action.title['en']}}:</p>
+          <p class="text-white text-2xl" >{{action.description['en']}}</p>
         </div>
       </div>
     </div>
