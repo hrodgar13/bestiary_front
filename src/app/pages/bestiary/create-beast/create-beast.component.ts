@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, UntypedFormGroup} from "@angular/forms"
 import {CreateTranslationAttribute} from "../../../../shared/interfaces/creature/create-attribute.interface";
 import {ActionsAndAbilities} from "./form-elements/title-text-input/title-text-input.component";
@@ -77,8 +77,9 @@ export enum MultiFieldsENUM {
   templateUrl: './create-beast.component.html',
   styleUrls: ['./create-beast.component.scss']
 })
-export class CreateBeastComponent extends DestroySubscription implements OnInit {
+export class CreateBeastComponent extends DestroySubscription implements OnInit, OnDestroy {
   FieldsEnum = MultiFieldsENUM
+  creatureId: null | number = null
 
   creaturePayload: CreaturePayload = {
     isFinished: false,
@@ -123,7 +124,18 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit 
       if(!this.isFinished) {
         this.writeForm(false)
       }
-    }, 5 * 60 * 1000)
+    },  15 * 1000)
+
+    const editableCreature = localStorage.getItem('creature-id')
+
+    if(editableCreature) {
+      this.creatureId = +editableCreature
+    }
+  }
+
+  override ngOnDestroy() {
+    super.ngOnDestroy();
+    localStorage.removeItem('creature-id')
   }
 
   writeForm(isFinished: boolean) {
@@ -162,12 +174,24 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit 
       }
     }
 
-    this.creatureService.createCreature(this.creaturePayload).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
-      this.matSnack.open('Saved','', {
-        duration: 1500,
-        verticalPosition: "top"
+    if(this.creatureId) {
+      this.creatureService.patchCreature(this.creatureId, this.creaturePayload).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+        this.matSnack.open('Saved','', {
+          duration: 1500,
+          verticalPosition: "top"
+        })
       })
-    })
+    } else {
+      this.creatureService.createCreature(this.creaturePayload).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+        this.matSnack.open('Saved','', {
+          duration: 1500,
+          verticalPosition: "top"
+        })
+        this.creatureId = data.id
+        localStorage.setItem('creature-id', data.id)
+      })
+    }
+
   }
 
   writeValueToCreature(route: MultiFieldsENUM, $event: CreateAttributeMeasure[]) {

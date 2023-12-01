@@ -13,4 +13,8 @@ export class CreatureService {
   createCreature(creaturePayload: CreaturePayload): Observable<any> {
     return this.apiService.createCreature(creaturePayload)
   }
+
+  patchCreature(creatureId: number, creaturePayload: CreaturePayload) {
+    return this.apiService.patchCreature(creatureId, creaturePayload)
+  }
 }

@@ -24,4 +24,8 @@ export class ApiService {
   getCreatureById(id: number) {
     return this.http.get<any>(`api/creature/${id}`)
   }
+
+  patchCreature(creatureId: number, creaturePayload: CreaturePayload) {
+    return this.http.patch(`api/creature/${creatureId}`, creaturePayload)
+  }
 }
