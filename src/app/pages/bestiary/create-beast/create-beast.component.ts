@@ -124,7 +124,7 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit,
       if(!this.isFinished) {
         this.writeForm(false)
       }
-    },  15 * 1000)
+    },  5 * 60 * 1000)
 
     const editableCreature = localStorage.getItem('creature-id')
 
