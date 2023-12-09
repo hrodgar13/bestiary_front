@@ -4,9 +4,12 @@ import {CreateTranslationAttribute} from "../../../../shared/interfaces/creature
 import {ActionsAndAbilities} from "./form-elements/title-text-input/title-text-input.component";
 import {CreateAttributeMeasure} from "../../../../shared/interfaces/creature/create-attribute-measure.interface";
 import {CreatureService} from "./creature.service";
-import {takeUntil} from "rxjs";
+import {concatMap, of, switchMap, takeUntil} from "rxjs";
 import {DestroySubscription} from "../../../../shared/helpers/destroy-subscribtion";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {Creature, Measure} from "../beast-page/beast-page.component";
+import {ActivatedRoute, Router} from "@angular/router";
+import {MultiSelectList} from "./form-elements/multi-select/multi-select.component";
 
 export interface CreaturePayload {
   isFinished: boolean,
@@ -80,6 +83,7 @@ export enum MultiFieldsENUM {
 export class CreateBeastComponent extends DestroySubscription implements OnInit, OnDestroy {
   FieldsEnum = MultiFieldsENUM
   creatureId: null | number = null
+  creatureToUpdate: Creature | null = null
 
   creaturePayload: CreaturePayload = {
     isFinished: false,
@@ -92,45 +96,75 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit,
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly creatureService: CreatureService,
-    private readonly matSnack: MatSnackBar
+    private readonly matSnack: MatSnackBar,
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     super()
   }
 
   ngOnInit(): void {
-    this.creatureForm = this.formBuilder.group({
-      creatureNameUa: [null],
-      creatureNameEn: [null],
-      alignment: [null],
-      type: [null],
-      size: [null],
-      armorClass: [null],
-      armorTag: [null],
-      hits: [null],
-      hitsInDice: [null],
-      strength: [null],
-      dexterity: [null],
-      construction: [null],
-      intelligence: [null],
-      wisdom: [null],
-      charisma: [null],
-      dangerLevel: [null],
-      experience: [null],
-      masteryBonus: [null],
-      descriptionEN: [null],
-      descriptionUA: [null]
+    let editableCreature = localStorage.getItem('creature-id')
+
+    this.route.params.pipe(takeUntil(this.destroyStream$)).subscribe(params => {
+      if(editableCreature && !params['id']) {
+        localStorage.removeItem('creature-id')
+        this.router.navigate(['bestiary/edit/' + editableCreature])
+      } else {
+        editableCreature = params['id']
+      }
     })
+
+    if(editableCreature) {
+      this.creatureId = +editableCreature
+    }
+
+    if (this.creatureId) {
+      this.creatureService.getCreatureById(this.creatureId).pipe(
+        takeUntil(this.destroyStream$),
+        concatMap(data => {
+          this.creatureToUpdate = data;
+          return of(data);
+        })
+      ).subscribe(() => {
+        this.initForm();
+      });
+    } else {
+      this.initForm();
+    }
+
+
     setInterval(() => {
       if(!this.isFinished) {
         this.writeForm(false)
       }
     },  5 * 60 * 1000)
 
-    const editableCreature = localStorage.getItem('creature-id')
+  }
 
-    if(editableCreature) {
-      this.creatureId = +editableCreature
-    }
+  private initForm() {
+    this.creatureForm = this.formBuilder.group({
+      creatureNameUa: [this.creatureToUpdate?.creatureName.ua || null],
+      creatureNameEn: [this.creatureToUpdate?.creatureName.en || null],
+      alignment: [this.creatureToUpdate?.alignment?.id || null],
+      type: [this.creatureToUpdate?.type?.id || null],
+      size: [this.creatureToUpdate?.size?.id || null],
+      armorClass: [this.creatureToUpdate?.armorClass || null],
+      armorTag: [this.creatureToUpdate?.armorTag?.id || null],
+      hits: [this.creatureToUpdate?.hits || null],
+      hitsInDice: [this.creatureToUpdate?.hitsInDice || null],
+      strength: [this.creatureToUpdate?.strength || null],
+      dexterity: [this.creatureToUpdate?.dexterity || null],
+      construction: [this.creatureToUpdate?.construction || null],
+      intelligence: [this.creatureToUpdate?.intelligence || null],
+      wisdom: [this.creatureToUpdate?.wisdom || null],
+      charisma: [this.creatureToUpdate?.charisma || null],
+      dangerLevel: [this.creatureToUpdate?.dangerLevel || null],
+      experience: [this.creatureToUpdate?.experience || null],
+      masteryBonus: [this.creatureToUpdate?.masteryBonus || null],
+      descriptionEN: [this.creatureToUpdate?.description?.en || null],
+      descriptionUA: [this.creatureToUpdate?.description?.ua || null]
+    })
   }
 
   override ngOnDestroy() {
@@ -202,5 +236,22 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit,
 
   setAbilityOrAction(abilities: ActionsAbilitiesENUM, $event: ActionsAndAbilities[]) {
     this.creaturePayload.actionsAbilities[abilities] = $event
+  }
+
+  convertMeasureToMultiSelect(param: Measure[] | null): MultiSelectList[] {
+    if(!param) {
+      return []
+    }
+
+    const attrs = param.map(item => {
+      return {
+        id: item.id,
+        title: {en: item?.attribute?.attrName?.en, ua: item?.attribute?.attrName?.ua},
+        msr: item.isMeasureEnable ? item.isMeasureEnable : false,
+        amt: item.amt ? item.amt : 0
+      }
+    })
+
+    return attrs
   }
 }

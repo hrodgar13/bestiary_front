@@ -45,6 +45,7 @@ export class BestiaryListComponent extends DestroySubscription implements OnInit
   creatureFilter: CreatureFilter = {}
 
   private filterSubject = new Subject<string>();
+  unfinishedCreatures: CreatureListItem[] = [];
 
   constructor(
     private readonly bestiaryService: BestiaryService,
@@ -62,10 +63,20 @@ export class BestiaryListComponent extends DestroySubscription implements OnInit
 
       this.getCreatures()
     })
+
+    if(this.isAdminAuthenticated) {
+      this.getUnfinishedCreatures()
+    }
   }
 
   clearInputFilter() {
     this.searchInput = ''
+  }
+
+  getUnfinishedCreatures() {
+    this.bestiaryService.getUnfinishedCreatures().pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+      this.unfinishedCreatures = data
+    })
   }
 
   getCreatures() {

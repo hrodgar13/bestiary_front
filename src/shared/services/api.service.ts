@@ -3,6 +3,7 @@ import {CreaturePayload} from "../../app/pages/bestiary/create-beast/create-beas
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {CreatureListItem} from "../../app/pages/bestiary/bestiary-list/bestiary-list.component";
+import {Creature} from "../../app/pages/bestiary/beast-page/beast-page.component";
 
 @Injectable({
   providedIn: 'root'
@@ -21,11 +22,15 @@ export class ApiService {
     return this.http.get<CreatureListItem[]>(`api/creature`);
   }
 
-  getCreatureById(id: number) {
+  getCreatureById(id: number): Observable<Creature> {
     return this.http.get<any>(`api/creature/${id}`)
   }
 
   patchCreature(creatureId: number, creaturePayload: CreaturePayload) {
     return this.http.patch(`api/creature/${creatureId}`, creaturePayload)
+  }
+
+  getUnfinishedCreatures() {
+    return this.http.get<CreatureListItem[]>(`api/creature-unfinished`);
   }
 }

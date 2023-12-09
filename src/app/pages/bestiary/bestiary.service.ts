@@ -25,4 +25,8 @@ export class BestiaryService {
   getCreatureById(id: number) {
     return this.apiService.getCreatureById(id)
   }
+
+  getUnfinishedCreatures() {
+    return this.apiService.getUnfinishedCreatures()
+  }
 }

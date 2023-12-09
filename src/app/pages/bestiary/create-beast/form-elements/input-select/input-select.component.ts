@@ -64,7 +64,10 @@ export class InputSelectComponent extends DestroySubscription implements Control
 
     if (newValue !== undefined) {
       this._value = newValue;
-      this.currentSelected.emit(this.selectData.find(item => item.id === newValue)[this.route])
+
+      const attr = this.selectData.find(item => item.id === newValue)['attrName']
+
+      this.currentSelected.emit({en: attr.en, ua: attr.ua})
       this.propagateChange(this._value);
     }
   }

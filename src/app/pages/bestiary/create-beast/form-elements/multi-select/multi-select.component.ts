@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {CreateTranslationAttribute} from "../../../../../../shared/interfaces/creature/create-attribute.interface";
@@ -23,6 +23,9 @@ export class MultiSelectComponent implements OnInit {
   @Input() alwaysUseMsr = false
   @Input() label!: string;
   @Input() placeholder: string = '';
+
+  @Input() defaultValues: MultiSelectList[] = []
+
   form!: UntypedFormGroup;
 
   @Output() listChange = new EventEmitter<CreateAttributeMeasure[]>
@@ -34,17 +37,23 @@ export class MultiSelectComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
+    private cdr: ChangeDetectorRef,
     private snackBar: MatSnackBar
   ) {
   }
 
   ngOnInit() {
-
     this.form = this.formBuilder.group({
       value: [null, [Validators.required]],
       amount: [null],
       measure: [null]
     })
+
+    if(this.defaultValues.length) {
+      console.log(this.defaultValues)
+
+      this.selectedItems = this.defaultValues
+    }
   }
 
   onSubmit() {
@@ -60,7 +69,7 @@ export class MultiSelectComponent implements OnInit {
     }
 
     this.selectedItems.push(selectedItem)
-
+    this.cdr.detectChanges()
     this.emitListPrerender()
   }
 
@@ -71,6 +80,7 @@ export class MultiSelectComponent implements OnInit {
 
   selectedItemTitleChange(event: CreateTranslationAttribute) {
     this.selectedItemTitle = event
+
   }
 
   private emitListPrerender() {

@@ -17,6 +17,11 @@ const routes: Routes = [
     canActivate: [AdminGuard]
   },
   {
+    path: 'edit/:id',
+    component: CreateBeastComponent,
+    canActivate: [AdminGuard]
+  },
+  {
     path: 'list',
     component: BestiaryListComponent,
   },

@@ -6,5 +6,5 @@ import {Component, Input} from '@angular/core';
   styleUrls: ['./danger-separator.component.scss']
 })
 export class DangerSeparatorComponent {
-  @Input() dangerLVL = 0
+  @Input() dangerLVL: number | string = 0
 }
