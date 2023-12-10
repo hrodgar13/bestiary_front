@@ -14,8 +14,11 @@ export interface ActionsAndAbilities {
 })
 export class TitleTextInputComponent implements OnInit{
   @Input()blockName: string = 'Actions';
+  @Input() defaultValues: ActionsAndAbilities[] = []
 
   @Output() listChange = new EventEmitter<ActionsAndAbilities[]>()
+
+
 
   titleTextList: ActionsAndAbilities[] = []
 
@@ -33,6 +36,10 @@ export class TitleTextInputComponent implements OnInit{
       descriptionEN: [],
       descriptionUA: [],
     })
+
+    if(this.defaultValues.length) {
+      this.titleTextList = this.defaultValues
+    }
   }
 
   onListChange() {

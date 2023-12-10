@@ -7,7 +7,7 @@ import {CreatureService} from "./creature.service";
 import {concatMap, of, switchMap, takeUntil} from "rxjs";
 import {DestroySubscription} from "../../../../shared/helpers/destroy-subscribtion";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {Creature, Measure} from "../beast-page/beast-page.component";
+import {Action, Creature, Measure} from "../beast-page/beast-page.component";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MultiSelectList} from "./form-elements/multi-select/multi-select.component";
 
@@ -253,5 +253,20 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit,
     })
 
     return attrs
+  }
+
+  protected readonly takeUntil = takeUntil;
+
+  convertTitle(abilities: Action[] | undefined): ActionsAndAbilities[] {
+    if(abilities && abilities.length > 0 ) {
+      return abilities.map(item => {
+        return {
+          title: item.title,
+          description: item.description
+        }
+      })
+    }
+
+    return []
   }
 }
