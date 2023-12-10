@@ -54,7 +54,8 @@
             </div>
           </div>
           <div class="w-full">
-            <app-multi-select [defaultValues]="convertMeasureToMultiSelect(creatureToUpdate?.speeds || null)" (listChange)="writeValueToCreature(FieldsEnum.speeds, $event)" label="Speeds"
+            <app-multi-select [defaultValues]="convertMeasureToMultiSelect(creatureToUpdate?.speeds || null)"
+                              (listChange)="writeValueToCreature(FieldsEnum.speeds, $event)" label="Speeds"
                               [route]="'speed'" [placeholder]="'Select speed: '" [amt]="true"
                               [msr]="true" [alwaysUseMsr]="true"/>
           </div>
@@ -73,13 +74,17 @@
       </div>
       <div class="flex gap-x-10 w-full">
         <div class="w-full flex flex-col gap-4">
-          <app-multi-select (listChange)="writeValueToCreature(FieldsEnum.immunities, $event)" [msr]="false"
+          <app-multi-select [defaultValues]="convertMeasureToMultiSelect(creatureToUpdate?.immunities || null)"
+                            (listChange)="writeValueToCreature(FieldsEnum.immunities, $event)" [msr]="false"
                             [placeholder]="'Select damage: '" label="Immunities" [route]="'damage'"/>
-          <app-multi-select (listChange)="writeValueToCreature(FieldsEnum.resists, $event)" [msr]="false"
+          <app-multi-select [defaultValues]="convertMeasureToMultiSelect(creatureToUpdate?.resists || null)"
+                            (listChange)="writeValueToCreature(FieldsEnum.resists, $event)" [msr]="false"
                             [placeholder]="'Select damage: '" label="Resists" [route]="'damage'"/>
-          <app-multi-select (listChange)="writeValueToCreature(FieldsEnum.vulnerabilities, $event)" [msr]="false"
+          <app-multi-select [defaultValues]="convertMeasureToMultiSelect(creatureToUpdate?.vulnerabilities || null)"
+                            (listChange)="writeValueToCreature(FieldsEnum.vulnerabilities, $event)" [msr]="false"
                             [placeholder]="'Select damage: '" label="Vulnerabilities" [route]="'damage'"/>
-          <app-multi-select (listChange)="writeValueToCreature(FieldsEnum.feelings, $event)" [amt]="true"
+          <app-multi-select [defaultValues]="convertMeasureToMultiSelect(creatureToUpdate?.feelings || null)"
+                            (listChange)="writeValueToCreature(FieldsEnum.feelings, $event)" [amt]="true"
                             [msr]="true" [placeholder]="'Select Feel: '" label="Feelings"
                             [route]="'feeling'"/>
           <div class="flex">
@@ -94,15 +99,20 @@
           </div>
         </div>
         <div class="w-full flex flex-col gap-4">
-          <app-multi-select (listChange)="writeValueToCreature(FieldsEnum.savingThrows, $event)" [amt]="true"
+          <app-multi-select [defaultValues]="convertMeasureToMultiSelect(creatureToUpdate?.savingThrows || null)"
+                            (listChange)="writeValueToCreature(FieldsEnum.savingThrows, $event)" [amt]="true"
                             [msr]="false" [unmeasuredAmount]="true" [placeholder]="'Saving throw: '"
                             label="Saving throws" [route]="'saving-throw'"/>
-          <app-multi-select (listChange)="writeValueToCreature(FieldsEnum.skills, $event)" [amt]="true" [msr]="false"
+          <app-multi-select [defaultValues]="convertMeasureToMultiSelect(creatureToUpdate?.skills || null)"
+                            (listChange)="writeValueToCreature(FieldsEnum.skills, $event)" [amt]="true" [msr]="false"
                             [unmeasuredAmount]="true" [placeholder]="'Select Skill: '" label="Skills"
                             [route]="'skill'"/>
-          <app-multi-select (listChange)="writeValueToCreature(FieldsEnum.conditionsImmunities, $event)" [msr]="false"
-                            [placeholder]="'Select condition: '" label="Conditions immunities" [route]="'condition'"/>
-          <app-multi-select (listChange)="writeValueToCreature(FieldsEnum.languages, $event)" [amt]="true"
+          <app-multi-select
+            [defaultValues]="convertMeasureToMultiSelect(creatureToUpdate?.conditionsImmunities || null)"
+            (listChange)="writeValueToCreature(FieldsEnum.conditionsImmunities, $event)" [msr]="false"
+            [placeholder]="'Select condition: '" label="Conditions immunities" [route]="'condition'"/>
+          <app-multi-select [defaultValues]="convertMeasureToMultiSelect(creatureToUpdate?.languages || null)"
+                            (listChange)="writeValueToCreature(FieldsEnum.languages, $event)" [amt]="true"
                             [alwaysUseMsr]="true"
                             [placeholder]="'Select Language: '" label="Langs"
                             [route]="'language'"/>
@@ -116,23 +126,27 @@
       </div>
       <div>
         <div class="h-[1px] w-full bg-[#E2A23B]"></div>
-        <app-title-text-input (listChange)="setAbilityOrAction(ActionsAbilitiesENUM.abilities, $event)" [blockName]="'Abilities'"/>
+        <app-title-text-input (listChange)="setAbilityOrAction(ActionsAbilitiesENUM.abilities, $event)"
+                              [blockName]="'Abilities'"/>
         <div class="h-[1px] w-full bg-[#E2A23B]"></div>
       </div>
       <div>
-        <app-title-text-input (listChange)="setAbilityOrAction(ActionsAbilitiesENUM.actions, $event)" [blockName]="'Actions'"/>
+        <app-title-text-input (listChange)="setAbilityOrAction(ActionsAbilitiesENUM.actions, $event)"
+                              [blockName]="'Actions'"/>
         <div class="h-[1px] w-full bg-[#E2A23B]"></div>
       </div>
       <div>
-        <app-title-text-input (listChange)="setAbilityOrAction(ActionsAbilitiesENUM.bonusActions, $event)" [blockName]="'Bonus Actions'"/>
+        <app-title-text-input (listChange)="setAbilityOrAction(ActionsAbilitiesENUM.bonusActions, $event)"
+                              [blockName]="'Bonus Actions'"/>
         <div class="h-[1px] w-full bg-[#E2A23B]"></div>
       </div>
       <div>
-        <app-title-text-input (listChange)="setAbilityOrAction(ActionsAbilitiesENUM.legendaryActions, $event)" [blockName]="'Legendary Actions'"/>
+        <app-title-text-input (listChange)="setAbilityOrAction(ActionsAbilitiesENUM.legendaryActions, $event)"
+                              [blockName]="'Legendary Actions'"/>
         <div class="h-[1px] w-full bg-[#E2A23B]"></div>
       </div>
       <div>
-        <app-multi-select (listChange)="writeValueToCreature(FieldsEnum.regions, $event)" [msr]="false"
+        <app-multi-select [defaultValues]="convertMeasureToMultiSelect(creatureToUpdate?.regions || null)" (listChange)="writeValueToCreature(FieldsEnum.regions, $event)" [msr]="false"
                           [placeholder]="'Select region: '" label="Habitats: " [route]="'region'"/>
         <div class="h-[1px] w-full bg-[#E2A23B] mt-5"></div>
       </div>
@@ -143,7 +157,9 @@
           <app-text-area-input formControlName="descriptionUA" class="w-full h-[200px]" [placeholder]="'UA'"/>
         </div>
       </div>
-      <button class="mx-auto font-semibold w-[400px] h-[80px] rounded-xl bg-[#FAFD5D] text-2xl" (click)="writeForm(true)">Save Creature</button>
+      <button class="mx-auto font-semibold w-[400px] h-[80px] rounded-xl bg-[#FAFD5D] text-2xl"
+              (click)="writeForm(true)">Save Creature
+      </button>
     </form>
   </div>
 </div>
