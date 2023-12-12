@@ -1,5 +1,5 @@
 <div
-  class="flex-row poppins-font items-center 768:items-start 768:pt-[144px] px-1 768:px-[100px] pt-[50px]">
+  class="flex-row poppins-font items-center 768:items-start 768:pt-[144px] px-1 768:px-[20px] pt-[50px]">
   <div
     class="flex flex-col relative items-center 768:items-start gap-2 h-auto w-full bg-[#1E232DFF] rounded border-2 border-[#E2A23B]">
     <form class="p-2 768:p-5 flex flex-col gap-6 w-full " *ngIf="creatureForm" [formGroup]="creatureForm">
@@ -10,47 +10,47 @@
         <app-input-text formControlName="creatureNameUa" class="h-[48px] w-full max-w-[280px]"
                         [placeholder]="'UA'"></app-input-text>
       </div>
-      <div class="flex gap-3 w-full flex-col">
+      <div class="flex gap-3 w-full flex-col 1024:flex-row">
         <div class="flex flex-col items-center gap-3 w-full">
-          <div class="flex gap-3 w-full flex-col">
+          <div class="flex gap-3 w-full flex-col 640:flex-row 640:items-center">
             <app-label-text [label]="'Alignment: '"/>
-            <div class="flex justify-between w-full">
+            <div class="flex justify-between w-full gap-1">
               <app-input-select formControlName="alignment" [route]="'alignment'" class="h-[48px] w-full"
                                 [placeholder]="'Select Alignment'"/>
               <app-input-green-btn [route]="'alignment'" [title]="'Alignment'"/>
             </div>
           </div>
-          <div class="flex flex-col gap-3 w-full">
+          <div class="flex flex-col gap-3 w-full 640:flex-row 640:items-center">
             <app-label-text [label]="'Type: '"/>
-            <div class="flex items-center justify-between w-full">
+            <div class="flex items-center justify-between w-full gap-1">
               <app-input-select formControlName="type" [route]="'type'" class="h-[48px] w-full"
                                 [placeholder]="'Select Type'"/>
               <app-input-green-btn [route]="'type'"/>
             </div>
           </div>
-          <div class="flex gap-3 flex-col w-full">
+          <div class="flex gap-3 flex-col w-full 640:flex-row 640:items-center">
             <app-label-text [label]="'Size: '"/>
-            <div class="flex items-center justify-between w-full">
+            <div class="flex items-center justify-between w-full gap-1">
               <app-input-select formControlName="size" [route]="'size'" class="h-[48px] w-full "
                                 [placeholder]="'Select Size'"/>
               <app-input-green-btn [route]="'size'"/>
             </div>
           </div>
-          <div class="flex w-full flex-col gap-3">
+          <div class="flex w-full flex-col gap-3 640:flex-row 640:items-center">
             <div class="flex gap-3 items-center">
               <app-label-text [label]="'Armor class:'"/>
               <app-input-number formControlName="armorClass" [placeholder]="'0'" class="h-[48px]"></app-input-number>
             </div>
-            <div class="flex gap-3 items-center flex-col w-full">
+            <div class="flex gap-3 items-center flex-col w-full 640:flex-row 640:items-center">
               <app-label-text [label]="'Armor Type:'"/>
-              <div class="flex items-center justify-between w-full">
+              <div class="flex items-center justify-between w-full gap-1">
                 <app-input-select formControlName="armorTag" [route]="'armor-tag'" class="h-[48px] w-full "
                                   [placeholder]="'Select armor: '"></app-input-select>
                 <app-input-green-btn [route]="'armor-tag'"/>
               </div>
             </div>
           </div>
-          <div class="flex w-full flex-col gap-3">
+          <div class="flex w-full flex-col gap-3 640:flex-row 640:items-center">
             <div class="flex gap-3 items-center">
               <app-label-text [label]="'Hits: '"/>
               <app-input-number formControlName="hits" [placeholder]="'0'" class="h-[48px]"/>
@@ -74,19 +74,19 @@
       </div>
       <div class="flex items-center justify-between flex-wrap gap-y-4">
         <app-statblock-input formControlName="strength" label="STR"
-                             class="max-w-[150px] h-[150px] 1024:max-w-[180px] 1024:h-[180px] w-full"/>
+                             class="h-[130px] max-w-[130px]  640:max-w-[150px] 640:h-[150px] 1280:max-w-[180px] 1280:h-[180px] w-full"/>
         <app-statblock-input formControlName="dexterity" label="DEX"
-                             class="max-w-[150px] h-[150px] 1024:max-w-[180px] 1024:h-[180px] w-full"/>
+                             class="h-[130px] max-w-[130px]  640:max-w-[150px] 640:h-[150px] 1280:max-w-[180px] 1280:h-[180px] w-full"/>
         <app-statblock-input formControlName="construction" label="CON"
-                             class="max-w-[150px] h-[150px] 1024:max-w-[180px] 1024:h-[180px] w-full"/>
+                             class="h-[130px] max-w-[130px]  640:max-w-[150px] 640:h-[150px] 1280:max-w-[180px] 1280:h-[180px] w-full"/>
         <app-statblock-input formControlName="intelligence" label="INT"
-                             class="max-w-[150px] h-[150px] 1024:max-w-[180px] 1024:h-[180px] w-full"/>
+                             class="h-[130px] max-w-[130px]  640:max-w-[150px] 640:h-[150px] 1280:max-w-[180px] 1280:h-[180px] w-full"/>
         <app-statblock-input formControlName="wisdom" label="WIS"
-                             class="max-w-[150px] h-[150px] 1024:max-w-[180px] 1024:h-[180px] w-full"/>
+                             class="h-[130px] max-w-[130px]  640:max-w-[150px] 640:h-[150px] 1280:max-w-[180px] 1280:h-[180px] w-full"/>
         <app-statblock-input formControlName="charisma" label="CHA"
-                             class="max-w-[150px] h-[150px] 1024:max-w-[180px] 1024:h-[180px] w-full"/>
+                             class="h-[130px] max-w-[130px]  640:max-w-[150px] 640:h-[150px] 1280:max-w-[180px] 1280:h-[180px] w-full"/>
       </div>
-      <div class="grid grid-cols-1 gap-4">
+      <div class="grid grid-cols-1 gap-4 1280:grid-cols-2">
         <app-multi-select [defaultValues]="convertMeasureToMultiSelect(creatureToUpdate?.immunities || null)"
                           (listChange)="writeValueToCreature(FieldsEnum.immunities, $event)" [msr]="false"
                           [placeholder]="'Select damage: '" label="Immunities" [route]="'damage'"/>
@@ -117,7 +117,7 @@
                           [alwaysUseMsr]="true"
                           [placeholder]="'Select Language: '" label="Langs"
                           [route]="'language'"/>
-        <div class="flex flex-col">
+        <div class="flex flex-col 640:flex-row">
           <div class="flex w-full items-center gap-2">
             <app-label-text [label]="'Danger Lvl: '"/>
             <app-input-number formControlName="dangerLevel" class="h-[48px]" placeholder="0"/>
@@ -167,7 +167,7 @@
       </div>
       <div>
         <h2 class="text-[#E2A23B] playfair-font text-3xl">Description</h2>
-        <div class="flex flex-col gap-10 w-full mt-2">
+        <div class="flex flex-col gap-10 w-full mt-2 1024:flex-row">
           <app-text-area-input formControlName="descriptionEN" class="w-full h-[200px]" [placeholder]="'EN'"/>
           <app-text-area-input formControlName="descriptionUA" class="w-full h-[200px]" [placeholder]="'UA'"/>
         </div>

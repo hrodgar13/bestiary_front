@@ -1,6 +1,6 @@
 <div class="w-full">
-  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="w-full flex-col flex gap-2 mb-2">
-    <div class="flex flex-col gap-2 w-full">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="w-full flex-col flex gap-2 mb-2 640:flex-row">
+    <div class="flex flex-col gap-2 w-full 640:flex-row 640: items-center">
       <app-label-text [label]="label"/>
       <div class="flex items-start justify-between w-full">
         <app-input-select [route]="route" formControlName="value" class="h-[48px] max-w-[280px] w-full"
