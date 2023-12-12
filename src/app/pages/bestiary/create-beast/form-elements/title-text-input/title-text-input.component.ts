@@ -13,7 +13,7 @@ export interface ActionsAndAbilities {
   styleUrls: ['./title-text-input.component.scss']
 })
 export class TitleTextInputComponent implements OnInit{
-  @Input()blockName: string = 'Actions';
+  @Input() blockName: string = 'Actions';
   @Input() defaultValues: ActionsAndAbilities[] = []
 
   @Output() listChange = new EventEmitter<ActionsAndAbilities[]>()
