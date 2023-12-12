@@ -62,6 +62,8 @@ export class AuthService {
   isAuthenticated(): boolean {
     this.access_token = this.getTokenFromStorage()
 
+    this.accessToken$.next(this.access_token)
+
     return !! this.access_token
   }
 
