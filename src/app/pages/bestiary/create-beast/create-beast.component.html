@@ -1,9 +1,9 @@
 <div
-  class="flex-row poppins-font items-center 768:items-start 768:pt-[144px] px-2.5 768:px-[100px] pt-[50px]">
+  class="flex-row poppins-font items-center 768:items-start 768:pt-[144px] px-1 768:px-[100px] pt-[50px]">
   <div
     class="flex flex-col relative items-center 768:items-start gap-2 h-auto w-full bg-[#1E232DFF] rounded border-2 border-[#E2A23B]">
-    <form class="p-5 flex flex-col gap-6 w-full " *ngIf="creatureForm" [formGroup]="creatureForm">
-      <div class="flex items-center gap-3">
+    <form class="p-2 768:p-5 flex flex-col gap-6 w-full " *ngIf="creatureForm" [formGroup]="creatureForm">
+      <div class="flex items-center flex-col 640:flex-row gap-3">
         <app-label-text [label]="'Creature name: '"></app-label-text>
         <app-input-text formControlName="creatureNameEn" class="h-[48px] w-full max-w-[280px]"
                         [placeholder]="'EN'"></app-input-text>
@@ -12,37 +12,45 @@
       </div>
       <div class="flex gap-3 w-full flex-col">
         <div class="flex flex-col items-center gap-3 w-full">
-          <div class="flex items-center gap-3 w-full">
+          <div class="flex gap-3 w-full flex-col">
             <app-label-text [label]="'Alignment: '"/>
-            <app-input-select formControlName="alignment" [route]="'alignment'" class="h-[48px] w-full"
-                              [placeholder]="'Select Alignment'"/>
-            <app-input-green-btn [route]="'alignment'" [title]="'Alignment'"/>
+            <div class="flex justify-between w-full">
+              <app-input-select formControlName="alignment" [route]="'alignment'" class="h-[48px] w-full"
+                                [placeholder]="'Select Alignment'"/>
+              <app-input-green-btn [route]="'alignment'" [title]="'Alignment'"/>
+            </div>
           </div>
-          <div class="flex items-center gap-3 w-full">
+          <div class="flex flex-col gap-3 w-full">
             <app-label-text [label]="'Type: '"/>
-            <app-input-select formControlName="type" [route]="'type'" class="h-[48px] w-full"
-                              [placeholder]="'Select Type'"/>
-            <app-input-green-btn [route]="'type'"/>
+            <div class="flex items-center justify-between w-full">
+              <app-input-select formControlName="type" [route]="'type'" class="h-[48px] w-full"
+                                [placeholder]="'Select Type'"/>
+              <app-input-green-btn [route]="'type'"/>
+            </div>
           </div>
-          <div class="flex items-center gap-3 w-full">
+          <div class="flex gap-3 flex-col w-full">
             <app-label-text [label]="'Size: '"/>
-            <app-input-select formControlName="size" [route]="'size'" class="h-[48px] w-full "
-                              [placeholder]="'Select Size'"/>
-            <app-input-green-btn [route]="'size'"/>
+            <div class="flex items-center justify-between w-full">
+              <app-input-select formControlName="size" [route]="'size'" class="h-[48px] w-full "
+                                [placeholder]="'Select Size'"/>
+              <app-input-green-btn [route]="'size'"/>
+            </div>
           </div>
-          <div class="flex w-full gap-3">
+          <div class="flex w-full flex-col gap-3">
             <div class="flex gap-3 items-center">
               <app-label-text [label]="'Armor class:'"/>
               <app-input-number formControlName="armorClass" [placeholder]="'0'" class="h-[48px]"></app-input-number>
             </div>
-            <div class="flex gap-3 items-center w-full">
+            <div class="flex gap-3 items-center flex-col w-full">
               <app-label-text [label]="'Armor Type:'"/>
-              <app-input-select formControlName="armorTag" [route]="'armor-tag'" class="h-[48px] w-full "
-                                [placeholder]="'Select armor: '"></app-input-select>
-              <app-input-green-btn [route]="'armor-tag'"/>
+              <div class="flex items-center justify-between w-full">
+                <app-input-select formControlName="armorTag" [route]="'armor-tag'" class="h-[48px] w-full "
+                                  [placeholder]="'Select armor: '"></app-input-select>
+                <app-input-green-btn [route]="'armor-tag'"/>
+              </div>
             </div>
           </div>
-          <div class="flex w-full gap-3">
+          <div class="flex w-full flex-col gap-3">
             <div class="flex gap-3 items-center">
               <app-label-text [label]="'Hits: '"/>
               <app-input-number formControlName="hits" [placeholder]="'0'" class="h-[48px]"/>
@@ -65,12 +73,18 @@
         </div>
       </div>
       <div class="flex items-center justify-between flex-wrap gap-y-4">
-        <app-statblock-input formControlName="strength" label="STR" class="max-w-[150px] h-[150px] 1024:max-w-[180px] 1024:h-[180px] w-full"/>
-        <app-statblock-input formControlName="dexterity" label="DEX" class="max-w-[150px] h-[150px] 1024:max-w-[180px] 1024:h-[180px] w-full"/>
-        <app-statblock-input formControlName="construction" label="CON" class="max-w-[150px] h-[150px] 1024:max-w-[180px] 1024:h-[180px] w-full"/>
-        <app-statblock-input formControlName="intelligence" label="INT" class="max-w-[150px] h-[150px] 1024:max-w-[180px] 1024:h-[180px] w-full"/>
-        <app-statblock-input formControlName="wisdom" label="WIS" class="max-w-[150px] h-[150px] 1024:max-w-[180px] 1024:h-[180px] w-full"/>
-        <app-statblock-input formControlName="charisma" label="CHA" class="max-w-[150px] h-[150px] 1024:max-w-[180px] 1024:h-[180px] w-full"/>
+        <app-statblock-input formControlName="strength" label="STR"
+                             class="max-w-[150px] h-[150px] 1024:max-w-[180px] 1024:h-[180px] w-full"/>
+        <app-statblock-input formControlName="dexterity" label="DEX"
+                             class="max-w-[150px] h-[150px] 1024:max-w-[180px] 1024:h-[180px] w-full"/>
+        <app-statblock-input formControlName="construction" label="CON"
+                             class="max-w-[150px] h-[150px] 1024:max-w-[180px] 1024:h-[180px] w-full"/>
+        <app-statblock-input formControlName="intelligence" label="INT"
+                             class="max-w-[150px] h-[150px] 1024:max-w-[180px] 1024:h-[180px] w-full"/>
+        <app-statblock-input formControlName="wisdom" label="WIS"
+                             class="max-w-[150px] h-[150px] 1024:max-w-[180px] 1024:h-[180px] w-full"/>
+        <app-statblock-input formControlName="charisma" label="CHA"
+                             class="max-w-[150px] h-[150px] 1024:max-w-[180px] 1024:h-[180px] w-full"/>
       </div>
       <div class="grid grid-cols-1 gap-4">
         <app-multi-select [defaultValues]="convertMeasureToMultiSelect(creatureToUpdate?.immunities || null)"
@@ -103,7 +117,7 @@
                           [alwaysUseMsr]="true"
                           [placeholder]="'Select Language: '" label="Langs"
                           [route]="'language'"/>
-        <div class="flex">
+        <div class="flex flex-col">
           <div class="flex w-full items-center gap-2">
             <app-label-text [label]="'Danger Lvl: '"/>
             <app-input-number formControlName="dangerLevel" class="h-[48px]" placeholder="0"/>
@@ -122,27 +136,32 @@
       </div>
       <div>
         <div class="h-[1px] w-full bg-[#E2A23B]"></div>
-        <app-title-text-input [defaultValues]="convertTitle(creatureToUpdate?.abilities)" (listChange)="setAbilityOrAction(ActionsAbilitiesENUM.abilities, $event)"
+        <app-title-text-input [defaultValues]="convertTitle(creatureToUpdate?.abilities)"
+                              (listChange)="setAbilityOrAction(ActionsAbilitiesENUM.abilities, $event)"
                               [blockName]="'Abilities'"/>
         <div class="h-[1px] w-full bg-[#E2A23B]"></div>
       </div>
       <div>
-        <app-title-text-input [defaultValues]="convertTitle(creatureToUpdate?.actions)" (listChange)="setAbilityOrAction(ActionsAbilitiesENUM.actions, $event)"
+        <app-title-text-input [defaultValues]="convertTitle(creatureToUpdate?.actions)"
+                              (listChange)="setAbilityOrAction(ActionsAbilitiesENUM.actions, $event)"
                               [blockName]="'Actions'"/>
         <div class="h-[1px] w-full bg-[#E2A23B]"></div>
       </div>
       <div>
-        <app-title-text-input [defaultValues]="convertTitle(creatureToUpdate?.bonusActions)" (listChange)="setAbilityOrAction(ActionsAbilitiesENUM.bonusActions, $event)"
+        <app-title-text-input [defaultValues]="convertTitle(creatureToUpdate?.bonusActions)"
+                              (listChange)="setAbilityOrAction(ActionsAbilitiesENUM.bonusActions, $event)"
                               [blockName]="'Bonus Actions'"/>
         <div class="h-[1px] w-full bg-[#E2A23B]"></div>
       </div>
       <div>
-        <app-title-text-input [defaultValues]="convertTitle(creatureToUpdate?.legendaryActions)" (listChange)="setAbilityOrAction(ActionsAbilitiesENUM.legendaryActions, $event)"
+        <app-title-text-input [defaultValues]="convertTitle(creatureToUpdate?.legendaryActions)"
+                              (listChange)="setAbilityOrAction(ActionsAbilitiesENUM.legendaryActions, $event)"
                               [blockName]="'Legendary Actions'"/>
         <div class="h-[1px] w-full bg-[#E2A23B]"></div>
       </div>
       <div>
-        <app-multi-select [defaultValues]="convertMeasureToMultiSelect(creatureToUpdate?.regions || null)" (listChange)="writeValueToCreature(FieldsEnum.regions, $event)" [msr]="false"
+        <app-multi-select [defaultValues]="convertMeasureToMultiSelect(creatureToUpdate?.regions || null)"
+                          (listChange)="writeValueToCreature(FieldsEnum.regions, $event)" [msr]="false"
                           [placeholder]="'Select region: '" label="Habitats: " [route]="'region'"/>
         <div class="h-[1px] w-full bg-[#E2A23B] mt-5"></div>
       </div>
@@ -153,7 +172,7 @@
           <app-text-area-input formControlName="descriptionUA" class="w-full h-[200px]" [placeholder]="'UA'"/>
         </div>
       </div>
-      <button class="mx-auto font-semibold w-[400px] h-[80px] rounded-xl bg-[#FAFD5D] text-2xl"
+      <button class="mx-auto font-semibold w-[260px] 640:w-[400px] h-[80px] rounded-xl bg-[#FAFD5D] text-2xl"
               (click)="writeForm(true)">Save Creature
       </button>
     </form>
