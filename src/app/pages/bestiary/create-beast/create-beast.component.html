@@ -1,5 +1,5 @@
 <div
-  class="flex-row poppins-font items-center 768:items-start 768:pt-[144px] px-2.5 768:px-[100px]">
+  class="flex-row poppins-font items-center 768:items-start 768:pt-[144px] px-2.5 768:px-[100px] pt-[50px]">
   <div
     class="flex flex-col relative items-center 768:items-start gap-2 h-auto w-full bg-[#1E232DFF] rounded border-2 border-[#E2A23B]">
     <form class="p-5 flex flex-col gap-6 w-full " *ngIf="creatureForm" [formGroup]="creatureForm">
@@ -10,23 +10,23 @@
         <app-input-text formControlName="creatureNameUa" class="h-[48px] w-full max-w-[280px]"
                         [placeholder]="'UA'"></app-input-text>
       </div>
-      <div class="flex gap-3 w-full">
-        <div class="flex flex-col items-center gap-3 w-full max-w-[60%]">
+      <div class="flex gap-3 w-full flex-col">
+        <div class="flex flex-col items-center gap-3 w-full">
           <div class="flex items-center gap-3 w-full">
             <app-label-text [label]="'Alignment: '"/>
-            <app-input-select formControlName="alignment" [route]="'alignment'" class="h-[48px] w-full max-w-[280px]"
+            <app-input-select formControlName="alignment" [route]="'alignment'" class="h-[48px] w-full"
                               [placeholder]="'Select Alignment'"/>
             <app-input-green-btn [route]="'alignment'" [title]="'Alignment'"/>
           </div>
           <div class="flex items-center gap-3 w-full">
             <app-label-text [label]="'Type: '"/>
-            <app-input-select formControlName="type" [route]="'type'" class="h-[48px] w-full max-w-[280px]"
+            <app-input-select formControlName="type" [route]="'type'" class="h-[48px] w-full"
                               [placeholder]="'Select Type'"/>
             <app-input-green-btn [route]="'type'"/>
           </div>
           <div class="flex items-center gap-3 w-full">
             <app-label-text [label]="'Size: '"/>
-            <app-input-select formControlName="size" [route]="'size'" class="h-[48px] w-full max-w-[280px]"
+            <app-input-select formControlName="size" [route]="'size'" class="h-[48px] w-full "
                               [placeholder]="'Select Size'"/>
             <app-input-green-btn [route]="'size'"/>
           </div>
@@ -37,7 +37,7 @@
             </div>
             <div class="flex gap-3 items-center w-full">
               <app-label-text [label]="'Armor Type:'"/>
-              <app-input-select formControlName="armorTag" [route]="'armor-tag'" class="h-[48px] w-full  max-w-[280px]"
+              <app-input-select formControlName="armorTag" [route]="'armor-tag'" class="h-[48px] w-full "
                                 [placeholder]="'Select armor: '"></app-input-select>
               <app-input-green-btn [route]="'armor-tag'"/>
             </div>
@@ -49,7 +49,7 @@
             </div>
             <div class="flex gap-3 items-center w-full">
               <app-label-text [label]="'Hits in dice:'"/>
-              <app-input-text formControlName="hitsInDice" class="h-[48px] w-full max-w-[280px]"
+              <app-input-text formControlName="hitsInDice" class="h-[48px] w-full"
                               [placeholder]="'Hits in dice: '"/>
             </div>
           </div>
@@ -60,67 +60,63 @@
                               [msr]="true" [alwaysUseMsr]="true"/>
           </div>
         </div>
-        <div class="flex image-load w-full">
+        <div class="flex image-load w-full min-h-[350px]">
           <app-input-file class="w-full "/>
         </div>
       </div>
-      <div class="flex items-center justify-between h-[180px]">
-        <app-statblock-input formControlName="strength" label="STR" class="max-w-[180px] h-full w-full"/>
-        <app-statblock-input formControlName="dexterity" label="DEX" class="max-w-[180px] h-full w-full"/>
-        <app-statblock-input formControlName="construction" label="CON" class="max-w-[180px] h-full w-full"/>
-        <app-statblock-input formControlName="intelligence" label="INT" class="max-w-[180px] h-full w-full"/>
-        <app-statblock-input formControlName="wisdom" label="WIS" class="max-w-[180px] h-full w-full"/>
-        <app-statblock-input formControlName="charisma" label="CHA" class="max-w-[180px] h-full w-full"/>
+      <div class="flex items-center justify-between flex-wrap gap-y-4">
+        <app-statblock-input formControlName="strength" label="STR" class="max-w-[150px] h-[150px] 1024:max-w-[180px] 1024:h-[180px] w-full"/>
+        <app-statblock-input formControlName="dexterity" label="DEX" class="max-w-[150px] h-[150px] 1024:max-w-[180px] 1024:h-[180px] w-full"/>
+        <app-statblock-input formControlName="construction" label="CON" class="max-w-[150px] h-[150px] 1024:max-w-[180px] 1024:h-[180px] w-full"/>
+        <app-statblock-input formControlName="intelligence" label="INT" class="max-w-[150px] h-[150px] 1024:max-w-[180px] 1024:h-[180px] w-full"/>
+        <app-statblock-input formControlName="wisdom" label="WIS" class="max-w-[150px] h-[150px] 1024:max-w-[180px] 1024:h-[180px] w-full"/>
+        <app-statblock-input formControlName="charisma" label="CHA" class="max-w-[150px] h-[150px] 1024:max-w-[180px] 1024:h-[180px] w-full"/>
       </div>
-      <div class="flex gap-x-10 w-full">
-        <div class="w-full flex flex-col gap-4">
-          <app-multi-select [defaultValues]="convertMeasureToMultiSelect(creatureToUpdate?.immunities || null)"
-                            (listChange)="writeValueToCreature(FieldsEnum.immunities, $event)" [msr]="false"
-                            [placeholder]="'Select damage: '" label="Immunities" [route]="'damage'"/>
-          <app-multi-select [defaultValues]="convertMeasureToMultiSelect(creatureToUpdate?.resists || null)"
-                            (listChange)="writeValueToCreature(FieldsEnum.resists, $event)" [msr]="false"
-                            [placeholder]="'Select damage: '" label="Resists" [route]="'damage'"/>
-          <app-multi-select [defaultValues]="convertMeasureToMultiSelect(creatureToUpdate?.vulnerabilities || null)"
-                            (listChange)="writeValueToCreature(FieldsEnum.vulnerabilities, $event)" [msr]="false"
-                            [placeholder]="'Select damage: '" label="Vulnerabilities" [route]="'damage'"/>
-          <app-multi-select [defaultValues]="convertMeasureToMultiSelect(creatureToUpdate?.feelings || null)"
-                            (listChange)="writeValueToCreature(FieldsEnum.feelings, $event)" [amt]="true"
-                            [msr]="true" [placeholder]="'Select Feel: '" label="Feelings"
-                            [route]="'feeling'"/>
-          <div class="flex">
-            <div class="flex w-full items-center gap-2">
-              <app-label-text [label]="'Danger Lvl: '"/>
-              <app-input-number formControlName="dangerLevel" class="h-[48px]" placeholder="0"/>
-            </div>
-            <div class="flex w-full items-center gap-2">
-              <app-label-text [label]="'Experience: '"/>
-              <app-input-text formControlName="experience" class="h-[48px]" placeholder="Experience"/>
-            </div>
+      <div class="grid grid-cols-1 gap-4">
+        <app-multi-select [defaultValues]="convertMeasureToMultiSelect(creatureToUpdate?.immunities || null)"
+                          (listChange)="writeValueToCreature(FieldsEnum.immunities, $event)" [msr]="false"
+                          [placeholder]="'Select damage: '" label="Immunities" [route]="'damage'"/>
+        <app-multi-select [defaultValues]="convertMeasureToMultiSelect(creatureToUpdate?.savingThrows || null)"
+                          (listChange)="writeValueToCreature(FieldsEnum.savingThrows, $event)" [amt]="true"
+                          [msr]="false" [unmeasuredAmount]="true" [placeholder]="'Saving throw: '"
+                          label="Saving throws" [route]="'saving-throw'"/>
+        <app-multi-select [defaultValues]="convertMeasureToMultiSelect(creatureToUpdate?.resists || null)"
+                          (listChange)="writeValueToCreature(FieldsEnum.resists, $event)" [msr]="false"
+                          [placeholder]="'Select damage: '" label="Resists" [route]="'damage'"/>
+        <app-multi-select [defaultValues]="convertMeasureToMultiSelect(creatureToUpdate?.skills || null)"
+                          (listChange)="writeValueToCreature(FieldsEnum.skills, $event)" [amt]="true" [msr]="false"
+                          [unmeasuredAmount]="true" [placeholder]="'Select Skill: '" label="Skills"
+                          [route]="'skill'"/>
+        <app-multi-select [defaultValues]="convertMeasureToMultiSelect(creatureToUpdate?.vulnerabilities || null)"
+                          (listChange)="writeValueToCreature(FieldsEnum.vulnerabilities, $event)" [msr]="false"
+                          [placeholder]="'Select damage: '" label="Vulnerabilities" [route]="'damage'"/>
+        <app-multi-select
+          [defaultValues]="convertMeasureToMultiSelect(creatureToUpdate?.conditionsImmunities || null)"
+          (listChange)="writeValueToCreature(FieldsEnum.conditionsImmunities, $event)" [msr]="false"
+          [placeholder]="'Select condition: '" label="Conditions immunities" [route]="'condition'"/>
+        <app-multi-select [defaultValues]="convertMeasureToMultiSelect(creatureToUpdate?.feelings || null)"
+                          (listChange)="writeValueToCreature(FieldsEnum.feelings, $event)" [amt]="true"
+                          [msr]="true" [placeholder]="'Select Feel: '" label="Feelings"
+                          [route]="'feeling'"/>
+        <app-multi-select [defaultValues]="convertMeasureToMultiSelect(creatureToUpdate?.languages || null)"
+                          (listChange)="writeValueToCreature(FieldsEnum.languages, $event)" [amt]="true"
+                          [alwaysUseMsr]="true"
+                          [placeholder]="'Select Language: '" label="Langs"
+                          [route]="'language'"/>
+        <div class="flex">
+          <div class="flex w-full items-center gap-2">
+            <app-label-text [label]="'Danger Lvl: '"/>
+            <app-input-number formControlName="dangerLevel" class="h-[48px]" placeholder="0"/>
+          </div>
+          <div class="flex w-full items-center gap-2">
+            <app-label-text [label]="'Experience: '"/>
+            <app-input-text formControlName="experience" class="h-[48px]" placeholder="Experience"/>
           </div>
         </div>
-        <div class="w-full flex flex-col gap-4">
-          <app-multi-select [defaultValues]="convertMeasureToMultiSelect(creatureToUpdate?.savingThrows || null)"
-                            (listChange)="writeValueToCreature(FieldsEnum.savingThrows, $event)" [amt]="true"
-                            [msr]="false" [unmeasuredAmount]="true" [placeholder]="'Saving throw: '"
-                            label="Saving throws" [route]="'saving-throw'"/>
-          <app-multi-select [defaultValues]="convertMeasureToMultiSelect(creatureToUpdate?.skills || null)"
-                            (listChange)="writeValueToCreature(FieldsEnum.skills, $event)" [amt]="true" [msr]="false"
-                            [unmeasuredAmount]="true" [placeholder]="'Select Skill: '" label="Skills"
-                            [route]="'skill'"/>
-          <app-multi-select
-            [defaultValues]="convertMeasureToMultiSelect(creatureToUpdate?.conditionsImmunities || null)"
-            (listChange)="writeValueToCreature(FieldsEnum.conditionsImmunities, $event)" [msr]="false"
-            [placeholder]="'Select condition: '" label="Conditions immunities" [route]="'condition'"/>
-          <app-multi-select [defaultValues]="convertMeasureToMultiSelect(creatureToUpdate?.languages || null)"
-                            (listChange)="writeValueToCreature(FieldsEnum.languages, $event)" [amt]="true"
-                            [alwaysUseMsr]="true"
-                            [placeholder]="'Select Language: '" label="Langs"
-                            [route]="'language'"/>
-          <div class="flex">
-            <div class="flex w-full items-center gap-2">
-              <app-label-text [label]="'Mastery bonus: '"/>
-              <app-input-number formControlName="masteryBonus" class="h-[48px]" placeholder="0"/>
-            </div>
+        <div class="flex">
+          <div class="flex w-full items-center gap-2">
+            <app-label-text [label]="'Mastery bonus: '"/>
+            <app-input-number formControlName="masteryBonus" class="h-[48px]" placeholder="0"/>
           </div>
         </div>
       </div>
@@ -152,7 +148,7 @@
       </div>
       <div>
         <h2 class="text-[#E2A23B] playfair-font text-3xl">Description</h2>
-        <div class="flex gap-10 w-full mt-2">
+        <div class="flex flex-col gap-10 w-full mt-2">
           <app-text-area-input formControlName="descriptionEN" class="w-full h-[200px]" [placeholder]="'EN'"/>
           <app-text-area-input formControlName="descriptionUA" class="w-full h-[200px]" [placeholder]="'UA'"/>
         </div>
