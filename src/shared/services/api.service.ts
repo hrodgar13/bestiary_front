@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import {CreaturePayload} from "../../app/pages/bestiary/create-beast/create-beast.component";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {CreatureListItem} from "../../app/pages/bestiary/bestiary-list/bestiary-list.component";
 import {Creature} from "../../app/pages/bestiary/beast-page/beast-page.component";
+import {CreaturePayload} from "../interfaces/creature/create-update/creature-payload.interface";
 
 @Injectable({
   providedIn: 'root'

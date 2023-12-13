@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {CreateTranslationAttribute} from "../../../../shared/interfaces/creature/create-attribute.interface";
+import {CreateTranslationAttribute} from "../../../../shared/interfaces/creature/create-update/create-attribute.interface";
 
 @Injectable()
 export class AttributeService {

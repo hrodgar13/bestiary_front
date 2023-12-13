@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {DestroySubscription} from "../../../../../shared/helpers/destroy-subscribtion";
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {CreatureFilter} from "../bestiary-list.component";
-import {CreateTranslationAttribute} from "../../../../../shared/interfaces/creature/create-attribute.interface";
+import {CreateTranslationAttribute} from "../../../../../shared/interfaces/creature/create-update/create-attribute.interface";
 
 export interface routeValue {
   route: string

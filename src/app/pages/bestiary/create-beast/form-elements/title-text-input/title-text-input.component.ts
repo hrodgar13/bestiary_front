@@ -1,11 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, UntypedFormGroup} from "@angular/forms";
-import {CreateTranslationAttribute} from "../../../../../../shared/interfaces/creature/create-attribute.interface";
-
-export interface ActionsAndAbilities {
-  title?: CreateTranslationAttribute
-  description?: CreateTranslationAttribute
-}
+import {CreateTranslationAttribute} from "../../../../../../shared/interfaces/creature/create-update/create-attribute.interface";
+import {
+  ActionsAndAbilities
+} from "../../../../../../shared/interfaces/creature/form-technical/action-abilities.interface";
 
 @Component({
   selector: 'app-title-text-input',
@@ -17,8 +15,6 @@ export class TitleTextInputComponent implements OnInit{
   @Input() defaultValues: ActionsAndAbilities[] = []
 
   @Output() listChange = new EventEmitter<ActionsAndAbilities[]>()
-
-
 
   titleTextList: ActionsAndAbilities[] = []
 

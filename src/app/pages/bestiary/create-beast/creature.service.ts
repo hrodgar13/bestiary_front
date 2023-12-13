@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {CreaturePayload} from "./create-beast.component";
 import {Observable} from "rxjs";
 import {ApiService} from "../../../../shared/services/api.service";
+import {CreaturePayload} from "../../../../shared/interfaces/creature/create-update/creature-payload.interface";
 
 @Injectable()
 export class CreatureService {

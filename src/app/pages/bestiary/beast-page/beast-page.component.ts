@@ -3,7 +3,7 @@ import {DestroySubscription} from "../../../../shared/helpers/destroy-subscribti
 import {BestiaryService} from "../bestiary.service";
 import {takeUntil} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
-import {CreateTranslationAttribute} from "../../../../shared/interfaces/creature/create-attribute.interface";
+import {CreateTranslationAttribute} from "../../../../shared/interfaces/creature/create-update/create-attribute.interface";
 
 export interface Creature {
   abilities: Action[]

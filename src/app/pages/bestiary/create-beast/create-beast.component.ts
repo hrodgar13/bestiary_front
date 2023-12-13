@@ -1,79 +1,17 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, UntypedFormGroup} from "@angular/forms"
-import {CreateTranslationAttribute} from "../../../../shared/interfaces/creature/create-attribute.interface";
-import {ActionsAndAbilities} from "./form-elements/title-text-input/title-text-input.component";
-import {CreateAttributeMeasure} from "../../../../shared/interfaces/creature/create-attribute-measure.interface";
+import {CreateAttributeMeasure} from "../../../../shared/interfaces/creature/create-update/create-attribute-measure.interface";
 import {CreatureService} from "./creature.service";
 import {concatMap, of, switchMap, takeUntil} from "rxjs";
 import {DestroySubscription} from "../../../../shared/helpers/destroy-subscribtion";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Action, Creature, Measure} from "../beast-page/beast-page.component";
 import {ActivatedRoute, Router} from "@angular/router";
-import {MultiSelectList} from "./form-elements/multi-select/multi-select.component";
-
-export interface CreaturePayload {
-  isFinished: boolean,
-  creatureName?: CreateTranslationAttribute,
-  alignment?: number,
-  type?: number,
-  size?: number,
-  armorClass?: number
-  armorTag?: number
-  hits?: number,
-  hitsInDice?: string,
-  strength?: number,
-  dexterity?: number,
-  construction?: number,
-  intelligence?: number,
-  wisdom?: number,
-  charisma?: number,
-  multiSelects: MultiSelectAmount
-  dangerLevel?: number,
-  experience?: string,
-  masteryBonus?: number
-  actionsAbilities: ActionsAndAbilitiesAmount
-  description?: CreateTranslationAttribute
-}
-
-export interface MultiSelectAmount {
-  [MultiFieldsENUM.immunities]?: CreateAttributeMeasure[]
-  [MultiFieldsENUM.vulnerabilities]?: CreateAttributeMeasure[]
-  [MultiFieldsENUM.speeds]?: CreateAttributeMeasure[]
-  [MultiFieldsENUM.resists]?: CreateAttributeMeasure[]
-  [MultiFieldsENUM.feelings]?: CreateAttributeMeasure[]
-  [MultiFieldsENUM.savingThrows]?: CreateAttributeMeasure[]
-  [MultiFieldsENUM.skills]?: CreateAttributeMeasure[]
-  [MultiFieldsENUM.conditionsImmunities]?: CreateAttributeMeasure[]
-  [MultiFieldsENUM.languages]?: CreateAttributeMeasure[]
-  [MultiFieldsENUM.regions]?: CreateAttributeMeasure[]
-}
-
-export interface ActionsAndAbilitiesAmount {
-  [ActionsAbilitiesENUM.abilities]?: ActionsAndAbilities[],
-  [ActionsAbilitiesENUM.actions]?: ActionsAndAbilities[]
-  [ActionsAbilitiesENUM.bonusActions]?: ActionsAndAbilities[]
-  [ActionsAbilitiesENUM.legendaryActions]?: ActionsAndAbilities[]
-}
-
-export enum ActionsAbilitiesENUM{
-  abilities = 'abilities',
-  actions = 'actions',
-  bonusActions = 'bonusActions',
-  legendaryActions = 'legendaryActions'
-}
-
-export enum MultiFieldsENUM {
-  vulnerabilities = 'vulnerabilities',
-  immunities = 'immunities',
-  speeds = 'speeds',
-  resists = 'resists',
-  feelings = 'feelings',
-  savingThrows = 'savingThrows',
-  skills = 'skills',
-  conditionsImmunities = 'conditionsImmunities',
-  languages = 'languages',
-  regions = 'regions'
-}
+import {MultiFieldsENUM} from "../../../../shared/static/creature/multi-fields.enum";
+import {ActionsAbilitiesENUM} from "../../../../shared/static/creature/action-abilities-fields.enum";
+import {CreaturePayload} from "../../../../shared/interfaces/creature/create-update/creature-payload.interface";
+import {MultiSelectList} from "../../../../shared/interfaces/creature/form-technical/multi-select.interface";
+import {ActionsAndAbilities} from "../../../../shared/interfaces/creature/form-technical/action-abilities.interface";
 
 @Component({
   selector: 'app-create-beast',

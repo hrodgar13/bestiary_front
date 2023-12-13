@@ -1,15 +1,11 @@
 import {ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {CreateTranslationAttribute} from "../../../../../../shared/interfaces/creature/create-attribute.interface";
-import {CreateAttributeMeasure} from "../../../../../../shared/interfaces/creature/create-attribute-measure.interface";
+import {CreateTranslationAttribute} from "../../../../../../shared/interfaces/creature/create-update/create-attribute.interface";
+import {CreateAttributeMeasure} from "../../../../../../shared/interfaces/creature/create-update/create-attribute-measure.interface";
+import {MultiSelectList} from "../../../../../../shared/interfaces/creature/form-technical/multi-select.interface";
 
-export interface MultiSelectList {
-  id: number
-  title: CreateTranslationAttribute
-  msr: boolean
-  amt: number
-}
+
 
 @Component({
   selector: 'app-multi-select',

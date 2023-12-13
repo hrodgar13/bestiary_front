@@ -5,7 +5,7 @@ import {takeUntil} from "rxjs";
 import {BestiaryService} from "../../../bestiary.service";
 import {AttributeService} from "../../attribute.service";
 import {TranslocoService} from "@ngneat/transloco";
-import {CreateTranslationAttribute} from "../../../../../../shared/interfaces/creature/create-attribute.interface";
+import {CreateTranslationAttribute} from "../../../../../../shared/interfaces/creature/create-update/create-attribute.interface";
 
 
 @Component({

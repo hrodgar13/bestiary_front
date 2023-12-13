@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {CreateTranslationAttribute} from "../../../../../../../shared/interfaces/creature/create-attribute.interface";
+import {CreateTranslationAttribute} from "../../../../../../../shared/interfaces/creature/create-update/create-attribute.interface";
 import {TranslocoService} from "@ngneat/transloco";
 import {DestroySubscription} from "../../../../../../../shared/helpers/destroy-subscribtion";
 import {takeUntil} from "rxjs";

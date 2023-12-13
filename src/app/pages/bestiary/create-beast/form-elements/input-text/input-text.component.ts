@@ -1,11 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 
-export interface KeyValue {
-  key: string
-  value: any
-}
-
 @Component({
   selector: 'app-input-text',
   templateUrl: './input-text.component.html',

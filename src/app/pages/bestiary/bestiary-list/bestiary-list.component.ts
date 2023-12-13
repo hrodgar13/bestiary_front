@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {BestiaryService} from "../bestiary.service";
 import {DestroySubscription} from "../../../../shared/helpers/destroy-subscribtion";
 import {debounceTime, Subject, takeUntil} from "rxjs";
-import {CreateTranslationAttribute} from "../../../../shared/interfaces/creature/create-attribute.interface";
+import {CreateTranslationAttribute} from "../../../../shared/interfaces/creature/create-update/create-attribute.interface";
 import {MatDialog} from "@angular/material/dialog";
 import {FiltersModalComponent} from "./filters-modal/filters-modal.component";
 export interface CreatureListItem {

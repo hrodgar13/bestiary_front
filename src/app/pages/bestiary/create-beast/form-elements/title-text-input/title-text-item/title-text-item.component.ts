@@ -1,10 +1,12 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ActionsAndAbilities} from "../title-text-input.component";
 import {DestroySubscription} from "../../../../../../../shared/helpers/destroy-subscribtion";
 import {TranslocoService} from "@ngneat/transloco";
 import {takeUntil} from "rxjs";
 import {ConfirmDialogComponent} from "../../../../../../../shared/components/confirm-dialog/confirm-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
+import {
+  ActionsAndAbilities
+} from "../../../../../../../shared/interfaces/creature/form-technical/action-abilities.interface";
 
 @Component({
   selector: 'app-title-text-item',

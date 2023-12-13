@@ -4,7 +4,7 @@ import {DestroySubscription} from "../../../../../shared/helpers/destroy-subscri
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {AttributeService} from "../attribute.service";
 import {takeUntil} from "rxjs";
-import {CreateTranslationAttribute} from "../../../../../shared/interfaces/creature/create-attribute.interface";
+import {CreateTranslationAttribute} from "../../../../../shared/interfaces/creature/create-update/create-attribute.interface";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
 export interface MatData {
