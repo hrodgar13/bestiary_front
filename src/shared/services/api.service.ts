@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import {CreatureListItem} from "../../app/pages/bestiary/bestiary-list/bestiary-list.component";
 import {Creature} from "../../app/pages/bestiary/beast-page/beast-page.component";
 import {CreaturePayload} from "../interfaces/creature/create-update/creature-payload.interface";
+import {FilterLabel, FilterLabelValues} from "../interfaces/filter/creature-filter.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -32,5 +33,9 @@ export class ApiService {
 
   getUnfinishedCreatures() {
     return this.http.get<CreatureListItem[]>(`api/creature-unfinished`);
+  }
+
+  getAttributes(key: string): Observable<FilterLabelValues[]> {
+    return this.http.get<FilterLabelValues[]>(`api/${key}`)
   }
 }
