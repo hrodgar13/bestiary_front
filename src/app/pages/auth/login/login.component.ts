@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {LoginService} from "../login.service";
-import {LoginInterface} from "../../../../shared/interfaces/login.interface";
+import {LoginInterface} from "../../../../shared/interfaces/user/login.interface";
 import {DestroySubscription} from "../../../../shared/helpers/destroy-subscribtion";
 import {takeUntil} from "rxjs";
 import {animate, style, transition, trigger} from "@angular/animations";

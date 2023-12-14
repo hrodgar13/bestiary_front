@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, Observable, tap} from "rxjs";
-import {Token, TokenDecoded} from "../interfaces/token.interface";
-import {RegisterData} from "../interfaces/create-user.interface";
-import {LoginInterface} from "../interfaces/login.interface";
+import {Token, TokenDecoded} from "../interfaces/user/token.interface";
+import {RegisterData} from "../interfaces/user/create-user.interface";
+import {LoginInterface} from "../interfaces/user/login.interface";
 import jwt_decode from 'jwt-decode'
 
 @Injectable({
