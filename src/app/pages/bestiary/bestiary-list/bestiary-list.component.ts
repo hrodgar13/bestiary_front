@@ -42,7 +42,7 @@ export class BestiaryListComponent extends DestroySubscription implements OnInit
   searchInput: string = '';
   creaturesList: CreatureListItem[] = [];
 
-  creatureFilter: CreatureFilter = {}
+  creatureFilter!: CreatureFilter
 
   private filterSubject = new Subject<string>();
   unfinishedCreatures: CreatureListItem[] = [];
