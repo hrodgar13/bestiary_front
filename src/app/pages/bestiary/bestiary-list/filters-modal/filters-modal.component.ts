@@ -9,6 +9,7 @@ import {CreatureFilterColumns} from "../../../../../shared/static/filter/creatur
 import {CreatureFilterInterface, FilterLabel} from "../../../../../shared/interfaces/filter/creature-filter.interface";
 import {forkJoin, take, takeUntil, tap} from "rxjs";
 import {BestiaryService} from "../../bestiary.service";
+import {TranslocoService} from "@ngneat/transloco";
 
 @Component({
     selector: 'app-filters-modal',
@@ -17,13 +18,16 @@ import {BestiaryService} from "../../bestiary.service";
 })
 export class FiltersModalComponent extends DestroySubscription implements OnInit {
 
+    currentLang: 'en' | 'ua' = 'en'
+
     filter: CreatureFilterInterface[] = []
 
     filterLabels: FilterLabel[] = []
 
     constructor(
         @Inject(MAT_DIALOG_DATA) public data: CreatureFilter,
-        private attributeService: BestiaryService
+        private attributeService: BestiaryService,
+        private translocoService: TranslocoService
     ) {
         super();
     }
@@ -32,6 +36,8 @@ export class FiltersModalComponent extends DestroySubscription implements OnInit
         this.generateFilter();
 
         this.checkFilterSubjectEmpty()
+
+        this.detectLangChange()
     }
 
     private produceFilterColumns() {
@@ -79,5 +85,14 @@ export class FiltersModalComponent extends DestroySubscription implements OnInit
         })
 
         sbjSub.unsubscribe()
+    }
+
+    private detectLangChange() {
+        const activeLang = this.translocoService.getActiveLang()
+
+        if(activeLang === 'en' || activeLang === 'ua') {
+            this.currentLang = activeLang
+            console.log(this.currentLang)
+        }
     }
 }

@@ -1,5 +1,16 @@
 <div class="w-[250px] 640:w-[400px] 768:w-[600px] 1024:w-[800px] h-[400px] 768:h-[340px] rounded-full">
     <app-border-outline>
-
+        <div>
+            <div class="flex flex-col" *ngFor="let label of filterLabels">
+                <div>
+                    {{label.attr}}
+                </div>
+                <div class="flex">
+                    <div *ngFor="let value of label.values">
+                        <div>{{value.attrName[currentLang]}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </app-border-outline>
 </div>
