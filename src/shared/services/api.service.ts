@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {BehaviorSubject, Observable} from "rxjs";
 import {CreatureListItem} from "../../app/pages/bestiary/bestiary-list/bestiary-list.component";
 import {Creature} from "../../app/pages/bestiary/beast-page/beast-page.component";
 import {CreaturePayload} from "../interfaces/creature/create-update/creature-payload.interface";
-import {FilterLabel, FilterLabelValues} from "../interfaces/filter/creature-filter.interface";
+import {CreatureFilterInterface, FilterLabel, FilterLabelValues} from "../interfaces/filter/creature-filter.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +19,9 @@ export class ApiService {
     return this.http.post(`api/creature`, creaturePayload);
   }
 
-  getCreaturesList(): Observable<CreatureListItem[]> {
-    return this.http.get<CreatureListItem[]>(`api/creature`);
+  getCreaturesList(filter: CreatureFilterInterface[]): Observable<CreatureListItem[]> {
+    const params: HttpParams = this.transformArrayInParams(filter)
+    return this.http.get<CreatureListItem[]>(`api/creature`, {params});
   }
 
   getCreatureById(id: number): Observable<Creature> {
@@ -37,5 +38,16 @@ export class ApiService {
 
   getAttributes(key: string): Observable<FilterLabelValues[]> {
     return this.http.get<FilterLabelValues[]>(`api/${key}`)
+  }
+
+  private transformArrayInParams(filter: CreatureFilterInterface[]): HttpParams {
+    return filter
+      .reduce((params, key) => {
+
+        if (key.ids.length !== null) {
+          return params.set(key.attributeName, key.ids.toString());
+        }
+        return params;
+      }, new HttpParams())
   }
 }

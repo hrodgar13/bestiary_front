@@ -4,7 +4,7 @@
       <h2 class="text-2xl text-[#E2A23B] playfair-font">
         {{label.attr | titlecase}}
       </h2>
-      <div class="flex gap-2 mt-2.5">
+      <div class="flex flex-wrap gap-2 mt-2.5">
         <div *ngFor="let value of label.values">
           <app-border-outline *ngIf="!detectFilterActivity(label.attr, value.id); else activeFilter" (click)="setFilter(label.attr, value.id)">
             <p class="text-[#E2A23B] text-center min-w-[40px] px-2 cursor-pointer">{{value.attrName[currentLang]}}</p>

@@ -3,7 +3,7 @@ import {AuthService} from "../../../shared/services/auth.service";
 import {BehaviorSubject, Observable} from "rxjs";
 import {CreatureListItem} from "./bestiary-list/bestiary-list.component";
 import {ApiService} from "../../../shared/services/api.service";
-import {FilterLabel} from "../../../shared/interfaces/filter/creature-filter.interface";
+import {CreatureFilterInterface, FilterLabel} from "../../../shared/interfaces/filter/creature-filter.interface";
 
 @Injectable()
 export class BestiaryService {
@@ -21,8 +21,8 @@ export class BestiaryService {
         return this.authService.isAdminAuthenticated();
     }
 
-    getCreatures(): Observable<CreatureListItem[]> {
-        return this.apiService.getCreaturesList()
+    getCreatures(filter: CreatureFilterInterface[]): Observable<CreatureListItem[]> {
+        return this.apiService.getCreaturesList(filter)
     }
 
     getCreatureById(id: number) {

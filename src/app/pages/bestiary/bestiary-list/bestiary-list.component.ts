@@ -64,7 +64,7 @@ export class BestiaryListComponent extends DestroySubscription implements OnInit
   }
 
   getCreatures() {
-    this.bestiaryService.getCreatures().pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+    this.bestiaryService.getCreatures(this.creatureFilter).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
       this.creaturesList = data
     })
   }
@@ -85,6 +85,7 @@ export class BestiaryListComponent extends DestroySubscription implements OnInit
   clearFilter(e: any) {
     e.stopPropagation()
     this.creatureFilter = []
+    this.getCreatures()
   }
 
   checkFiltersToClear() {
