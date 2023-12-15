@@ -18,7 +18,7 @@
 
       </div>
       <div (click)="openFilterDialog()" class="768:w-full border-l border-[#E2A23B] px-3 h-full cursor-pointer relative py-1 max-w-[230px] flex items-center gap-4">
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="24" viewBox="0 0 22 24" fill="none">
+        <svg class="w-[40px]" xmlns="http://www.w3.org/2000/svg" width="22" height="24" viewBox="0 0 22 24" fill="none">
           <path d="M3.13743 23.8412C2.8466 23.8412 2.61056 23.6051 2.61056 23.3143V14.6511C2.61056 14.3603 2.8466 14.1243 3.13743 14.1243C3.42827 14.1243 3.66431 14.3603 3.66431 14.6511V23.3143C3.66431 23.6051 3.42853 23.8412 3.13743 23.8412Z" fill="#E2A23B"/>
           <path d="M18.8357 15.7687C18.5448 15.7687 18.3088 15.5327 18.3088 15.2418V0.658711C18.3088 0.367876 18.5448 0.131836 18.8357 0.131836C19.1265 0.131836 19.3625 0.367876 19.3625 0.658711V15.2418C19.3625 15.5329 19.1265 15.7687 18.8357 15.7687Z" fill="#E2A23B"/>
           <path d="M10.9866 23.8412C10.6957 23.8412 10.4597 23.6052 10.4597 23.3144V7.48757C10.4597 7.19673 10.6957 6.96069 10.9866 6.96069C11.2774 6.96069 11.5134 7.19673 11.5134 7.48757V23.3144C11.5134 23.6052 11.2774 23.8412 10.9866 23.8412Z" fill="#E2A23B"/>
@@ -30,7 +30,7 @@
           <path d="M18.8357 23.8413C18.5448 23.8413 18.3088 23.6052 18.3088 23.3144V19.4094C18.3088 19.1186 18.5448 18.8826 18.8357 18.8826C19.1265 18.8826 19.3625 19.1186 19.3625 19.4094V23.3144C19.3625 23.6052 19.1265 23.8413 18.8357 23.8413Z" fill="#E2A23B"/>
         </svg>
         <p class="hidden 768:block w-full">Filters</p>
-        <button *ngIf="creatureFilter" mat-icon-button class="flex">
+        <button *ngIf="checkFiltersToClear()" (click)="clearFilter($event)" mat-icon-button class="flex">
           <mat-icon class="text-[#E2A23B] absolute right-2">delete_sweep</mat-icon>
         </button>
       </div>

@@ -5,6 +5,7 @@ import {debounceTime, Subject, takeUntil} from "rxjs";
 import {CreateTranslationAttribute} from "../../../../shared/interfaces/creature/create-update/create-attribute.interface";
 import {MatDialog} from "@angular/material/dialog";
 import {FiltersModalComponent} from "./filters-modal/filters-modal.component";
+import {CreatureFilterInterface} from "../../../../shared/interfaces/filter/creature-filter.interface";
 export interface CreatureListItem {
   creatureDangerLvl: number
   creatures: CreatureListBody[]
@@ -13,23 +14,6 @@ export interface CreatureListItem {
 interface CreatureListBody {
   id: number
   creatureName: CreateTranslationAttribute
-}
-
-export interface CreatureFilter {
-  creatureName?: string
-  alignments?: number[]
-  type?: number[]
-  size?: number[]
-  speeds?: number[]
-  speedsAllAttributes?: boolean
-  vulnerabilities?: number[]
-  vulnerabilitiesAllAttributes?: boolean
-  resists?: number[]
-  resistsAllAttributes?: boolean
-  immunities?: number[]
-  immunitiesAllAttributes?: boolean
-  languages?: number[]
-  languagesAllAttributes?: boolean
 }
 
 @Component({
@@ -42,7 +26,7 @@ export class BestiaryListComponent extends DestroySubscription implements OnInit
   searchInput: string = '';
   creaturesList: CreatureListItem[] = [];
 
-  creatureFilter!: CreatureFilter
+  creatureFilter: CreatureFilterInterface[] = []
 
   private filterSubject = new Subject<string>();
   unfinishedCreatures: CreatureListItem[] = [];
@@ -59,7 +43,7 @@ export class BestiaryListComponent extends DestroySubscription implements OnInit
     this.getCreatures()
 
     this.filterSubject.pipe(debounceTime(1000), takeUntil(this.destroyStream$)).subscribe((value) => {
-      this.creatureFilter.creatureName = value.toString()
+      this.searchInput = value.toString()
 
       this.getCreatures()
     })
@@ -96,5 +80,14 @@ export class BestiaryListComponent extends DestroySubscription implements OnInit
       this.creatureFilter = data
       this.getCreatures()
     })
+  }
+
+  clearFilter(e: any) {
+    e.stopPropagation()
+    this.creatureFilter = []
+  }
+
+  checkFiltersToClear() {
+    return !! this.creatureFilter.flatMap(item => item.ids).length
   }
 }

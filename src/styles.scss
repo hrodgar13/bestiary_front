@@ -127,3 +127,23 @@ mat-snack-bar-container {
 .mat-mdc-button-base.mat-mdc-icon-button.mat-unthemed.mdc-icon-button {
   display: flex;
 }
+
+.mat-mdc-dialog-surface.mdc-dialog__surface {
+  background: #15181F !important;
+  border: 2px solid #E2A23B !important;
+  overflow-x: hidden;
+}
+
+.mat-mdc-dialog-surface.mdc-dialog__surface::-webkit-scrollbar {
+  width: 5px;
+}
+
+.mat-mdc-dialog-surface.mdc-dialog__surface::-webkit-scrollbar-track {
+  background: none;
+}
+
+.mat-mdc-dialog-surface.mdc-dialog__surface::-webkit-scrollbar-thumb {
+  background-color: #E2A23B;
+  border-radius: 20px;
+  margin-left: -5px;
+}

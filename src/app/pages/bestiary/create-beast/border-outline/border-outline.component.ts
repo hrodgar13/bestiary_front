@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-border-outline',
@@ -6,4 +6,5 @@ import {Component} from '@angular/core';
   styleUrls: ['./border-outline.component.scss']
 })
 export class BorderOutlineComponent {
+  @Input() bg = '#15181F'
 }
