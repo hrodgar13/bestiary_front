@@ -119,8 +119,8 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit,
     this.creaturePayload = {
       isFinished: this.isFinished,
       creatureName: {
-        ua: this.creatureForm.value.creatureNameEn,
-        en: this.creatureForm.value.creatureNameUa
+        ua: this.creatureForm.value.creatureNameUa,
+        en: this.creatureForm.value.creatureNameEn
       },
       alignment: this.creatureForm.value.alignment,
       type: this.creatureForm.value.type,
