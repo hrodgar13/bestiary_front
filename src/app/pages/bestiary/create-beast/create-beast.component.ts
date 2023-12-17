@@ -1,6 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, UntypedFormGroup} from "@angular/forms"
-import {CreateAttributeMeasure} from "../../../../shared/interfaces/creature/create-update/create-attribute-measure.interface";
+import {
+  CreateAttributeMeasure
+} from "../../../../shared/interfaces/creature/create-update/create-attribute-measure.interface";
 import {CreatureService} from "./creature.service";
 import {concatMap, of, switchMap, takeUntil} from "rxjs";
 import {DestroySubscription} from "../../../../shared/helpers/destroy-subscribtion";
@@ -31,6 +33,7 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit,
 
   creatureForm!: UntypedFormGroup;
   private isFinished = false;
+
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly creatureService: CreatureService,
@@ -45,19 +48,29 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit,
     let editableCreature = localStorage.getItem('creature-id')
 
     this.route.params.pipe(takeUntil(this.destroyStream$)).subscribe(params => {
-      if(editableCreature && !params['id']) {
+      if (editableCreature && !params['id']) {
         localStorage.removeItem('creature-id')
         this.router.navigate(['bestiary/edit/' + editableCreature])
       } else {
         editableCreature = params['id']
       }
+
+      this.getCreatureById(editableCreature)
     })
 
-    if(editableCreature) {
-      this.creatureId = +editableCreature
-    }
 
-    if (this.creatureId) {
+    setInterval(() => {
+      if (!this.isFinished) {
+        this.writeForm(false)
+      }
+    }, 5 * 60 * 1000)
+
+  }
+
+  private getCreatureById(editableCreature: string | null) {
+    if (editableCreature) {
+      this.creatureId = +editableCreature
+
       this.creatureService.getCreatureById(this.creatureId).pipe(
         takeUntil(this.destroyStream$),
         concatMap(data => {
@@ -70,14 +83,6 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit,
     } else {
       this.initForm();
     }
-
-
-    setInterval(() => {
-      if(!this.isFinished) {
-        this.writeForm(false)
-      }
-    },  5 * 60 * 1000)
-
   }
 
   private initForm() {
@@ -112,7 +117,7 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit,
 
   writeForm(isFinished: boolean) {
     this.isFinished = isFinished
-    if(this.creatureForm.invalid) {
+    if (this.creatureForm.invalid) {
       return
     }
 
@@ -146,16 +151,16 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit,
       }
     }
 
-    if(this.creatureId) {
+    if (this.creatureId) {
       this.creatureService.patchCreature(this.creatureId, this.creaturePayload).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
-        this.matSnack.open('Saved','', {
+        this.matSnack.open('Saved', '', {
           duration: 1500,
           verticalPosition: "top"
         })
       })
     } else {
       this.creatureService.createCreature(this.creaturePayload).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
-        this.matSnack.open('Saved','', {
+        this.matSnack.open('Saved', '', {
           duration: 1500,
           verticalPosition: "top"
         })
@@ -167,7 +172,10 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit,
   }
 
   writeValueToCreature(route: MultiFieldsENUM, $event: CreateAttributeMeasure[]) {
+    console.log($event)
+
     this.creaturePayload.multiSelects[route] = $event
+    console.log(this.creaturePayload.multiSelects[route], route)
   }
 
   protected readonly ActionsAbilitiesENUM = ActionsAbilitiesENUM;
@@ -177,13 +185,14 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit,
   }
 
   convertMeasureToMultiSelect(param: Measure[] | null): MultiSelectList[] {
-    if(!param) {
+    if (!param) {
       return []
     }
 
     const attrs = param.map(item => {
+      console.log(item)
       return {
-        id: item.id,
+        id: Number(item?.attribute?.attrName?.id),
         title: {en: item?.attribute?.attrName?.en, ua: item?.attribute?.attrName?.ua},
         msr: item.isMeasureEnable ? item.isMeasureEnable : false,
         amt: item.amt ? item.amt : 0
@@ -196,7 +205,7 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit,
   protected readonly takeUntil = takeUntil;
 
   convertTitle(abilities: Action[] | undefined): ActionsAndAbilities[] {
-    if(abilities && abilities.length > 0 ) {
+    if (abilities && abilities.length > 0) {
       return abilities.map(item => {
         return {
           title: item.title,

@@ -46,8 +46,6 @@ export class MultiSelectComponent implements OnInit {
     })
 
     if(this.defaultValues.length) {
-      console.log(this.defaultValues)
-
       this.selectedItems = this.defaultValues
     }
   }

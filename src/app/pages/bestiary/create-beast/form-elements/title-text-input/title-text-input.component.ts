@@ -35,6 +35,7 @@ export class TitleTextInputComponent implements OnInit{
 
     if(this.defaultValues.length) {
       this.titleTextList = this.defaultValues
+      console.log(this.titleTextList)
     }
   }
 
