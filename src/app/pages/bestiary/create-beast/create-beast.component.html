@@ -2,7 +2,7 @@
   class="flex-row poppins-font items-center 768:items-start 768:pt-[144px] px-1 768:px-[20px] pt-[50px]">
   <div
     class="flex flex-col relative items-center 768:items-start gap-2 h-auto w-full bg-[#1E232DFF] rounded border-2 border-[#E2A23B]">
-    <form class="p-2 768:p-5 flex flex-col gap-6 w-full ">
+    <form [formGroup]="creatureForm" *ngIf="creatureForm" class="p-2 768:p-5 flex flex-col gap-6 w-full ">
       <div class="flex items-center flex-col 640:flex-row gap-3">
         <app-label-text [label]="'Creature name: '"></app-label-text>
         <app-input-text formControlName="name_en" class="h-[48px] w-full max-w-[280px]"
@@ -38,20 +38,6 @@
           </div>
           <div class="flex w-full flex-col gap-3 640:flex-row 640:items-center">
             <div class="flex gap-3 items-center">
-              <app-label-text [label]="'Armor class:'"/>
-              <app-input-number formControlName="armor_class" [placeholder]="'0'" class="h-[48px]"></app-input-number>
-            </div>
-            <!--            <div class="flex gap-3 items-center flex-col w-full 640:flex-row 640:items-center">-->
-            <!--              <app-label-text [label]="'Armor Type:'"/>-->
-            <!--              <div class="flex items-center justify-between w-full gap-1">-->
-            <!--                <app-input-select formControlName="armorTag" [route]="'armor-tag'" class="h-[48px] w-full "-->
-            <!--                                  [placeholder]="'Select armor: '"></app-input-select>-->
-            <!--                <app-input-green-btn [route]="'armor-tag'"/>-->
-            <!--              </div>-->
-            <!--            </div>-->
-          </div>
-          <div class="flex w-full flex-col gap-3 640:flex-row 640:items-center">
-            <div class="flex gap-3 items-center">
               <app-label-text [label]="'Hits: '"/>
               <app-input-number formControlName="hits" [placeholder]="'0'" class="h-[48px]"/>
             </div>
@@ -61,9 +47,20 @@
                               [placeholder]="'Hits in dice: '"/>
             </div>
           </div>
+          <div class="flex w-full flex-col gap-3 640:flex-row 640:items-center">
+            <div class="flex gap-3 items-center">
+              <app-label-text [label]="'Armor class:'"/>
+              <app-input-number formControlName="armor_class" [placeholder]="'0'" class="h-[48px]"></app-input-number>
+            </div>
+          </div>
+          <div class="w-full">
+            <app-multi-select label="Armor tags"
+                              [route]="AttributesCodes.armor_tag" [placeholder]="'Select armor tags: '" [amt]="false"
+                              [msr]="false" [alwaysUseMsr]="false"/>
+          </div>
           <div class="w-full">
             <app-multi-select label="Speeds"
-                              [route]="'speed'" [placeholder]="'Select speed: '" [amt]="true"
+                              [route]="AttributesCodes.speeds" [placeholder]="'Select speed: '" [amt]="true"
                               [msr]="true" [alwaysUseMsr]="true"/>
           </div>
         </div>
@@ -76,7 +73,7 @@
                              class="h-[130px] max-w-[130px]  640:max-w-[150px] 640:h-[150px] 1280:max-w-[180px] 1280:h-[180px] w-full"/>
         <app-statblock-input formControlName="dexterity" label="DEX"
                              class="h-[130px] max-w-[130px]  640:max-w-[150px] 640:h-[150px] 1280:max-w-[180px] 1280:h-[180px] w-full"/>
-        <app-statblock-input formControlName="construction" label="CON"
+        <app-statblock-input formControlName="constitution" label="CON"
                              class="h-[130px] max-w-[130px]  640:max-w-[150px] 640:h-[150px] 1280:max-w-[180px] 1280:h-[180px] w-full"/>
         <app-statblock-input formControlName="intelligence" label="INT"
                              class="h-[130px] max-w-[130px]  640:max-w-[150px] 640:h-[150px] 1280:max-w-[180px] 1280:h-[180px] w-full"/>
@@ -151,8 +148,8 @@
       <div>
         <h2 class="text-[#E2A23B] playfair-font text-3xl">Description</h2>
         <div class="flex flex-col gap-10 w-full mt-2 1024:flex-row">
-          <app-text-area-input formControlName="descriptionEN" class="w-full h-[200px]" [placeholder]="'EN'"/>
-          <app-text-area-input formControlName="descriptionUA" class="w-full h-[200px]" [placeholder]="'UA'"/>
+          <app-text-area-input formControlName="description_en" class="w-full h-[200px]" [placeholder]="'EN'"/>
+          <app-text-area-input formControlName="description_ua" class="w-full h-[200px]" [placeholder]="'UA'"/>
         </div>
       </div>
       <button class="mx-auto font-semibold w-[260px] 640:w-[400px] h-[80px] rounded-xl bg-[#FAFD5D] text-2xl">Save Creature

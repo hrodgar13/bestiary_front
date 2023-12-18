@@ -57,6 +57,6 @@ export class ApiService {
     }
 
     getDataForSelect(route: string): Observable<Attribute[]> {
-        return this.http.get<Attribute[]>(`api/attribute/route`)
+        return this.http.get<Attribute[]>(`api/attribute/${route}`)
     }
 }

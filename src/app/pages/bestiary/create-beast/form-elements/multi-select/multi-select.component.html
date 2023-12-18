@@ -1,5 +1,5 @@
 <div class="w-full">
-  <form class="w-full flex-col flex gap-2 mb-2 640:flex-row">
+  <div *ngIf="measureForm" [formGroup]="measureForm" class="w-full flex-col flex gap-2 mb-2 640:flex-row">
     <div class="flex flex-col gap-2 w-full 640:flex-row 640: items-center">
       <app-label-text [label]="label"/>
       <div class="flex items-start justify-between w-full">
@@ -21,7 +21,7 @@
         <mat-icon class="text-[#E2A23B]">check_circle</mat-icon>
       </button>
     </div>
-  </form>
+  </div>
   <div class="bg-[#15181F] h-[136px] rounded-xl p-4 border-2 border-[#E2A23B]">
     <div class="flex items-start flex-wrap overflow-y-auto gap-2 properties-container max-h-full">
 <!--      <app-multi-select-item *ngFor="let item of selectedItems" [msr]="alwaysUseMsr ? alwaysUseMsr : item.msr"-->
