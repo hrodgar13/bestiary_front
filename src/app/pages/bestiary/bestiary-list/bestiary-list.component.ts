@@ -10,24 +10,24 @@ import {FiltersModalComponent} from "./filters-modal/filters-modal.component";
   styleUrls: ['./bestiary-list.component.scss']
 })
 export class BestiaryListComponent extends DestroySubscription implements OnInit{
-  // isAdminAuthenticated = false;
-  // searchInput: string = '';
-  // creaturesList: CreatureListItem[] = [];
+  isAdminAuthenticated = false;
+  searchInput: string = '';
+  creaturesList: any[] = []; // TODO CREATURE LIST INTERFACE
   //
-  // creatureFilter: CreatureFilterInterface[] = []
+  creatureFilter: any[] = [] // TODO CREATURE FILER INTERFACE
   //
-  // private filterSubject = new Subject<string>();
-  // unfinishedCreatures: CreatureListItem[] = [];
+  private filterSubject = new Subject<string>();
+  unfinishedCreatures: any[] = []; // TODO CREATURE LIST INTERFACE
   //
-  // constructor(
-  //   private readonly bestiaryService: BestiaryService,
-  //   private readonly dialog: MatDialog
-  // ) {
-  //   super()
-  // }
+  constructor(
+    private readonly bestiaryService: BestiaryService,
+    private readonly dialog: MatDialog
+  ) {
+    super()
+  }
 
   ngOnInit() {
-    // this.isAdminAuthenticated = this.bestiaryService.isAdmin();
+    this.isAdminAuthenticated = this.bestiaryService.isAdmin();
     // this.getCreatures()
     //
     // this.filterSubject.pipe(debounceTime(1000), takeUntil(this.destroyStream$)).subscribe((value) => {
@@ -41,9 +41,9 @@ export class BestiaryListComponent extends DestroySubscription implements OnInit
     // }
   }
 
-  // clearInputFilter() {
-  //   this.searchInput = ''
-  // }
+  clearInputFilter() {
+    this.searchInput = ''
+  }
   //
   // getUnfinishedCreatures() {
   //   this.bestiaryService.getUnfinishedCreatures().pipe(takeUntil(this.destroyStream$)).subscribe(data => {
@@ -51,32 +51,32 @@ export class BestiaryListComponent extends DestroySubscription implements OnInit
   //   })
   // }
   //
-  // getCreatures() {
-  //   this.bestiaryService.getCreatures(this.creatureFilter).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
-  //     this.creaturesList = data
-  //   })
-  // }
+  getCreatures() {
+    this.bestiaryService.getCreatures(this.creatureFilter).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+      this.creaturesList = data
+    })
+  }
   //
-  // setCreatureNameFilter() {
-  //   this.filterSubject.next(this.searchInput)
-  // }
+  setCreatureNameFilter() {
+    this.filterSubject.next(this.searchInput)
+  }
   //
-  // openFilterDialog() {
-  //   const dialogRef = this.dialog.open(FiltersModalComponent, {data: this.creatureFilter})
+  openFilterDialog() {
+    const dialogRef = this.dialog.open(FiltersModalComponent, {data: this.creatureFilter})
+
+    dialogRef.afterClosed().pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+      this.creatureFilter = data
+      this.getCreatures()
+    })
+  }
   //
-  //   dialogRef.afterClosed().pipe(takeUntil(this.destroyStream$)).subscribe(data => {
-  //     this.creatureFilter = data
-  //     this.getCreatures()
-  //   })
-  // }
+  clearFilter(e: any) {
+    e.stopPropagation()
+    this.creatureFilter = []
+    this.getCreatures()
+  }
   //
-  // clearFilter(e: any) {
-  //   e.stopPropagation()
-  //   this.creatureFilter = []
-  //   this.getCreatures()
-  // }
-  //
-  // checkFiltersToClear() {
-  //   return !! this.creatureFilter.flatMap(item => item.ids).length
-  // }
+  checkFiltersToClear() {
+    return !! this.creatureFilter.flatMap(item => item.ids).length
+  }
 }
