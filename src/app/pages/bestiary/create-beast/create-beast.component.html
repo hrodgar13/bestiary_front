@@ -54,7 +54,7 @@
             </div>
           </div>
           <div class="w-full">
-            <app-multi-select label="Armor tags"
+            <app-multi-select label="Armor tags" [defaultValues]="filterMeasuresByCategories(AttributesCodes.armor_tag)"
                               [route]="AttributesCodes.armor_tag" [placeholder]="'Select armor tags: '" [amt]="false"
                               [msr]="false" [alwaysUseMsr]="false"/>
           </div>

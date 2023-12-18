@@ -16,6 +16,7 @@ import {Measure} from "../../../../shared/interfaces/creature/get/measure";
 import {ActionsAbilities} from "../../../../shared/interfaces/creature/get/actions-abilities";
 import {ActionAbilities} from "../../../../shared/static/creature/action-abilities.code";
 import {CreateTranslation} from "../../../../shared/interfaces/creature/create/create-translation";
+import {iterator} from "rxjs/internal/symbol/iterator";
 
 @Component({
   selector: 'app-create-beast',
@@ -101,19 +102,19 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit 
       },
       isFinished: this.isFinished,
       armor_class: this.creatureForm.get('armor_class')?.value,
-      hits: this.creatureForm.get('armor_class')?.value,
-      hits_in_dice: this.creatureForm.get('armor_class')?.value,
-      danger_lvl: this.creatureForm.get('armor_class')?.value,
-      experience: this.creatureForm.get('armor_class')?.value,
-      mastery_bonus: this.creatureForm.get('armor_class')?.value,
+      hits: this.creatureForm.get('hits')?.value,
+      hits_in_dice: this.creatureForm.get('hits_in_dice')?.value,
+      danger_lvl: this.creatureForm.get('danger_lvl')?.value,
+      experience: this.creatureForm.get('experience')?.value,
+      mastery_bonus: this.creatureForm.get('mastery_bonus')?.value,
       stat_block: {
         id: this.creaturePayload.stat_block.id,
-        strength: this.creatureForm.get('armor_class')?.value,
-        dexterity: this.creatureForm.get('armor_class')?.value,
-        constitution: this.creatureForm.get('armor_class')?.value,
-        intelligence: this.creatureForm.get('armor_class')?.value,
-        wisdom: this.creatureForm.get('armor_class')?.value,
-        charisma: this.creatureForm.get('armor_class')?.value
+        strength: this.creatureForm.get('strength')?.value,
+        dexterity: this.creatureForm.get('dexterity')?.value,
+        constitution: this.creatureForm.get('constitution')?.value,
+        intelligence: this.creatureForm.get('intelligence')?.value,
+        wisdom: this.creatureForm.get('wisdom')?.value,
+        charisma: this.creatureForm.get('charisma')?.value
       },
       measures: this.measures,
       attributes: this.attributes,
@@ -144,9 +145,11 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit 
 
   private convertMeasureInCreationType(measures: Measure[]): CreateMeasure[] {
     return measures.map(measure => {
+      const attribute: Attribute[] = measure.attribute ? [measure.attribute] : []
+
       return {
         ...measure,
-        attribute: this.convertAttributeInCreationType([measure.attribute])[0]
+        attribute: this.convertAttributeInCreationType(attribute)[0]
       }
     })
   }
@@ -164,5 +167,15 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit 
     });
 
     return create_action_abilities
+  }
+
+  filterMeasuresByCategories(armor_tag: Attributes): Measure[] {
+    if(this.creaturePayload) {
+      const filteredMeasures = this.creaturePayload.measures.filter(item => item.attribute?.attr_cat === armor_tag)
+
+      return filteredMeasures;
+    }
+
+    return []
   }
 }

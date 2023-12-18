@@ -3,6 +3,7 @@ import {TranslocoService} from "@ngneat/transloco";
 import {DestroySubscription} from "../../../../../../../shared/helpers/destroy-subscribtion";
 import {takeUntil} from "rxjs";
 import {Translation} from "../../../../../../../shared/interfaces/creature/get/translation";
+import {Measure} from "../../../../../../../shared/interfaces/creature/get/measure";
 
 @Component({
   selector: 'app-multi-select-item',
@@ -10,11 +11,8 @@ import {Translation} from "../../../../../../../shared/interfaces/creature/get/t
   styleUrls: ['./multi-select-item.component.scss']
 })
 export class MultiSelectItemComponent extends DestroySubscription implements OnInit{
-  @Input() id!: number
-  @Input() label!: Translation
-  @Input() amt!: number
-  @Input() msr!: boolean
-  @Output() deleteItem = new EventEmitter<number>()
+  @Input() displayMeasure!: Measure
+  @Output() deleteItem = new EventEmitter<Measure>()
 
   currentLanguageLabel: string | null = ''
 
@@ -31,12 +29,14 @@ export class MultiSelectItemComponent extends DestroySubscription implements OnI
   }
 
   private defineCurrentLanguage(data: string = 'en') {
-    if(data === 'en' || data === 'ua') {
-      this.currentLanguageLabel = this.label[data]
+    if(this.displayMeasure.attribute) {
+      if (data === 'en' || data === 'ua') {
+        this.currentLanguageLabel = this.displayMeasure.attribute.name[data]
+      }
     }
   }
 
   removeElement() {
-    this.deleteItem.emit(this.id)
+    this.deleteItem.emit(this.displayMeasure)
   }
 }
