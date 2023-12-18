@@ -4,9 +4,8 @@ import {TranslocoService} from "@ngneat/transloco";
 import {takeUntil} from "rxjs";
 import {ConfirmDialogComponent} from "../../../../../../../shared/components/confirm-dialog/confirm-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
-import {
-  ActionsAndAbilities
-} from "../../../../../../../shared/interfaces/creature/form-technical/action-abilities.interface";
+import {ActionAbilities} from "../../../../../../../shared/static/creature/action-abilities.code";
+import {CreateActionAbility} from "../../../../../../../shared/interfaces/creature/create/create-action-ability";
 
 @Component({
   selector: 'app-title-text-item',
@@ -14,12 +13,12 @@ import {
   styleUrls: ['./title-text-item.component.scss']
 })
 export class TitleTextItemComponent extends DestroySubscription implements OnInit {
-  @Input() titleText: ActionsAndAbilities = {}
+  @Input() titleText!: CreateActionAbility
 
   currentLanguage = this.localeService.getActiveLang()
-  currentLanguageTitle!: string;
-  currentLanguageDescription!: string;
-  @Output() remove = new EventEmitter<ActionsAndAbilities>
+  currentLanguageTitle!: string | null;
+  currentLanguageDescription!: string | null;
+  @Output() remove = new EventEmitter<CreateActionAbility>
 
   constructor(
     private dialog: MatDialog,

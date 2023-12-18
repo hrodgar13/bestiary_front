@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {CreateTranslationAttribute} from "../../../../../../../shared/interfaces/creature/create-update/create-attribute.interface";
 import {TranslocoService} from "@ngneat/transloco";
 import {DestroySubscription} from "../../../../../../../shared/helpers/destroy-subscribtion";
 import {takeUntil} from "rxjs";
+import {Translation} from "../../../../../../../shared/interfaces/creature/get/translation";
 
 @Component({
   selector: 'app-multi-select-item',
@@ -11,12 +11,12 @@ import {takeUntil} from "rxjs";
 })
 export class MultiSelectItemComponent extends DestroySubscription implements OnInit{
   @Input() id!: number
-  @Input() label!: CreateTranslationAttribute
+  @Input() label!: Translation
   @Input() amt!: number
   @Input() msr!: boolean
   @Output() deleteItem = new EventEmitter<number>()
 
-  currentLanguageLabel: string = ''
+  currentLanguageLabel: string | null = ''
 
   constructor(
     private readonly translocoService: TranslocoService

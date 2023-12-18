@@ -1,9 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, UntypedFormGroup} from "@angular/forms";
-import {CreateTranslationAttribute} from "../../../../../../shared/interfaces/creature/create-update/create-attribute.interface";
-import {
-  ActionsAndAbilities
-} from "../../../../../../shared/interfaces/creature/form-technical/action-abilities.interface";
+import {CreateActionAbility} from "../../../../../../shared/interfaces/creature/create/create-action-ability";
+import {ActionAbilities} from "../../../../../../shared/static/creature/action-abilities.code";
+
 
 @Component({
   selector: 'app-title-text-input',
@@ -11,12 +10,12 @@ import {
   styleUrls: ['./title-text-input.component.scss']
 })
 export class TitleTextInputComponent implements OnInit{
-  @Input() blockName: string = 'Actions';
-  @Input() defaultValues: ActionsAndAbilities[] = []
+  @Input() blockName: ActionAbilities | string = 'Actions';
+  @Input() defaultValues: CreateActionAbility[] = []
 
-  @Output() listChange = new EventEmitter<ActionsAndAbilities[]>()
+  @Output() listChange = new EventEmitter<CreateActionAbility[]>()
 
-  titleTextList: ActionsAndAbilities[] = []
+  titleTextList: CreateActionAbility[] = []
 
   form!: UntypedFormGroup
 
@@ -35,7 +34,6 @@ export class TitleTextInputComponent implements OnInit{
 
     if(this.defaultValues.length) {
       this.titleTextList = this.defaultValues
-      console.log(this.titleTextList)
     }
   }
 
@@ -44,7 +42,8 @@ export class TitleTextInputComponent implements OnInit{
       return
     }
 
-    const titleTextPayload: ActionsAndAbilities = {
+    const titleTextPayload: CreateActionAbility = {
+      actionType: this.blockName,
       description: {
         en: this.form.value.descriptionEN,
         ua: this.form.value.descriptionUA
@@ -59,7 +58,7 @@ export class TitleTextInputComponent implements OnInit{
     this.listChange.emit(this.titleTextList)
   }
 
-  removeElement($event: ActionsAndAbilities) {
+  removeElement($event: CreateActionAbility) {
     this.titleTextList.splice(this.titleTextList.findIndex(item => item === $event), 1)
     this.listChange.emit(this.titleTextList)
   }

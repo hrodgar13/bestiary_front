@@ -32,7 +32,6 @@ import {
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {TranslocoPipe} from "@ngneat/transloco";
 import {CreatureService} from "./create-beast/creature.service";
-import {AttributeService} from "./create-beast/attribute.service";
 import { DangerSeparatorComponent } from './bestiary-list/danger-separator/danger-separator.component';
 import { FiltersModalComponent } from './bestiary-list/filters-modal/filters-modal.component';
 import { BeastPageComponent } from './beast-page/beast-page.component';
@@ -42,7 +41,6 @@ import { BeastPageComponent } from './beast-page/beast-page.component';
   providers: [
     BestiaryService,
     CreatureService,
-    AttributeService,
     InputTextComponent
   ],
   declarations: [

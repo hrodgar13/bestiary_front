@@ -1,219 +1,166 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, UntypedFormGroup} from "@angular/forms"
-import {
-  CreateAttributeMeasure
-} from "../../../../shared/interfaces/creature/create-update/create-attribute-measure.interface";
 import {CreatureService} from "./creature.service";
 import {concatMap, of, switchMap, takeUntil} from "rxjs";
 import {DestroySubscription} from "../../../../shared/helpers/destroy-subscribtion";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {Action, Creature, Measure} from "../beast-page/beast-page.component";
 import {ActivatedRoute, Router} from "@angular/router";
-import {MultiFieldsENUM} from "../../../../shared/static/creature/multi-fields.enum";
-import {ActionsAbilitiesENUM} from "../../../../shared/static/creature/action-abilities-fields.enum";
-import {CreaturePayload} from "../../../../shared/interfaces/creature/create-update/creature-payload.interface";
-import {MultiSelectList} from "../../../../shared/interfaces/creature/form-technical/multi-select.interface";
-import {ActionsAndAbilities} from "../../../../shared/interfaces/creature/form-technical/action-abilities.interface";
+import {Creature} from "../../../../shared/interfaces/creature/get/creature";
+import {Attributes} from "../../../../shared/static/creature/attributes.code";
+import {Attribute} from "../../../../shared/interfaces/creature/get/attribute";
+import {CreateMeasure} from "../../../../shared/interfaces/creature/create/create-measure";
+import {CreateCreature} from "../../../../shared/interfaces/creature/create/create-creature";
+import {CreateActionAbility} from "../../../../shared/interfaces/creature/create/create-action-ability";
+import {CreateAttribute} from "../../../../shared/interfaces/creature/create/create-attribute";
+import {Measure} from "../../../../shared/interfaces/creature/get/measure";
+import {ActionsAbilities} from "../../../../shared/interfaces/creature/get/actions-abilities";
+import {ActionAbilities} from "../../../../shared/static/creature/action-abilities.code";
+import {CreateTranslation} from "../../../../shared/interfaces/creature/create/create-translation";
 
 @Component({
-  selector: 'app-create-beast',
-  templateUrl: './create-beast.component.html',
-  styleUrls: ['./create-beast.component.scss']
+    selector: 'app-create-beast',
+    templateUrl: './create-beast.component.html',
+    styleUrls: ['./create-beast.component.scss']
 })
-export class CreateBeastComponent extends DestroySubscription implements OnInit, OnDestroy {
-  FieldsEnum = MultiFieldsENUM
-  creatureId: null | number = null
-  creatureToUpdate: Creature | null = null
+export class CreateBeastComponent extends DestroySubscription implements OnInit {
 
-  creaturePayload: CreaturePayload = {
-    isFinished: false,
-    multiSelects: {},
-    actionsAbilities: {}
-  }
+    AttributesCodes = Attributes
 
-  creatureForm!: UntypedFormGroup;
-  private isFinished = false;
+    creatureId: null | number = null
+    creaturePayload!: Creature
 
-  constructor(
-    private readonly formBuilder: FormBuilder,
-    private readonly creatureService: CreatureService,
-    private readonly matSnack: MatSnackBar,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {
-    super()
-  }
+    attributes: number[] = []
+    measures: CreateMeasure[] = []
+    actionAbilities: CreateActionAbility[] = []
 
-  ngOnInit(): void {
-    let editableCreature = localStorage.getItem('creature-id')
+    creatureForm!: UntypedFormGroup;
+    private isFinished = false;
 
-    this.route.params.pipe(takeUntil(this.destroyStream$)).subscribe(params => {
-      if (editableCreature && !params['id']) {
-        localStorage.removeItem('creature-id')
-        this.router.navigate(['bestiary/edit/' + editableCreature])
-      } else {
-        editableCreature = params['id']
-      }
-
-      this.getCreatureById(editableCreature)
-    })
-
-
-    setInterval(() => {
-      if (!this.isFinished) {
-        this.writeForm(false)
-      }
-    }, 5 * 60 * 1000)
-
-  }
-
-  private getCreatureById(editableCreature: string | null) {
-    if (editableCreature) {
-      this.creatureId = +editableCreature
-
-      this.creatureService.getCreatureById(this.creatureId).pipe(
-        takeUntil(this.destroyStream$),
-        concatMap(data => {
-          this.creatureToUpdate = data;
-          return of(data);
-        })
-      ).subscribe(() => {
-        this.initForm();
-      });
-    } else {
-      this.initForm();
-    }
-  }
-
-  private initForm() {
-    this.creatureForm = this.formBuilder.group({
-      creatureNameUa: [this.creatureToUpdate?.creatureName.ua || null],
-      creatureNameEn: [this.creatureToUpdate?.creatureName.en || null],
-      alignment: [this.creatureToUpdate?.alignment?.id || null],
-      type: [this.creatureToUpdate?.type?.id || null],
-      size: [this.creatureToUpdate?.size?.id || null],
-      armorClass: [this.creatureToUpdate?.armorClass || null],
-      armorTag: [this.creatureToUpdate?.armorTag?.id || null],
-      hits: [this.creatureToUpdate?.hits || null],
-      hitsInDice: [this.creatureToUpdate?.hitsInDice || null],
-      strength: [this.creatureToUpdate?.strength || null],
-      dexterity: [this.creatureToUpdate?.dexterity || null],
-      construction: [this.creatureToUpdate?.construction || null],
-      intelligence: [this.creatureToUpdate?.intelligence || null],
-      wisdom: [this.creatureToUpdate?.wisdom || null],
-      charisma: [this.creatureToUpdate?.charisma || null],
-      dangerLevel: [this.creatureToUpdate?.dangerLevel || null],
-      experience: [this.creatureToUpdate?.experience || null],
-      masteryBonus: [this.creatureToUpdate?.masteryBonus || null],
-      descriptionEN: [this.creatureToUpdate?.description?.en || null],
-      descriptionUA: [this.creatureToUpdate?.description?.ua || null]
-    })
-  }
-
-  override ngOnDestroy() {
-    super.ngOnDestroy();
-    localStorage.removeItem('creature-id')
-  }
-
-  writeForm(isFinished: boolean) {
-    this.isFinished = isFinished
-    if (this.creatureForm.invalid) {
-      return
+    constructor(
+        private readonly formBuilder: FormBuilder,
+        private readonly creatureService: CreatureService,
+        private readonly matSnack: MatSnackBar,
+        private route: ActivatedRoute,
+        private router: Router
+    ) {
+        super()
     }
 
-    this.creaturePayload = {
-      isFinished: this.isFinished,
-      creatureName: {
-        ua: this.creatureForm.value.creatureNameUa,
-        en: this.creatureForm.value.creatureNameEn
-      },
-      alignment: this.creatureForm.value.alignment,
-      type: this.creatureForm.value.type,
-      size: this.creatureForm.value.size,
-      armorClass: this.creatureForm.value.armorClass,
-      armorTag: this.creatureForm.value.armorTag,
-      hits: this.creatureForm.value.hits,
-      hitsInDice: this.creatureForm.value.hitsInDice,
-      strength: this.creatureForm.value.strength,
-      dexterity: this.creatureForm.value.dexterity,
-      construction: this.creatureForm.value.construction,
-      intelligence: this.creatureForm.value.intelligence,
-      wisdom: this.creatureForm.value.wisdom,
-      charisma: this.creatureForm.value.charisma,
-      dangerLevel: this.creatureForm.value.dangerLevel,
-      experience: this.creatureForm.value.experience,
-      masteryBonus: this.creatureForm.value.masteryBonus,
-      multiSelects: this.creaturePayload.multiSelects,
-      actionsAbilities: this.creaturePayload.actionsAbilities,
-      description: {
-        ua: this.creatureForm.value.descriptionUA,
-        en: this.creatureForm.value.descriptionEN
-      }
+    ngOnInit(): void {
+
     }
 
-    if (this.creatureId) {
-      this.creatureService.patchCreature(this.creatureId, this.creaturePayload).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
-        this.matSnack.open('Saved', '', {
-          duration: 1500,
-          verticalPosition: "top"
-        })
-      })
-    } else {
-      this.creatureService.createCreature(this.creaturePayload).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
-        this.matSnack.open('Saved', '', {
-          duration: 1500,
-          verticalPosition: "top"
-        })
-        this.creatureId = data.id
-        localStorage.setItem('creature-id', data.id)
-      })
-    }
+    private getCreatureToUpdate() {
+        if (this.creatureId) {
+            this.creatureService.getCreatureById(this.creatureId).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+                this.creaturePayload = data
 
-  }
-
-  writeValueToCreature(route: MultiFieldsENUM, $event: CreateAttributeMeasure[]) {
-    console.log($event)
-
-    this.creaturePayload.multiSelects[route] = $event
-    console.log(this.creaturePayload.multiSelects[route], route)
-  }
-
-  protected readonly ActionsAbilitiesENUM = ActionsAbilitiesENUM;
-
-  setAbilityOrAction(abilities: ActionsAbilitiesENUM, $event: ActionsAndAbilities[]) {
-    this.creaturePayload.actionsAbilities[abilities] = $event
-  }
-
-  convertMeasureToMultiSelect(param: Measure[] | null): MultiSelectList[] {
-    if (!param) {
-      return []
-    }
-
-    const attrs = param.map(item => {
-      console.log(item)
-      return {
-        id: Number(item?.attribute?.attrName?.id),
-        title: {en: item?.attribute?.attrName?.en, ua: item?.attribute?.attrName?.ua},
-        msr: item.isMeasureEnable ? item.isMeasureEnable : false,
-        amt: item.amt ? item.amt : 0
-      }
-    })
-
-    return attrs
-  }
-
-  protected readonly takeUntil = takeUntil;
-
-  convertTitle(abilities: Action[] | undefined): ActionsAndAbilities[] {
-    if (abilities && abilities.length > 0) {
-      return abilities.map(item => {
-        return {
-          title: item.title,
-          description: item.description
+                this.attributes = this.convertAttributeInCreationType(data.attributes)
+                this.measures = this.convertMeasureInCreationType(data.measures)
+                this.actionAbilities = this.convertActionAbilitiesInCreationType(data.action_abilities)
+            })
         }
-      })
+
+        this.initForm()
     }
 
-    return []
-  }
+    private initForm() {
+        this.creatureForm = this.formBuilder.group({
+            name_en: [this.creaturePayload.name.en || null, []],
+            name_ua: [this.creaturePayload.name.en || null],
+            armor_class: [this.creaturePayload.armor_class || null],
+            hits: [this.creaturePayload.hits || null],
+            hits_in_dice: [this.creaturePayload.hits_in_dice || null],
+            danger_lvl: [this.creaturePayload.danger_lvl || null],
+            experience: [this.creaturePayload.experience || null],
+            mastery_bonus: [this.creaturePayload.mastery_bonus || null],
+            strength: [this.creaturePayload.stat_block.strength || null],
+            dexterity: [this.creaturePayload.stat_block.strength || null],
+            constitution: [this.creaturePayload.stat_block.strength || null],
+            intelligence: [this.creaturePayload.stat_block.strength || null],
+            wisdom: [this.creaturePayload.stat_block.strength || null],
+            charisma: [this.creaturePayload.stat_block.strength || null],
+            description_en: [this.creaturePayload.description.en || null],
+            description_ua: [this.creaturePayload.description.ua || null],
+            alignment: [this.defineSingleAttribute(this.creaturePayload, Attributes.alignment)],
+            size: [this.defineSingleAttribute(this.creaturePayload, Attributes.size)],
+            type: [this.defineSingleAttribute(this.creaturePayload, Attributes.type)],
+        })
+    }
+
+    private sendForm() {
+        if (this.creatureForm.invalid) {
+            return
+        }
+
+        const creaturePayload: CreateCreature = {
+            name: {
+                id: this.creaturePayload.id,
+                en: this.creatureForm.get('name_en')?.value,
+                ua: this.creatureForm.get('name_ua')?.value,
+            },
+            isFinished: this.isFinished,
+            armor_class: this.creatureForm.get('armor_class')?.value,
+            hits: this.creatureForm.get('armor_class')?.value,
+            hits_in_dice: this.creatureForm.get('armor_class')?.value,
+            danger_lvl: this.creatureForm.get('armor_class')?.value,
+            experience: this.creatureForm.get('armor_class')?.value,
+            mastery_bonus: this.creatureForm.get('armor_class')?.value,
+            stat_block: {
+                id: this.creaturePayload.stat_block.id,
+                strength: this.creatureForm.get('armor_class')?.value,
+                dexterity: this.creatureForm.get('armor_class')?.value,
+                constitution: this.creatureForm.get('armor_class')?.value,
+                intelligence: this.creatureForm.get('armor_class')?.value,
+                wisdom: this.creatureForm.get('armor_class')?.value,
+                charisma: this.creatureForm.get('armor_class')?.value
+            },
+            measures: this.measures,
+            attributes: this.attributes,
+            action_abilities: this.actionAbilities,
+            description: {
+                en: this.creatureForm.get('description_en')?.value,
+                ua: this.creatureForm.get('description_ua')?.value,
+            }
+        }
+
+        this.creatureService.createCreature(creaturePayload).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+            this.matSnack.open('saved', 'ok', {
+                duration: 3000,
+                verticalPosition: "top"
+            })
+        })
+    }
+
+    private defineSingleAttribute(creaturePayload: Creature, attr_cat: string): number | null {
+        return this.creaturePayload.attributes.find(item => item.attr_cat === attr_cat)?.id || null
+    }
+
+    private convertAttributeInCreationType(attributes: Attribute[]): number[] {
+        return attributes.map(attr => attr.id);
+    }
+
+    private convertMeasureInCreationType(measures: Measure[]): CreateMeasure[] {
+        return measures.map(measure => {
+            return {
+                ...measure,
+                attribute: this.convertAttributeInCreationType([measure.attribute])[0]
+            }
+        })
+    }
+
+    private convertActionAbilitiesInCreationType(action_abilities: ActionsAbilities[]): CreateActionAbility[] {
+        const create_action_abilities: CreateActionAbility[] = []
+
+        action_abilities.forEach(item => {
+            create_action_abilities.push({
+                id: item.id,
+                actionType: item.action_type,
+                description: item.description,
+                title: item.title
+            })
+        });
+
+        return create_action_abilities
+    }
 }

@@ -2,13 +2,14 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DestroySubscription} from "../../../../../shared/helpers/destroy-subscribtion";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {AttributeService} from "../attribute.service";
 import {takeUntil} from "rxjs";
-import {CreateTranslationAttribute} from "../../../../../shared/interfaces/creature/create-update/create-attribute.interface";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {CreateAttribute} from "../../../../../shared/interfaces/creature/create/create-attribute";
+import {CreatureService} from "../creature.service";
+import {Attributes} from "../../../../../shared/static/creature/attributes.code";
 
 export interface MatData {
-  route: string,
+  attr_cat: Attributes | string,
   title: string
 }
 
@@ -24,7 +25,7 @@ export class PropertyModalComponent extends DestroySubscription implements OnIni
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: MatData,
     private formBuilder: FormBuilder,
-    private modalService: AttributeService,
+    private creatureService: CreatureService,
     private matSnack: MatSnackBar,
     public dialogRef: MatDialogRef<PropertyModalComponent>
   ) {
@@ -45,22 +46,16 @@ export class PropertyModalComponent extends DestroySubscription implements OnIni
       return
     }
 
-    const payload: CreateTranslationAttribute = {
-      en: this.modalForm.get('en')?.value,
-      ua: this.modalForm.get('ua')?.value,
+    const payload: CreateAttribute = {
+      attr_cat: this.data.attr_cat,
+      name: {
+        en: this.modalForm.get('en')?.value,
+        ua: this.modalForm.get('ua')?.value
+      }
     }
 
-    this.modalService.createAttribute(this.data.route, payload).pipe(takeUntil(this.destroyStream$)).subscribe((data) => {
-      this.matSnack.open('Created', 'ok', {
-        verticalPosition: "top",
-        duration: 3000
-      })
-      this.dialogRef.close()
-    }, error => {
-      this.matSnack.open(error.error.message, 'ok', {
-        verticalPosition: "top",
-        duration: 3000
-      })
+    this.creatureService.createAttribute(payload).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+
     })
   }
 }

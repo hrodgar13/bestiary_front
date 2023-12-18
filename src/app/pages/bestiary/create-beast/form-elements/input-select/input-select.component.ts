@@ -3,9 +3,11 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {DestroySubscription} from "../../../../../../shared/helpers/destroy-subscribtion";
 import {takeUntil} from "rxjs";
 import {BestiaryService} from "../../../bestiary.service";
-import {AttributeService} from "../../attribute.service";
 import {TranslocoService} from "@ngneat/transloco";
-import {CreateTranslationAttribute} from "../../../../../../shared/interfaces/creature/create-update/create-attribute.interface";
+import {Attributes} from "../../../../../../shared/static/creature/attributes.code";
+import {CreatureService} from "../../creature.service";
+import {CreateActionAbility} from "../../../../../../shared/interfaces/creature/create/create-action-ability";
+import {Attribute} from "../../../../../../shared/interfaces/creature/get/attribute";
 
 
 @Component({
@@ -22,15 +24,15 @@ import {CreateTranslationAttribute} from "../../../../../../shared/interfaces/cr
 })
 export class InputSelectComponent extends DestroySubscription implements ControlValueAccessor, OnInit{
   @Input() placeholder: string = '';
-  @Input() route = ''
+  @Input() route: Attributes | string = ''
 
-  @Output() currentSelected = new EventEmitter<CreateTranslationAttribute>()
-  selectData: any[] = []
-  currentLanguage = this.localeService.getActiveLang()
+  @Output() currentSelected = new EventEmitter<Attribute>()
+  selectData: Attribute[] = []
+  currentLanguage: 'en' | 'ua' = 'en'
   _value: any;
 
   constructor(
-    private readonly attrService: AttributeService,
+    private readonly creatureService: CreatureService,
     private localeService: TranslocoService,
     private bestiaryService: BestiaryService
   ) {
@@ -38,6 +40,12 @@ export class InputSelectComponent extends DestroySubscription implements Control
   }
 
   ngOnInit() {
+    const activeLang: 'en' | 'ua' | string = this.localeService.getActiveLang()
+
+    if(activeLang === 'en' ||activeLang === 'ua') {
+      this.currentLanguage = activeLang
+    }
+
     this.getSelectData()
     this.detectLanguageChange()
     this.bestiaryService.greenBtnChange$.pipe(takeUntil(this.destroyStream$)).subscribe(data => {
@@ -65,22 +73,27 @@ export class InputSelectComponent extends DestroySubscription implements Control
     if (newValue !== undefined) {
       this._value = newValue;
 
-      const attr = this.selectData.find(item => item.id === newValue)['attrName']
+      const attr = this.selectData.find(item => item.id === newValue)
 
-      this.currentSelected.emit({en: attr.en, ua: attr.ua})
+      this.currentSelected.emit(attr)
       this.propagateChange(this._value);
     }
   }
 
   private getSelectData() {
-    this.attrService.getDataForSelect(this.route).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+    this.creatureService.getDataForSelect(this.route).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
       this.selectData = data
     })
   }
 
   private detectLanguageChange() {
     this.localeService.langChanges$.pipe(takeUntil(this.destroyStream$)).subscribe(data => {
-      this.currentLanguage = data
+      const activeLang: 'en' | 'ua' | string = data
+
+
+      if(activeLang === 'en' ||activeLang === 'ua') {
+        this.currentLanguage = activeLang
+      }
     })
   }
 }
