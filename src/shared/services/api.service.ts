@@ -3,7 +3,7 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {BehaviorSubject, Observable} from "rxjs";
 import {CreateAttribute} from "../interfaces/creature/create/create-attribute";
 import {Creature} from "../interfaces/creature/get/creature";
-import {Attributes} from "../static/creature/attributes.code";
+import {AttributeCode} from "../static/creature/attributes.code";
 import {Attribute} from "../interfaces/creature/get/attribute";
 
 @Injectable({

@@ -4,7 +4,7 @@ import {DestroySubscription} from "../../../../../../shared/helpers/destroy-subs
 import {takeUntil} from "rxjs";
 import {BestiaryService} from "../../../bestiary.service";
 import {TranslocoService} from "@ngneat/transloco";
-import {Attributes} from "../../../../../../shared/static/creature/attributes.code";
+import {AttributeCode} from "../../../../../../shared/static/creature/attributes.code";
 import {CreatureService} from "../../creature.service";
 import {CreateActionAbility} from "../../../../../../shared/interfaces/creature/create/create-action-ability";
 import {Attribute} from "../../../../../../shared/interfaces/creature/get/attribute";
@@ -24,7 +24,7 @@ import {Attribute} from "../../../../../../shared/interfaces/creature/get/attrib
 })
 export class InputSelectComponent extends DestroySubscription implements ControlValueAccessor, OnInit{
   @Input() placeholder: string = '';
-  @Input() route: Attributes | string = ''
+  @Input() attribute_code: AttributeCode | string = ''
 
   @Output() currentSelected = new EventEmitter<Attribute>()
   selectData: Attribute[] = []
@@ -49,7 +49,7 @@ export class InputSelectComponent extends DestroySubscription implements Control
     this.getSelectData()
     this.detectLanguageChange()
     this.bestiaryService.greenBtnChange$.pipe(takeUntil(this.destroyStream$)).subscribe(data => {
-      if(data === this.route) {
+      if(data === this.attribute_code) {
         this.getSelectData()
       }
     })
@@ -81,7 +81,9 @@ export class InputSelectComponent extends DestroySubscription implements Control
   }
 
   private getSelectData() {
-    this.creatureService.getDataForSelect(this.route).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+    const damageRoutePreCheck = this.attribute_code.includes('damage') ? 'damage' : this.attribute_code
+
+    this.creatureService.getDataForSelect(damageRoutePreCheck).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
       this.selectData = data
     })
   }

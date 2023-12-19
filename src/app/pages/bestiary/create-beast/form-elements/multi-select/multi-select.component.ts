@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Attributes} from "../../../../../../shared/static/creature/attributes.code";
+import {AttributeCode} from "../../../../../../shared/static/creature/attributes.code";
 import {FormBuilder, UntypedFormGroup} from "@angular/forms";
 import {CreatureService} from "../../creature.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
@@ -8,6 +8,7 @@ import {DestroySubscription} from "../../../../../../shared/helpers/destroy-subs
 import {CreateMeasure} from "../../../../../../shared/interfaces/creature/create/create-measure";
 import {Measure} from "../../../../../../shared/interfaces/creature/get/measure";
 import {Attribute} from "../../../../../../shared/interfaces/creature/get/attribute";
+import {MeasureCode} from "../../../../../../shared/static/creature/measure.code";
 
 
 @Component({
@@ -17,7 +18,8 @@ import {Attribute} from "../../../../../../shared/interfaces/creature/get/attrib
 })
 export class MultiSelectComponent extends DestroySubscription implements OnInit {
   @Input() placeholder: string = '';
-  @Input() route: Attributes | string = ''
+  @Input() attribute_code: AttributeCode | string = ''
+  @Input() measure_code: MeasureCode | string = ''
   @Input() label: string = ''
   @Input() amt: boolean = false
   @Input() msr: boolean = true
@@ -56,6 +58,7 @@ export class MultiSelectComponent extends DestroySubscription implements OnInit 
     if(!isAttributeInUse) {
       let element: Measure = {
         amt:  this.measureForm.get('amount')?.value,
+        measure_cat: this.measure_code,
         isMeasureEnable:  this.measureForm.get('measure')?.value,
         attribute: this.currentSelectedAttribute
       }
@@ -69,6 +72,7 @@ export class MultiSelectComponent extends DestroySubscription implements OnInit 
   convertMeasureInCreationType(element: Measure): CreateMeasure {
     return {
       amt: element.amt,
+      measure_cat: element.measure_cat,
       attribute: element.attribute?.id || 0,
       isMeasureEnable: element.isMeasureEnable
     }

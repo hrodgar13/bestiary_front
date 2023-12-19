@@ -4,7 +4,7 @@ import {MatData, PropertyModalComponent} from "../../property-modal/property-mod
 import {takeUntil} from "rxjs";
 import {DestroySubscription} from "../../../../../../shared/helpers/destroy-subscribtion";
 import {BestiaryService} from "../../../bestiary.service";
-import {Attributes} from "../../../../../../shared/static/creature/attributes.code";
+import {AttributeCode} from "../../../../../../shared/static/creature/attributes.code";
 
 @Component({
   selector: 'app-input-green-btn',
@@ -13,7 +13,7 @@ import {Attributes} from "../../../../../../shared/static/creature/attributes.co
 })
 export class InputGreenBtnComponent extends DestroySubscription{
   @Output() modalClose = new EventEmitter<any>()
-  @Input() route: Attributes | string = ''
+  @Input() route: AttributeCode | string = ''
   @Input() title = ''
 
   constructor(

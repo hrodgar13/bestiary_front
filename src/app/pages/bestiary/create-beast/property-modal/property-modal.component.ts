@@ -6,10 +6,10 @@ import {takeUntil} from "rxjs";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {CreateAttribute} from "../../../../../shared/interfaces/creature/create/create-attribute";
 import {CreatureService} from "../creature.service";
-import {Attributes} from "../../../../../shared/static/creature/attributes.code";
+import {AttributeCode} from "../../../../../shared/static/creature/attributes.code";
 
 export interface MatData {
-  attr_cat: Attributes | string,
+  attr_cat: AttributeCode | string,
   title: string
 }
 

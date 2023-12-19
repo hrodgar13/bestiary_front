@@ -3,9 +3,9 @@
     <div class="flex flex-col gap-2 w-full 640:flex-row 640: items-center">
       <app-label-text [label]="label"/>
       <div class="flex items-start justify-between w-full">
-        <app-input-select [route]="route" (currentSelected)="setCurrentSelected($event)" class="h-[48px] max-w-[280px] w-full"
+        <app-input-select [attribute_code]="attribute_code" (currentSelected)="setCurrentSelected($event)" class="h-[48px] max-w-[280px] w-full"
                           [placeholder]="placeholder"/>
-        <app-input-green-btn [route]="route"/>
+        <app-input-green-btn [route]="attribute_code"/>
       </div>
     </div>
     <div class="flex">

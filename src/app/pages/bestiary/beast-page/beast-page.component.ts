@@ -14,12 +14,12 @@ export class BeastPageComponent extends DestroySubscription implements OnInit{
   //
   // constructor(
   //   private readonly bestiaryService: BestiaryService,
-  //   private readonly route: ActivatedRoute
+  //   private readonly attribute_code: ActivatedRoute
   // ) {
   //   super();
   // }
   ngOnInit(): void {
-    // this.route.params.pipe(takeUntil(this.destroyStream$)).subscribe(param => {
+    // this.attribute_code.params.pipe(takeUntil(this.destroyStream$)).subscribe(param => {
     //   if(param['id']) {
     //     this.getCreature(param['id'])
     //   }

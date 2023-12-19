@@ -6,7 +6,7 @@ import {DestroySubscription} from "../../../../shared/helpers/destroy-subscribti
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Creature} from "../../../../shared/interfaces/creature/get/creature";
-import {Attributes} from "../../../../shared/static/creature/attributes.code";
+import {AttributeCode} from "../../../../shared/static/creature/attributes.code";
 import {Attribute} from "../../../../shared/interfaces/creature/get/attribute";
 import {CreateMeasure} from "../../../../shared/interfaces/creature/create/create-measure";
 import {CreateCreature} from "../../../../shared/interfaces/creature/create/create-creature";
@@ -17,6 +17,7 @@ import {ActionsAbilities} from "../../../../shared/interfaces/creature/get/actio
 import {ActionAbilities} from "../../../../shared/static/creature/action-abilities.code";
 import {CreateTranslation} from "../../../../shared/interfaces/creature/create/create-translation";
 import {iterator} from "rxjs/internal/symbol/iterator";
+import {MeasureCode} from "../../../../shared/static/creature/measure.code";
 
 @Component({
   selector: 'app-create-beast',
@@ -25,12 +26,12 @@ import {iterator} from "rxjs/internal/symbol/iterator";
 })
 export class CreateBeastComponent extends DestroySubscription implements OnInit {
 
-  AttributesCodes = Attributes
+  AttributesCodes = AttributeCode
+  MeasuresCodes = MeasureCode
 
   creatureId: null | number = null
   creaturePayload!: Creature
 
-  attributes: number[] = []
   measures: CreateMeasure[] = []
   actionAbilities: CreateActionAbility[] = []
 
@@ -56,7 +57,6 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit 
       this.creatureService.getCreatureById(this.creatureId).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
         this.creaturePayload = data
 
-        this.attributes = this.convertAttributeInCreationType(data.attributes)
         this.measures = this.convertMeasureInCreationType(data.measures)
         this.actionAbilities = this.convertActionAbilitiesInCreationType(data.action_abilities)
       })
@@ -83,20 +83,20 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit 
       charisma: [this.creaturePayload?.stat_block.strength || null],
       description_en: [this.creaturePayload?.description.en || null],
       description_ua: [this.creaturePayload?.description.ua || null],
-      alignment: [this.defineSingleAttribute(this.creaturePayload, Attributes.alignment)],
-      size: [this.defineSingleAttribute(this.creaturePayload, Attributes.size)],
-      type: [this.defineSingleAttribute(this.creaturePayload, Attributes.type)],
+      alignment: [this.defineSingleAttribute(this.creaturePayload, AttributeCode.alignment)],
+      size: [this.defineSingleAttribute(this.creaturePayload, AttributeCode.size)],
+      type: [this.defineSingleAttribute(this.creaturePayload, AttributeCode.type)],
     })
   }
 
-  private sendForm() {
+   sendForm() {
     if (this.creatureForm.invalid) {
       return
     }
 
     const creaturePayload: CreateCreature = {
       name: {
-        id: this.creaturePayload.id,
+        id: this.creaturePayload?.id || undefined,
         en: this.creatureForm.get('name_en')?.value,
         ua: this.creatureForm.get('name_ua')?.value,
       },
@@ -108,7 +108,7 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit 
       experience: this.creatureForm.get('experience')?.value,
       mastery_bonus: this.creatureForm.get('mastery_bonus')?.value,
       stat_block: {
-        id: this.creaturePayload.stat_block.id,
+        id: this.creaturePayload?.stat_block?.id || undefined,
         strength: this.creatureForm.get('strength')?.value,
         dexterity: this.creatureForm.get('dexterity')?.value,
         constitution: this.creatureForm.get('constitution')?.value,
@@ -117,7 +117,7 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit 
         charisma: this.creatureForm.get('charisma')?.value
       },
       measures: this.measures,
-      attributes: this.attributes,
+      attributes: [this.creatureForm.get('alignment')?.value, this.creatureForm.get('size')?.value, this.creatureForm.get('type')?.value],
       action_abilities: this.actionAbilities,
       description: {
         en: this.creatureForm.get('description_en')?.value,
@@ -127,12 +127,12 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit 
 
     console.log(creaturePayload)
 
-    // this.creatureService.createCreature(creaturePayload).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
-    //     this.matSnack.open('saved', 'ok', {
-    //         duration: 3000,
-    //         verticalPosition: "top"
-    //     })
-    // })
+    this.creatureService.createCreature(creaturePayload).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+        this.matSnack.open('saved', 'ok', {
+            duration: 3000,
+            verticalPosition: "top"
+        })
+    })
   }
 
   private defineSingleAttribute(creaturePayload: Creature, attr_cat: string): number | null {
@@ -169,13 +169,27 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit 
     return create_action_abilities
   }
 
-  filterMeasuresByCategories(armor_tag: Attributes): Measure[] {
+  filterMeasuresByCategories(measure_code: MeasureCode): Measure[] {
     if(this.creaturePayload) {
-      const filteredMeasures = this.creaturePayload.measures.filter(item => item.attribute?.attr_cat === armor_tag)
+      const filteredMeasures = this.creaturePayload.measures.filter(item => item.measure_cat === measure_code)
 
       return filteredMeasures;
     }
 
     return []
   }
+
+  addMeasure($event: CreateMeasure) {
+    this.measures.push($event)
+  }
+
+  removeMeasure($event: CreateMeasure) {
+    const idx = this.measures.findIndex(item => item === $event)
+
+    if(idx !== -1) {
+      this.measures.splice(idx, 1)
+    }
+  }
+
+  // protected readonly MeasureCode = MeasureCode;
 }

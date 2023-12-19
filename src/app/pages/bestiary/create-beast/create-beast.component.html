@@ -15,7 +15,7 @@
           <div class="flex gap-3 w-full flex-col 640:flex-row 640:items-center">
             <app-label-text [label]="'Alignment: '"/>
             <div class="flex justify-between w-full gap-1">
-              <app-input-select [route]="AttributesCodes.alignment" class="h-[48px] w-full"
+              <app-input-select formControlName="alignment" [attribute_code]="AttributesCodes.alignment" class="h-[48px] w-full"
                                 [placeholder]="'Select Alignment'"/>
               <app-input-green-btn [route]="AttributesCodes.alignment" [title]="'Alignment'"/>
             </div>
@@ -23,7 +23,7 @@
           <div class="flex flex-col gap-3 w-full 640:flex-row 640:items-center">
             <app-label-text [label]="'Type: '"/>
             <div class="flex items-center justify-between w-full gap-1">
-              <app-input-select [route]="'type'" class="h-[48px] w-full"
+              <app-input-select formControlName="type" [attribute_code]="'type'" class="h-[48px] w-full"
                                 [placeholder]="'Select Type'"/>
               <app-input-green-btn [route]="'type'"/>
             </div>
@@ -31,7 +31,7 @@
           <div class="flex gap-3 flex-col w-full 640:flex-row 640:items-center">
             <app-label-text [label]="'Size: '"/>
             <div class="flex items-center justify-between w-full gap-1">
-              <app-input-select [route]="'size'" class="h-[48px] w-full "
+              <app-input-select formControlName="size" [attribute_code]="'size'" class="h-[48px] w-full "
                                 [placeholder]="'Select Size'"/>
               <app-input-green-btn [route]="'size'"/>
             </div>
@@ -54,13 +54,18 @@
             </div>
           </div>
           <div class="w-full">
-            <app-multi-select label="Armor tags" [defaultValues]="filterMeasuresByCategories(AttributesCodes.armor_tag)"
-                              [route]="AttributesCodes.armor_tag" [placeholder]="'Select armor tags: '" [amt]="false"
+            <app-multi-select label="Armor tags" [defaultValues]="filterMeasuresByCategories(MeasuresCodes.armor_tag)"
+                              (addMeasure)="addMeasure($event)" (removeMeasure)="removeMeasure($event)"
+                              [attribute_code]="AttributesCodes.armor_tag" [placeholder]="'Select armor tags: '" [amt]="false"
+                              [measure_code]="MeasuresCodes.armor_tag"
                               [msr]="false" [alwaysUseMsr]="false"/>
           </div>
           <div class="w-full">
             <app-multi-select label="Speeds"
-                              [route]="AttributesCodes.speeds" [placeholder]="'Select speed: '" [amt]="true"
+                              [defaultValues]="filterMeasuresByCategories(MeasuresCodes.speeds)"
+                              (addMeasure)="addMeasure($event)" (removeMeasure)="removeMeasure($event)"
+                              [attribute_code]="AttributesCodes.speeds" [placeholder]="'Select speed: '" [amt]="true"
+                              [measure_code]="MeasuresCodes.speeds"
                               [msr]="true" [alwaysUseMsr]="true"/>
           </div>
         </div>
@@ -84,28 +89,49 @@
       </div>
       <div class="grid grid-cols-1 gap-4 1280:grid-cols-2">
         <app-multi-select
-          [msr]="false"
-          [placeholder]="'Select damage: '" label="Immunities" [route]="'damage'"/>
-        <app-multi-select [amt]="true"
-                          [msr]="false" [placeholder]="'Saving throw: '"
-                          label="Saving throws" [route]="'saving-throw'"/>
-        <app-multi-select [msr]="false"
-                          [placeholder]="'Select damage: '" label="Resists" [route]="'damage'"/>
-        <app-multi-select [amt]="true" [msr]="false"
-                          [placeholder]="'Select Skill: '" label="Skills"
-                          [route]="'skill'"/>
-        <app-multi-select [msr]="false"
-                          [placeholder]="'Select damage: '" label="Vulnerabilities" [route]="'damage'"/>
+          [defaultValues]="filterMeasuresByCategories(MeasuresCodes.immunities)"
+          (addMeasure)="addMeasure($event)" (removeMeasure)="removeMeasure($event)"
+          [msr]="false" [measure_code]="MeasuresCodes.armor_tag"
+          [placeholder]="'Select damage: '" label="Immunities" [attribute_code]="AttributesCodes.damage"/>
         <app-multi-select
-          [msr]="false"
-          [placeholder]="'Select condition: '" label="Conditions immunities" [route]="'condition'"/>
+          [defaultValues]="filterMeasuresByCategories(MeasuresCodes.saving_throws)"
+          (addMeasure)="addMeasure($event)" (removeMeasure)="removeMeasure($event)"
+          [amt]="true" [measure_code]="MeasuresCodes.saving_throws"
+          [msr]="false" [placeholder]="'Saving throw: '"
+          label="Saving throws" [attribute_code]="AttributesCodes.saving_throws"/>
+        <app-multi-select [msr]="false"
+                          [defaultValues]="filterMeasuresByCategories(MeasuresCodes.resists)"
+                          (addMeasure)="addMeasure($event)" (removeMeasure)="removeMeasure($event)"
+                          [measure_code]="MeasuresCodes.resists"
+                          [placeholder]="'Select damage: '" label="Resists" [attribute_code]="AttributesCodes.damage"/>
+        <app-multi-select [amt]="true" [msr]="false"
+                          [defaultValues]="filterMeasuresByCategories(MeasuresCodes.skills)"
+                          (addMeasure)="addMeasure($event)" (removeMeasure)="removeMeasure($event)"
+                          [placeholder]="'Select Skill: '" label="Skills"
+                          [measure_code]="MeasuresCodes.skills"
+                          [attribute_code]="AttributesCodes.skills"/>
+        <app-multi-select [msr]="false" [defaultValues]="filterMeasuresByCategories(MeasuresCodes.vulnerabilities)"
+                          [measure_code]="MeasuresCodes.vulnerabilities"
+                          (addMeasure)="addMeasure($event)" (removeMeasure)="removeMeasure($event)"
+                          [placeholder]="'Select damage: '" label="Vulnerabilities" [attribute_code]="AttributesCodes.damage"/>
+        <app-multi-select
+          [msr]="false" [defaultValues]="filterMeasuresByCategories(MeasuresCodes.conditions)"
+          [measure_code]="MeasuresCodes.conditions"
+          (addMeasure)="addMeasure($event)" (removeMeasure)="removeMeasure($event)"
+          [placeholder]="'Select condition: '" label="Conditions immunities" [attribute_code]="AttributesCodes.conditions"/>
         <app-multi-select [amt]="true"
+                          [defaultValues]="filterMeasuresByCategories(MeasuresCodes.feelings)"
+                          (addMeasure)="addMeasure($event)" (removeMeasure)="removeMeasure($event)"
                           [msr]="true" [placeholder]="'Select Feel: '" label="Feelings"
-                          [route]="'feeling'"/>
+                          [measure_code]="MeasuresCodes.feelings"
+                          [attribute_code]="AttributesCodes.feelings"/>
         <app-multi-select [amt]="true"
+                          [defaultValues]="filterMeasuresByCategories(MeasuresCodes.languages)"
+                          (addMeasure)="addMeasure($event)" (removeMeasure)="removeMeasure($event)"
                           [alwaysUseMsr]="true"
+                          [measure_code]="MeasuresCodes.languages"
                           [placeholder]="'Select Language: '" label="Langs"
-                          [route]="'language'"/>
+                          [attribute_code]="AttributesCodes.languages"/>
         <div class="flex flex-col 640:flex-row">
           <div class="flex w-full items-center gap-2">
             <app-label-text [label]="'Danger Lvl: '"/>
@@ -142,7 +168,10 @@
       </div>
       <div>
         <app-multi-select [msr]="false"
-                          [placeholder]="'Select region: '" label="Habitats: " [route]="'region'"/>
+                          [defaultValues]="filterMeasuresByCategories(MeasuresCodes.regions)"
+                          [measure_code]="MeasuresCodes.regions"
+                          (addMeasure)="addMeasure($event)" (removeMeasure)="removeMeasure($event)"
+                          [placeholder]="'Select region: '" label="Habitats: " [attribute_code]="AttributesCodes.regions"/>
         <div class="h-[1px] w-full bg-[#E2A23B] mt-5"></div>
       </div>
       <div>
@@ -152,7 +181,8 @@
           <app-text-area-input formControlName="description_ua" class="w-full h-[200px]" [placeholder]="'UA'"/>
         </div>
       </div>
-      <button class="mx-auto font-semibold w-[260px] 640:w-[400px] h-[80px] rounded-xl bg-[#FAFD5D] text-2xl">Save Creature
+      <button (click)="sendForm()" class="mx-auto font-semibold w-[260px] 640:w-[400px] h-[80px] rounded-xl bg-[#FAFD5D] text-2xl">
+        Save Creature
       </button>
     </form>
   </div>
