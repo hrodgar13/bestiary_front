@@ -56,17 +56,18 @@
           <div class="w-full">
             <app-multi-select label="Armor tags" [defaultValues]="filterMeasuresByCategories(MeasuresCodes.armor_tag)"
                               (addMeasure)="addMeasure($event)" (removeMeasure)="removeMeasure($event)"
-                              [attribute_code]="AttributesCodes.armor_tag" [placeholder]="'Select armor tags: '" [amt]="false"
+                              [attribute_code]="AttributesCodes.armor_tag" [placeholder]="'Select armor tags: '" [enableAmt]="false"
                               [measure_code]="MeasuresCodes.armor_tag"
-                              [msr]="false" [alwaysUseMsr]="false"/>
+                              [enableMsr]="false" [alwaysUseMsr]="false"/>
           </div>
           <div class="w-full">
             <app-multi-select label="Speeds"
                               [defaultValues]="filterMeasuresByCategories(MeasuresCodes.speeds)"
                               (addMeasure)="addMeasure($event)" (removeMeasure)="removeMeasure($event)"
-                              [attribute_code]="AttributesCodes.speeds" [placeholder]="'Select speed: '" [amt]="true"
+                              [attribute_code]="AttributesCodes.speeds" [placeholder]="'Select speed: '" [enableAmt]="true"
                               [measure_code]="MeasuresCodes.speeds"
-                              [msr]="true" [alwaysUseMsr]="true"/>
+                              [amtNullValidator]="true"
+                              [enableMsr]="true" [alwaysUseMsr]="true"/>
           </div>
         </div>
         <div class="flex image-load w-full min-h-[350px]">
@@ -91,41 +92,41 @@
         <app-multi-select
           [defaultValues]="filterMeasuresByCategories(MeasuresCodes.immunities)"
           (addMeasure)="addMeasure($event)" (removeMeasure)="removeMeasure($event)"
-          [msr]="false" [measure_code]="MeasuresCodes.armor_tag"
+          [enableMsr]="false" [measure_code]="MeasuresCodes.armor_tag"
           [placeholder]="'Select damage: '" label="Immunities" [attribute_code]="AttributesCodes.damage"/>
         <app-multi-select
           [defaultValues]="filterMeasuresByCategories(MeasuresCodes.saving_throws)"
           (addMeasure)="addMeasure($event)" (removeMeasure)="removeMeasure($event)"
-          [amt]="true" [measure_code]="MeasuresCodes.saving_throws"
-          [msr]="false" [placeholder]="'Saving throw: '"
+          [enableAmt]="true" [measure_code]="MeasuresCodes.saving_throws"
+          [enableMsr]="false" [placeholder]="'Saving throw: '"
           label="Saving throws" [attribute_code]="AttributesCodes.saving_throws"/>
-        <app-multi-select [msr]="false"
+        <app-multi-select [enableMsr]="false"
                           [defaultValues]="filterMeasuresByCategories(MeasuresCodes.resists)"
                           (addMeasure)="addMeasure($event)" (removeMeasure)="removeMeasure($event)"
                           [measure_code]="MeasuresCodes.resists"
                           [placeholder]="'Select damage: '" label="Resists" [attribute_code]="AttributesCodes.damage"/>
-        <app-multi-select [amt]="true" [msr]="false"
+        <app-multi-select [enableAmt]="true" [enableMsr]="false"
                           [defaultValues]="filterMeasuresByCategories(MeasuresCodes.skills)"
                           (addMeasure)="addMeasure($event)" (removeMeasure)="removeMeasure($event)"
                           [placeholder]="'Select Skill: '" label="Skills"
                           [measure_code]="MeasuresCodes.skills"
                           [attribute_code]="AttributesCodes.skills"/>
-        <app-multi-select [msr]="false" [defaultValues]="filterMeasuresByCategories(MeasuresCodes.vulnerabilities)"
+        <app-multi-select [enableMsr]="false" [defaultValues]="filterMeasuresByCategories(MeasuresCodes.vulnerabilities)"
                           [measure_code]="MeasuresCodes.vulnerabilities"
                           (addMeasure)="addMeasure($event)" (removeMeasure)="removeMeasure($event)"
                           [placeholder]="'Select damage: '" label="Vulnerabilities" [attribute_code]="AttributesCodes.damage"/>
         <app-multi-select
-          [msr]="false" [defaultValues]="filterMeasuresByCategories(MeasuresCodes.conditions)"
+          [enableMsr]="false" [defaultValues]="filterMeasuresByCategories(MeasuresCodes.conditions)"
           [measure_code]="MeasuresCodes.conditions"
           (addMeasure)="addMeasure($event)" (removeMeasure)="removeMeasure($event)"
           [placeholder]="'Select condition: '" label="Conditions immunities" [attribute_code]="AttributesCodes.conditions"/>
-        <app-multi-select [amt]="true"
+        <app-multi-select [enableAmt]="true"
                           [defaultValues]="filterMeasuresByCategories(MeasuresCodes.feelings)"
                           (addMeasure)="addMeasure($event)" (removeMeasure)="removeMeasure($event)"
-                          [msr]="true" [placeholder]="'Select Feel: '" label="Feelings"
+                          [enableMsr]="true" [placeholder]="'Select Feel: '" label="Feelings"
                           [measure_code]="MeasuresCodes.feelings"
                           [attribute_code]="AttributesCodes.feelings"/>
-        <app-multi-select [amt]="true"
+        <app-multi-select [enableAmt]="true"
                           [defaultValues]="filterMeasuresByCategories(MeasuresCodes.languages)"
                           (addMeasure)="addMeasure($event)" (removeMeasure)="removeMeasure($event)"
                           [alwaysUseMsr]="true"
@@ -167,7 +168,7 @@
         <div class="h-[1px] w-full bg-[#E2A23B]"></div>
       </div>
       <div>
-        <app-multi-select [msr]="false"
+        <app-multi-select [enableMsr]="false"
                           [defaultValues]="filterMeasuresByCategories(MeasuresCodes.regions)"
                           [measure_code]="MeasuresCodes.regions"
                           (addMeasure)="addMeasure($event)" (removeMeasure)="removeMeasure($event)"

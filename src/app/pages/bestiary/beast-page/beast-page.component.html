@@ -30,7 +30,7 @@
 <!--          </div>-->
 <!--          <div class="text-xl flex items-center gap-1">-->
 <!--            <p class="text-[#E2A23B]">Speeds:</p>-->
-<!--            <p class="text-white" *ngFor="let speed of creature.speeds">{{speed.attribute.attrName['en']}} {{speed.amt}} {{'ft'}}</p>-->
+<!--            <p class="text-white" *ngFor="let speed of creature.speeds">{{speed.attribute.attrName['en']}} {{speed.enableAmt}} {{'ft'}}</p>-->
 <!--          </div>-->
 <!--          <div class="flex gap-2">-->
 <!--            <div class="grid grid-rows-2 overflow-hidden text-[#FAFD5D] text-3xl w-[120px] h-[120px] rounded-xl border-2 border-[#FAFD5D]">-->
@@ -70,7 +70,7 @@
 <!--      <div class="w-full flex flex-col gap-5">-->
 <!--        <div *ngIf="creature.savingThrows && creature.savingThrows.length" class="text-xl flex items-center gap-1">-->
 <!--          <p class="text-[#E2A23B] text-2xl">Saving throws:</p>-->
-<!--          <p class="text-white text-2xl" *ngFor="let st of creature.savingThrows">{{st.attribute.attrName['en']}} <span *ngIf="st.amt" class="text-[#1DAEFF]">{{(st.amt > 0 ? '+' + st.amt : st.amt) }}</span></p>-->
+<!--          <p class="text-white text-2xl" *ngFor="let st of creature.savingThrows">{{st.attribute.attrName['en']}} <span *ngIf="st.enableAmt" class="text-[#1DAEFF]">{{(st.enableAmt > 0 ? '+' + st.enableAmt : st.enableAmt) }}</span></p>-->
 <!--        </div>-->
 <!--        <div *ngIf="creature.immunities && creature.immunities.length" class="text-xl flex items-center gap-1">-->
 <!--          <p class="text-[#E2A23B] text-2xl">Damage immunities:</p>-->
@@ -90,11 +90,11 @@
 <!--        </div>-->
 <!--        <div *ngIf="creature.feelings && creature.feelings.length" class="text-xl flex items-center gap-1">-->
 <!--          <p class="text-[#E2A23B] text-2xl">Senses:</p>-->
-<!--          <p class="text-white text-2xl" *ngFor="let sens of creature.feelings">{{sens.attribute.attrName['en']}}  <span *ngIf="sens.amt" class="text-[#1DAEFF]">{{(sens.amt > 0 ? '+' + sens.amt : sens.amt) }}</span> {{(sens.isMeasureEnable ? 'ft' : '')}}</p>-->
+<!--          <p class="text-white text-2xl" *ngFor="let sens of creature.feelings">{{sens.attribute.attrName['en']}}  <span *ngIf="sens.enableAmt" class="text-[#1DAEFF]">{{(sens.enableAmt > 0 ? '+' + sens.enableAmt : sens.enableAmt) }}</span> {{(sens.isMeasureEnable ? 'ft' : '')}}</p>-->
 <!--        </div>-->
 <!--        <div *ngIf="creature.languages && creature.languages.length" class="text-xl flex items-center gap-1">-->
 <!--          <p class="text-[#E2A23B] text-2xl">Languages:</p>-->
-<!--          <p class="text-white text-2xl" *ngFor="let lang of creature.languages">{{lang.attribute.attrName['en']}}  <span *ngIf="lang.amt" class="text-[#1DAEFF]">{{(lang.amt > 0 ? '+' + lang.amt : lang.amt) }}</span> {{(lang.isMeasureEnable ? 'ft' : '')}}</p>-->
+<!--          <p class="text-white text-2xl" *ngFor="let lang of creature.languages">{{lang.attribute.attrName['en']}}  <span *ngIf="lang.enableAmt" class="text-[#1DAEFF]">{{(lang.enableAmt > 0 ? '+' + lang.enableAmt : lang.enableAmt) }}</span> {{(lang.isMeasureEnable ? 'ft' : '')}}</p>-->
 <!--        </div>-->
 <!--        <div *ngIf="creature.dangerLevel && creature.experience" class="text-xl flex items-center gap-1">-->
 <!--          <p class="text-[#E2A23B] text-2xl">Challenge level:</p>-->

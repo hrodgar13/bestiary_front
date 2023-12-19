@@ -9,11 +9,11 @@
       </div>
     </div>
     <div class="flex">
-      <div *ngIf="amt" class="flex items-center gap-2 w-auto">
+      <div *ngIf="enableAmt" class="flex items-center gap-2 w-auto">
         <app-label-text [label]="'Amt: '"/>
         <app-input-number formControlName="amount" class="h-[48px]" [placeholder]="'0'"/>
       </div>
-      <div *ngIf="msr && !alwaysUseMsr" class="flex items-center gap-2 w-auto">
+      <div *ngIf="enableMsr && !alwaysUseMsr" class="flex items-center gap-2 w-auto">
         <app-label-text [label]="'Msr: '"/>
         <input type="checkbox" formControlName="measure"/>
       </div>

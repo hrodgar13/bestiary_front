@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AttributeCode} from "../../../../../../shared/static/creature/attributes.code";
-import {FormBuilder, UntypedFormGroup} from "@angular/forms";
+import {FormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {CreatureService} from "../../creature.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -21,8 +21,9 @@ export class MultiSelectComponent extends DestroySubscription implements OnInit 
   @Input() attribute_code: AttributeCode | string = ''
   @Input() measure_code: MeasureCode | string = ''
   @Input() label: string = ''
-  @Input() amt: boolean = false
-  @Input() msr: boolean = true
+  @Input() enableAmt: boolean = false
+  @Input() enableMsr: boolean = true
+  @Input() amtNullValidator: boolean = false
   @Input() alwaysUseMsr: boolean = false
   @Input() defaultValues: Measure[] = []
 
@@ -45,7 +46,7 @@ export class MultiSelectComponent extends DestroySubscription implements OnInit 
 
   ngOnInit() {
     this.measureForm = this.formBuilder.group({
-      amount: [null],
+      amount: [null, this.amtNullValidator ? Validators.required : null],
       measure: [null]
     })
 
@@ -53,6 +54,10 @@ export class MultiSelectComponent extends DestroySubscription implements OnInit 
   }
 
   emitMeasure() {
+    if(this.measureForm.invalid) {
+      return
+    }
+
     const isAttributeInUse = this.selectedItems.find(item => item.attribute === this.currentSelectedAttribute)
 
     if(!isAttributeInUse) {
