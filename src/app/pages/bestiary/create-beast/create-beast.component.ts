@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, UntypedFormGroup} from "@angular/forms"
 import {CreatureService} from "./creature.service";
-import {concatMap, of, switchMap, takeUntil} from "rxjs";
+import {takeUntil} from "rxjs";
 import {DestroySubscription} from "../../../../shared/helpers/destroy-subscribtion";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -11,16 +11,12 @@ import {Attribute} from "../../../../shared/interfaces/creature/get/attribute";
 import {CreateMeasure} from "../../../../shared/interfaces/creature/create/create-measure";
 import {CreateCreature} from "../../../../shared/interfaces/creature/create/create-creature";
 import {CreateActionAbility} from "../../../../shared/interfaces/creature/create/create-action-ability";
-import {CreateAttribute} from "../../../../shared/interfaces/creature/create/create-attribute";
 import {Measure} from "../../../../shared/interfaces/creature/get/measure";
 import {ActionsAbilities} from "../../../../shared/interfaces/creature/get/actions-abilities";
-import {ActionAbilities} from "../../../../shared/static/creature/action-abilities.code";
-import {CreateTranslation} from "../../../../shared/interfaces/creature/create/create-translation";
-import {iterator} from "rxjs/internal/symbol/iterator";
 import {MeasureCode} from "../../../../shared/static/creature/measure.code";
-import {FiltersModalComponent} from "../bestiary-list/filters-modal/filters-modal.component";
 import {ConfirmDialogComponent} from "../../../../shared/components/confirm-dialog/confirm-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
+import {ActionAbilities} from "../../../../shared/static/creature/action-abilities.code";
 
 @Component({
     selector: 'app-create-beast',
@@ -31,6 +27,7 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit 
 
     AttributesCodes = AttributeCode
     MeasuresCodes = MeasureCode
+    ActionCodes = ActionAbilities
 
     creatureId: null | number = null
     creaturePayload!: Creature
@@ -104,47 +101,47 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit 
 
         dialogRef.afterClosed().pipe(takeUntil(this.destroyStream$)).subscribe(data => {
             finished = data
-        })
 
-        const creaturePayload: CreateCreature = {
-            name: {
-                id: this.creaturePayload?.id || undefined,
-                en: this.creatureForm.get('name_en')?.value,
-                ua: this.creatureForm.get('name_ua')?.value,
-            },
-            isFinished: finished,
-            armor_class: this.creatureForm.get('armor_class')?.value,
-            hits: this.creatureForm.get('hits')?.value,
-            hits_in_dice: this.creatureForm.get('hits_in_dice')?.value,
-            danger_lvl: this.creatureForm.get('danger_lvl')?.value,
-            experience: this.creatureForm.get('experience')?.value,
-            mastery_bonus: this.creatureForm.get('mastery_bonus')?.value,
-            stat_block: {
-                id: this.creaturePayload?.stat_block?.id || undefined,
-                strength: this.creatureForm.get('strength')?.value,
-                dexterity: this.creatureForm.get('dexterity')?.value,
-                constitution: this.creatureForm.get('constitution')?.value,
-                intelligence: this.creatureForm.get('intelligence')?.value,
-                wisdom: this.creatureForm.get('wisdom')?.value,
-                charisma: this.creatureForm.get('charisma')?.value
-            },
-            measures: this.measures,
-            attributes: [this.creatureForm.get('alignment')?.value, this.creatureForm.get('size')?.value, this.creatureForm.get('type')?.value],
-            action_abilities: this.actionAbilities,
-            description: {
-                en: this.creatureForm.get('description_en')?.value,
-                ua: this.creatureForm.get('description_ua')?.value,
+            const creaturePayload: CreateCreature = {
+                name: {
+                    id: this.creaturePayload?.id || undefined,
+                    en: this.creatureForm.get('name_en')?.value,
+                    ua: this.creatureForm.get('name_ua')?.value,
+                },
+                isFinished: finished,
+                armor_class: this.creatureForm.get('armor_class')?.value,
+                hits: this.creatureForm.get('hits')?.value,
+                hits_in_dice: this.creatureForm.get('hits_in_dice')?.value,
+                danger_lvl: this.creatureForm.get('danger_lvl')?.value,
+                experience: this.creatureForm.get('experience')?.value,
+                mastery_bonus: this.creatureForm.get('mastery_bonus')?.value,
+                stat_block: {
+                    id: this.creaturePayload?.stat_block?.id || undefined,
+                    strength: this.creatureForm.get('strength')?.value,
+                    dexterity: this.creatureForm.get('dexterity')?.value,
+                    constitution: this.creatureForm.get('constitution')?.value,
+                    intelligence: this.creatureForm.get('intelligence')?.value,
+                    wisdom: this.creatureForm.get('wisdom')?.value,
+                    charisma: this.creatureForm.get('charisma')?.value
+                },
+                measures: this.measures,
+                attributes: [this.creatureForm.get('alignment')?.value, this.creatureForm.get('size')?.value, this.creatureForm.get('type')?.value],
+                action_abilities: this.actionAbilities,
+                description: {
+                    en: this.creatureForm.get('description_en')?.value,
+                    ua: this.creatureForm.get('description_ua')?.value,
+                }
             }
-        }
 
-        console.log(creaturePayload)
-
-        this.creatureService.createCreature(creaturePayload).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
-            this.matSnack.open('saved', 'ok', {
-                duration: 3000,
-                verticalPosition: "top"
+            this.creatureService.createCreature(creaturePayload).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+                this.matSnack.open('saved', 'ok', {
+                    duration: 3000,
+                    verticalPosition: "top"
+                })
             })
         })
+
+
     }
 
     private defineSingleAttribute(creaturePayload: Creature, attr_cat: string): number | null {
@@ -172,7 +169,7 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit 
         action_abilities.forEach(item => {
             create_action_abilities.push({
                 id: item.id,
-                actionType: item.action_type,
+                action_type: item.action_type,
                 description: item.description,
                 title: item.title
             })
@@ -183,9 +180,7 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit 
 
     filterMeasuresByCategories(measure_code: MeasureCode): Measure[] {
         if (this.creaturePayload) {
-            const filteredMeasures = this.creaturePayload.measures.filter(item => item.measure_cat === measure_code)
-
-            return filteredMeasures;
+            return this.creaturePayload.measures.filter(item => item.measure_cat === measure_code);
         }
 
         return []
@@ -200,6 +195,18 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit 
 
         if (idx !== -1) {
             this.measures.splice(idx, 1)
+        }
+    }
+
+    addActionAbility($event: CreateActionAbility) {
+        this.actionAbilities.push($event)
+    }
+
+    removeActionAbility($event: CreateActionAbility) {
+        const idx = this.actionAbilities.findIndex(item => item === $event)
+
+        if (idx !== -1) {
+            this.actionAbilities.splice(idx, 1)
         }
     }
 }

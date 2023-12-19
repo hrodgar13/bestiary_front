@@ -152,19 +152,19 @@
       </div>
       <div>
         <div class="h-[1px] w-full bg-[#E2A23B]"></div>
-        <app-title-text-input [blockName]="'Abilities'"/>
+        <app-title-text-input [blockName]="'Abilities'" [actionCode]="ActionCodes.abilities" (addValue)="addActionAbility($event)" (removeValue)="removeActionAbility($event)"/>
         <div class="h-[1px] w-full bg-[#E2A23B]"></div>
       </div>
       <div>
-        <app-title-text-input [blockName]="'Actions'"/>
+        <app-title-text-input [blockName]="'Actions'" [actionCode]="ActionCodes.actions" (addValue)="addActionAbility($event)" (removeValue)="removeActionAbility($event)"/>
         <div class="h-[1px] w-full bg-[#E2A23B]"></div>
       </div>
       <div>
-        <app-title-text-input [blockName]="'Bonus Actions'"/>
+        <app-title-text-input [blockName]="'Bonus Actions'" [actionCode]="ActionCodes.bonusActions" (addValue)="addActionAbility($event)" (removeValue)="removeActionAbility($event)"/>
         <div class="h-[1px] w-full bg-[#E2A23B]"></div>
       </div>
       <div>
-        <app-title-text-input [blockName]="'Legendary Actions'"/>
+        <app-title-text-input [blockName]="'Legendary Actions'" [actionCode]="ActionCodes.legendaryActions" (addValue)="addActionAbility($event)" (removeValue)="removeActionAbility($event)"/>
         <div class="h-[1px] w-full bg-[#E2A23B]"></div>
       </div>
       <div>

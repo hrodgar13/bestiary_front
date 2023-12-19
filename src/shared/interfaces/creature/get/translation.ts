@@ -1,5 +1,5 @@
 export interface Translation {
-    id: number
+    id?: number
     en: string | null
     ua: string | null
 }

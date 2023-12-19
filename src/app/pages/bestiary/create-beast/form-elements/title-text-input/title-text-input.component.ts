@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, UntypedFormGroup} from "@angular/forms";
 import {CreateActionAbility} from "../../../../../../shared/interfaces/creature/create/create-action-ability";
 import {ActionAbilities} from "../../../../../../shared/static/creature/action-abilities.code";
+import {ActionsAbilities} from "../../../../../../shared/interfaces/creature/get/actions-abilities";
 
 
 @Component({
@@ -10,12 +11,14 @@ import {ActionAbilities} from "../../../../../../shared/static/creature/action-a
   styleUrls: ['./title-text-input.component.scss']
 })
 export class TitleTextInputComponent implements OnInit{
-  @Input() blockName: ActionAbilities | string = 'Actions';
-  @Input() defaultValues: CreateActionAbility[] = []
+  @Input() blockName: string = 'Actions';
+  @Input() defaultValues: ActionsAbilities[] = []
+  @Input() actionCode: ActionAbilities | string = ''
 
-  @Output() listChange = new EventEmitter<CreateActionAbility[]>()
+  @Output() addValue = new EventEmitter<CreateActionAbility>()
+  @Output() removeValue = new EventEmitter<CreateActionAbility>()
 
-  titleTextList: CreateActionAbility[] = []
+  titleTextList: ActionsAbilities[] = []
 
   form!: UntypedFormGroup
 
@@ -43,7 +46,7 @@ export class TitleTextInputComponent implements OnInit{
     }
 
     const titleTextPayload: CreateActionAbility = {
-      actionType: this.blockName,
+      action_type: this.actionCode,
       description: {
         en: this.form.value.descriptionEN,
         ua: this.form.value.descriptionUA
@@ -55,11 +58,11 @@ export class TitleTextInputComponent implements OnInit{
     }
 
     this.titleTextList.push(titleTextPayload)
-    this.listChange.emit(this.titleTextList)
+    this.addValue.emit(titleTextPayload)
   }
 
   removeElement($event: CreateActionAbility) {
     this.titleTextList.splice(this.titleTextList.findIndex(item => item === $event), 1)
-    this.listChange.emit(this.titleTextList)
+    this.removeValue.emit($event)
   }
 }

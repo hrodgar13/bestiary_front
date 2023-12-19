@@ -3,7 +3,7 @@ import {CreateTranslation} from "./create-translation";
 
 export interface CreateActionAbility {
   id?: number
-  actionType: ActionAbilities | string
+  action_type: ActionAbilities | string
   title: CreateTranslation
   description: CreateTranslation
 }
