@@ -1,8 +1,12 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Inject, OnInit} from '@angular/core';
 import {DestroySubscription} from "../../../../../shared/helpers/destroy-subscribtion";
-import {CreatureFilterColumns} from "../../../../../shared/static/filter/creature-filter.enum";
 import {BestiaryService} from "../../bestiary.service";
+import {takeUntil} from "rxjs";
 import {TranslocoService} from "@ngneat/transloco";
+import {Attribute} from "../../../../../shared/interfaces/creature/get/attribute";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {OutputCreatureItem} from "../../../../../shared/interfaces/filters/output-creature-item";
+import {CreatureListFilter} from "../../../../../shared/interfaces/filters/creature-list-filter";
 
 @Component({
   selector: 'app-filters-modal',
@@ -10,110 +14,61 @@ import {TranslocoService} from "@ngneat/transloco";
   styleUrls: ['./filters-modal.component.scss']
 })
 export class FiltersModalComponent extends DestroySubscription implements OnInit {
-  //
-  // currentLang: 'en' | 'ua' = 'en'
-  //
-  // filter: CreatureFilterInterface[] = []
-  //
-  // filterLabels: FilterLabel[] = []
-  //
-  // constructor(
-  //   public dialogRef: MatDialogRef<FiltersModalComponent>,
-  //   @Inject(MAT_DIALOG_DATA) public data: CreatureFilterInterface[],
-  //   private attributeService: BestiaryService,
-  //   private translocoService: TranslocoService
-  // ) {
-  //   super();
-  // }
-  //
-  ngOnInit(): void {
-  //   this.filter = this.data
-  //
-  //   this.generateFilter();
-  //
-  //   this.checkFilterSubjectEmpty()
-  //
-  //   this.detectLangChange()
+
+  filters: CreatureListFilter[] = []
+  selectedFilters: OutputCreatureItem[] = []
+  currentLang: 'en' | 'ua' = 'en'
+
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: OutputCreatureItem[],
+    public dialogRef: MatDialogRef<FiltersModalComponent>,
+    private readonly bestiaryService: BestiaryService,
+    private readonly translocoService: TranslocoService,
+  ) {
+    super();
   }
-  //
-  // override ngOnDestroy() {
-  //   super.ngOnDestroy();
-  //   this.dialogRef.close(this.filter)
-  // }
-  //
-  // private produceFilterColumns() {
-  //   const requests = Object.values(CreatureFilterColumns).map(value => {
-  //
-  //     return this.attributeService.getFilters(value);
-  //   });
-  //
-  //   forkJoin(requests)
-  //     .pipe(takeUntil(this.destroyStream$))
-  //     .subscribe((responses: any[]) => {
-  //       responses.forEach((data, index) => {
-  //         this.filterLabels.push({
-  //           attr: Object.keys(CreatureFilterColumns)[index],
-  //           values: data,
-  //         });
-  //       });
-  //
-  //       this.afterAllRequestsCompleted();
-  //     });
-  // }
-  //
-  // private afterAllRequestsCompleted() {
-  //   this.attributeService.filterSubject$.next(this.filterLabels)
-  // }
-  //
-  // private generateFilter() {
-  //   Object.keys(CreatureFilterColumns).forEach(key => {
-  //     const filterItem: CreatureFilterInterface = {
-  //       attributeName: key,
-  //       ids: [],
-  //       mustContainAllSelected: null
-  //     }
-  //     this.filter.push(filterItem)
-  //   });
-  //
-  // }
-  //
-  // private checkFilterSubjectEmpty() {
-  //   const sbjSub = this.attributeService.filterSubject$.pipe(takeUntil(this.destroyStream$)).subscribe(data => {
-  //     if (!data) {
-  //       this.produceFilterColumns()
-  //     } else {
-  //       this.filterLabels = data
-  //     }
-  //   })
-  //
-  //   sbjSub.unsubscribe()
-  // }
-  //
-  // private detectLangChange() {
-  //   const activeLang = this.translocoService.getActiveLang()
-  //
-  //   if (activeLang === 'en' || activeLang === 'ua') {
-  //     this.currentLang = activeLang
-  //   }
-  // }
-  //
-  // setFilter(attr: string, id: number) {
-  //   const filterIdx = this.filter.findIndex(filter => filter.attributeName === attr)
-  //
-  //   this.filter[filterIdx].ids.push(id)
-  // }
-  //
-  // detectFilterActivity(attr: string, id: number): boolean {
-  //   const filterIdx = this.filter.findIndex(filter => filter.attributeName === attr)
-  //
-  //   return !!this.filter[filterIdx].ids.find(value => value === id)
-  // }
-  //
-  // removeFilter(attr: string, id: number) {
-  //   const filterIdx = this.filter.findIndex(filter => filter.attributeName === attr)
-  //
-  //   const attributeIdx = this.filter[filterIdx].ids.findIndex(item => item === id)
-  //
-  //   this.filter[filterIdx].ids.splice(attributeIdx, 1)
-  // }
+
+  ngOnInit(): void {
+    this.getActiveLang()
+
+    this.bestiaryService.getFilters().pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+      this.selectedFilters = this.data
+      this.filters = data
+    })
+  }
+
+  override ngOnDestroy() {
+    super.ngOnDestroy();
+    this.dialogRef.close(this.selectedFilters)
+  }
+
+
+  private getActiveLang() {
+    const activeLang = this.translocoService.getActiveLang()
+
+    if (activeLang === 'en' || activeLang === 'ua') {
+      this.currentLang = activeLang
+    }
+    this.translocoService.langChanges$.pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+      if (data === 'en' || data === 'ua') {
+        this.currentLang = data
+      }
+    })
+  }
+
+  detectFilterActivity(filter_values: Attribute) {
+    return !!this.selectedFilters.find(item => filter_values.id === item.attribute.id)
+  }
+
+  setFilter(attribute: Attribute, msr_cat: string) {
+    this.selectedFilters.push({msr_cat, attribute})
+  }
+
+  removeFilter(filter_values: Attribute) {
+    const idx = this.selectedFilters.findIndex(item => item.attribute.id === filter_values.id)
+
+    if (idx !== -1) {
+      this.selectedFilters.splice(idx, 1)
+    }
+  }
 }

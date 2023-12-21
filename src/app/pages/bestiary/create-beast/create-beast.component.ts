@@ -24,7 +24,7 @@ import {ActionAbilities} from "../../../../shared/static/creature/action-abiliti
     styleUrls: ['./create-beast.component.scss']
 })
 export class CreateBeastComponent extends DestroySubscription implements OnInit, OnDestroy {
-    interval = interval(30 * 1000)
+    interval = interval(5 * 60 * 1000)
 
     AttributesCodes = AttributeCode
     MeasuresCodes = MeasureCode
@@ -112,7 +112,7 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit,
         if(finishedStatus === undefined) {
           let finished = false
 
-          const dialogRef = this.dialog.open(ConfirmDialogComponent)
+          const dialogRef = this.dialog.open(ConfirmDialogComponent, {data: {message: 'Do you finish The Beast?'}})
 
           dialogRef.afterClosed().pipe(takeUntil(this.destroyStream$)).subscribe(data => {
             finished = data
