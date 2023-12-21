@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {BehaviorSubject, Observable} from "rxjs";
+import {Observable} from "rxjs";
 import {CreateAttribute} from "../interfaces/creature/create/create-attribute";
 import {Creature} from "../interfaces/creature/get/creature";
-import {AttributeCode} from "../static/creature/attributes.code";
 import {Attribute} from "../interfaces/creature/get/attribute";
 
 @Injectable({
@@ -16,17 +15,17 @@ export class ApiService {
     ) {
     }
 
-    createCreature(creaturePayload: any) {
-        return this.http.post(`api/creature`, creaturePayload);
+    createCreature(creaturePayload: any): Observable<Creature> {
+        return this.http.post<Creature>(`api/creature`, creaturePayload);
     }
 
     getCreaturesList(filter: any[]): Observable<any[]> {
         const params: HttpParams = this.transformArrayInParams(filter)
-        return this.http.get<any[]>(`api/creature`, {params});
+        return this.http.get<any[]>(`api/creature/list`, {params});
     }
 
     getCreatureById(id: number): Observable<Creature> {
-        return this.http.get<Creature>(`api/creature/${id}`)
+        return this.http.get<Creature>(`api/creature/list/${id}`)
     }
 
     patchCreature(creatureId: number, creaturePayload: any) {
