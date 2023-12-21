@@ -6,7 +6,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {FiltersModalComponent} from "./filters-modal/filters-modal.component";
 import {Attribute} from "../../../../shared/interfaces/creature/get/attribute";
 import {OutputCreatureItem} from "../../../../shared/interfaces/filters/output-creature-item";
-import {FilteredCreatureList} from "../../../../shared/interfaces/filters/creatures.list";
+import {FilteredCreatureList, FilteredCreatureListItem} from "../../../../shared/interfaces/filters/creatures.list";
 @Component({
   selector: 'app-bestiary-list',
   templateUrl: './bestiary-list.component.html',
@@ -15,12 +15,12 @@ import {FilteredCreatureList} from "../../../../shared/interfaces/filters/creatu
 export class BestiaryListComponent extends DestroySubscription implements OnInit{
   isAdminAuthenticated = false;
   searchInput: string = '';
-  creaturesList: FilteredCreatureList[] = []; // TODO CREATURE LIST INTERFACE
+  creaturesList: FilteredCreatureList[] = [];
   //
   creatureFilter: OutputCreatureItem[] = []
   //
   private filterSubject = new Subject<string>();
-  unfinishedCreatures: FilteredCreatureList[] = []; // TODO CREATURE LIST INTERFACE
+  unfinishedCreatures: FilteredCreatureListItem[] = [];
   //
   constructor(
     private readonly bestiaryService: BestiaryService,
@@ -39,23 +39,23 @@ export class BestiaryListComponent extends DestroySubscription implements OnInit
       this.getCreatures()
     })
 
-    // if(this.isAdminAuthenticated) {
-    //   this.getUnfinishedCreatures()
-    // }
+    if(this.isAdminAuthenticated) {
+      this.getUnfinishedCreatures()
+    }
   }
 
   clearInputFilter() {
     this.searchInput = ''
   }
 
-  // getUnfinishedCreatures() {
-  //   this.bestiaryService.getUnfinishedCreatures().pipe(takeUntil(this.destroyStream$)).subscribe(data => {
-  //     this.unfinishedCreatures = data
-  //   })
-  // }
+  getUnfinishedCreatures() {
+    this.bestiaryService.getCreatures([], 'FALSE').pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+      this.unfinishedCreatures = data.flatMap(item => item.creature)
+    })
+  }
   //
   getCreatures() {
-    this.bestiaryService.getCreatures(this.creatureFilter, true).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+    this.bestiaryService.getCreatures(this.creatureFilter, 'TRUE').pipe(takeUntil(this.destroyStream$)).subscribe(data => {
       this.creaturesList = data
     })
   }

@@ -21,7 +21,7 @@ export class ApiService {
     return this.http.post<Creature>(`api/creature`, creaturePayload);
   }
 
-  getCreaturesList(filter: any[], finished?: boolean): Observable<FilteredCreatureList[]> {
+  getCreaturesList(filter: any[], finished?: string): Observable<FilteredCreatureList[]> {
     let params: HttpParams = this.transformArrayInParams(filter)
 
     if(finished) {

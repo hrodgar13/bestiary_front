@@ -20,7 +20,7 @@ export class BestiaryService {
     return this.authService.isAdminAuthenticated();
   }
 
-  getCreatures(filter: any[], finished?: boolean): Observable<FilteredCreatureList[]> {
+  getCreatures(filter: any[], finished?: string): Observable<FilteredCreatureList[]> {
     return this.apiService.getCreaturesList(filter, finished)
   }
 
