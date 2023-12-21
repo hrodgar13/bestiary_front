@@ -33,7 +33,7 @@ export class MultiSelectComponent extends DestroySubscription implements OnInit 
   selectedItems: Measure[] = []
 
   measureForm!: UntypedFormGroup;
-  currentSelectedAttribute: any;
+  currentSelectedAttribute!: Attribute;
 
   constructor(
     private readonly formBuilder: FormBuilder,
@@ -60,7 +60,7 @@ export class MultiSelectComponent extends DestroySubscription implements OnInit 
 
     const isAttributeInUse = this.selectedItems.find(item => item.attribute === this.currentSelectedAttribute)
 
-    if(!isAttributeInUse) {
+    if(!isAttributeInUse && this.currentSelectedAttribute) {
       let element: Measure = {
         amt:  this.measureForm.get('amount')?.value,
         measure_cat: this.measure_code,

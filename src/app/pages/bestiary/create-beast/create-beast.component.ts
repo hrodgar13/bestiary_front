@@ -187,7 +187,7 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit,
     }
 
     private defineSingleAttribute(creaturePayload: Creature, attr_cat: string): number | null {
-        return creaturePayload?.attributes.find(item => item.attr_cat === attr_cat)?.id || null
+        return this.creaturePayload?.attributes.find(item => item.attr_cat === attr_cat)?.id || null
     }
 
     private convertAttributeInCreationType(attributes: Attribute[]): number[] {
@@ -218,14 +218,6 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit,
         });
 
         return create_action_abilities
-    }
-
-    filterMeasuresByCategories(measure_code: MeasureCode): Measure[] {
-        if (this.creaturePayload) {
-            return this.creaturePayload.measures.filter(item => item.measure_cat === measure_code);
-        }
-
-        return []
     }
 
     addMeasure($event: CreateMeasure) {
@@ -265,5 +257,23 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit,
     this.interval.pipe(takeUntil(this.destroyStream$)).subscribe(() => {
       this.sendForm(false)
     })
+  }
+
+  protected readonly ActionAbilities = ActionAbilities;
+
+  filterActionAbilities(abilities: ActionAbilities): ActionsAbilities[] {
+    if (this.creaturePayload) {
+      return this.creaturePayload.action_abilities.filter(item => item.action_type === abilities);
+    }
+
+    return []
+  }
+
+  filterMeasuresByCategories(measure_code: MeasureCode): Measure[] {
+    if (this.creaturePayload) {
+      return this.creaturePayload.measures.filter(item => item.measure_cat === measure_code);
+    }
+
+    return []
   }
 }

@@ -17,23 +17,23 @@
             <div class="flex justify-between w-full gap-1">
               <app-input-select formControlName="alignment" [attribute_code]="AttributesCodes.alignment" class="h-[48px] w-full"
                                 [placeholder]="'Select Alignment'"/>
-              <app-input-green-btn [route]="AttributesCodes.alignment" [title]="'Alignment'"/>
+              <app-input-green-btn [route]="AttributesCodes.alignment" [title]="AttributesCodes.alignment"/>
             </div>
           </div>
           <div class="flex flex-col gap-3 w-full 640:flex-row 640:items-center">
             <app-label-text [label]="'Type: '"/>
             <div class="flex items-center justify-between w-full gap-1">
-              <app-input-select formControlName="type" [attribute_code]="'type'" class="h-[48px] w-full"
+              <app-input-select formControlName="type" [attribute_code]="AttributesCodes.type" class="h-[48px] w-full"
                                 [placeholder]="'Select Type'"/>
-              <app-input-green-btn [route]="'type'"/>
+              <app-input-green-btn [route]="AttributesCodes.type"/>
             </div>
           </div>
           <div class="flex gap-3 flex-col w-full 640:flex-row 640:items-center">
             <app-label-text [label]="'Size: '"/>
             <div class="flex items-center justify-between w-full gap-1">
-              <app-input-select formControlName="size" [attribute_code]="'size'" class="h-[48px] w-full "
+              <app-input-select formControlName="size" [attribute_code]="AttributesCodes.size" class="h-[48px] w-full "
                                 [placeholder]="'Select Size'"/>
-              <app-input-green-btn [route]="'size'"/>
+              <app-input-green-btn [route]="AttributesCodes.size"/>
             </div>
           </div>
           <div class="flex w-full flex-col gap-3 640:flex-row 640:items-center">
@@ -92,7 +92,7 @@
         <app-multi-select
           [defaultValues]="filterMeasuresByCategories(MeasuresCodes.immunities)"
           (addMeasure)="addMeasure($event)" (removeMeasure)="removeMeasure($event)"
-          [enableMsr]="false" [measure_code]="MeasuresCodes.armor_tag"
+          [enableMsr]="false" [measure_code]="MeasuresCodes.immunities"
           [placeholder]="'Select damage: '" label="Immunities" [attribute_code]="AttributesCodes.damage"/>
         <app-multi-select
           [defaultValues]="filterMeasuresByCategories(MeasuresCodes.saving_throws)"
@@ -152,19 +152,19 @@
       </div>
       <div>
         <div class="h-[1px] w-full bg-[#E2A23B]"></div>
-        <app-title-text-input [blockName]="'Abilities'" [actionCode]="ActionCodes.abilities" (addValue)="addActionAbility($event)" (removeValue)="removeActionAbility($event)"/>
+        <app-title-text-input [defaultValues]="filterActionAbilities(ActionAbilities.abilities)" [blockName]="'Abilities'" [actionCode]="ActionCodes.abilities" (addValue)="addActionAbility($event)" (removeValue)="removeActionAbility($event)"/>
         <div class="h-[1px] w-full bg-[#E2A23B]"></div>
       </div>
       <div>
-        <app-title-text-input [blockName]="'Actions'" [actionCode]="ActionCodes.actions" (addValue)="addActionAbility($event)" (removeValue)="removeActionAbility($event)"/>
+        <app-title-text-input [defaultValues]="filterActionAbilities(ActionAbilities.actions)" [blockName]="'Actions'" [actionCode]="ActionCodes.actions" (addValue)="addActionAbility($event)" (removeValue)="removeActionAbility($event)"/>
         <div class="h-[1px] w-full bg-[#E2A23B]"></div>
       </div>
       <div>
-        <app-title-text-input [blockName]="'Bonus Actions'" [actionCode]="ActionCodes.bonusActions" (addValue)="addActionAbility($event)" (removeValue)="removeActionAbility($event)"/>
+        <app-title-text-input [defaultValues]="filterActionAbilities(ActionAbilities.bonusActions)" [blockName]="'Bonus Actions'" [actionCode]="ActionCodes.bonusActions" (addValue)="addActionAbility($event)" (removeValue)="removeActionAbility($event)"/>
         <div class="h-[1px] w-full bg-[#E2A23B]"></div>
       </div>
       <div>
-        <app-title-text-input [blockName]="'Legendary Actions'" [actionCode]="ActionCodes.legendaryActions" (addValue)="addActionAbility($event)" (removeValue)="removeActionAbility($event)"/>
+        <app-title-text-input [defaultValues]="filterActionAbilities(ActionAbilities.legendaryActions)" [blockName]="'Legendary Actions'" [actionCode]="ActionCodes.legendaryActions" (addValue)="addActionAbility($event)" (removeValue)="removeActionAbility($event)"/>
         <div class="h-[1px] w-full bg-[#E2A23B]"></div>
       </div>
       <div>
