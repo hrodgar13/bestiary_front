@@ -6,67 +6,65 @@ import {Creature} from "../interfaces/creature/get/creature";
 import {Attribute} from "../interfaces/creature/get/attribute";
 import {CreatureListFilter} from "../interfaces/filters/creature-list-filter";
 import {FilteredCreatureList, FilteredCreatureListItem} from "../interfaces/filters/creatures.list";
+import {OutputCreatureItem} from "../interfaces/filters/output-creature-item";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class ApiService {
 
-  constructor(
-    private http: HttpClient
-  ) {
-  }
-
-  createCreature(creaturePayload: any): Observable<Creature> {
-    return this.http.post<Creature>(`api/creature`, creaturePayload);
-  }
-
-  getCreaturesList(filter: any[], finished?: string): Observable<FilteredCreatureList[]> {
-    let params: HttpParams = this.transformArrayInParams(filter)
-
-    if(finished) {
-      params = params.set('finished', finished)
+    constructor(
+        private http: HttpClient
+    ) {
     }
 
-    return this.http.get<FilteredCreatureList[]>(`api/creature/list`, {params});
-  }
+    createCreature(creaturePayload: any): Observable<Creature> {
+        return this.http.post<Creature>(`api/creature`, creaturePayload);
+    }
 
-  getCreatureById(id: number): Observable<Creature> {
-    return this.http.get<Creature>(`api/creature/list/${id}`)
-  }
+    getCreaturesList(filter: CreatureListFilter[], finished?: string): Observable<FilteredCreatureList[]> {
+        let params: HttpParams = this.transformArrayInParams(filter)
 
-  patchCreature(creatureId: number, creaturePayload: any) {
-    return this.http.patch(`api/creature/${creatureId}`, creaturePayload)
-  }
-
-  getUnfinishedCreatures() {
-    return this.http.get<any[]>(`api/creature-unfinished`);
-  }
-
-  // getAttributes(key: string): Observable<FilterLabelValues[]> {
-  //   return this.http.get<FilterLabelValues[]>(`api/${key}`)
-  // }
-  //
-  private transformArrayInParams(filter: any[]): HttpParams {
-    return filter
-      .reduce((params, key) => {
-
-        if (key.ids.length !== null) {
-          return params.set(key.attributeName, key.ids.toString());
+        if (finished) {
+            params = params.set('finished', finished)
         }
-        return params;
-      }, new HttpParams())
-  }
 
-  createAttribute(payload: CreateAttribute) {
-    return this.http.post(`api/attribute`, payload)
-  }
+        return this.http.get<FilteredCreatureList[]>(`api/creature/list`, {params});
+    }
 
-  getDataForSelect(route: string): Observable<Attribute[]> {
-    return this.http.get<Attribute[]>(`api/attribute/${route}`)
-  }
+    getCreatureById(id: number): Observable<Creature> {
+        return this.http.get<Creature>(`api/creature/list/${id}`)
+    }
 
-  getFilters(): Observable<CreatureListFilter[]> {
-    return this.http.get<CreatureListFilter[]>(`api/attribute`)
-  }
+    patchCreature(creatureId: number, creaturePayload: any) {
+        return this.http.patch(`api/creature/${creatureId}`, creaturePayload)
+    }
+
+    getUnfinishedCreatures() {
+        return this.http.get<any[]>(`api/creature-unfinished`);
+    }
+
+    // getAttributes(key: string): Observable<FilterLabelValues[]> {
+    //   return this.http.get<FilterLabelValues[]>(`api/${key}`)
+    // }
+    //
+    private transformArrayInParams(filter: CreatureListFilter[]): HttpParams {
+        return filter
+            .reduce((params, key) => {
+
+                return params.set(key.filter_cat, key.filter_values.map(item => item.id).toString());
+            }, new HttpParams())
+    }
+
+    createAttribute(payload: CreateAttribute) {
+        return this.http.post(`api/attribute`, payload)
+    }
+
+    getDataForSelect(route: string): Observable<Attribute[]> {
+        return this.http.get<Attribute[]>(`api/attribute/${route}`)
+    }
+
+    getFilters(): Observable<CreatureListFilter[]> {
+        return this.http.get<CreatureListFilter[]>(`api/attribute`)
+    }
 }

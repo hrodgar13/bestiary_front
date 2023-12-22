@@ -3,6 +3,8 @@ import {AuthService} from "../../../shared/services/auth.service";
 import {BehaviorSubject, Observable} from "rxjs";
 import {ApiService} from "../../../shared/services/api.service";
 import {FilteredCreatureList} from "../../../shared/interfaces/filters/creatures.list";
+import {OutputCreatureItem} from "../../../shared/interfaces/filters/output-creature-item";
+import {CreatureListFilter} from "../../../shared/interfaces/filters/creature-list-filter";
 
 @Injectable()
 export class BestiaryService {
@@ -20,8 +22,24 @@ export class BestiaryService {
     return this.authService.isAdminAuthenticated();
   }
 
-  getCreatures(filter: any[], finished?: string): Observable<FilteredCreatureList[]> {
-    return this.apiService.getCreaturesList(filter, finished)
+  getCreatures(filter: OutputCreatureItem[], finished?: string): Observable<FilteredCreatureList[]> {
+
+    const refactoredFilters: CreatureListFilter[] = []
+
+    filter.forEach(item => {
+      const idx = refactoredFilters.findIndex(itemIdx => itemIdx.filter_cat === item.msr_cat)
+
+      if(idx === -1) {
+        refactoredFilters.push({
+          filter_cat: item.msr_cat,
+          filter_values: [item.attribute]
+        })
+      } else {
+        refactoredFilters[idx].filter_values.push(item.attribute)
+      }
+    })
+
+    return this.apiService.getCreaturesList(refactoredFilters, finished)
   }
 
   getCreatureById(id: number) {

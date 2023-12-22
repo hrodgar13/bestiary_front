@@ -16,12 +16,12 @@ export class BestiaryListComponent extends DestroySubscription implements OnInit
   isAdminAuthenticated = false;
   searchInput: string = '';
   creaturesList: FilteredCreatureList[] = [];
-  //
+
   creatureFilter: OutputCreatureItem[] = []
-  //
   private filterSubject = new Subject<string>();
+
   unfinishedCreatures: FilteredCreatureListItem[] = [];
-  //
+
   constructor(
     private readonly bestiaryService: BestiaryService,
     private readonly dialog: MatDialog
@@ -53,7 +53,7 @@ export class BestiaryListComponent extends DestroySubscription implements OnInit
       this.unfinishedCreatures = data.flatMap(item => item.creature)
     })
   }
-  //
+
   getCreatures() {
     this.bestiaryService.getCreatures(this.creatureFilter, 'TRUE').pipe(takeUntil(this.destroyStream$)).subscribe(data => {
       this.creaturesList = data
@@ -79,7 +79,7 @@ export class BestiaryListComponent extends DestroySubscription implements OnInit
     this.getCreatures()
   }
 
-  // checkFiltersToClear() {
-  //   return !! this.creatureFilter.flatMap(item => item.ids).length
-  // }
+  checkFiltersToClear() {
+    return !! this.creatureFilter.length
+  }
 }
