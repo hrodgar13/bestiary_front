@@ -22,12 +22,15 @@ export class ApiService {
         return this.http.post<Creature>(`api/creature`, creaturePayload);
     }
 
-    getCreaturesList(filter: CreatureListFilter[], finished?: string): Observable<FilteredCreatureList[]> {
+    getCreaturesList(filter: CreatureListFilter[], search: string, perPage: number, finished?: string): Observable<FilteredCreatureList[]> {
         let params: HttpParams = this.transformArrayInParams(filter)
 
         if (finished) {
             params = params.set('finished', finished)
         }
+
+        params = params.set('search', search)
+          .set('perPage', perPage)
 
         return this.http.get<FilteredCreatureList[]>(`api/creature/list`, {params});
     }

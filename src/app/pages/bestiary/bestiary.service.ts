@@ -22,7 +22,7 @@ export class BestiaryService {
     return this.authService.isAdminAuthenticated();
   }
 
-  getCreatures(filter: OutputCreatureItem[], finished?: string): Observable<FilteredCreatureList[]> {
+  getCreatures(filter: OutputCreatureItem[], search: string, perPage: number, finished?: string): Observable<FilteredCreatureList[]> {
 
     const refactoredFilters: CreatureListFilter[] = []
 
@@ -39,7 +39,7 @@ export class BestiaryService {
       }
     })
 
-    return this.apiService.getCreaturesList(refactoredFilters, finished)
+    return this.apiService.getCreaturesList(refactoredFilters,search, perPage, finished)
   }
 
   getCreatureById(id: number) {

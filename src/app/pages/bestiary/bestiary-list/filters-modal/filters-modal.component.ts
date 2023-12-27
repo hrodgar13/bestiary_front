@@ -64,8 +64,8 @@ export class FiltersModalComponent extends DestroySubscription implements OnInit
     this.selectedFilters.push({msr_cat, attribute})
   }
 
-  removeFilter(filter_values: Attribute) {
-    const idx = this.selectedFilters.findIndex(item => item.attribute.id === filter_values.id)
+  removeFilter(filter_values: Attribute, filter_cat: string) {
+    const idx = this.selectedFilters.findIndex(item => item.attribute.id === filter_values.id && item.msr_cat === filter_cat)
 
     if (idx !== -1) {
       this.selectedFilters.splice(idx, 1)

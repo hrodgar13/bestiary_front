@@ -10,7 +10,7 @@
             <p class="text-[#E2A23B] text-center min-w-[40px] px-2 cursor-pointer">{{value.name[currentLang]}}</p>
           </app-border-outline>
           <ng-template #activeFilter>
-            <app-border-outline [bg]="'#E2A23B'" (click)="removeFilter(value)">
+            <app-border-outline [bg]="'#E2A23B'" (click)="removeFilter(value, filter.filter_cat)">
               <p class="bg-[#E2A23B] rounded-xl text-white text-center min-w-[40px] px-2 cursor-pointer">{{value.name[currentLang]}}</p>
             </app-border-outline>
           </ng-template>

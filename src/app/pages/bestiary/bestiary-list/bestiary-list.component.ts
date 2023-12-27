@@ -15,6 +15,7 @@ import {FilteredCreatureList, FilteredCreatureListItem} from "../../../../shared
 export class BestiaryListComponent extends DestroySubscription implements OnInit{
   isAdminAuthenticated = false;
   searchInput: string = '';
+  perPage = 10
   creaturesList: FilteredCreatureList[] = [];
 
   creatureFilter: OutputCreatureItem[] = []
@@ -49,13 +50,13 @@ export class BestiaryListComponent extends DestroySubscription implements OnInit
   }
 
   getUnfinishedCreatures() {
-    this.bestiaryService.getCreatures([], 'FALSE').pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+    this.bestiaryService.getCreatures([], '', 0, 'FALSE').pipe(takeUntil(this.destroyStream$)).subscribe(data => {
       this.unfinishedCreatures = data.flatMap(item => item.creature)
     })
   }
 
   getCreatures() {
-    this.bestiaryService.getCreatures(this.creatureFilter, 'TRUE').pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+    this.bestiaryService.getCreatures(this.creatureFilter, this.searchInput, this.perPage, 'TRUE').pipe(takeUntil(this.destroyStream$)).subscribe(data => {
       this.creaturesList = data
     })
   }
