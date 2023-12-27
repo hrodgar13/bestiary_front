@@ -56,8 +56,8 @@ export class FiltersModalComponent extends DestroySubscription implements OnInit
     })
   }
 
-  detectFilterActivity(filter_values: Attribute) {
-    return !!this.selectedFilters.find(item => filter_values.id === item.attribute.id)
+  detectFilterActivity(filter_values: Attribute, filter_cat: string) {
+    return !!this.selectedFilters.find(item => filter_values.id === item.attribute.id && item.msr_cat === filter_cat)
   }
 
   setFilter(attribute: Attribute, msr_cat: string) {

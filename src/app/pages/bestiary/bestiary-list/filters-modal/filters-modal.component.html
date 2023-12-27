@@ -6,7 +6,7 @@
       </h2>
       <div class="flex flex-wrap gap-2 mt-2.5">
         <div *ngFor="let value of filter.filter_values">
-          <app-border-outline *ngIf="!detectFilterActivity(value); else activeFilter" (click)="setFilter(value, filter.filter_cat)">
+          <app-border-outline *ngIf="!detectFilterActivity(value, filter.filter_cat); else activeFilter" (click)="setFilter(value, filter.filter_cat)">
             <p class="text-[#E2A23B] text-center min-w-[40px] px-2 cursor-pointer">{{value.name[currentLang]}}</p>
           </app-border-outline>
           <ng-template #activeFilter>
