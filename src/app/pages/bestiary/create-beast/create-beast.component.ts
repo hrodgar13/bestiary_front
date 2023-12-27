@@ -82,7 +82,7 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit,
     private initForm() {
         this.creatureForm = this.formBuilder.group({
             name_en: [this.creaturePayload?.name.en, []],
-            name_ua: [this.creaturePayload?.name.en || null],
+            name_ua: [this.creaturePayload?.name.ua || null],
             armor_class: [this.creaturePayload?.armor_class || null],
             hits: [this.creaturePayload?.hits || null],
             hits_in_dice: [this.creaturePayload?.hits_in_dice || null],
