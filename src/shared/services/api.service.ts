@@ -5,7 +5,11 @@ import {CreateAttribute} from "../interfaces/creature/create/create-attribute";
 import {Creature} from "../interfaces/creature/get/creature";
 import {Attribute} from "../interfaces/creature/get/attribute";
 import {CreatureListFilter} from "../interfaces/filters/creature-list-filter";
-import {FilteredCreatureList, FilteredCreatureListItem} from "../interfaces/filters/creatures.list";
+import {
+  FilteredCreatureDataMetaDto,
+  FilteredCreatureList,
+  FilteredCreatureListItem
+} from "../interfaces/filters/creatures.list";
 import {OutputCreatureItem} from "../interfaces/filters/output-creature-item";
 
 @Injectable({
@@ -22,7 +26,7 @@ export class ApiService {
         return this.http.post<Creature>(`api/creature`, creaturePayload);
     }
 
-    getCreaturesList(filter: CreatureListFilter[], search: string, perPage: number, finished?: string): Observable<FilteredCreatureList[]> {
+    getCreaturesList(filter: CreatureListFilter[], search: string, perPage: number, finished?: string): Observable<FilteredCreatureDataMetaDto> {
         let params: HttpParams = this.transformArrayInParams(filter)
 
         if (finished) {
@@ -32,7 +36,7 @@ export class ApiService {
         params = params.set('search', search)
           .set('perPage', perPage)
 
-        return this.http.get<FilteredCreatureList[]>(`api/creature/list`, {params});
+        return this.http.get<FilteredCreatureDataMetaDto>(`api/creature/list`, {params});
     }
 
     getCreatureById(id: number): Observable<Creature> {

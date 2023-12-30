@@ -5,3 +5,4 @@ export interface CreatureListFilter {
 
   filter_values: Attribute[]
 }
+

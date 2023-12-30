@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, HostListener, OnInit} from '@angular/core';
 import {BestiaryService} from "../bestiary.service";
 import {DestroySubscription} from "../../../../shared/helpers/destroy-subscribtion";
 import {debounceTime, Subject, takeUntil} from "rxjs";
@@ -15,17 +15,20 @@ import {FilteredCreatureList, FilteredCreatureListItem} from "../../../../shared
 export class BestiaryListComponent extends DestroySubscription implements OnInit{
   isAdminAuthenticated = false;
   searchInput: string = '';
-  perPage = 10
+  perPage = 30
   creaturesList: FilteredCreatureList[] = [];
+  total: number = 0
 
   creatureFilter: OutputCreatureItem[] = []
   private filterSubject = new Subject<string>();
 
   unfinishedCreatures: FilteredCreatureListItem[] = [];
+  private loading: boolean = false;
 
   constructor(
     private readonly bestiaryService: BestiaryService,
-    private readonly dialog: MatDialog
+    private readonly dialog: MatDialog,
+    private el: ElementRef
   ) {
     super()
   }
@@ -51,13 +54,16 @@ export class BestiaryListComponent extends DestroySubscription implements OnInit
 
   getUnfinishedCreatures() {
     this.bestiaryService.getCreatures([], '', 0, 'FALSE').pipe(takeUntil(this.destroyStream$)).subscribe(data => {
-      this.unfinishedCreatures = data.flatMap(item => item.creature)
+      this.unfinishedCreatures = data.creatures.flatMap(item => item.creature)
     })
   }
 
   getCreatures() {
+    this.loading = true
     this.bestiaryService.getCreatures(this.creatureFilter, this.searchInput, this.perPage, 'TRUE').pipe(takeUntil(this.destroyStream$)).subscribe(data => {
-      this.creaturesList = data
+      this.creaturesList = data.creatures
+      this.total = data.total
+      this.loading = false
     })
   }
 
@@ -82,5 +88,17 @@ export class BestiaryListComponent extends DestroySubscription implements OnInit
 
   checkFiltersToClear() {
     return !! this.creatureFilter.length
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  onScroll($event: any) {
+    const scrollY = window.scrollY || window.pageYOffset;
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+
+    if (scrollY + windowHeight === documentHeight && !this.loading) {
+      this.perPage += 30
+      this.getCreatures()
+    }
   }
 }

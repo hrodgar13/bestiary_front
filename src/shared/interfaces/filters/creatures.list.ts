@@ -9,3 +9,8 @@ export interface FilteredCreatureList {
     dangerLvl: number
     creature: FilteredCreatureListItem[]
 }
+
+export interface FilteredCreatureDataMetaDto {
+  creatures: FilteredCreatureList[]
+  total: number
+}

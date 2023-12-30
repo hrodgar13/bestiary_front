@@ -53,7 +53,27 @@ $bestiary_front-theme: mat.define-light-theme((
   font-family: 'Password', sans-serif;
 }
 
-html, body { height: 100%; }
+html, body {
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: black;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #E2A23B;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #E2A23B;
+  }
+
+}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .primary-bg {

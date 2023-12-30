@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {AuthService} from "../../../shared/services/auth.service";
 import {BehaviorSubject, Observable} from "rxjs";
 import {ApiService} from "../../../shared/services/api.service";
-import {FilteredCreatureList} from "../../../shared/interfaces/filters/creatures.list";
+import {FilteredCreatureDataMetaDto, FilteredCreatureList} from "../../../shared/interfaces/filters/creatures.list";
 import {OutputCreatureItem} from "../../../shared/interfaces/filters/output-creature-item";
 import {CreatureListFilter} from "../../../shared/interfaces/filters/creature-list-filter";
 
@@ -22,7 +22,7 @@ export class BestiaryService {
     return this.authService.isAdminAuthenticated();
   }
 
-  getCreatures(filter: OutputCreatureItem[], search: string, perPage: number, finished?: string): Observable<FilteredCreatureList[]> {
+  getCreatures(filter: OutputCreatureItem[], search: string, perPage: number, finished?: string): Observable<FilteredCreatureDataMetaDto> {
 
     const refactoredFilters: CreatureListFilter[] = []
 
