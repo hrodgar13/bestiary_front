@@ -3,6 +3,7 @@ import {Observable} from "rxjs";
 import {ApiService} from "../../../../shared/services/api.service";
 import {CreateAttribute} from "../../../../shared/interfaces/creature/create/create-attribute";
 import {Creature} from "../../../../shared/interfaces/creature/get/creature";
+import {FileUpload} from "../../../../shared/interfaces/file/file-upload.interface";
 
 @Injectable()
 export class CreatureService {
@@ -31,4 +32,12 @@ export class CreatureService {
     getDataForSelect(route: string) {
         return this.apiService.getDataForSelect(route)
     }
+
+  uploadPhoto(selectedImage: File): Observable<FileUpload> {
+     return  this.apiService.uploadPhoto(selectedImage)
+  }
+
+  removePhoto(selectedImage: string): Observable<any> {
+      return  this.apiService.removePhoto(selectedImage)
+  }
 }

@@ -11,6 +11,7 @@ import {
   FilteredCreatureListItem
 } from "../interfaces/filters/creatures.list";
 import {OutputCreatureItem} from "../interfaces/filters/output-creature-item";
+import {FileUpload} from "../interfaces/file/file-upload.interface";
 
 @Injectable({
     providedIn: 'root'
@@ -74,4 +75,15 @@ export class ApiService {
     getFilters(): Observable<CreatureListFilter[]> {
         return this.http.get<CreatureListFilter[]>(`api/attribute`)
     }
+
+  uploadPhoto(file: File): Observable<FileUpload> {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    return this.http.post<FileUpload>('api/file-upload', formData);
+  }
+
+  removePhoto(selectedImage: string) {
+    return this.http.delete<any>(`api/file-upload/remove/${selectedImage}`);
+  }
 }

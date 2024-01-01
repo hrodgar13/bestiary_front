@@ -8,6 +8,7 @@ export interface CreateCreature {
   isFinished: boolean
   name: CreateTranslation
   armor_class: number | null
+  image: string | null
   hits: string | null
   hits_in_dice: string | null
   danger_lvl: number | null

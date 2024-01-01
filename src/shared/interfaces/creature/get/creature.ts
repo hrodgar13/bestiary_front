@@ -7,6 +7,7 @@ import {ActionsAbilities} from "./actions-abilities";
 export interface Creature {
     id: number
     isFinished: boolean
+    image: string
     name: Translation
     armor_class: number | null
     hits: string | null

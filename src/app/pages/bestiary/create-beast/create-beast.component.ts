@@ -37,6 +37,7 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit,
   actionAbilities: CreateActionAbility[] = []
 
   creatureForm!: UntypedFormGroup;
+  creatureImage: string | null = null;
 
   constructor(
     private readonly formBuilder: FormBuilder,
@@ -71,6 +72,7 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit,
 
         this.measures = this.convertMeasureInCreationType(data.measures)
         this.actionAbilities = this.convertActionAbilitiesInCreationType(data.action_abilities)
+        this.creatureImage = data.image
 
         this.initForm()
       })
@@ -135,6 +137,7 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit,
         en: this.creatureForm.get('name_en')?.value,
         ua: this.creatureForm.get('name_ua')?.value,
       },
+      image: this.creatureImage,
       isFinished: finished,
       armor_class: this.creatureForm.get('armor_class')?.value,
       hits: this.creatureForm.get('hits')?.value,
@@ -278,5 +281,10 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit,
     }
 
     return []
+  }
+
+  setPhoto(event: string) {
+    this.creatureImage = event
+    this.sendForm()
   }
 }

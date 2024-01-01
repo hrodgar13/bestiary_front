@@ -1,6 +1,6 @@
-<app-border-outline class="w-full h-full relative">
-  <div class="w-full h-full relative flex items-center justify-center">
-    <label class="absolute text-2xl text-[#E2A23B]" for="inputFile">Load Image</label>
-    <input type="file" id="inputFile" class="h-full w-full opacity-0">
+<app-border-outline class="w-full overflow-hidden h-full relative">
+  <div class="w-full h-full relative flex items-center overflow-hidden justify-center">
+    <img [src]="baseUrl + '/uploads/' + currentImage" alt="Load Image" class="absolute h-full w-full object-contain  text-2xl text-[#E2A23B]">
+    <input type="file" (change)="loadFile($event)" id="inputFile" class="h-full w-full opacity-0">
   </div>
 </app-border-outline>

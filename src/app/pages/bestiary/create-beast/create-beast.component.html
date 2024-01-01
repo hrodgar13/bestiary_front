@@ -71,7 +71,7 @@
           </div>
         </div>
         <div class="flex image-load w-full min-h-[350px]">
-          <app-input-file class="w-full "/>
+          <app-input-file [currentImage]="this.creatureImage" (fileLoaded)="setPhoto($event)" class="w-full "/>
         </div>
       </div>
       <div class="flex items-center justify-between flex-wrap gap-y-4">
