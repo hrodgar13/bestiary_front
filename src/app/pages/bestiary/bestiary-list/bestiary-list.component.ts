@@ -83,6 +83,7 @@ export class BestiaryListComponent extends DestroySubscription implements OnInit
   clearFilter(e: any) {
     e.stopPropagation()
     this.creatureFilter = []
+    this.perPage = 30
     this.getCreatures()
   }
 
@@ -96,7 +97,7 @@ export class BestiaryListComponent extends DestroySubscription implements OnInit
     const windowHeight = window.innerHeight;
     const documentHeight = document.documentElement.scrollHeight;
 
-    if (scrollY + windowHeight === documentHeight && !this.loading) {
+    if (scrollY + windowHeight === documentHeight && !this.loading && this.perPage < this.total) {
       this.perPage += 30
       this.getCreatures()
     }
