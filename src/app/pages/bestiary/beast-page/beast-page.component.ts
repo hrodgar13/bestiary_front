@@ -9,6 +9,7 @@ import {MeasureCode} from "../../../../shared/static/creature/measure.code";
 import {Measure} from "../../../../shared/interfaces/creature/get/measure";
 import {ActionAbilities} from "../../../../shared/static/creature/action-abilities.code";
 import {ActionsAbilities} from "../../../../shared/interfaces/creature/get/actions-abilities";
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-beast-page',
@@ -69,6 +70,7 @@ export class BeastPageComponent extends DestroySubscription implements OnInit {
   }
 
   protected readonly ActionAbilities = ActionAbilities;
+  baseUrl: string = environment.baseUrl;
 
   validateEmptyName(speed: Measure) {
     return speed.attribute ? speed.attribute.name['en'] : ''

@@ -5,9 +5,11 @@
     <div class="p-5 flex flex-col gap-6 w-full">
       <div class="w-full flex justify-between">
         <p class="playfair-font text-4xl text-[#E2A23B]">{{creature.name['en']}}</p>
-        <app-border-outline class="w-[48px] h-[48px] cursor-pointer">
-          <mat-icon class="mx-auto my-auto text-[#E2A23B]">close</mat-icon>
-        </app-border-outline>
+        <a [routerLink]="'../'"  class="w-[48px] h-[48px] cursor-pointer">
+          <app-border-outline>
+            <mat-icon class="mx-auto my-auto text-[#E2A23B]">close</mat-icon>
+          </app-border-outline>
+        </a>
       </div>
       <app-border-outline>
         <div class="w-full poppins-font p-3 bg-[#1E232D] rounded-xl">
@@ -18,7 +20,7 @@
           </p>
         </div>
       </app-border-outline>
-      <div class="w-full flex poppins-font gap-3 max-h-[280px]">
+      <div class="w-full flex poppins-font gap-3">
         <div class="flex font-medium flex-col gap-6 w-full max-w-[70%]">
           <div class="text-xl flex items-center gap-1">
             <p class="text-[#E2A23B]">Armor class:</p>
@@ -78,63 +80,61 @@
               </div>
             </div>
           </div>
+          <div *ngIf="defineCreatureMeasures(MeasureCode.saving_throws).length" class="text-xl flex items-center gap-1">
+            <p class="text-[#E2A23B] text-2xl">Saving throws:</p>
+            <p class="text-white text-2xl"
+               *ngFor="let st of defineCreatureMeasures(MeasureCode.saving_throws)">{{validateEmptyName(st)}} <span
+              *ngIf="st.amt" class="text-[#1DAEFF]">{{(st.amt > 0 ? '+' + st.amt : st.amt) }}; </span></p>
+          </div>
+          <div *ngIf="defineCreatureMeasures(MeasureCode.immunities).length" class="text-xl flex items-center gap-1">
+            <p class="text-[#E2A23B] text-2xl">Damage immunities:</p>
+            <p class="text-white text-2xl"
+               *ngFor="let im of defineCreatureMeasures(MeasureCode.immunities)">{{validateEmptyName(im)}}; </p>
+          </div>
+          <div *ngIf="defineCreatureMeasures(MeasureCode.resists).length" class="text-xl flex items-center gap-1">
+            <p class="text-[#E2A23B] text-2xl">Damage resists:</p>
+            <p class="text-white text-2xl"
+               *ngFor="let res of defineCreatureMeasures(MeasureCode.resists)">{{validateEmptyName(res)}}; </p>
+          </div>
+          <div *ngIf="defineCreatureMeasures(MeasureCode.vulnerabilities).length" class="text-xl flex items-center gap-1">
+            <p class="text-[#E2A23B] text-2xl">Damage resists:</p>
+            <p class="text-white text-2xl"
+               *ngFor="let vul of defineCreatureMeasures(MeasureCode.vulnerabilities)">{{validateEmptyName(vul)}}; </p>
+          </div>
+          <div *ngIf="defineCreatureMeasures(MeasureCode.conditions).length" class="text-xl flex items-center gap-1">
+            <p class="text-[#E2A23B] text-2xl">Immunities to charmed:</p>
+            <p class="text-white text-2xl"
+               *ngFor="let con of defineCreatureMeasures(MeasureCode.conditions)">{{validateEmptyName(con)}}; </p>
+          </div>
+          <div *ngIf="defineCreatureMeasures(MeasureCode.feelings).length" class="text-xl flex items-center gap-1">
+            <p class="text-[#E2A23B] text-2xl">Senses:</p>
+            <p class="text-white text-2xl"
+               *ngFor="let sens of defineCreatureMeasures(MeasureCode.feelings)">{{validateEmptyName(sens)}} <span
+              *ngIf="sens.amt"
+              class="text-[#1DAEFF]">{{(sens.amt > 0 ? '+' + sens.amt : sens.amt) }}</span>{{(sens.isMeasureEnable ? ' ft' : '')}}
+              ; </p>
+          </div>
+          <div *ngIf=" defineCreatureMeasures(MeasureCode.languages).length" class="text-xl flex items-center gap-1">
+            <p class="text-[#E2A23B] text-2xl">Languages:</p>
+            <p class="text-white text-2xl"
+               *ngFor="let lang of defineCreatureMeasures(MeasureCode.languages)">{{validateEmptyName(lang)}} <span
+              *ngIf="lang.amt">{{(lang.amt > 0 ? lang.amt : lang.amt) }}</span>{{(lang.amt ? ' ft' : '')}}; </p>
+          </div>
+          <div *ngIf="creature.danger_lvl && creature.experience" class="text-xl flex items-center gap-1">
+            <p class="text-[#E2A23B] text-2xl">Challenge level:</p>
+            <p class="text-white text-2xl">{{creature.danger_lvl}} ({{creature.experience}})</p>
+          </div>
+          <div *ngIf="creature.mastery_bonus" class="text-xl flex items-center gap-1">
+            <p class="text-[#E2A23B] text-2xl">Mastery bonus:</p>
+            <p class="text-white text-2xl">+{{creature.mastery_bonus}}</p>
+          </div>
         </div>
-        <div class="w-full h-auto max-h-[280px]">
-          <app-border-outline class="relative">
-            <div class="w-full h-full flex items-center justify-center">
-              <img src="assets/images/tarrasque.png" class="w-full h-full object-contain" alt="">
+        <div class="w-full h-auto">
+          <app-border-outline [height]="'h-auto'" class="relative">
+            <div class="w-full h-auto flex items-center justify-center">
+              <img [src]="baseUrl + '/uploads/' + creature.image" class="w-full h-full object-contain" alt="">
             </div>
           </app-border-outline>
-        </div>
-      </div>
-      <div class="w-full flex flex-col gap-5">
-        <div *ngIf="defineCreatureMeasures(MeasureCode.saving_throws).length" class="text-xl flex items-center gap-1">
-          <p class="text-[#E2A23B] text-2xl">Saving throws:</p>
-          <p class="text-white text-2xl"
-             *ngFor="let st of defineCreatureMeasures(MeasureCode.saving_throws)">{{validateEmptyName(st)}} <span
-            *ngIf="st.amt" class="text-[#1DAEFF]">{{(st.amt > 0 ? '+' + st.amt : st.amt) }}; </span></p>
-        </div>
-        <div *ngIf="defineCreatureMeasures(MeasureCode.immunities).length" class="text-xl flex items-center gap-1">
-          <p class="text-[#E2A23B] text-2xl">Damage immunities:</p>
-          <p class="text-white text-2xl"
-             *ngFor="let im of defineCreatureMeasures(MeasureCode.immunities)">{{validateEmptyName(im)}}; </p>
-        </div>
-        <div *ngIf="defineCreatureMeasures(MeasureCode.resists).length" class="text-xl flex items-center gap-1">
-          <p class="text-[#E2A23B] text-2xl">Damage resists:</p>
-          <p class="text-white text-2xl"
-             *ngFor="let res of defineCreatureMeasures(MeasureCode.resists)">{{validateEmptyName(res)}}; </p>
-        </div>
-        <div *ngIf="defineCreatureMeasures(MeasureCode.vulnerabilities).length" class="text-xl flex items-center gap-1">
-          <p class="text-[#E2A23B] text-2xl">Damage resists:</p>
-          <p class="text-white text-2xl"
-             *ngFor="let vul of defineCreatureMeasures(MeasureCode.vulnerabilities)">{{validateEmptyName(vul)}}; </p>
-        </div>
-        <div *ngIf="defineCreatureMeasures(MeasureCode.conditions).length" class="text-xl flex items-center gap-1">
-          <p class="text-[#E2A23B] text-2xl">Immunities to charmed:</p>
-          <p class="text-white text-2xl"
-             *ngFor="let con of defineCreatureMeasures(MeasureCode.conditions)">{{validateEmptyName(con)}}; </p>
-        </div>
-        <div *ngIf="defineCreatureMeasures(MeasureCode.feelings).length" class="text-xl flex items-center gap-1">
-          <p class="text-[#E2A23B] text-2xl">Senses:</p>
-          <p class="text-white text-2xl"
-             *ngFor="let sens of defineCreatureMeasures(MeasureCode.feelings)">{{validateEmptyName(sens)}} <span
-            *ngIf="sens.amt"
-            class="text-[#1DAEFF]">{{(sens.amt > 0 ? '+' + sens.amt : sens.amt) }}</span>{{(sens.isMeasureEnable ? ' ft' : '')}}
-            ; </p>
-        </div>
-        <div *ngIf=" defineCreatureMeasures(MeasureCode.languages).length" class="text-xl flex items-center gap-1">
-          <p class="text-[#E2A23B] text-2xl">Languages:</p>
-          <p class="text-white text-2xl"
-             *ngFor="let lang of defineCreatureMeasures(MeasureCode.languages)">{{validateEmptyName(lang)}} <span
-            *ngIf="lang.amt">{{(lang.amt > 0 ? lang.amt : lang.amt) }}</span>{{(lang.amt ? ' ft' : '')}}; </p>
-        </div>
-        <div *ngIf="creature.danger_lvl && creature.experience" class="text-xl flex items-center gap-1">
-          <p class="text-[#E2A23B] text-2xl">Challenge level:</p>
-          <p class="text-white text-2xl">{{creature.danger_lvl}} ({{creature.experience}})</p>
-        </div>
-        <div *ngIf="creature.mastery_bonus" class="text-xl flex items-center gap-1">
-          <p class="text-[#E2A23B] text-2xl">Mastery bonus:</p>
-          <p class="text-white text-2xl">+{{creature.mastery_bonus}}</p>
         </div>
       </div>
       <div *ngIf="defineActionAbilities(ActionAbilities.abilities).length" class="h-[1px] w-full bg-[#E2A23B]"></div>
@@ -142,8 +142,7 @@
         <p class="playfair-font text-4xl text-[#E2A23B]">Abilities</p>
         <div *ngFor="let action of defineActionAbilities(ActionAbilities.abilities)"
              class="text-xl flex items-start gap-1 pt-3">
-          <p class="text-white text-2xl"><span class="text-[#E2A23B]">{{action.title['en']}}
-            :</span> {{action.description['en']}}</p>
+          <p class="text-white text-2xl"><span class="text-[#E2A23B]">{{action.title['en']}}:</span> {{action.description['en']}}</p>
         </div>
       </div>
       <div *ngIf="defineActionAbilities(ActionAbilities.actions).length" class="h-[1px] w-full bg-[#E2A23B]"></div>
@@ -151,8 +150,7 @@
         <p class="playfair-font text-4xl text-[#E2A23B]">Actions</p>
         <div *ngFor="let action of defineActionAbilities(ActionAbilities.actions)"
              class="text-xl flex items-start gap-1 pt-3">
-          <p class="text-white text-2xl"><span class="text-[#E2A23B]">{{action.title['en']}}
-            :</span> {{action.description['en']}}</p>
+          <p class="text-white text-2xl"><span class="text-[#E2A23B]">{{action.title['en']}}:</span> {{action.description['en']}}</p>
         </div>
       </div>
       <div *ngIf="defineActionAbilities(ActionAbilities.bonusActions).length" class="h-[1px] w-full bg-[#E2A23B]"></div>
@@ -160,8 +158,7 @@
         <p class="playfair-font text-4xl text-[#E2A23B]">Bonus Actions</p>
         <div *ngFor="let action of defineActionAbilities(ActionAbilities.bonusActions)"
              class="text-xl flex items-start gap-1 pt-3">
-          <p class="text-white text-2xl"><span class="text-[#E2A23B]">{{action.title['en']}}
-            :</span> {{action.description['en']}}</p>
+          <p class="text-white text-2xl"><span class="text-[#E2A23B]">{{action.title['en']}}:</span> {{action.description['en']}}</p>
         </div>
       </div>
       <div *ngIf="defineActionAbilities(ActionAbilities.legendaryActions).length"
@@ -170,8 +167,7 @@
         <p class="playfair-font text-4xl text-[#E2A23B]">Legendary Actions</p>
         <div *ngFor="let action of defineActionAbilities(ActionAbilities.legendaryActions)"
              class="text-xl flex items-start gap-1 pt-3">
-          <p class="text-white text-2xl"><span class="text-[#E2A23B]">{{action.title['en']}}
-            :</span> {{action.description['en']}}</p>
+          <p class="text-white text-2xl"><span class="text-[#E2A23B]">{{action.title['en']}}:</span> {{action.description['en']}}</p>
         </div>
       </div>
       <div *ngIf="defineCreatureMeasures(MeasureCode.regions).length" class="h-[1px] w-full bg-[#E2A23B]"></div>
