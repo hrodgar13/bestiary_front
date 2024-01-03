@@ -34,5 +34,25 @@
   "Don't have an account": "Немає аккаунта",
   "Join an order": "Приєднатися до ордену",
   "Register": "Зареєструватись",
-  "ft": "фт"
+  "ft": "фт",
+
+  "Search": "Пошук",
+  "Filters": "Фільтри",
+  "Unfinished Creatures": "Незакінчені Істоти",
+  "Danger": "Небезпека",
+
+  "alignment": "Світогляд",
+  "type": "Тип",
+  "size": "Розмір",
+  "armor_tag": "Тег обладунку",
+  "speeds": "Швидкості",
+  "feelings": "Відчуття",
+  "saving_throws": "Кидки протидії",
+  "skills": "Навички",
+  "conditions": "Іммунітети до станів",
+  "languages": "Мови",
+  "regions": "Регіони проживання",
+  "vulnerabilities_damage": "Вразливості до Шкоди",
+  "resists_damage": "Спротив до Шкоди",
+  "immunities_damage": "Іммунітет до Шкоди"
 }

@@ -7,6 +7,7 @@ import {FiltersModalComponent} from "./filters-modal/filters-modal.component";
 import {Attribute} from "../../../../shared/interfaces/creature/get/attribute";
 import {OutputCreatureItem} from "../../../../shared/interfaces/filters/output-creature-item";
 import {FilteredCreatureList, FilteredCreatureListItem} from "../../../../shared/interfaces/filters/creatures.list";
+import {TranslocoService} from "@ngneat/transloco";
 @Component({
   selector: 'app-bestiary-list',
   templateUrl: './bestiary-list.component.html',
@@ -24,16 +25,18 @@ export class BestiaryListComponent extends DestroySubscription implements OnInit
 
   unfinishedCreatures: FilteredCreatureListItem[] = [];
   private loading: boolean = false;
+  currentLanguage: 'en' | 'ua'  = 'en';
 
   constructor(
     private readonly bestiaryService: BestiaryService,
     private readonly dialog: MatDialog,
-    private el: ElementRef
+    private transloco: TranslocoService
   ) {
     super()
   }
 
   ngOnInit() {
+    this.detectCurrentLang()
     this.isAdminAuthenticated = this.bestiaryService.isAdmin();
     this.getCreatures()
 
@@ -101,5 +104,19 @@ export class BestiaryListComponent extends DestroySubscription implements OnInit
       this.perPage += 30
       this.getCreatures()
     }
+  }
+
+  private detectCurrentLang() {
+    const initLang = this.transloco.getActiveLang()
+
+    if(initLang === 'en' || initLang === 'ua') {
+      this.currentLanguage = initLang
+    }
+
+    this.transloco.langChanges$.pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+      if(data === 'en' || data === 'ua') {
+        this.currentLanguage = data
+      }
+    })
   }
 }

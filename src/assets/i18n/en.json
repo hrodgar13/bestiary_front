@@ -34,5 +34,26 @@
   "Don't have an account": "Don't have an account",
   "Join an order": "Join an order",
   "Register": "Register",
-  "ft": "ft"
+  "ft": "ft",
+
+  "Search": "Search",
+  "Filters": "Filters",
+  "Unfinished Creatures": "Unfinished Creatures",
+  "Danger": "Danger",
+
+
+  "alignment": "Alignment",
+  "type": "Type",
+  "size": "Size",
+  "armor_tag": "Armor Tag",
+  "speeds": "Speeds",
+  "feelings": "Feelings",
+  "saving_throws": "Saving Throws",
+  "skills": "Skills",
+  "conditions": "Immunities to conditions",
+  "languages": "Languages",
+  "regions": "Regions and Habitats",
+  "vulnerabilities_damage": "Vulnerabilities to Damage",
+  "resists_damage": "Resists to Damage",
+  "immunities_damage": "Immunities To Damage"
 }

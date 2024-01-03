@@ -2,7 +2,7 @@
   <div class="mx-2 768:mx-[100px]">
     <div class="flex text-7xl pb-5 text-[#E2A23B] items-center 768:items-center gap-4">
       <h2 class="playfair-font text-4xl 768:text-7xl">
-        BESTIARY
+        {{'Bestiary' | transloco | uppercase}}
       </h2>
       <a routerLink='../create' *ngIf="isAdminAuthenticated"
          class="rounded-xl w-full h-[40px] 768:h-[60px] flex-row bg-gradient-to-r from-[#75e498] to-[#20e074] flex items-center justify-end p-2">
@@ -13,7 +13,7 @@
       class="filters w-full h-[56px] rounded-xl bg-[#1E232D] text-[#B1A79C] border-2 border-[#E2A23B] flex items-center">
       <div class="w-full flex items-center h-full poppins-font p-2">
         <input [(ngModel)]="searchInput" (ngModelChange)="setCreatureNameFilter()"
-               class="w-full h-full text-[#B1A79C] bg-transparent outline-0" type="text" placeholder="Search..."/>
+               class="w-full h-full text-[#B1A79C] bg-transparent outline-0" type="text" placeholder="{{'Search' | transloco}}..."/>
         <mat-icon *ngIf="searchInput" (click)="clearInputFilter()" class="text-[#E2A23B]">close</mat-icon>
       </div>
       <div>
@@ -52,7 +52,7 @@
               d="M18.8357 23.8413C18.5448 23.8413 18.3088 23.6052 18.3088 23.3144V19.4094C18.3088 19.1186 18.5448 18.8826 18.8357 18.8826C19.1265 18.8826 19.3625 19.1186 19.3625 19.4094V23.3144C19.3625 23.6052 19.1265 23.8413 18.8357 23.8413Z"
               fill="#E2A23B"/>
           </svg>
-          <p class="hidden 768:block w-full">Filters</p>
+          <p class="hidden 768:block w-full">{{'Filters' | transloco}}</p>
         </div>
         <button *ngIf="checkFiltersToClear()" (click)="clearFilter($event)" mat-icon-button class="flex">
           <mat-icon class="text-[#E2A23B] absolute right-2">delete_sweep</mat-icon>
@@ -61,12 +61,12 @@
     </div>
   </div>
   <div *ngIf="isAdminAuthenticated && unfinishedCreatures.length" class="pt-5" >
-    <h2 class="text-[#E2A23B] text-3xl mx-2 768:mx-[100px] playfair-font">Unfinished Creatures</h2>
+    <h2 class="text-[#E2A23B] text-3xl mx-2 768:mx-[100px] playfair-font"></h2>
     <div class="grid grid-cols-1 480:grid-cols-2 768:grid-cols-3 gap-3 mx-2 768:mx-[100px] pt-5 items-center">
       <a [routerLink]="['../edit/' + beast.id]" *ngFor="let beast of unfinishedCreatures "
          class="w-full h-[56px] bg-[#1E232D] rounded-xl 768:max-w-[400px] border border-[#E2A23B] cursor-pointer flex items-center">
         <div class="text-[#B1A79C] overflow-ellipsis overflow-hidden whitespace-nowrap w-full p-3 text-xl poppins-font">
-          {{beast.creatureName && beast.creatureName.en ? beast.creatureName.en : 'No Name'}}
+          {{beast.creatureName && beast.creatureName[currentLanguage] ? beast.creatureName[currentLanguage] : 'No Name'}}
         </div>
       </a>
     </div>
@@ -81,7 +81,7 @@
           {{beasts.dangerLvl ? beasts.dangerLvl : '-'}}
         </div>
         <div class="text-[#B1A79C] overflow-ellipsis overflow-hidden whitespace-nowrap w-full p-3 text-xl poppins-font">
-          {{beast.creatureName && beast.creatureName.en ? beast.creatureName.en : 'No Name'}}
+          {{beast.creatureName && beast.creatureName[currentLanguage] ? beast.creatureName[currentLanguage] : 'No Name'}}
         </div>
         <div class="border rounded mr-1 flex items-center justify-center border-[#E2A23B] min-w-[40px] min-h-[40px]"
              *ngIf="isAdminAuthenticated">
