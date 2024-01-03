@@ -22,7 +22,7 @@ const routes: Routes = [
         },
         {
           path: 'bestiary',
-          loadChildren: () => import('../../../../Bestiary/bestiary_front/src/app/pages/bestiary/bestiary.module').then((m) => m.BestiaryModule)
+          loadChildren: () => import('./pages/bestiary/bestiary.module').then((m) => m.BestiaryModule)
         }
       ]
     }
