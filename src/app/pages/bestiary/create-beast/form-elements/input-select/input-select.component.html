@@ -1,0 +1,16 @@
+<div class="flex flex-row items-center justify-between font-semibold h-full w-full">
+  <div class="flex gap-2 h-full w-full justify-end">
+    <app-border-outline class="h-full flex items-center w-full">
+      <div class="flex items-center justify-center h-full w-full">
+        <mat-select [(ngModel)]="_value" class="text-[#B1A79C] vu-select outline-0 bg-transparent w-full px-2"
+                    panelClass="vu-select"
+                    (ngModelChange)="onInputChange($event)" [placeholder]="placeholder | transloco">
+          <mat-option class="text-[#B1A79C] vu-select" [value]="attribute.id" *ngFor="let attribute of selectData">
+            {{attribute.name[currentLanguage]}}
+          </mat-option>
+        </mat-select>
+      </div>
+    </app-border-outline>
+  </div>
+</div>
+

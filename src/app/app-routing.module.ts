@@ -19,6 +19,10 @@ const routes: Routes = [
         {
           path: 'auth',
           loadChildren: () => import('./pages/auth/auth.module').then((m) => m.AuthModule)
+        },
+        {
+          path: 'bestiary',
+          loadChildren: () => import('../../../../Bestiary/bestiary_front/src/app/pages/bestiary/bestiary.module').then((m) => m.BestiaryModule)
         }
       ]
     }

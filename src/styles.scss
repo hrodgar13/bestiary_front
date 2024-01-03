@@ -1,4 +1,3 @@
-
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
@@ -41,6 +40,8 @@ $bestiary_front-theme: mat.define-light-theme((
 @tailwind components;
 @tailwind utilities;
 
+
+
 .playfair-font {
   font-family: 'Playfair Display', sans-serif;
 }
@@ -53,7 +54,32 @@ $bestiary_front-theme: mat.define-light-theme((
   font-family: 'Password', sans-serif;
 }
 
-html, body { height: 100%; }
+html {
+  height: 100%;
+  background: #15181F;
+}
+
+html, body {
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: black;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #E2A23B;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #E2A23B;
+  }
+
+}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .primary-bg {
@@ -65,4 +91,85 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     border: 1px solid #E2A23B;
     border-radius: 0.25rem;
   }
+}
+
+.vu-select {
+  .mat-mdc-select-trigger {
+    color: #B1A79C !important;
+
+    .mat-mdc-select-placeholder {
+      color: #B1A79C !important;
+    }
+  }
+}
+
+
+.vu-select.mat-mdc-select-panel {
+  background: #1E232DFF;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+
+  border: 1px solid #E2A23B;
+
+  .mdc-list-item__primary-text {
+    color: #E2A23B;
+  }
+}
+
+.vu-select {
+  svg {
+    path {
+      fill: #E2A23B;
+    }
+  }
+
+  &.mat-mdc-select-panel {
+    max-width: 90%;
+  }
+}
+
+.mat-mdc-dialog-surface.mdc-dialog__surface {
+  background: transparent!important;
+}
+mat-snack-bar-container {
+  background: #1E232DFF !important;
+  border: 2px solid #E2A23B !important;
+  border-radius: 10px !important;
+
+  .mdc-snackbar__surface {
+    border-radius: 10px !important;
+    background: #1E232DFF !important;
+  }
+}
+
+.mat-mdc-menu-content {
+  background: #1E232DFF !important;
+  border: 2px solid #E2A23B !important;
+
+  .mat-mdc-menu-item-text {
+    color: #B1A79C;
+  }
+}
+.mat-mdc-button-base.mat-mdc-icon-button.mat-unthemed.mdc-icon-button {
+  display: flex;
+}
+
+.mat-mdc-dialog-surface.mdc-dialog__surface {
+  background: #15181F !important;
+  border: 2px solid #E2A23B !important;
+  overflow-x: hidden;
+}
+
+.mat-mdc-dialog-surface.mdc-dialog__surface::-webkit-scrollbar {
+  width: 5px;
+}
+
+.mat-mdc-dialog-surface.mdc-dialog__surface::-webkit-scrollbar-track {
+  background: none;
+}
+
+.mat-mdc-dialog-surface.mdc-dialog__surface::-webkit-scrollbar-thumb {
+  background-color: #E2A23B;
+  border-radius: 20px;
+  margin-left: -5px;
 }

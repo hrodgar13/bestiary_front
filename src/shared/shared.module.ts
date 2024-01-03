@@ -6,13 +6,17 @@ import { SwitchLangComponent } from './components/switch-lang/switch-lang.compon
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatSelectModule} from "@angular/material/select";
 import {MatLegacySelectModule} from "@angular/material/legacy-select";
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {BestiaryModule} from "../app/pages/bestiary/bestiary.module";
 
 
 
 @NgModule({
   declarations: [
     LoaderComponent,
-    SwitchLangComponent
+    SwitchLangComponent,
+    ConfirmDialogComponent
   ],
   exports: [
     LoaderComponent,
@@ -23,6 +27,9 @@ import {MatLegacySelectModule} from "@angular/material/legacy-select";
     MatProgressSpinnerModule,
     MatSlideToggleModule,
     MatLegacySelectModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BestiaryModule,
   ]
 })
 export class SharedModule { }

@@ -5,7 +5,7 @@ import {Router} from "@angular/router";
 import {LoginService} from "../login.service";
 import {takeUntil} from "rxjs";
 import {passwordMatchValidator} from "../../../../shared/helpers/password-match.validators";
-import {Register} from "../../../../shared/interfaces/creature.interface";
+import {Register} from "../../../../shared/interfaces/user/register.interface";
 import {animate, style, transition, trigger} from "@angular/animations";
 
 @Component({

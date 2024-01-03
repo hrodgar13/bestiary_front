@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Observable, tap} from "rxjs";
-import {Token} from "../interfaces/token.interface";
-import {RegisterData} from "../interfaces/create-user.interface";
-import {LoginInterface} from "../interfaces/login.interface";
+import {BehaviorSubject, Observable, tap} from "rxjs";
+import {Token, TokenDecoded} from "../interfaces/user/token.interface";
+import {RegisterData} from "../interfaces/user/create-user.interface";
+import {LoginInterface} from "../interfaces/user/login.interface";
+import jwt_decode from 'jwt-decode'
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
+  accessToken$ = new BehaviorSubject<string | null>(null)
 
   private access_token: string | null = null
 
@@ -23,7 +26,6 @@ export class AuthService {
       tap(
         (
           (Token) => {
-            localStorage.setItem('auth-token', Token.access_token)
             this.setToken(Token.access_token)
           }
         )
@@ -36,7 +38,6 @@ export class AuthService {
       tap(
         (
           (Token) => {
-            localStorage.setItem('auth-token', Token.access_token)
             this.setToken(Token.access_token)
           }
         )
@@ -48,7 +49,10 @@ export class AuthService {
     if(access_token) {
       localStorage.setItem('auth-token', access_token)
     }
-    return this.access_token = access_token
+
+    this.accessToken$.next(access_token)
+
+    this.access_token = access_token
   }
 
   getToken(): string | null {
@@ -56,7 +60,10 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    this.getTokenFromStorage()
+    this.access_token = this.getTokenFromStorage()
+
+    this.accessToken$.next(this.access_token)
+
     return !! this.access_token
   }
 
@@ -67,5 +74,15 @@ export class AuthService {
 
   getTokenFromStorage() {
     return localStorage.getItem('auth-token') ? localStorage.getItem('auth-token') : null
+  }
+
+  isAdminAuthenticated() {
+    if(this.access_token) {
+      const user: TokenDecoded = jwt_decode(this.access_token)
+      //TODO change this if wi will increase amount of roles
+      return user.role === 'ADMIN'
+    }
+
+    return false
   }
 }

@@ -1,0 +1,31 @@
+<div class="w-full">
+  <form *ngIf="measureForm" [formGroup]="measureForm" (ngSubmit)="emitMeasure()" class="w-full flex-col flex gap-2 mb-2 640:flex-row">
+    <div class="flex flex-col gap-2 w-full 640:flex-row 640: items-center">
+      <app-label-text [label]="label"/>
+      <div class="flex items-start justify-between w-full">
+        <app-input-select [attribute_code]="attribute_code" (currentSelected)="setCurrentSelected($event)" class="h-[48px] max-w-[280px] w-full"
+                          [placeholder]="placeholder"/>
+        <app-input-green-btn [route]="attribute_code"/>
+      </div>
+    </div>
+    <div class="flex">
+      <div *ngIf="enableAmt" class="flex items-center gap-2 w-auto">
+        <app-label-text [label]="'Amt'"/>
+        <app-input-number formControlName="amount" class="h-[48px]" [placeholder]="'0'"/>
+      </div>
+      <div *ngIf="enableMsr && !alwaysUseMsr" class="flex items-center gap-2 w-auto">
+        <app-label-text [label]="'Msr'"/>
+        <input type="checkbox" formControlName="measure"/>
+      </div>
+      <button mat-icon-button type="submit">
+        <mat-icon class="text-[#E2A23B]">check_circle</mat-icon>
+      </button>
+    </div>
+  </form>
+  <div class="bg-[#15181F] h-[136px] rounded-xl p-4 border-2 border-[#E2A23B]">
+    <div class="flex items-start flex-wrap overflow-y-auto gap-2 properties-container max-h-full">
+      <app-multi-select-item *ngFor="let item of selectedItems" [displayMeasure]="item"
+                             (deleteItem)="removeItemFromList($event)"/>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<app-border-outline class="w-full overflow-hidden h-full relative">
+  <div class="w-full h-full relative flex items-center overflow-hidden justify-center">
+    <img *ngIf="currentImage; else loadImg" [src]="baseUrl + '/uploads/' + currentImage" alt="" class="absolute text-center h-full w-full object-contain">
+    <ng-template #loadImg>
+      <p class="absolute text-center w-full text-2xl text-[#E2A23B]">{{'Load Image' | transloco}}</p>
+    </ng-template>
+    <input type="file" (change)="loadFile($event)" id="inputFile" class="h-full w-full opacity-0">
+  </div>
+</app-border-outline>

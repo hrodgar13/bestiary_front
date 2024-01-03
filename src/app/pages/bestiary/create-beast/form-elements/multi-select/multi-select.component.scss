@@ -1,0 +1,16 @@
+.properties-container {
+  &::-webkit-scrollbar {
+    width: 5px;
+    height: 90%;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: none;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #E2A23B;
+    border-radius: 20px;
+    margin-left: -5px;
+  }
+}

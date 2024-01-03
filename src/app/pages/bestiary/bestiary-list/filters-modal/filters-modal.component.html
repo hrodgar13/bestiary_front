@@ -1,0 +1,21 @@
+<div class="w-[250px] 640:w-[400px] 768:w-[600px] 1024:w-[800px] h-[400px] 768:h-[340px] rounded-full">
+  <div class="p-2 flex gap-2 flex-col">
+    <div class="flex flex-col border border-[#1E232DFF] rounded p-2" *ngFor="let filter of filters">
+      <h2 class="text-2xl text-[#E2A23B] playfair-font">
+        {{filter.filter_cat | transloco | titlecase}}
+      </h2>
+      <div class="flex flex-wrap gap-2 mt-2.5">
+        <div *ngFor="let value of filter.filter_values">
+          <app-border-outline *ngIf="!detectFilterActivity(value, filter.filter_cat); else activeFilter" (click)="setFilter(value, filter.filter_cat)">
+            <p class="text-[#E2A23B] text-center min-w-[40px] px-2 cursor-pointer">{{value.name[currentLang]}}</p>
+          </app-border-outline>
+          <ng-template #activeFilter>
+            <app-border-outline [bg]="'#E2A23B'" (click)="removeFilter(value, filter.filter_cat)">
+              <p class="bg-[#E2A23B] rounded-xl text-white text-center min-w-[40px] px-2 cursor-pointer">{{value.name[currentLang]}}</p>
+            </app-border-outline>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
