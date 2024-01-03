@@ -4,7 +4,7 @@
     class="flex flex-col relative items-center 768:items-start gap-2 h-auto w-full bg-[#1E232DFF] rounded border-2 border-[#E2A23B]">
     <div class="p-5 flex flex-col gap-6 w-full">
       <div class="w-full flex justify-between">
-        <p class="playfair-font text-4xl text-[#E2A23B] break-words">{{creature.name['en']}}</p>
+        <p class="playfair-font text-4xl text-[#E2A23B] break-words">{{creature.name[currentLang]}}</p>
         <a [routerLink]="'../'" class="w-[48px] h-[48px] cursor-pointer">
           <app-border-outline>
             <mat-icon class="mx-auto my-auto text-[#E2A23B]">close</mat-icon>
@@ -23,58 +23,58 @@
       <div class="w-full flex-col flex poppins-font 1280:flex-row gap-3">
         <div class="flex font-medium flex-col gap-6 w-full 1280:max-w-[70%]">
           <div class="text-xl flex items-center gap-1 flex-wrap">
-            <p class="text-[#E2A23B]">Armor class:</p>
+            <p class="text-[#E2A23B]">{{'Armor class' | transloco}}: </p>
             <p class="text-white">{{creature.armor_class}}</p>
           </div>
           <div class="text-xl flex items-center gap-1 flex-wrap">
-            <p class="text-[#E2A23B]">Hits: </p>
+            <p class="text-[#E2A23B]">{{'Hits' | transloco}}: </p>
             <p class="text-white">{{creature.hits}} (<span class="text-[#1DAEFF]">{{creature.hits_in_dice}}</span>)</p>
           </div>
           <div class="text-xl flex items-center gap-1 flex-wrap">
-            <p class="text-[#E2A23B]">Speeds:</p>
+            <p class="text-[#E2A23B]">{{'speeds' | transloco | titlecase}}: </p>
             <p class="text-white"
-               *ngFor="let speed of defineCreatureMeasures(MeasureCode.speeds)">{{validateEmptyName(speed)}} {{speed.amt}} {{'ft'}}
+               *ngFor="let speed of defineCreatureMeasures(MeasureCode.speeds)">{{validateEmptyName(speed)}} {{speed.amt}} {{'ft' | transloco}}
               ; </p>
           </div>
           <div class="flex items-center justify-around flex-wrap gap-2">
             <div
               class="grid grid-rows-2 overflow-hidden text-[#FAFD5D] text-3xl w-[120px] h-[120px] rounded-xl border-2 border-[#FAFD5D]">
-              <div class="bg-[#1C1E25] border-b border-[#FAFD5D] flex items-center justify-center">STR</div>
+              <div class="bg-[#1C1E25] border-b border-[#FAFD5D] flex items-center justify-center">{{'STR' | transloco}}</div>
               <div class="flex items-center justify-center">{{creature.stat_block.strength}} (<span
                 class="text-[#1DAEFF]">{{calculateModificator(creature.stat_block.strength)}}</span>)
               </div>
             </div>
             <div
               class="grid grid-rows-2 overflow-hidden text-[#FAFD5D] text-3xl w-[120px] h-[120px] rounded-xl border-2 border-[#FAFD5D]">
-              <div class="bg-[#1C1E25] border-b border-[#FAFD5D] flex items-center justify-center">DEX</div>
+              <div class="bg-[#1C1E25] border-b border-[#FAFD5D] flex items-center justify-center">{{'DEX' | transloco}}</div>
               <div class="flex items-center justify-center">{{creature.stat_block.dexterity}} (<span
                 class="text-[#1DAEFF]">{{calculateModificator(creature.stat_block.dexterity)}}</span>)
               </div>
             </div>
             <div
               class="grid grid-rows-2 overflow-hidden text-[#FAFD5D] text-3xl w-[120px] h-[120px] rounded-xl border-2 border-[#FAFD5D]">
-              <div class="bg-[#1C1E25] border-b border-[#FAFD5D] flex items-center justify-center">CON</div>
+              <div class="bg-[#1C1E25] border-b border-[#FAFD5D] flex items-center justify-center">{{'CON' | transloco}}</div>
               <div class="flex items-center justify-center">{{creature.stat_block.constitution}} (<span
                 class="text-[#1DAEFF]">{{calculateModificator(creature.stat_block.constitution)}}</span>)
               </div>
             </div>
             <div
               class="grid grid-rows-2 overflow-hidden text-[#FAFD5D] text-3xl w-[120px] h-[120px] rounded-xl border-2 border-[#FAFD5D]">
-              <div class="bg-[#1C1E25] border-b border-[#FAFD5D] flex items-center justify-center">INT</div>
+              <div class="bg-[#1C1E25] border-b border-[#FAFD5D] flex items-center justify-center">{{'INT' | transloco}}</div>
               <div class="flex items-center justify-center">{{creature.stat_block.intelligence}} (<span
                 class="text-[#1DAEFF]">{{calculateModificator(creature.stat_block.intelligence)}}</span>)
               </div>
             </div>
             <div
               class="grid grid-rows-2 overflow-hidden text-[#FAFD5D] text-3xl w-[120px] h-[120px] rounded-xl border-2 border-[#FAFD5D]">
-              <div class="bg-[#1C1E25] border-b border-[#FAFD5D] flex items-center justify-center">WIS</div>
+              <div class="bg-[#1C1E25] border-b border-[#FAFD5D] flex items-center justify-center">{{'WIS' | transloco}}</div>
               <div class="flex items-center justify-center">{{creature.stat_block.wisdom}} (<span
                 class="text-[#1DAEFF]">{{calculateModificator(creature.stat_block.wisdom)}}</span>)
               </div>
             </div>
             <div
               class="grid grid-rows-2 overflow-hidden text-[#FAFD5D] text-3xl w-[120px] h-[120px] rounded-xl border-2 border-[#FAFD5D]">
-              <div class="bg-[#1C1E25] border-b border-[#FAFD5D] flex items-center justify-center">CHA</div>
+              <div class="bg-[#1C1E25] border-b border-[#FAFD5D] flex items-center justify-center">{{'CHA' | transloco}}</div>
               <div class="flex items-center justify-center">{{creature.stat_block.charisma}} (<span
                 class="text-[#1DAEFF]">{{calculateModificator(creature.stat_block.charisma)}}</span>)
               </div>
@@ -82,49 +82,49 @@
           </div>
           <div *ngIf="defineCreatureMeasures(MeasureCode.saving_throws).length"
                class="flex items-center flex-wrap gap-1">
-            <p class="text-[#E2A23B] text-xl 768:text-2xl">Saving throws:</p>
+            <p class="text-[#E2A23B] text-xl 768:text-2xl">{{'Saving throws:' | transloco}}</p>
             <p class="text-white text-xl 768:text-2xl"
                *ngFor="let st of defineCreatureMeasures(MeasureCode.saving_throws)">{{validateEmptyName(st)}} <span
               *ngIf="st.amt" class="text-[#1DAEFF]">{{(st.amt > 0 ? '+' + st.amt : st.amt) }}; </span></p>
           </div>
           <div *ngIf="defineCreatureMeasures(MeasureCode.immunities).length" class="text-xl flex items-center gap-1  flex-wrap">
-            <p class="text-[#E2A23B] text-xl 768:text-2xl">Damage immunities:</p>
+            <p class="text-[#E2A23B] text-xl 768:text-2xl">{{'immunities_damage' | transloco | titlecase}}:</p>
             <p class="text-white text-xl 768:text-2xl"
                *ngFor="let im of defineCreatureMeasures(MeasureCode.immunities)">{{validateEmptyName(im)}}; </p>
           </div>
           <div *ngIf="defineCreatureMeasures(MeasureCode.resists).length" class="text-xl flex items-center gap-1 flex-wrap">
-            <p class="text-[#E2A23B] text-xl 768:text-2xl">Damage resists:</p>
+            <p class="text-[#E2A23B] text-xl 768:text-2xl">{{'resists_damage' | transloco | titlecase}}:</p>
             <p class="text-white text-xl 768:text-2xl"
                *ngFor="let res of defineCreatureMeasures(MeasureCode.resists)">{{validateEmptyName(res)}}; </p>
           </div>
           <div *ngIf="defineCreatureMeasures(MeasureCode.vulnerabilities).length"
                class="text-xl flex items-center gap-1 flex-wrap">
-            <p class="text-[#E2A23B] text-xl 768:text-2xl">Damage Vulnerabilities:</p>
+            <p class="text-[#E2A23B] text-xl 768:text-2xl">{{'vulnerabilities_damage' | transloco | titlecase}}:</p>
             <p class="text-white text-xl 768:text-2xl"
                *ngFor="let vul of defineCreatureMeasures(MeasureCode.vulnerabilities)">{{validateEmptyName(vul)}}; </p>
           </div>
           <div *ngIf="defineCreatureMeasures(MeasureCode.conditions).length" class="text-xl flex items-center gap-1 flex-wrap">
-            <p class="text-[#E2A23B] text-xl 768:text-2xl">Immunities to charmed:</p>
+            <p class="text-[#E2A23B] text-xl 768:text-2xl">{{'conditions' | transloco | titlecase}}:</p>
             <p class="text-white text-xl 768:text-2xl"
                *ngFor="let con of defineCreatureMeasures(MeasureCode.conditions)">{{validateEmptyName(con)}}; </p>
           </div>
           <div *ngIf="defineCreatureMeasures(MeasureCode.feelings).length" class="text-xl flex items-center gap-1 flex-wrap">
-            <p class="text-[#E2A23B] text-xl 768:text-2xl">Senses:</p>
+            <p class="text-[#E2A23B] text-xl 768:text-2xl">{{'feelings' | transloco | titlecase}}:</p>
             <p class="text-white text-xl 768:text-2xl"
                *ngFor="let sens of defineCreatureMeasures(MeasureCode.feelings)">{{validateEmptyName(sens)}} {{(sens.amt) }}{{(sens.isMeasureEnable ? ' ft' : '')}};</p>
           </div>
           <div *ngIf=" defineCreatureMeasures(MeasureCode.languages).length" class="text-xl flex items-center gap-1 flex-wrap">
-            <p class="text-[#E2A23B] text-xl 768:text-2xl">Languages:</p>
+            <p class="text-[#E2A23B] text-xl 768:text-2xl">{{'languages' | transloco | titlecase}}:</p>
             <p class="text-white text-xl 768:text-2xl"
                *ngFor="let lang of defineCreatureMeasures(MeasureCode.languages)">{{validateEmptyName(lang)}} <span
-              *ngIf="lang.amt">{{(lang.amt > 0 ? lang.amt : lang.amt) }}</span>{{(lang.amt ? ' ft' : '')}}; </p>
+              *ngIf="lang.amt">{{(lang.amt > 0 ? lang.amt : lang.amt) }}</span>{{(lang.amt ? 'ft' : '' | transloco)}}; </p>
           </div>
           <div *ngIf="creature.danger_lvl && creature.experience" class="text-xl flex items-center gap-1 flex-wrap">
-            <p class="text-[#E2A23B] text-xl 768:text-2xl">Challenge level:</p>
+            <p class="text-[#E2A23B] text-xl 768:text-2xl">{{'Challenge level' | transloco}}:</p>
             <p class="text-white text-xl 768:text-2xl">{{creature.danger_lvl}} ({{creature.experience}})</p>
           </div>
           <div *ngIf="creature.mastery_bonus" class="text-xl flex items-center gap-1 flex-wrap">
-            <p class="text-[#E2A23B] text-xl 768:text-2xl">Mastery bonus:</p>
+            <p class="text-[#E2A23B] text-xl 768:text-2xl">{{'Mastery bonus' | transloco}}:</p>
             <p class="text-white text-xl 768:text-2xl">+{{creature.mastery_bonus}}</p>
           </div>
         </div>
@@ -138,40 +138,40 @@
       </div>
       <div *ngIf="defineActionAbilities(ActionAbilities.abilities).length" class="h-[1px] w-full bg-[#E2A23B]"></div>
       <div *ngIf="defineActionAbilities(ActionAbilities.abilities).length">
-        <p class="playfair-font text-4xl text-[#E2A23B]">Abilities</p>
+        <p class="playfair-font text-4xl text-[#E2A23B]">{{'Abilities' | transloco}}</p>
         <div *ngFor="let action of defineActionAbilities(ActionAbilities.abilities)"
              class="text-xl flex flex-col items-start gap-1 pt-3">
-          <p class="text-white text-xl 768:text-2xl"><span class="text-[#E2A23B]">{{action.title['en']}}: </span>{{action.description['en']}}</p>
+          <p class="text-white text-xl 768:text-2xl"><span class="text-[#E2A23B]">{{action.title[currentLang]}}: </span>{{action.description[currentLang]}}</p>
         </div>
       </div>
       <div *ngIf="defineActionAbilities(ActionAbilities.actions).length" class="h-[1px] w-full bg-[#E2A23B]"></div>
       <div *ngIf="defineActionAbilities(ActionAbilities.actions).length">
-        <p class="playfair-font text-4xl text-[#E2A23B]">Actions</p>
+        <p class="playfair-font text-4xl text-[#E2A23B]">{{'Actions' | transloco}}</p>
         <div *ngFor="let action of defineActionAbilities(ActionAbilities.actions)"
              class="text-xl flex flex-col items-start gap-1 pt-3">
-          <p class="text-white text-xl 768:text-2xl"><span class="text-[#E2A23B]">{{action.title['en']}}: </span>{{action.description['en']}}</p>
+          <p class="text-white text-xl 768:text-2xl"><span class="text-[#E2A23B]">{{action.title[currentLang]}}: </span>{{action.description[currentLang]}}</p>
         </div>
       </div>
       <div *ngIf="defineActionAbilities(ActionAbilities.bonusActions).length" class="h-[1px] w-full bg-[#E2A23B]"></div>
       <div *ngIf="defineActionAbilities(ActionAbilities.bonusActions).length">
-        <p class="playfair-font text-4xl text-[#E2A23B]">Bonus Actions</p>
+        <p class="playfair-font text-4xl text-[#E2A23B]">{{'Bonus Actions' | transloco}}</p>
         <div *ngFor="let action of defineActionAbilities(ActionAbilities.bonusActions)"
              class="text-xl flex flex-col items-start gap-1 pt-3">
-          <p class="text-white text-xl 768:text-2xl"><span class="text-[#E2A23B]">{{action.title['en']}}: </span>{{action.description['en']}}</p>
+          <p class="text-white text-xl 768:text-2xl"><span class="text-[#E2A23B]">{{action.title[currentLang]}}: </span>{{action.description[currentLang]}}</p>
         </div>
       </div>
       <div *ngIf="defineActionAbilities(ActionAbilities.legendaryActions).length"
            class="h-[1px] w-full bg-[#E2A23B]"></div>
       <div *ngIf="defineActionAbilities(ActionAbilities.legendaryActions).length">
-        <p class="playfair-font text-4xl text-[#E2A23B]">Legendary Actions</p>
+        <p class="playfair-font text-4xl text-[#E2A23B]">{{'Legendary Actions' | transloco}}</p>
         <div *ngFor="let action of defineActionAbilities(ActionAbilities.legendaryActions)"
              class="text-xl flex flex-col items-start gap-1 pt-3">
-          <p class="text-white text-xl 768:text-2xl"><span class="text-[#E2A23B]">{{action.title['en']}}: </span>{{action.description['en']}}</p>
+          <p class="text-white text-xl 768:text-2xl"><span class="text-[#E2A23B]">{{action.title[currentLang]}}: </span>{{action.description[currentLang]}}</p>
         </div>
       </div>
       <div *ngIf="defineCreatureMeasures(MeasureCode.regions).length" class="h-[1px] w-full bg-[#E2A23B]"></div>
       <div *ngIf="defineCreatureMeasures(MeasureCode.regions).length">
-        <p class="playfair-font text-4xl text-[#E2A23B]">Regions</p>
+        <p class="playfair-font text-4xl text-[#E2A23B]">{{'regions' | transloco | titlecase}}</p>
         <div *ngFor="let region of defineCreatureMeasures(MeasureCode.regions)"
              class="text-xl flex items-start gap-1 pt-3">
           <p class="text-white text-xl 768:text-2xl">{{validateEmptyName(region)}}</p>
@@ -179,8 +179,8 @@
       </div>
       <div *ngIf="creature.description" class="h-[1px] w-full bg-[#E2A23B]"></div>
       <div *ngIf="creature.description">
-        <p class="playfair-font text-4xl text-[#E2A23B]">Description</p>
-        <p class="text-white text-xl 768:text-2xl pt-3">{{creature.description['en']}}</p>
+        <p class="playfair-font text-4xl text-[#E2A23B]">{{'Description' | transloco}}</p>
+        <p class="text-white text-xl 768:text-2xl pt-3">{{creature.description[currentLang]}}</p>
       </div>
     </div>
   </div>

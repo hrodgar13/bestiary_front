@@ -10,6 +10,7 @@ import {Measure} from "../../../../shared/interfaces/creature/get/measure";
 import {ActionAbilities} from "../../../../shared/static/creature/action-abilities.code";
 import {ActionsAbilities} from "../../../../shared/interfaces/creature/get/actions-abilities";
 import {environment} from "../../../../environments/environment";
+import {TranslocoService} from "@ngneat/transloco";
 
 @Component({
   selector: 'app-beast-page',
@@ -20,16 +21,20 @@ export class BeastPageComponent extends DestroySubscription implements OnInit {
   AttributeCode = AttributeCode;
   MeasureCode = MeasureCode;
 
+  currentLang: 'en' | 'ua' = 'en'
+
   creature!: Creature
 
   constructor(
     private readonly bestiaryService: BestiaryService,
-    private readonly attribute_code: ActivatedRoute
+    private readonly attribute_code: ActivatedRoute,
+    private readonly transloco: TranslocoService
   ) {
     super();
   }
 
   ngOnInit(): void {
+    this.defineCurrentLang()
     this.attribute_code.params.pipe(takeUntil(this.destroyStream$)).subscribe(param => {
       if (param['id']) {
         this.getCreature(param['id'])
@@ -58,7 +63,7 @@ export class BeastPageComponent extends DestroySubscription implements OnInit {
 
 
   defineValueByAttribute(attr: AttributeCode) {
-    return this.creature.attributes.find(item => item.attr_cat === attr)?.name['en']
+    return this.creature.attributes.find(item => item.attr_cat === attr)?.name[this.currentLang]
   }
 
   defineCreatureMeasures(msr: MeasureCode): Measure[] {
@@ -73,6 +78,20 @@ export class BeastPageComponent extends DestroySubscription implements OnInit {
   baseUrl: string = environment.baseUrl;
 
   validateEmptyName(speed: Measure) {
-    return speed.attribute ? speed.attribute.name['en'] : ''
+    return speed.attribute ? speed.attribute.name[this.currentLang] : ''
+  }
+
+  private defineCurrentLang() {
+    const initLang = this.transloco.getActiveLang()
+
+    if(initLang === 'en' || initLang === 'ua') {
+      this.currentLang = initLang
+    }
+
+    this.transloco.langChanges$.pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+      if(data === 'en' || data === 'ua') {
+        this.currentLang = data
+      }
+    })
   }
 }
