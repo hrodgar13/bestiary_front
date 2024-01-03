@@ -4,7 +4,7 @@
       <div class="w-full">
         <div class="flex justify-between items-center">
           <h2
-            class="flex items-center justify-center text-3xl font-semibold playfair-font text-[#E2A23B]">{{blockName}}</h2>
+            class="flex items-center justify-center text-3xl font-semibold playfair-font text-[#E2A23B]">{{blockName | transloco}}</h2>
           <div class="flex items-center gap-2">
             <app-label-text [label]="'Title EN'"/>
             <app-input-text formControlName="titleEN" class="h-[48px]" [placeholder]="'Title EN'"/>
@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="flex items-center justify-center">
-      <button class="h-[48px] max-w-[300px] text-center text-2xl bg-[#FAFD5D] font-bold rounded-xl w-full" type="submit">ADD</button>
+      <button class="h-[48px] max-w-[300px] text-center text-2xl bg-[#FAFD5D] font-bold rounded-xl w-full" type="submit">{{'ADD' | transloco}}</button>
     </div>
   </form>
   <div class="w-full mt-7 h-[200px]">
