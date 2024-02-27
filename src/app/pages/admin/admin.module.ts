@@ -6,6 +6,7 @@ import { CreaturesListComponent } from './components/creatures-list/creatures-li
 import { AttributesListComponent } from './components/attributes-list/attributes-list.component';
 import { AdminRequestsListComponent } from './components/admin-requests-list/admin-requests-list.component';
 import {AdminRoutingModule} from "./admin-routing.module";
+import {MatSidenavModule} from "@angular/material/sidenav";
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import {AdminRoutingModule} from "./admin-routing.module";
   ],
   imports: [
     CommonModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    MatSidenavModule
   ],
   providers: [
     AdminService

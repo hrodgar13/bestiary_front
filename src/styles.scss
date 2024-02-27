@@ -173,3 +173,11 @@ mat-snack-bar-container {
   border-radius: 20px;
   margin-left: -5px;
 }
+
+.mat-drawer-content {
+  overflow: hidden !important;
+}
+
+mat-drawer {
+  position: fixed !important;
+}

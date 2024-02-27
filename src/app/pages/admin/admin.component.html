@@ -1,8 +1,19 @@
-<div class="h-full flex">
-  <div class="fixed left-menu 768:max-w-[240px] max-w-[160px] w-full h-full bg-[#1E232DFF] flex flex-col gap-2 px-2 py-2">
-    <a class="text-2xl text-[#E2A23B]" routerLinkActive="text-[#FFFFFF]" *ngFor="let route of routes" [routerLink]="[route.route]">{{route.title}}</a>
+<mat-drawer-container class="example-container h-full mt-[48px] 768:mt-[112px]">
+  <div class="h-full flex">
+    <div
+      class="fixed left-menu 768:max-w-[240px] max-w-[160px] w-full h-full hidden 768:flex bg-[#1E232DFF]  flex-col gap-2 px-2 py-2">
+      <a class="text-2xl text-[#E2A23B]" routerLinkActive="text-[#FFFFFF]" *ngFor="let route of routes"
+         [routerLink]="[route.route]">{{route.title}}</a>
+    </div>
+    <button (click)="AdminDrawer.toggle()">
+      X
+    </button>
+    <mat-drawer #AdminDrawer>
+      <a class="text-2xl text-[#E2A23B]" routerLinkActive="text-[#FFFFFF]" *ngFor="let route of routes"
+         [routerLink]="[route.route]">{{route.title}}</a>
+    </mat-drawer>
+    <div class="768:pl-[240px] pl-[160px]">
+      <router-outlet/>
+    </div>
   </div>
-  <div class="768:pl-[240px] pl-[160px]">
-    <router-outlet />
-  </div>
-</div>
+</mat-drawer-container>
