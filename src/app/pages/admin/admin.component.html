@@ -1,2 +1,8 @@
-<p>admin works!</p>
-<router-outlet />
+<div class="h-full flex">
+  <div class="fixed left-menu 768:max-w-[240px] max-w-[160px] w-full h-full bg-[#1E232DFF] flex flex-col gap-2 px-2 py-2">
+    <a class="text-2xl text-[#E2A23B]" routerLinkActive="text-[#FFFFFF]" *ngFor="let route of routes" [routerLink]="[route.route]">{{route.title}}</a>
+  </div>
+  <div class="768:pl-[240px] pl-[160px]">
+    <router-outlet />
+  </div>
+</div>

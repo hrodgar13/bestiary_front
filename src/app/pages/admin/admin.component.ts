@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Route} from "../../../shared/interfaces/route.interface";
 
 @Component({
   selector: 'app-admin',
@@ -6,5 +7,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent {
+  routes: Route[] = [
+    {
+      route: 'creatures',
+      title: 'Creatures'
+    },
+    {
+      route: 'attributes',
+      title: 'Attributes'
+    },
+    {
+      title: 'Request',
+      route: 'requests'
+    },
+  ];
 
 }
