@@ -23,6 +23,10 @@ const routes: Routes = [
         {
           path: 'bestiary',
           loadChildren: () => import('./pages/bestiary/bestiary.module').then((m) => m.BestiaryModule)
+        },
+        {
+          path: 'admin',
+          loadChildren: () => import('./pages/admin/admin.module').then((m) => m.AdminModule)
         }
       ]
     }

@@ -169,7 +169,7 @@
                 </svg>
       </div>
       <mat-menu class="rounded-[10px]" #loginMenu>
-        <button mat-menu-item>Admin</button>
+        <button mat-menu-item [routerLink]="['/' + 'admin']" >Admin</button>
         <button mat-menu-item>Profile</button>
         <button (click)="logout()" mat-menu-item>Logout</button>
       </mat-menu>
