@@ -33,6 +33,7 @@ export class BestiaryListComponent extends DestroySubscription implements OnInit
 
   clearInputFilter() {
     this.searchInput = ''
+    this.search = ''
   }
 
   setCreatureNameFilter() {

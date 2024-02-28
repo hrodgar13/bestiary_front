@@ -14,6 +14,7 @@ import {RouterLink} from "@angular/router";
 import {MatIconModule} from "@angular/material/icon";
 import {CreatureListService} from "./components/creatures-list/creature-list.service";
 import {BorderOutlineComponent} from "./components/border-outline/border-outline.component";
+import { CreaturesFilterComponent } from './components/creatures-filter/creatures-filter.component';
 
 
 
@@ -24,7 +25,8 @@ import {BorderOutlineComponent} from "./components/border-outline/border-outline
     ConfirmDialogComponent,
     CreaturesListComponent,
     DangerSeparatorComponent,
-    BorderOutlineComponent
+    BorderOutlineComponent,
+    CreaturesFilterComponent
   ],
   exports: [
     BorderOutlineComponent,

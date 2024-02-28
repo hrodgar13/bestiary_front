@@ -45,12 +45,9 @@ export class BeastPageComponent extends DestroySubscription implements OnInit {
   private getCreature(id: number) {
     this.bestiaryService.getCreatureById(id).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
       this.creature = data
-
-      console.log(this.creature)
     })
   }
 
-  //
   calculateModificator(income: number | null): string {
     if(income) {
       const modif = Math.floor((income - 10) / 2)

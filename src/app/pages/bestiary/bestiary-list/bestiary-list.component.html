@@ -60,16 +60,5 @@
       </div>
     </div>
   </div>
-<!--  <div *ngIf="isAdminAuthenticated && unfinishedCreatures.length" class="pt-5" >-->
-<!--    <h2 class="text-[#E2A23B] text-3xl mx-2 768:mx-[100px] playfair-font"></h2>-->
-<!--    <div class="grid grid-cols-1 480:grid-cols-2 768:grid-cols-3 gap-3 mx-2 768:mx-[100px] pt-5 items-center">-->
-<!--      <a [routerLink]="['../edit/' + beast.id]" *ngFor="let beast of unfinishedCreatures "-->
-<!--         class="w-full h-[56px] bg-[#1E232D] rounded-xl 768:max-w-[400px] border border-[#E2A23B] cursor-pointer flex items-center">-->
-<!--        <div class="text-[#B1A79C] overflow-ellipsis overflow-hidden whitespace-nowrap w-full p-3 text-xl poppins-font">-->
-<!--          {{beast.creatureName && beast.creatureName[currentLanguage] ? beast.creatureName[currentLanguage] : 'No Name'}}-->
-<!--        </div>-->
-<!--      </a>-->
-<!--    </div>-->
-<!--  </div>-->
   <app-creatures-list [finished]="'TRUE'" [perPage]="perPage" [creatureFilter]="creatureFilter" [searchInput]="search"/>
 </div>
