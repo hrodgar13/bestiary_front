@@ -1,13 +1,9 @@
-import {Component, ElementRef, HostListener, OnInit} from '@angular/core';
-import {BestiaryService} from "../bestiary.service";
+import {Component, OnInit} from '@angular/core';
 import {DestroySubscription} from "../../../../shared/helpers/destroy-subscribtion";
 import {debounceTime, Subject, takeUntil} from "rxjs";
 import {MatDialog} from "@angular/material/dialog";
 import {FiltersModalComponent} from "./filters-modal/filters-modal.component";
-import {Attribute} from "../../../../shared/interfaces/creature/get/attribute";
 import {OutputCreatureItem} from "../../../../shared/interfaces/filters/output-creature-item";
-import {FilteredCreatureList, FilteredCreatureListItem} from "../../../../shared/interfaces/filters/creatures.list";
-import {TranslocoService} from "@ngneat/transloco";
 @Component({
   selector: 'app-bestiary-list',
   templateUrl: './bestiary-list.component.html',
@@ -16,58 +12,27 @@ import {TranslocoService} from "@ngneat/transloco";
 export class BestiaryListComponent extends DestroySubscription implements OnInit{
   isAdminAuthenticated = false;
   searchInput: string = '';
-  perPage = 30
-  creaturesList: FilteredCreatureList[] = [];
-  total: number = 0
 
   creatureFilter: OutputCreatureItem[] = []
   private filterSubject = new Subject<string>();
+  perPage = 30;
+  search: string = '';
 
-  unfinishedCreatures: FilteredCreatureListItem[] = [];
-  private loading: boolean = false;
-  currentLanguage: 'en' | 'ua'  = 'en';
 
   constructor(
-    private readonly bestiaryService: BestiaryService,
     private readonly dialog: MatDialog,
-    private transloco: TranslocoService
   ) {
     super()
   }
 
   ngOnInit() {
-    this.detectCurrentLang()
-    this.isAdminAuthenticated = this.bestiaryService.isAdmin();
-    this.getCreatures()
-
     this.filterSubject.pipe(debounceTime(1000), takeUntil(this.destroyStream$)).subscribe((value) => {
-      this.searchInput = value.toString()
-
-      this.getCreatures()
+      this.search = value.toString()
     })
-
-    if(this.isAdminAuthenticated) {
-      this.getUnfinishedCreatures()
-    }
   }
 
   clearInputFilter() {
     this.searchInput = ''
-  }
-
-  getUnfinishedCreatures() {
-    this.bestiaryService.getCreatures([], '', 0, 'FALSE').pipe(takeUntil(this.destroyStream$)).subscribe(data => {
-      this.unfinishedCreatures = data.creatures.flatMap(item => item.creature)
-    })
-  }
-
-  getCreatures() {
-    this.loading = true
-    this.bestiaryService.getCreatures(this.creatureFilter, this.searchInput, this.perPage, 'TRUE').pipe(takeUntil(this.destroyStream$)).subscribe(data => {
-      this.creaturesList = data.creatures
-      this.total = data.total
-      this.loading = false
-    })
   }
 
   setCreatureNameFilter() {
@@ -78,8 +43,7 @@ export class BestiaryListComponent extends DestroySubscription implements OnInit
     const dialogRef = this.dialog.open(FiltersModalComponent, {data: this.creatureFilter})
 
     dialogRef.afterClosed().pipe(takeUntil(this.destroyStream$)).subscribe(data => {
-      this.creatureFilter = data
-      this.getCreatures()
+      this.creatureFilter = [...data]
     })
   }
 
@@ -87,36 +51,10 @@ export class BestiaryListComponent extends DestroySubscription implements OnInit
     e.stopPropagation()
     this.creatureFilter = []
     this.perPage = 30
-    this.getCreatures()
   }
 
   checkFiltersToClear() {
     return !! this.creatureFilter.length
   }
 
-  @HostListener('window:scroll', ['$event'])
-  onScroll($event: any) {
-    const scrollY = window.scrollY || window.pageYOffset;
-    const windowHeight = window.innerHeight;
-    const documentHeight = document.documentElement.scrollHeight;
-
-    if (scrollY + windowHeight === documentHeight && !this.loading && this.perPage < this.total) {
-      this.perPage += 30
-      this.getCreatures()
-    }
-  }
-
-  private detectCurrentLang() {
-    const initLang = this.transloco.getActiveLang()
-
-    if(initLang === 'en' || initLang === 'ua') {
-      this.currentLanguage = initLang
-    }
-
-    this.transloco.langChanges$.pipe(takeUntil(this.destroyStream$)).subscribe(data => {
-      if(data === 'en' || data === 'ua') {
-        this.currentLanguage = data
-      }
-    })
-  }
 }

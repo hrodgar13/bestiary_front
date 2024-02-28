@@ -13,33 +13,8 @@ export class BestiaryService {
   filterSubject$ = new BehaviorSubject<any[] | null>(null)
 
   constructor(
-    private readonly authService: AuthService,
     private readonly apiService: ApiService
   ) {
-  }
-
-  isAdmin() {
-    return this.authService.isAdminAuthenticated();
-  }
-
-  getCreatures(filter: OutputCreatureItem[], search: string, perPage: number, finished?: string): Observable<FilteredCreatureDataMetaDto> {
-
-    const refactoredFilters: CreatureListFilter[] = []
-
-    filter.forEach(item => {
-      const idx = refactoredFilters.findIndex(itemIdx => itemIdx.filter_cat === item.msr_cat)
-
-      if(idx === -1) {
-        refactoredFilters.push({
-          filter_cat: item.msr_cat,
-          filter_values: [item.attribute]
-        })
-      } else {
-        refactoredFilters[idx].filter_values.push(item.attribute)
-      }
-    })
-
-    return this.apiService.getCreaturesList(refactoredFilters,search, perPage, finished)
   }
 
   getCreatureById(id: number) {

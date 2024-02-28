@@ -8,7 +8,6 @@ import {BestiaryService} from "./bestiary.service";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {InputTextComponent} from './create-beast/form-elements/input-text/input-text.component';
 import {InputSelectComponent} from './create-beast/form-elements/input-select/input-select.component';
-import {BorderOutlineComponent} from './create-beast/border-outline/border-outline.component';
 import {MatSelectModule} from "@angular/material/select";
 import {MultiSelectComponent} from './create-beast/form-elements/multi-select/multi-select.component';
 import {MatButtonModule} from "@angular/material/button";
@@ -32,9 +31,9 @@ import {
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {TranslocoPipe} from "@ngneat/transloco";
 import {CreatureService} from "./create-beast/creature.service";
-import { DangerSeparatorComponent } from './bestiary-list/danger-separator/danger-separator.component';
 import { FiltersModalComponent } from './bestiary-list/filters-modal/filters-modal.component';
 import { BeastPageComponent } from './beast-page/beast-page.component';
+import {SharedModule} from "../../../shared/shared.module";
 
 
 @NgModule({
@@ -48,7 +47,6 @@ import { BeastPageComponent } from './beast-page/beast-page.component';
     BestiaryListComponent,
     InputTextComponent,
     InputSelectComponent,
-    BorderOutlineComponent,
     MultiSelectComponent,
     LabelTextComponent,
     InputGreenBtnComponent,
@@ -60,12 +58,8 @@ import { BeastPageComponent } from './beast-page/beast-page.component';
     TitleTextInputComponent,
     TextAreaInputComponent,
     TitleTextItemComponent,
-    DangerSeparatorComponent,
     FiltersModalComponent,
     BeastPageComponent,
-  ],
-  exports: [
-    BorderOutlineComponent
   ],
   imports: [
     HttpClientModule,
@@ -79,7 +73,8 @@ import { BeastPageComponent } from './beast-page/beast-page.component';
     MatSnackBarModule,
     MatDialogModule,
     MatButtonToggleModule,
-    TranslocoPipe
+    TranslocoPipe,
+    SharedModule
   ]
 })
 export class BestiaryModule {

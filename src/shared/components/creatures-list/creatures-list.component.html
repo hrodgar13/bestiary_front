@@ -1,0 +1,21 @@
+  <div class="pt-5" *ngFor="let beasts of creaturesList ">
+    <app-danger-separator [dangerLVL]="beasts.dangerLvl"/>
+    <div class="grid grid-cols-1 480:grid-cols-2 768:grid-cols-3 gap-3 mx-2 768:mx-[100px] pt-5 items-center">
+      <a [routerLink]="['../list/' + beast.id]" *ngFor="let beast of beasts.creature"
+         class="w-full h-[56px] bg-[#1E232D] rounded-xl 768:max-w-[400px] border border-[#E2A23B] cursor-pointer flex items-center">
+        <div
+          class="w-16 border-r border-[#E2A23B] flex items-center justify-center poppins-font text-[#E2A23B] h-full text-3xl">
+          {{beasts.dangerLvl ? beasts.dangerLvl : '-'}}
+        </div>
+        <div class="text-[#B1A79C] overflow-ellipsis overflow-hidden whitespace-nowrap w-full p-3 text-xl poppins-font">
+          {{beast.creatureName && beast.creatureName[currentLanguage] ? beast.creatureName[currentLanguage] : 'No Name'}}
+        </div>
+        <div class="border rounded mr-1 flex items-center justify-center border-[#E2A23B] min-w-[40px] min-h-[40px]"
+             *ngIf="isAdminAuthenticated">
+          <a class="flex items-center justify-center" [routerLink]="'../edit/' + beast.id">
+            <mat-icon class="text-[#E2A23B]">edit</mat-icon>
+          </a>
+        </div>
+      </a>
+    </div>
+  </div>

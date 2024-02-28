@@ -4,11 +4,16 @@ import { LoaderComponent } from './components/loader/loader.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import { SwitchLangComponent } from './components/switch-lang/switch-lang.component';
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
-import {MatSelectModule} from "@angular/material/select";
 import {MatLegacySelectModule} from "@angular/material/legacy-select";
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {BestiaryModule} from "../app/pages/bestiary/bestiary.module";
+import {CreaturesListComponent} from "./components/creatures-list/creatures-list.component";
+import {DangerSeparatorComponent} from "./components/creatures-list/danger-separator/danger-separator.component";
+import {TranslocoPipe} from "@ngneat/transloco";
+import {RouterLink} from "@angular/router";
+import {MatIconModule} from "@angular/material/icon";
+import {CreatureListService} from "./components/creatures-list/creature-list.service";
+import {BorderOutlineComponent} from "./components/border-outline/border-outline.component";
 
 
 
@@ -16,11 +21,17 @@ import {BestiaryModule} from "../app/pages/bestiary/bestiary.module";
   declarations: [
     LoaderComponent,
     SwitchLangComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    CreaturesListComponent,
+    DangerSeparatorComponent,
+    BorderOutlineComponent
   ],
   exports: [
+    BorderOutlineComponent,
     LoaderComponent,
-    SwitchLangComponent
+    SwitchLangComponent,
+    CreaturesListComponent,
+    DangerSeparatorComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +40,12 @@ import {BestiaryModule} from "../app/pages/bestiary/bestiary.module";
     MatLegacySelectModule,
     FormsModule,
     ReactiveFormsModule,
-    BestiaryModule,
+    TranslocoPipe,
+    RouterLink,
+    MatIconModule,
+  ],
+  providers: [
+      CreatureListService
   ]
 })
 export class SharedModule { }

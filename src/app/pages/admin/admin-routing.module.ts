@@ -2,7 +2,7 @@ import {RouterModule, Routes} from "@angular/router";
 import {NgModule} from "@angular/core";
 import {AdminComponent} from "./admin.component";
 import {AdminGuard} from "../../../shared/guards/admin.guard";
-import {CreaturesListComponent} from "./components/creatures-list/creatures-list.component";
+import {UnfinishedCreaturesListComponent} from "./components/creatures-list/unfinished-creatures-list.component";
 import {AttributesListComponent} from "./components/attributes-list/attributes-list.component";
 import {AdminRequestsListComponent} from "./components/admin-requests-list/admin-requests-list.component";
 
@@ -19,7 +19,7 @@ const routes: Routes = [
       },
       {
         path: 'creatures',
-        component: CreaturesListComponent
+        component: UnfinishedCreaturesListComponent
       },
       {
         path: 'attributes',
