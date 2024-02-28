@@ -12,6 +12,7 @@ import {
 } from "../interfaces/filters/creatures.list";
 import {OutputCreatureItem} from "../interfaces/filters/output-creature-item";
 import {FileUpload} from "../interfaces/file/file-upload.interface";
+import {MessageI} from "../interfaces/message.interface";
 
 @Injectable({
     providedIn: 'root'
@@ -85,5 +86,9 @@ export class ApiService {
 
   removePhoto(selectedImage: string) {
     return this.http.delete<any>(`api/file-upload/remove/${selectedImage}`);
+  }
+
+  deleteFilter(id: number) {
+    return this.http.delete<MessageI>(`api/attribute/${id}`)
   }
 }

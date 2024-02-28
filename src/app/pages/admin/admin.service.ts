@@ -17,4 +17,8 @@ export class AdminService {
   getFilters() {
     return this.apiService.getFilters()
   }
+
+  deleteFilter(id: number) {
+    return this.apiService.deleteFilter(id)
+  }
 }
