@@ -181,3 +181,7 @@ mat-snack-bar-container {
 mat-drawer {
   position: fixed !important;
 }
+
+.mat-drawer {
+  animation-duration: 500ms;
+}
