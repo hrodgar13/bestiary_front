@@ -7,6 +7,10 @@ import { AttributesListComponent } from './components/attributes-list/attributes
 import { AdminRequestsListComponent } from './components/admin-requests-list/admin-requests-list.component';
 import {AdminRoutingModule} from "./admin-routing.module";
 import {MatSidenavModule} from "@angular/material/sidenav";
+import {TranslocoPipe} from "@ngneat/transloco";
+import {MatIconModule} from "@angular/material/icon";
+import {SharedModule} from "../../../shared/shared.module";
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 @NgModule({
@@ -19,7 +23,11 @@ import {MatSidenavModule} from "@angular/material/sidenav";
   imports: [
     CommonModule,
     AdminRoutingModule,
-    MatSidenavModule
+    MatDialogModule,
+    MatSidenavModule,
+    TranslocoPipe,
+    MatIconModule,
+    SharedModule
   ],
   providers: [
     AdminService

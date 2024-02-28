@@ -13,6 +13,7 @@ export class BestiaryService {
   filterSubject$ = new BehaviorSubject<any[] | null>(null)
 
   constructor(
+    private authService: AuthService,
     private readonly apiService: ApiService
   ) {
   }
@@ -21,12 +22,12 @@ export class BestiaryService {
     return this.apiService.getCreatureById(id)
   }
 
-  getUnfinishedCreatures() {
-    return this.apiService.getUnfinishedCreatures()
-  }
-
 
   getFilters() {
     return this.apiService.getFilters()
+  }
+
+  isAdmin() {
+    return this.authService.isAdminAuthenticated()
   }
 }
