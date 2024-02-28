@@ -25,10 +25,6 @@ export class CreatureService {
         return this.apiService.getCreatureById(creatureId)
     }
 
-    createAttribute(payload: CreateAttribute) {
-        return this.apiService.createAttribute(payload)
-    }
-
     getDataForSelect(route: string) {
         return this.apiService.getDataForSelect(route)
     }

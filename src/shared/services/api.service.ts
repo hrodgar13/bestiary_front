@@ -13,6 +13,7 @@ import {
 import {OutputCreatureItem} from "../interfaces/filters/output-creature-item";
 import {FileUpload} from "../interfaces/file/file-upload.interface";
 import {MessageI} from "../interfaces/message.interface";
+import {Translation} from "@ngneat/transloco";
 
 @Injectable({
     providedIn: 'root'
@@ -49,10 +50,6 @@ export class ApiService {
         return this.http.patch(`api/creature/${creatureId}`, creaturePayload)
     }
 
-    getUnfinishedCreatures() {
-        return this.http.get<any[]>(`api/creature-unfinished`);
-    }
-
     // getAttributes(key: string): Observable<FilterLabelValues[]> {
     //   return this.http.get<FilterLabelValues[]>(`api/${key}`)
     // }
@@ -65,8 +62,8 @@ export class ApiService {
             }, new HttpParams())
     }
 
-    createAttribute(payload: CreateAttribute) {
-        return this.http.post(`api/attribute`, payload)
+    createAttribute(payload: CreateAttribute): Observable<Attribute> {
+        return this.http.post<Attribute>(`api/attribute`, payload)
     }
 
     getDataForSelect(route: string): Observable<Attribute[]> {
@@ -90,5 +87,9 @@ export class ApiService {
 
   deleteFilter(id: number) {
     return this.http.delete<MessageI>(`api/attribute/${id}`)
+  }
+
+  editAttribute(payload: Translation, id: number): Observable<Attribute> {
+    return this.http.patch<Attribute>(`api/attribute/${id}`, payload)
   }
 }

@@ -2,15 +2,17 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {takeUntil} from "rxjs";
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {AttributeCode} from "../../static/creature/attributes.code";
 import {DestroySubscription} from "../../helpers/destroy-subscribtion";
-import {CreatureService} from "../../../app/pages/bestiary/create-beast/creature.service";
 import {CreateAttribute} from "../../interfaces/creature/create/create-attribute";
+import {Translation} from "../../interfaces/creature/get/translation";
+import {ApiService} from "../../services/api.service";
 
 export interface MatData {
   attr_cat: AttributeCode | string,
-  title: string
+  title: string,
+  initData?: Translation
+  attributeId?: number
 }
 
 @Component({
@@ -20,24 +22,25 @@ export interface MatData {
 })
 export class PropertyModalComponent extends DestroySubscription implements OnInit {
   modalForm!: FormGroup;
-  title: string = ''
+  title: string = 'ADD'
 
   constructor(
+    public dialogRef: MatDialogRef<PropertyModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: MatData,
     private formBuilder: FormBuilder,
-    private creatureService: CreatureService,
-    private matSnack: MatSnackBar,
-    public dialogRef: MatDialogRef<PropertyModalComponent>
+    private apiService: ApiService,
   ) {
     super();
   }
 
   ngOnInit() {
-    this.title = this.data.title
+    if(this.data.title) {
+      this.title = this.data.title
+    }
 
     this.modalForm = this.formBuilder.group({
-      en: [null, Validators.required],
-      ua: [null, Validators.required]
+      en: [this.data.initData?.en, Validators.required],
+      ua: [this.data.initData?.ua, Validators.required]
     })
   }
 
@@ -54,8 +57,15 @@ export class PropertyModalComponent extends DestroySubscription implements OnIni
       }
     }
 
-    this.creatureService.createAttribute(payload).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+    if(!this.data.attributeId) {
 
-    })
+      this.apiService.createAttribute(payload).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+        this.dialogRef.close(data)
+      })
+    } else {
+      this.apiService.editAttribute(payload, this.data.attributeId).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+        this.dialogRef.close(data)
+      })
+    }
   }
 }
