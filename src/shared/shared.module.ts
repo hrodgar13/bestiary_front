@@ -16,6 +16,8 @@ import {CreatureListService} from "./components/creatures-list/creature-list.ser
 import {BorderOutlineComponent} from "./components/border-outline/border-outline.component";
 import { CreaturesFilterComponent } from './components/creatures-filter/creatures-filter.component';
 import {MatButtonModule} from "@angular/material/button";
+import {PropertyModalComponent} from "./components/property-modal/property-modal.component";
+import {InputTextComponent} from "./components/input-text/input-text.component";
 
 
 
@@ -27,7 +29,9 @@ import {MatButtonModule} from "@angular/material/button";
     CreaturesListComponent,
     DangerSeparatorComponent,
     BorderOutlineComponent,
-    CreaturesFilterComponent
+    CreaturesFilterComponent,
+    PropertyModalComponent,
+    InputTextComponent
   ],
   exports: [
     BorderOutlineComponent,
@@ -35,7 +39,8 @@ import {MatButtonModule} from "@angular/material/button";
     SwitchLangComponent,
     CreaturesListComponent,
     DangerSeparatorComponent,
-    CreaturesFilterComponent
+    CreaturesFilterComponent,
+    InputTextComponent
   ],
   imports: [
     CommonModule,

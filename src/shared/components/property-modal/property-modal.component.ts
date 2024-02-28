@@ -1,12 +1,12 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {DestroySubscription} from "../../../../../shared/helpers/destroy-subscribtion";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {takeUntil} from "rxjs";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {CreateAttribute} from "../../../../../shared/interfaces/creature/create/create-attribute";
-import {CreatureService} from "../creature.service";
-import {AttributeCode} from "../../../../../shared/static/creature/attributes.code";
+import {AttributeCode} from "../../static/creature/attributes.code";
+import {DestroySubscription} from "../../helpers/destroy-subscribtion";
+import {CreatureService} from "../../../app/pages/bestiary/create-beast/creature.service";
+import {CreateAttribute} from "../../interfaces/creature/create/create-attribute";
 
 export interface MatData {
   attr_cat: AttributeCode | string,

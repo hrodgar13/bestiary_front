@@ -6,7 +6,6 @@ import {BestiaryRoutingModule} from "./bestiary-routing.module";
 import {MatIconModule} from "@angular/material/icon";
 import {BestiaryService} from "./bestiary.service";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {InputTextComponent} from './create-beast/form-elements/input-text/input-text.component';
 import {InputSelectComponent} from './create-beast/form-elements/input-select/input-select.component';
 import {MatSelectModule} from "@angular/material/select";
 import {MultiSelectComponent} from './create-beast/form-elements/multi-select/multi-select.component';
@@ -19,7 +18,6 @@ import {
   MultiSelectItemComponent
 } from './create-beast/form-elements/multi-select/multi-select-item/multi-select-item.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
-import {PropertyModalComponent} from './create-beast/property-modal/property-modal.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {InputFileComponent} from './create-beast/form-elements/input-file/input-file.component';
 import {StatblockInputComponent} from './create-beast/form-elements/statblock-input/statblock-input.component';
@@ -40,19 +38,16 @@ import {SharedModule} from "../../../shared/shared.module";
   providers: [
     BestiaryService,
     CreatureService,
-    InputTextComponent
   ],
   declarations: [
     CreateBeastComponent,
     BestiaryListComponent,
-    InputTextComponent,
     InputSelectComponent,
     MultiSelectComponent,
     LabelTextComponent,
     InputGreenBtnComponent,
     InputNumberComponent,
     MultiSelectItemComponent,
-    PropertyModalComponent,
     InputFileComponent,
     StatblockInputComponent,
     TitleTextInputComponent,
