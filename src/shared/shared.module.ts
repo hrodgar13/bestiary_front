@@ -15,6 +15,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {CreatureListService} from "./components/creatures-list/creature-list.service";
 import {BorderOutlineComponent} from "./components/border-outline/border-outline.component";
 import { CreaturesFilterComponent } from './components/creatures-filter/creatures-filter.component';
+import {MatButtonModule} from "@angular/material/button";
 
 
 
@@ -33,7 +34,8 @@ import { CreaturesFilterComponent } from './components/creatures-filter/creature
     LoaderComponent,
     SwitchLangComponent,
     CreaturesListComponent,
-    DangerSeparatorComponent
+    DangerSeparatorComponent,
+    CreaturesFilterComponent
   ],
   imports: [
     CommonModule,
@@ -45,6 +47,7 @@ import { CreaturesFilterComponent } from './components/creatures-filter/creature
     TranslocoPipe,
     RouterLink,
     MatIconModule,
+    MatButtonModule,
   ],
   providers: [
       CreatureListService
