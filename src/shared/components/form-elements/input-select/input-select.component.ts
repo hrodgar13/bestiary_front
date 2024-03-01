@@ -1,13 +1,12 @@
 import {Component, EventEmitter, forwardRef, Input, OnInit, Output} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
-import {DestroySubscription} from "../../../../../../shared/helpers/destroy-subscribtion";
 import {takeUntil} from "rxjs";
-import {BestiaryService} from "../../../bestiary.service";
+import {DestroySubscription} from "../../../helpers/destroy-subscribtion";
+import {AttributeCode} from "../../../static/creature/attributes.code";
+import {Attribute} from "../../../interfaces/creature/get/attribute";
+import {BestiaryService} from "../../../../app/pages/bestiary/bestiary.service";
 import {TranslocoService} from "@ngneat/transloco";
-import {AttributeCode} from "../../../../../../shared/static/creature/attributes.code";
-import {CreatureService} from "../../creature.service";
-import {CreateActionAbility} from "../../../../../../shared/interfaces/creature/create/create-action-ability";
-import {Attribute} from "../../../../../../shared/interfaces/creature/get/attribute";
+import {CreatureService} from "../../../../app/pages/bestiary/create-beast/creature.service";
 
 
 @Component({

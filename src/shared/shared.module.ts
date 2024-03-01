@@ -17,7 +17,9 @@ import {BorderOutlineComponent} from "./components/border-outline/border-outline
 import { CreaturesFilterComponent } from './components/creatures-filter/creatures-filter.component';
 import {MatButtonModule} from "@angular/material/button";
 import {PropertyModalComponent} from "./components/property-modal/property-modal.component";
-import {InputTextComponent} from "./components/input-text/input-text.component";
+import { ContactUsComponent } from './modals/contact-us/contact-us.component';
+import {InputTextComponent} from "./components/form-elements/input-text/input-text.component";
+import {InputSelectComponent} from "./components/form-elements/input-select/input-select.component";
 
 
 
@@ -31,7 +33,9 @@ import {InputTextComponent} from "./components/input-text/input-text.component";
     BorderOutlineComponent,
     CreaturesFilterComponent,
     PropertyModalComponent,
-    InputTextComponent
+    InputTextComponent,
+    InputSelectComponent,
+    ContactUsComponent
   ],
   exports: [
     BorderOutlineComponent,
@@ -40,7 +44,8 @@ import {InputTextComponent} from "./components/input-text/input-text.component";
     CreaturesListComponent,
     DangerSeparatorComponent,
     CreaturesFilterComponent,
-    InputTextComponent
+    InputTextComponent,
+    InputSelectComponent,
   ],
   imports: [
     CommonModule,

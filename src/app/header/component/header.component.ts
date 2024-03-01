@@ -16,6 +16,7 @@ export class HeaderComponent extends DestroySubscription implements OnInit {
   @Output() onSwitchDrawer = new EventEmitter<any>()
   routes: Route[] = HEADER_ROUTES;
   isAuthed: boolean = this.auth.isAuthenticated();
+  isAdmin = this.auth.isAdminAuthenticated();
 
   constructor(
     private auth: AuthService,

@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {NG_VALUE_ACCESSOR} from "@angular/forms";
-import {InputTextComponent} from "../../../../../../shared/components/input-text/input-text.component";
+import {InputTextComponent} from "../../../../../../shared/components/form-elements/input-text/input-text.component";
 
 @Component({
   selector: 'app-label-text',

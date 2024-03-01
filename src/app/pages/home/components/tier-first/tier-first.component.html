@@ -10,4 +10,11 @@
     <p class="text-white mb-1">{{'Explore more' | transloco}}</p>
     <button class="max-w-[220px] w-full text-center h-[50px] rounded bg-[#E9DEC3]">{{'In our Telegram' | transloco}}!</button>
   </div>
+  <div *ngIf="!isAdmin" class="poppins-font flex">
+    <p class="text-white">{{'Have any questions' | transloco}}?</p>
+    <button *ngIf="isAuthed; else login" (click)="openContactForm()" class="text-[#E2A23B] ml-2">{{'Contact us' | transloco}}!</button>
+    <ng-template #login>
+      <a class="text-white">{{'Login to system' | transloco}}!</a>
+    </ng-template>
+  </div>
 </div>

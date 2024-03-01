@@ -6,7 +6,6 @@ import {BestiaryRoutingModule} from "./bestiary-routing.module";
 import {MatIconModule} from "@angular/material/icon";
 import {BestiaryService} from "./bestiary.service";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {InputSelectComponent} from './create-beast/form-elements/input-select/input-select.component';
 import {MatSelectModule} from "@angular/material/select";
 import {MultiSelectComponent} from './create-beast/form-elements/multi-select/multi-select.component';
 import {MatButtonModule} from "@angular/material/button";
@@ -42,7 +41,6 @@ import {SharedModule} from "../../../shared/shared.module";
   declarations: [
     CreateBeastComponent,
     BestiaryListComponent,
-    InputSelectComponent,
     MultiSelectComponent,
     LabelTextComponent,
     InputGreenBtnComponent,

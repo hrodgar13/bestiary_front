@@ -5,6 +5,7 @@ import { TierFirstComponent } from './components/tier-first/tier-first.component
 import { TierBestiaryComponent } from './components/tier-bestiary/tier-bestiary.component';
 import {TranslocoPipe} from "@ngneat/transloco";
 import {HomeRoutingModule} from "./home-routing.module";
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 
@@ -17,7 +18,8 @@ import {HomeRoutingModule} from "./home-routing.module";
   imports: [
     CommonModule,
     TranslocoPipe,
-    HomeRoutingModule
+    HomeRoutingModule,
+    MatDialogModule
   ]
 })
 export class HomeModule { }

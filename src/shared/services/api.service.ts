@@ -14,6 +14,7 @@ import {OutputCreatureItem} from "../interfaces/filters/output-creature-item";
 import {FileUpload} from "../interfaces/file/file-upload.interface";
 import {MessageI} from "../interfaces/message.interface";
 import {Translation} from "@ngneat/transloco";
+import {CreateRequest} from "../interfaces/request/create-request.interface";
 
 @Injectable({
     providedIn: 'root'
@@ -91,5 +92,9 @@ export class ApiService {
 
   editAttribute(payload: Translation, id: number): Observable<Attribute> {
     return this.http.patch<Attribute>(`api/attribute/${id}`, payload)
+  }
+
+  sendMessage(payload: CreateRequest): Observable<MessageI> {
+    return this.http.post<MessageI>(`api/message`, payload)
   }
 }
