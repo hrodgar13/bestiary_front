@@ -4,6 +4,8 @@ import {AdminService} from "../../admin.service";
 import {takeUntil} from "rxjs";
 import {RequestI} from "../../../../../shared/interfaces/request/request.interface";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {DEFAULT_PERPAGE} from "../../../../../shared/static/constants";
+import {load} from "@angular-devkit/build-angular/src/utils/server-rendering/esm-in-memory-file-loader";
 
 @Component({
   selector: 'app-admin-requests-list',
@@ -13,6 +15,10 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 export class AdminRequestsListComponent extends DestroySubscription implements OnInit{
 
   requests: RequestI[] = []
+  total: number = 0;
+  perPage = DEFAULT_PERPAGE
+  isAdminOnly = false
+  loading = false;
 
   constructor(
     private readonly adminService: AdminService,
@@ -26,8 +32,12 @@ export class AdminRequestsListComponent extends DestroySubscription implements O
   }
 
   getRequestsList() {
-    this.adminService.getRequestList().pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+    this.loading = true
+    this.adminService.getRequestList(this.perPage, this.isAdminOnly).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
       this.requests = data.data
+      this.total = data.meta.total
+
+      this.loading = false
     })
   }
 
@@ -38,5 +48,11 @@ export class AdminRequestsListComponent extends DestroySubscription implements O
         duration: 1000
       })
     })
+  }
+
+  increasePag() {
+    this.perPage += DEFAULT_PERPAGE
+
+    this.getRequestsList()
   }
 }

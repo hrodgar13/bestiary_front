@@ -89,9 +89,11 @@ export class ApiService {
     return this.http.post<MessageI>(`api/message`, payload)
   }
 
-  getReqList(onlyAdminRequest: boolean = false): Observable<RequestDataMetaI> {
+  getReqList(perPage: number, onlyAdminRequest: boolean = false): Observable<RequestDataMetaI> {
 
-    const params: HttpParams = new HttpParams().set('onlyAdminRequest', onlyAdminRequest)
+    const params: HttpParams = new HttpParams()
+      .set('onlyAdminRequest', onlyAdminRequest)
+      .set('perPage', perPage)
 
     return this.http.get<RequestDataMetaI>(`api/message/list`,{params})
   }

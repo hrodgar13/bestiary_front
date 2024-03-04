@@ -12,6 +12,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { SharedModule } from "../../../shared/shared.module";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
     TranslocoPipe,
     MatIconModule,
     SharedModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     AdminService

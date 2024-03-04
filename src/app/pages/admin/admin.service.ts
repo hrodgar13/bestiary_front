@@ -22,8 +22,8 @@ export class AdminService {
     return this.apiService.deleteFilter(id)
   }
 
-  getRequestList() {
-    return this.apiService.getReqList()
+  getRequestList(perPage: number, isAdmin: boolean) {
+    return this.apiService.getReqList(perPage, isAdmin)
   }
 
   deleteMessage(id: number) {

@@ -185,3 +185,7 @@ mat-drawer {
 .mat-drawer {
   animation-duration: 500ms;
 }
+
+.mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic {
+  stroke: #E2A23B !important;
+}

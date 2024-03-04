@@ -3,19 +3,31 @@
     {{'Requests' | transloco | uppercase}}
   </h2>
   <app-border-outline class="w-full p-1">
-    <div class="grid grid-cols-3 w-full gap-2 p-2">
-      <div *ngFor="let request of requests">
-        <app-border-outline [border_color]="request.isRead ? '#616465' : '#E2A23B'">
-          <div class="w-full h-full p-2 flex justify-between items-center">
-            <h3 class="text-[#B1A79C] whitespace-nowrap overflow-x-hidden overflow-ellipsis max-w-[80%]">{{request.text}}</h3>
+    <div class="flex flex-col w-full p-1">
+      <div class="grid 480:grid-cols-2 768:grid-cols-3 w-full gap-2 p-2">
+        <div *ngFor="let request of requests">
+          <app-border-outline [border_color]="request.isRead ? '#616465' : '#E2A23B'">
+            <div class="w-full h-full p-2 flex justify-between items-center">
+              <h3 class="text-[#B1A79C] whitespace-nowrap overflow-x-hidden overflow-ellipsis max-w-[80%]">{{request.text}}</h3>
 
-            <app-border-outline class="w-[32px] h-[32px]">
-              <button (click)="deleteMessage(request.id)" class="flex items-center justify-center w-full">
-                <mat-icon class="text-[#E2A23B]">delete_forever</mat-icon>
-              </button>
-            </app-border-outline>
-          </div>
+              <app-border-outline class="w-[32px] h-[32px]">
+                <button (click)="deleteMessage(request.id)" class="flex items-center justify-center w-full">
+                  <mat-icon class="text-[#E2A23B]">delete_forever</mat-icon>
+                </button>
+              </app-border-outline>
+            </div>
+          </app-border-outline>
+        </div>
+      </div>
+      <div class="m-auto w-[240px] flex items-center" *ngIf="requests.length < total">
+        <app-border-outline class="w-full" *ngIf="!loading; else loader">
+          <button (click)="increasePag()" class="p-2 text-[#E2A23B] w-full"> Load more </button>
         </app-border-outline>
+        <ng-template class="w-full" #loader>
+          <div class="m-auto">
+            <mat-spinner></mat-spinner>
+          </div>
+        </ng-template>
       </div>
     </div>
   </app-border-outline>
