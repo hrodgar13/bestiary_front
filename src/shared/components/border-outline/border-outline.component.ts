@@ -8,4 +8,5 @@ import {Component, Input} from '@angular/core';
 export class BorderOutlineComponent {
   @Input() bg = '#15181F'
   @Input() height = 'h-full'
+  @Input() border_color: string = '#E2A23B'
 }

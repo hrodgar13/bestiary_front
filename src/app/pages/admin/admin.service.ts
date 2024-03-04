@@ -21,4 +21,12 @@ export class AdminService {
   deleteFilter(id: number) {
     return this.apiService.deleteFilter(id)
   }
+
+  getRequestList() {
+    return this.apiService.getReqList()
+  }
+
+  deleteMessage(id: number) {
+    return this.apiService.deleteMessage(id)
+  }
 }
