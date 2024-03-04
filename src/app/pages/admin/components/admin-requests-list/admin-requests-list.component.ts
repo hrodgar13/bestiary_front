@@ -46,6 +46,15 @@ export class AdminRequestsListComponent extends DestroySubscription implements O
         verticalPosition: 'top',
         duration: 1000
       })
+
+      const elemIdx = this.requests.findIndex(item => item.id === id)
+
+      this.requests.splice(elemIdx, 1)
+    }, error => {
+      this.matSnack.open(error.error.message, 'ok', {
+        verticalPosition: 'top',
+        duration: 3000
+      })
     })
   }
 
