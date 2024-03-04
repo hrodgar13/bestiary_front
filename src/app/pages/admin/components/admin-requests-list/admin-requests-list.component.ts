@@ -5,7 +5,6 @@ import {takeUntil} from "rxjs";
 import {RequestI} from "../../../../../shared/interfaces/request/request.interface";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {DEFAULT_PERPAGE} from "../../../../../shared/static/constants";
-import {load} from "@angular-devkit/build-angular/src/utils/server-rendering/esm-in-memory-file-loader";
 
 @Component({
   selector: 'app-admin-requests-list',
@@ -53,6 +52,11 @@ export class AdminRequestsListComponent extends DestroySubscription implements O
   increasePag() {
     this.perPage += DEFAULT_PERPAGE
 
+    this.getRequestsList()
+  }
+
+  switchToggleAdmin() {
+    this.perPage = DEFAULT_PERPAGE
     this.getRequestsList()
   }
 }
