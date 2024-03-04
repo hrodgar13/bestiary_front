@@ -106,6 +106,10 @@ export class ApiService {
     return this.http.patch(`api/message/read/${id}`, {})
   }
 
+  setAsAdmin(id: number): Observable<MessageI> {
+    return this.http.patch<MessageI>(`api/auth/role/admin/${id}`, {})
+  }
+
   private transformArrayInParams(filter: CreatureListFilter[]): HttpParams {
     return filter
       .reduce((params, key) => {

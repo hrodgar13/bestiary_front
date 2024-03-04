@@ -33,4 +33,8 @@ export class AdminService {
   changeMessageStatus(id: number) {
     return this.apiService.changeReadStatus(id)
   }
+
+  setAsAdmin(id: number) {
+    return this.apiService.setAsAdmin(id)
+  }
 }

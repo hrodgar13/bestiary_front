@@ -43,4 +43,20 @@ export class MessageRequestModalComponent extends DestroySubscription implements
       })
     })
   }
+
+  setAsAdmin(id: number) {
+    this.adminService.setAsAdmin(id).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+      this.matSnackBar.open(data.message, 'ok', {
+        duration: 3000,
+        verticalPosition: "top"
+      })
+
+      this.deleteMessage()
+      }, error => {
+      this.matSnackBar.open(error.error.message, 'ok', {
+        duration: 3000,
+        verticalPosition: "top"
+      })
+    })
+  }
 }

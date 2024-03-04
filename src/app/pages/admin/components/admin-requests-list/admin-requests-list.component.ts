@@ -5,10 +5,6 @@ import {takeUntil} from "rxjs";
 import {RequestI} from "../../../../../shared/interfaces/request/request.interface";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {DEFAULT_PERPAGE} from "../../../../../shared/static/constants";
-import {
-  MatData,
-  PropertyModalComponent
-} from "../../../../../shared/components/property-modal/property-modal.component";
 import {MatDialog} from "@angular/material/dialog";
 import {MessageRequestModalComponent} from "./modals/message-request.modal/message-request.modal.component";
 
@@ -47,7 +43,12 @@ export class AdminRequestsListComponent extends DestroySubscription implements O
     })
   }
 
-  deleteMessage(id: number) {
+  deleteMessage(id: number, e: Event | null) {
+
+    if (e) {
+      e.stopPropagation()
+    }
+
     this.adminService.deleteMessage(id).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
       this.matSnack.open(data.message, 'ok', {
         verticalPosition: 'top',
@@ -81,7 +82,7 @@ export class AdminRequestsListComponent extends DestroySubscription implements O
 
     dialogRef.afterClosed().pipe(takeUntil(this.destroyStream$)).subscribe(isDelete => {
       if(isDelete) {
-        this.deleteMessage(data.id)
+        this.deleteMessage(data.id, null)
       }
     })
   }
