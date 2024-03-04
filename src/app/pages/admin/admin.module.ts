@@ -16,6 +16,8 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {FormsModule} from "@angular/forms";
+import { MessageRequestModalComponent } from './components/admin-requests-list/modals/message-request.modal/message-request.modal.component';
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 
 @NgModule({
@@ -23,7 +25,8 @@ import {FormsModule} from "@angular/forms";
     AdminComponent,
     UnfinishedCreaturesListComponent,
     AttributesListComponent,
-    AdminRequestsListComponent
+    AdminRequestsListComponent,
+    MessageRequestModalComponent
   ],
   imports: [
     CommonModule,
@@ -37,7 +40,8 @@ import {FormsModule} from "@angular/forms";
     MatProgressSpinnerModule,
     MatButtonToggleModule,
     MatSlideToggleModule,
-    FormsModule
+    FormsModule,
+    MatTooltipModule
   ],
   providers: [
     AdminService

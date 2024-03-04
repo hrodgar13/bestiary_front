@@ -5,6 +5,12 @@ import {takeUntil} from "rxjs";
 import {RequestI} from "../../../../../shared/interfaces/request/request.interface";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {DEFAULT_PERPAGE} from "../../../../../shared/static/constants";
+import {
+  MatData,
+  PropertyModalComponent
+} from "../../../../../shared/components/property-modal/property-modal.component";
+import {MatDialog} from "@angular/material/dialog";
+import {MessageRequestModalComponent} from "./modals/message-request.modal/message-request.modal.component";
 
 @Component({
   selector: 'app-admin-requests-list',
@@ -21,7 +27,8 @@ export class AdminRequestsListComponent extends DestroySubscription implements O
 
   constructor(
     private readonly adminService: AdminService,
-    private matSnack: MatSnackBar
+    private matSnack: MatSnackBar,
+    private dialog: MatDialog
   ) {
     super();
   }
@@ -67,5 +74,15 @@ export class AdminRequestsListComponent extends DestroySubscription implements O
   switchToggleAdmin() {
     this.perPage = DEFAULT_PERPAGE
     this.getRequestsList()
+  }
+
+  openMessage(data: RequestI) {
+    const dialogRef = this.dialog.open(MessageRequestModalComponent, {data})
+
+    dialogRef.afterClosed().pipe(takeUntil(this.destroyStream$)).subscribe(isDelete => {
+      if(isDelete) {
+        this.deleteMessage(data.id)
+      }
+    })
   }
 }

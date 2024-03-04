@@ -29,4 +29,8 @@ export class AdminService {
   deleteMessage(id: number) {
     return this.apiService.deleteMessage(id)
   }
+
+  changeMessageStatus(id: number) {
+    return this.apiService.changeReadStatus(id)
+  }
 }

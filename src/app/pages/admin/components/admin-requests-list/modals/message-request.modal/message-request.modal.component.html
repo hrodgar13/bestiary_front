@@ -1,0 +1,35 @@
+<div class="w-[250px] 640:w-[400px] 768:w-[600px] 1024:w-[800px] h-[400px] 768:h-[340px] flex flex-col justify-between rounded-full p-1 768:p-2">
+  <div class="flex-col items-center gap-1">
+    <div class="p-2 flex items-center justify-center w-full text-center">
+      <h2 class="768:text-2xl text-[#E2A23B] playfair-font break-all"> Message From, {{data.user.email}}</h2>
+    </div>
+    <div>
+      <p class="text-xl text-[#B1A79C]">{{data.text}}</p>
+    </div>
+  </div>
+  <div class="flex items-center justify-around gap-2">
+    <div *ngIf="data.isAdminRequest" class="h-[50px] w-[50px] 768:w-full">
+      <app-border-outline>
+        <button matTooltip="Hire as Admin" class="w-full h-full flex items-center justify-center">
+          <mat-icon class="text-[#E2A23B]">account_box</mat-icon>
+        </button>
+      </app-border-outline>
+    </div>
+    <div class="h-[50px] w-[50px] 768:w-full" (click)="changeReadStatus(data.id)">
+      <app-border-outline>
+        <button matTooltip="{{data.isRead ? 'Mark as unread' : 'Mark as read'}}" class="w-full h-full flex items-center justify-center">
+          <mat-icon [class]="data.isRead ? 'text-[#1E232DFF]' : 'text-[#E2A23B]'" class="">
+            remove_red_eye
+          </mat-icon>
+        </button>
+      </app-border-outline>
+    </div>
+    <div class="h-[50px] w-[50px] 768:w-full" (click)="deleteMessage()">
+      <app-border-outline>
+        <button matTooltip="Delete message" class="w-full h-full flex items-center justify-center">
+          <mat-icon class="text-[#E2A23B]">delete_forever</mat-icon>
+        </button>
+      </app-border-outline>
+    </div>
+  </div>
+</div>

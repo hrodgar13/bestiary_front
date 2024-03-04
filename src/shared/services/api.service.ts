@@ -102,6 +102,10 @@ export class ApiService {
     return this.http.delete<MessageI>(`api/message/${id}`)
   }
 
+  changeReadStatus(id: number) {
+    return this.http.patch(`api/message/read/${id}`, {})
+  }
+
   private transformArrayInParams(filter: CreatureListFilter[]): HttpParams {
     return filter
       .reduce((params, key) => {
@@ -109,6 +113,4 @@ export class ApiService {
         return params.set(key.filter_cat, key.filter_values.map(item => item.id).toString());
       }, new HttpParams())
   }
-
-
 }
