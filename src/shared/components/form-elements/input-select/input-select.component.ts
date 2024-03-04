@@ -4,9 +4,8 @@ import {takeUntil} from "rxjs";
 import {DestroySubscription} from "../../../helpers/destroy-subscribtion";
 import {AttributeCode} from "../../../static/creature/attributes.code";
 import {Attribute} from "../../../interfaces/creature/get/attribute";
-import {BestiaryService} from "../../../../app/pages/bestiary/bestiary.service";
 import {TranslocoService} from "@ngneat/transloco";
-import {CreatureService} from "../../../../app/pages/bestiary/create-beast/creature.service";
+import {ApiService} from "../../../services/api.service";
 
 
 @Component({
@@ -31,9 +30,8 @@ export class InputSelectComponent extends DestroySubscription implements Control
   _value: any;
 
   constructor(
-    private readonly creatureService: CreatureService,
+    private readonly apiService: ApiService,
     private localeService: TranslocoService,
-    private bestiaryService: BestiaryService
   ) {
     super();
   }
@@ -47,7 +45,7 @@ export class InputSelectComponent extends DestroySubscription implements Control
 
     this.getSelectData()
     this.detectLanguageChange()
-    this.bestiaryService.greenBtnChange$.pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+    this.apiService.greenBtnChange$.pipe(takeUntil(this.destroyStream$)).subscribe(data => {
       if(data === this.attribute_code) {
         this.getSelectData()
       }
@@ -82,7 +80,7 @@ export class InputSelectComponent extends DestroySubscription implements Control
   private getSelectData() {
     const damageRoutePreCheck = this.attribute_code.includes('damage') ? 'damage' : this.attribute_code
 
-    this.creatureService.getDataForSelect(damageRoutePreCheck).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+    this.apiService.getDataForSelect(damageRoutePreCheck).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
       this.selectData = data
     })
   }

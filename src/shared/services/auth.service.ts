@@ -11,7 +11,7 @@ import jwt_decode from 'jwt-decode'
 })
 export class AuthService {
 
-  accessToken$ = new BehaviorSubject<string | null>(null)
+  accessToken$ = new BehaviorSubject<string | null>(localStorage.getItem('auth-token') ? localStorage.getItem('auth-token') : null)
 
   private access_token: string | null = null
 
@@ -46,13 +46,13 @@ export class AuthService {
   }
 
   setToken(access_token: string | null) {
+    this.access_token = access_token
+
     if(access_token) {
       localStorage.setItem('auth-token', access_token)
     }
 
     this.accessToken$.next(access_token)
-
-    this.access_token = access_token
   }
 
   getToken(): string | null {
@@ -61,8 +61,6 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     this.access_token = this.getTokenFromStorage()
-
-    this.accessToken$.next(this.access_token)
 
     return !! this.access_token
   }

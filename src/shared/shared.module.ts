@@ -20,6 +20,7 @@ import {PropertyModalComponent} from "./components/property-modal/property-modal
 import { ContactUsComponent } from './modals/contact-us/contact-us.component';
 import {InputTextComponent} from "./components/form-elements/input-text/input-text.component";
 import {InputSelectComponent} from "./components/form-elements/input-select/input-select.component";
+import {TextAreaInputComponent} from "./components/form-elements/text-area-input/text-area-input.component";
 
 
 
@@ -35,7 +36,8 @@ import {InputSelectComponent} from "./components/form-elements/input-select/inpu
     PropertyModalComponent,
     InputTextComponent,
     InputSelectComponent,
-    ContactUsComponent
+    ContactUsComponent,
+    TextAreaInputComponent,
   ],
   exports: [
     BorderOutlineComponent,
@@ -46,6 +48,7 @@ import {InputSelectComponent} from "./components/form-elements/input-select/inpu
     CreaturesFilterComponent,
     InputTextComponent,
     InputSelectComponent,
+    TextAreaInputComponent,
   ],
   imports: [
     CommonModule,

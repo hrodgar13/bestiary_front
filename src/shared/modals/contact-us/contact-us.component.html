@@ -1,10 +1,29 @@
 <div class="w-[400px] h-[340px] rounded-full">
-  <app-border-outline>
-    <form class="flex flex-col justify-between items-center h-full w-full px-[60px] py-[32px]" [formGroup]="modalForm" (ngSubmit)="submitData()">
-      <h2 class="poppins-font text-3xl text-[#B1A79C] font-semibold">{{'Contact us form' | transloco}}</h2>
-      <app-input-text formControlName="en" class="h-[48px] max-w-[280px] w-full" [placeholder]="'EN'"/>
-      <app-input-text formControlName="ua" class="h-[48px] max-w-[280px] w-full" [placeholder]="'UA'"/>
-      <button [disabled]="modalForm.invalid" type="submit" class="h-[40px] w-[160px] bg-[#E2A23B] playfair-font font-semibold rounded">Confirm</button>
+    <form class="flex flex-col justify-between items-center h-full w-full px-[60px] py-[32px]" [formGroup]="modalForm"
+          (ngSubmit)="submitData()">
+        <h2 class="poppins-font text-3xl text-[#B1A79C] font-semibold">{{'Contact us form' | transloco}}</h2>
+        <div class="flex flex-row items-center justify-between font-semibold h-full w-full max-h-[48px]">
+            <div class="flex gap-2 h-full w-full justify-end">
+                <app-border-outline class="h-full flex items-center w-full">
+                    <div class="flex items-center justify-center h-full w-full">
+                        <mat-select formControlName="formType"
+                                    class="text-[#B1A79C] vu-select outline-0 w-full px-2"
+                                    panelClass="vu-select" [placeholder]="'Select message type' | transloco">
+                            <mat-option class="text-[#B1A79C] vu-select bg-[#1e232d]" [value]="attribute.id"
+                                        *ngFor="let attribute of selectData">
+                                {{attribute.text}}
+                            </mat-option>
+                        </mat-select>
+                    </div>
+                </app-border-outline>
+            </div>
+        </div>
+
+
+        <app-text-area-input formControlName="text" class="max-w-[280px] h-full max-h-[110px] w-full"
+                             [placeholder]="'Type message here'"/>
+        <button [disabled]="modalForm.invalid" type="submit"
+                class="h-[40px] w-[160px] bg-[#E2A23B] playfair-font font-semibold rounded">Confirm
+        </button>
     </form>
-  </app-border-outline>
 </div>

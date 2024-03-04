@@ -25,9 +25,6 @@ export class CreatureService {
         return this.apiService.getCreatureById(creatureId)
     }
 
-    getDataForSelect(route: string) {
-        return this.apiService.getDataForSelect(route)
-    }
 
   uploadPhoto(selectedImage: File): Observable<FileUpload> {
      return  this.apiService.uploadPhoto(selectedImage)

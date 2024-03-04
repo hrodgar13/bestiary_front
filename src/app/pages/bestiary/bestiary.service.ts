@@ -9,7 +9,6 @@ import {CreatureListFilter} from "../../../shared/interfaces/filters/creature-li
 @Injectable()
 export class BestiaryService {
 
-  greenBtnChange$ = new BehaviorSubject<string>('')
   filterSubject$ = new BehaviorSubject<any[] | null>(null)
 
   constructor(
@@ -29,5 +28,9 @@ export class BestiaryService {
 
   isAdmin() {
     return this.authService.isAdminAuthenticated()
+  }
+
+  getGreedBtn() {
+    return this.apiService.greenBtnChange$
   }
 }

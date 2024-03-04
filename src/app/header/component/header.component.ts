@@ -1,4 +1,13 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges
+} from '@angular/core';
 import {HEADER_ROUTES} from "../../../shared/static/header-routes.static";
 import {Route} from "../../../shared/interfaces/route.interface";
 import {AuthService} from "../../../shared/services/auth.service";
@@ -20,7 +29,8 @@ export class HeaderComponent extends DestroySubscription implements OnInit {
 
   constructor(
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {
     super()
   }
@@ -35,12 +45,18 @@ export class HeaderComponent extends DestroySubscription implements OnInit {
 
   detectTokenChange() {
     this.auth.accessToken$.pipe(takeUntil(this.destroyStream$)).subscribe((data) => {
-      this.isAuthed = !! data;
+      this.updateToken(data)
     })
   }
 
   logout() {
     this.auth.logout()
     this.router.navigate(['..'])
+  }
+
+  private updateToken(data: string | null) {
+    this.isAuthed = !!data;
+    this.isAdmin = this.auth.isAdminAuthenticated()
+    this.cdr.detectChanges()
   }
 }

@@ -35,7 +35,7 @@ export class InputGreenBtnComponent extends DestroySubscription{
     const dialogRef = this.dialog.open(PropertyModalComponent, {data})
 
     dialogRef.afterClosed().pipe(takeUntil(this.destroyStream$)).subscribe(data => {
-      this.bestiaryService.greenBtnChange$.next(this.route)
+      this.bestiaryService.getGreedBtn().next(this.route)
     })
   }
 }

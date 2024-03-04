@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import {CreateAttribute} from "../interfaces/creature/create/create-attribute";
 import {Creature} from "../interfaces/creature/get/creature";
 import {Attribute} from "../interfaces/creature/get/attribute";
@@ -21,7 +21,9 @@ import {CreateRequest} from "../interfaces/request/create-request.interface";
 })
 export class ApiService {
 
-    constructor(
+  greenBtnChange$ = new BehaviorSubject<string>('')
+
+  constructor(
         private http: HttpClient
     ) {
     }

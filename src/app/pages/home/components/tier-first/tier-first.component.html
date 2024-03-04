@@ -14,7 +14,7 @@
     <p class="text-white">{{'Have any questions' | transloco}}?</p>
     <button *ngIf="isAuthed; else login" (click)="openContactForm()" class="text-[#E2A23B] ml-2">{{'Contact us' | transloco}}!</button>
     <ng-template #login>
-      <a class="text-white">{{'Login to system' | transloco}}!</a>
+      <a class="text-white ml-2" [routerLink]="['../auth' + '/login']">{{'Login to system' | transloco}}!</a>
     </ng-template>
   </div>
 </div>

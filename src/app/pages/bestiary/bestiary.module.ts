@@ -21,7 +21,6 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {InputFileComponent} from './create-beast/form-elements/input-file/input-file.component';
 import {StatblockInputComponent} from './create-beast/form-elements/statblock-input/statblock-input.component';
 import {TitleTextInputComponent} from './create-beast/form-elements/title-text-input/title-text-input.component';
-import {TextAreaInputComponent} from './create-beast/form-elements/text-area-input/text-area-input.component';
 import {
   TitleTextItemComponent
 } from './create-beast/form-elements/title-text-input/title-text-item/title-text-item.component';
@@ -49,7 +48,6 @@ import {SharedModule} from "../../../shared/shared.module";
     InputFileComponent,
     StatblockInputComponent,
     TitleTextInputComponent,
-    TextAreaInputComponent,
     TitleTextItemComponent,
     FiltersModalComponent,
     BeastPageComponent,
