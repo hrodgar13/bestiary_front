@@ -5,6 +5,7 @@ import {MatDialogRef} from "@angular/material/dialog";
 import {ApiService} from "../../services/api.service";
 import {takeUntil} from "rxjs";
 import {CreateRequest} from "../../interfaces/request/create-request.interface";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 export interface SelectMessageTypeI {
     text: string
@@ -36,6 +37,7 @@ export class ContactUsComponent extends DestroySubscription implements OnInit {
         public dialogRef: MatDialogRef<ContactUsComponent>,
         private formBuilder: FormBuilder,
         private apiService: ApiService,
+        private matSnackBar: MatSnackBar
     ) {
         super();
     }
@@ -58,7 +60,11 @@ export class ContactUsComponent extends DestroySubscription implements OnInit {
         }
 
         this.apiService.sendMessage(payload).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
-            this.dialogRef.close(data)
+          this.matSnackBar.open(data.message, 'ok', {
+            verticalPosition: "top",
+            duration: 3000
+          })
+          this.dialogRef.close(data)
         })
     }
 }

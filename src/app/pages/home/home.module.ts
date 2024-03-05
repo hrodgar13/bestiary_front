@@ -6,6 +6,7 @@ import { TierBestiaryComponent } from './components/tier-bestiary/tier-bestiary.
 import {TranslocoPipe} from "@ngneat/transloco";
 import {HomeRoutingModule} from "./home-routing.module";
 import {MatDialogModule} from "@angular/material/dialog";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 
 
@@ -19,7 +20,8 @@ import {MatDialogModule} from "@angular/material/dialog";
     CommonModule,
     TranslocoPipe,
     HomeRoutingModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSnackBarModule
   ]
 })
 export class HomeModule { }
