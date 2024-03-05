@@ -4,11 +4,24 @@ import { LoaderComponent } from './components/loader/loader.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import { SwitchLangComponent } from './components/switch-lang/switch-lang.component';
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
-import {MatSelectModule} from "@angular/material/select";
 import {MatLegacySelectModule} from "@angular/material/legacy-select";
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {BestiaryModule} from "../app/pages/bestiary/bestiary.module";
+import {CreaturesListComponent} from "./components/creatures-list/creatures-list.component";
+import {DangerSeparatorComponent} from "./components/creatures-list/danger-separator/danger-separator.component";
+import {TranslocoPipe} from "@ngneat/transloco";
+import {RouterLink} from "@angular/router";
+import {MatIconModule} from "@angular/material/icon";
+import {CreatureListService} from "./components/creatures-list/creature-list.service";
+import {BorderOutlineComponent} from "./components/border-outline/border-outline.component";
+import { CreaturesFilterComponent } from './components/creatures-filter/creatures-filter.component';
+import {MatButtonModule} from "@angular/material/button";
+import {PropertyModalComponent} from "./components/property-modal/property-modal.component";
+import { ContactUsComponent } from './modals/contact-us/contact-us.component';
+import {InputTextComponent} from "./components/form-elements/input-text/input-text.component";
+import {InputSelectComponent} from "./components/form-elements/input-select/input-select.component";
+import {TextAreaInputComponent} from "./components/form-elements/text-area-input/text-area-input.component";
+import { PaginatorComponent } from './components/paginator/paginator.component';
 
 
 
@@ -16,12 +29,30 @@ import {BestiaryModule} from "../app/pages/bestiary/bestiary.module";
   declarations: [
     LoaderComponent,
     SwitchLangComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    CreaturesListComponent,
+    DangerSeparatorComponent,
+    BorderOutlineComponent,
+    CreaturesFilterComponent,
+    PropertyModalComponent,
+    InputTextComponent,
+    InputSelectComponent,
+    ContactUsComponent,
+    TextAreaInputComponent,
+    PaginatorComponent,
   ],
-  exports: [
-    LoaderComponent,
-    SwitchLangComponent
-  ],
+    exports: [
+        BorderOutlineComponent,
+        LoaderComponent,
+        SwitchLangComponent,
+        CreaturesListComponent,
+        DangerSeparatorComponent,
+        CreaturesFilterComponent,
+        InputTextComponent,
+        InputSelectComponent,
+        TextAreaInputComponent,
+        PaginatorComponent,
+    ],
   imports: [
     CommonModule,
     MatProgressSpinnerModule,
@@ -29,7 +60,13 @@ import {BestiaryModule} from "../app/pages/bestiary/bestiary.module";
     MatLegacySelectModule,
     FormsModule,
     ReactiveFormsModule,
-    BestiaryModule,
+    TranslocoPipe,
+    RouterLink,
+    MatIconModule,
+    MatButtonModule,
+  ],
+  providers: [
+      CreatureListService
   ]
 })
 export class SharedModule { }

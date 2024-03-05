@@ -1,0 +1,8 @@
+<app-border-outline class="w-full" *ngIf="!loading; else loader">
+  <button (click)="increasePag()" class="p-2 text-[#E2A23B] w-full"> Load more</button>
+</app-border-outline>
+<ng-template class="w-full" #loader>
+  <div class="m-auto">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

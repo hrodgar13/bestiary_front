@@ -1,0 +1,17 @@
+<app-border-outline class="w-full p-1">
+  <div *ngIf="requests.length && !loading; else noData" class="flex flex-col w-full p-1">
+    <div class="grid 480:grid-cols-2 768:grid-cols-3 w-full gap-2 p-2">
+      <div *ngFor="let request of requests" class="cursor-pointer" (click)="openMessage(request)">
+        <app-admin-request-item [request]="request" (deleteMsg)="deleteMessage($event)"/>
+      </div>
+    </div>
+    <div class="m-auto w-[240px] flex items-center" *ngIf="requests.length < total">
+      <app-paginator [loading]="loading" (increasePagination)="increasePag()"/>
+    </div>
+  </div>
+  <ng-template class="h-full" #noData>
+    <p class=" text-[#E2A23B] 768:text-4xl whitespace-nowrap p-3 w-full text-center h-full">
+      {{'No messages for now' | transloco | uppercase}} :)
+    </p>
+  </ng-template>
+</app-border-outline>

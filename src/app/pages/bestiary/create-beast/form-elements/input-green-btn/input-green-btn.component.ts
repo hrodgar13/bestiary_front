@@ -1,10 +1,13 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
-import {MatData, PropertyModalComponent} from "../../property-modal/property-modal.component";
 import {takeUntil} from "rxjs";
 import {DestroySubscription} from "../../../../../../shared/helpers/destroy-subscribtion";
 import {BestiaryService} from "../../../bestiary.service";
 import {AttributeCode} from "../../../../../../shared/static/creature/attributes.code";
+import {
+  MatData,
+  PropertyModalComponent
+} from "../../../../../../shared/components/property-modal/property-modal.component";
 
 @Component({
   selector: 'app-input-green-btn',
@@ -32,7 +35,7 @@ export class InputGreenBtnComponent extends DestroySubscription{
     const dialogRef = this.dialog.open(PropertyModalComponent, {data})
 
     dialogRef.afterClosed().pipe(takeUntil(this.destroyStream$)).subscribe(data => {
-      this.bestiaryService.greenBtnChange$.next(this.route)
+      this.bestiaryService.getGreedBtn().next(this.route)
     })
   }
 }

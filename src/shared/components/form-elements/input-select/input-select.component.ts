@@ -1,13 +1,11 @@
 import {Component, EventEmitter, forwardRef, Input, OnInit, Output} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
-import {DestroySubscription} from "../../../../../../shared/helpers/destroy-subscribtion";
 import {takeUntil} from "rxjs";
-import {BestiaryService} from "../../../bestiary.service";
+import {DestroySubscription} from "../../../helpers/destroy-subscribtion";
+import {AttributeCode} from "../../../static/creature/attributes.code";
+import {Attribute} from "../../../interfaces/creature/get/attribute";
 import {TranslocoService} from "@ngneat/transloco";
-import {AttributeCode} from "../../../../../../shared/static/creature/attributes.code";
-import {CreatureService} from "../../creature.service";
-import {CreateActionAbility} from "../../../../../../shared/interfaces/creature/create/create-action-ability";
-import {Attribute} from "../../../../../../shared/interfaces/creature/get/attribute";
+import {ApiService} from "../../../services/api.service";
 
 
 @Component({
@@ -32,9 +30,8 @@ export class InputSelectComponent extends DestroySubscription implements Control
   _value: any;
 
   constructor(
-    private readonly creatureService: CreatureService,
+    private readonly apiService: ApiService,
     private localeService: TranslocoService,
-    private bestiaryService: BestiaryService
   ) {
     super();
   }
@@ -48,7 +45,7 @@ export class InputSelectComponent extends DestroySubscription implements Control
 
     this.getSelectData()
     this.detectLanguageChange()
-    this.bestiaryService.greenBtnChange$.pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+    this.apiService.greenBtnChange$.pipe(takeUntil(this.destroyStream$)).subscribe(data => {
       if(data === this.attribute_code) {
         this.getSelectData()
       }
@@ -83,7 +80,7 @@ export class InputSelectComponent extends DestroySubscription implements Control
   private getSelectData() {
     const damageRoutePreCheck = this.attribute_code.includes('damage') ? 'damage' : this.attribute_code
 
-    this.creatureService.getDataForSelect(damageRoutePreCheck).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+    this.apiService.getDataForSelect(damageRoutePreCheck).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
       this.selectData = data
     })
   }

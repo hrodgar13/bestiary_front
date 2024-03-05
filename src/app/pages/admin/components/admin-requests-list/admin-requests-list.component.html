@@ -1,0 +1,5 @@
+<div class="p-2 w-full">
+  <app-admin-reqest-header (adminSwitch)="switchToggleAdmin($event)"/>
+  <app-admin-request-body [requests]="requests" [total]="total" [loading]="loading" (callModal)="openMessage($event)"
+                          (deleteMsg)="deleteMessage($event)" (paginationIncrease)="increasePag()"/>
+</div>

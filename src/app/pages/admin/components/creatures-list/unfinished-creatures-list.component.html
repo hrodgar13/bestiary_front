@@ -1,0 +1,15 @@
+<div class="flex-row items-center 768:items-start h-full">
+  <div class="mx-2 768:mx-[10px]">
+    <div class="flex text-7xl pb-5 text-[#E2A23B] items-center 768:items-center gap-4">
+      <h2 class="playfair-font text-xl 768:text-4xl whitespace-nowrap">
+        {{'Unfinished Creatures' | transloco | uppercase}}
+      </h2>
+      <a routerLink='../create' *ngIf="isAdminAuthenticated"
+         class="rounded-xl w-full h-[40px] 768:h-[60px] flex-row bg-gradient-to-r from-[#75e498] to-[#20e074] flex items-center justify-end p-2">
+        <mat-icon class="text-white">add</mat-icon>
+      </a>
+    </div>
+    <app-creatures-filter [perPage]="perPage" (changeFilter)="setFilter($event)" (changePerPage)="setPerPage($event)" (changeSearchInput)="setSearch($event)"/>
+  </div>
+  <app-creatures-list [finished]="'FALSE'" [perPage]="perPage" [creatureFilter]="creatureFilter" [searchInput]="search"/>
+</div>

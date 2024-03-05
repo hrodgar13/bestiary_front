@@ -7,6 +7,7 @@ import {AuthRoutingModule} from "./auth-routing.module";
 import {ReactiveFormsModule} from "@angular/forms";
 import {TranslocoPipe} from "@ngneat/transloco";
 import {LoginService} from "./login.service";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import {LoginService} from "./login.service";
     CommonModule,
     AuthRoutingModule,
     ReactiveFormsModule,
+    MatSnackBarModule,
     TranslocoPipe
   ]
 })

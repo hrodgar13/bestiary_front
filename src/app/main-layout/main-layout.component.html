@@ -16,10 +16,10 @@
   </mat-drawer>
   <mat-drawer-content class="primary-bg">
     <div class="relative h-full">
-      <div class="sticky top-0 z-50  bg-[#00000033]">
+      <div class="fixed w-full top-0 z-50  bg-[#00000033]">
         <app-header (onSwitchDrawer)="drawer.toggle()"></app-header>
       </div>
-      <div class="mt-[-48px] 768:mt-[-112px] h-full main">
+      <div class="h-full mb-8">
         <router-outlet></router-outlet>
       </div>
     </div>

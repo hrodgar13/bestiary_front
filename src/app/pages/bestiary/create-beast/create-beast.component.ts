@@ -226,15 +226,10 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit,
   }
 
   removeMeasure($event: CreateMeasure) {
-
-
     const idx = this.measures.findIndex(item => item.attribute === $event.attribute && item.measure_cat === item.measure_cat)
-
-    console.log($event, this.measures)
 
     if (idx !== -1) {
       this.measures.splice(idx, 1)
-      console.log(this.measures)
     }
   }
 

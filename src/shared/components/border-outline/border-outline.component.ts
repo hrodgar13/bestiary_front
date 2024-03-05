@@ -5,7 +5,9 @@ import {Component, Input} from '@angular/core';
   templateUrl: './border-outline.component.html',
   styleUrls: ['./border-outline.component.scss']
 })
-export class BorderOutlineComponent {
+export class BorderOutlineComponent{
   @Input() bg = '#15181F'
   @Input() height = 'h-full'
+  @Input() border_color: string = '#E2A23B'
+
 }

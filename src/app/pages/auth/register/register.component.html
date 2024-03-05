@@ -1,5 +1,5 @@
 <div [@flipInOut]
-     class="mt-[78px] h-[520px] 768:mt-[130px] 768:w-[420px] w-[300px] flex flex-col items-center border-[#E2A23B] bg-[#1E232DFF] border">
+     class="mt-[78px] min-h-[520px] 768:mt-[130px] 768:w-[420px] w-[300px] flex flex-col items-center border-[#E2A23B] bg-[#1E232DFF] border">
   <div class="flex items-center justify-center p-1 w-full">
     <div class="block 768:hidden">
       <svg width="40px" height="40px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
@@ -32,7 +32,7 @@
       </div>
       <div class="w-full">
         <div class="w-full flex items-center border bg-[#15181F] p-3 border-[#E2A23B]">
-          <input formControlName="passwordConfirm" [class]="!showPassword ? 'password-font' : 'poppins-font'"
+          <input formControlName="password" [class]="!showPassword ? 'password-font' : 'poppins-font'"
                  class="input-bg w-full outline-none text-[#B1A79C]" type="text"
                  placeholder="{{'Password' | transloco}}"/>
           <div (click)="changeConfirmVisibility()">
@@ -80,7 +80,7 @@
       </div>
       <div class="w-full">
         <div class="w-full flex items-center border bg-[#15181F] p-3 border-[#E2A23B]">
-          <input formControlName="password" [class]="!showPasswordConfirm ? 'password-font' : 'poppins-font'"
+          <input formControlName="passwordConfirm" [class]="!showPasswordConfirm ? 'password-font' : 'poppins-font'"
                  class="input-bg w-full outline-none text-[#B1A79C]" type="text"
                  placeholder="{{'Password confirm' | transloco}}"/>
           <div (click)="changeVisibility()">
