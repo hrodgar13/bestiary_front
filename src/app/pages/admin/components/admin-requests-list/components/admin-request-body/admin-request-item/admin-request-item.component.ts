@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {RequestI} from "../../../../../../../../shared/interfaces/request/request.interface";
 
 @Component({
   selector: 'app-admin-request-item',
@@ -6,5 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./admin-request-item.component.scss']
 })
 export class AdminRequestItemComponent {
+  @Input() request!: RequestI;
 
+  @Output() deleteMsg = new EventEmitter<number>()
+  deleteMessage(id: number, $event: Event) {
+    if ($event) {
+      $event.stopPropagation()
+    }
+
+    this.deleteMsg.emit(id)
+  }
 }

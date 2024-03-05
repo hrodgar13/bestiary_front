@@ -21,6 +21,7 @@ import { ContactUsComponent } from './modals/contact-us/contact-us.component';
 import {InputTextComponent} from "./components/form-elements/input-text/input-text.component";
 import {InputSelectComponent} from "./components/form-elements/input-select/input-select.component";
 import {TextAreaInputComponent} from "./components/form-elements/text-area-input/text-area-input.component";
+import { PaginatorComponent } from './components/paginator/paginator.component';
 
 
 
@@ -38,18 +39,20 @@ import {TextAreaInputComponent} from "./components/form-elements/text-area-input
     InputSelectComponent,
     ContactUsComponent,
     TextAreaInputComponent,
+    PaginatorComponent,
   ],
-  exports: [
-    BorderOutlineComponent,
-    LoaderComponent,
-    SwitchLangComponent,
-    CreaturesListComponent,
-    DangerSeparatorComponent,
-    CreaturesFilterComponent,
-    InputTextComponent,
-    InputSelectComponent,
-    TextAreaInputComponent,
-  ],
+    exports: [
+        BorderOutlineComponent,
+        LoaderComponent,
+        SwitchLangComponent,
+        CreaturesListComponent,
+        DangerSeparatorComponent,
+        CreaturesFilterComponent,
+        InputTextComponent,
+        InputSelectComponent,
+        TextAreaInputComponent,
+        PaginatorComponent,
+    ],
   imports: [
     CommonModule,
     MatProgressSpinnerModule,

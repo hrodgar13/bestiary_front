@@ -22,11 +22,7 @@ export class AdminRequestBodyComponent {
     this.callModal.emit(request)
   }
 
-  deleteMessage(id: number, $event: Event | null) {
-    if ($event) {
-      $event.stopPropagation()
-    }
-
+  deleteMessage(id: number) {
     this.deleteMsg.emit(id)
   }
 }
