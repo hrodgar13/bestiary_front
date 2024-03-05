@@ -18,8 +18,8 @@ export class AdminRequestsListComponent extends DestroySubscription implements O
   requests: RequestI[] = []
   total: number = 0;
   perPage = DEFAULT_PERPAGE
-  isAdminOnly = false
   loading = false;
+  private isAdminOnly: boolean = false;
 
   constructor(
     private readonly adminService: AdminService,
@@ -43,11 +43,7 @@ export class AdminRequestsListComponent extends DestroySubscription implements O
     })
   }
 
-  deleteMessage(id: number, e: Event | null) {
-
-    if (e) {
-      e.stopPropagation()
-    }
+  deleteMessage(id: number) {
 
     this.adminService.deleteMessage(id).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
       this.matSnack.open(data.message, 'ok', {
@@ -72,7 +68,9 @@ export class AdminRequestsListComponent extends DestroySubscription implements O
     this.getRequestsList()
   }
 
-  switchToggleAdmin() {
+  switchToggleAdmin($event: boolean) {
+    this.isAdminOnly = $event
+
     this.perPage = DEFAULT_PERPAGE
     this.getRequestsList()
   }
@@ -82,7 +80,7 @@ export class AdminRequestsListComponent extends DestroySubscription implements O
 
     dialogRef.afterClosed().pipe(takeUntil(this.destroyStream$)).subscribe(isDelete => {
       if(isDelete) {
-        this.deleteMessage(data.id, null)
+        this.deleteMessage(data.id)
       }
     })
   }

@@ -1,0 +1,9 @@
+<div class="flex justify-between items-center flex-col 480:flex-row">
+  <h2 class="playfair-font text-xl text-[#E2A23B] 768:text-4xl whitespace-nowrap">
+    {{'Requests' | transloco | uppercase}}
+  </h2>
+  <div class="flex gap-2 items-center text-[#E2A23B]">
+    <p>Show only Admin Requests</p>
+    <mat-slide-toggle [(ngModel)]="isAdminOnly" (ngModelChange)="switchToggleAdmin()"></mat-slide-toggle>
+  </div>
+</div>

@@ -18,6 +18,11 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {FormsModule} from "@angular/forms";
 import { MessageRequestModalComponent } from './components/admin-requests-list/modals/message-request.modal/message-request.modal.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
+import { AdminRequestBodyComponent } from './components/admin-requests-list/components/admin-request-body/admin-request-body.component';
+import { AdminRequestItemComponent } from './components/admin-requests-list/components/admin-request-body/admin-request-item/admin-request-item.component';
+import {
+  AdminRequestHeaderComponent
+} from "./components/admin-requests-list/components/admin-reqest-header/admin-request-header.component";
 
 
 @NgModule({
@@ -26,7 +31,10 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     UnfinishedCreaturesListComponent,
     AttributesListComponent,
     AdminRequestsListComponent,
-    MessageRequestModalComponent
+    MessageRequestModalComponent,
+    AdminRequestHeaderComponent,
+    AdminRequestBodyComponent,
+    AdminRequestItemComponent
   ],
   imports: [
     CommonModule,
