@@ -54,6 +54,8 @@ export class AdminRequestsListComponent extends DestroySubscription implements O
       const elemIdx = this.requests.findIndex(item => item.id === id)
 
       this.requests.splice(elemIdx, 1)
+      this.total = this.total - 1
+
     }, error => {
       this.matSnack.open(error.error.message, 'ok', {
         verticalPosition: 'top',
