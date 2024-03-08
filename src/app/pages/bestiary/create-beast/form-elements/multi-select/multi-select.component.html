@@ -5,7 +5,7 @@
       <div class="flex items-start justify-between w-full">
         <app-input-select [attribute_code]="attribute_code" (currentSelected)="setCurrentSelected($event)" class="h-[48px] max-w-[280px] w-full"
                           [placeholder]="placeholder"/>
-        <app-input-green-btn [route]="attribute_code"/>
+        <app-input-green-btn [route]="attribute_code" [title]="'Add'"/>
       </div>
     </div>
     <div class="flex">
@@ -24,7 +24,7 @@
   </form>
   <div class="bg-[#15181F] h-[136px] rounded-xl p-4 border-2 border-[#E2A23B]">
     <div class="flex items-start flex-wrap overflow-y-auto gap-2 properties-container max-h-full">
-      <app-multi-select-item *ngFor="let item of selectedItems" [displayMeasure]="item"
+      <app-multi-select-item *ngFor="let item of selectedItems" [displayMeasure]="item" [alwaysShowMsr]="alwaysUseMsr"
                              (deleteItem)="removeItemFromList($event)"/>
     </div>
   </div>
