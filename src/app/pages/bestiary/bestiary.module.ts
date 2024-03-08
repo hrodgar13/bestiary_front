@@ -30,6 +30,7 @@ import {CreatureService} from "./create-beast/creature.service";
 import { FiltersModalComponent } from './bestiary-list/filters-modal/filters-modal.component';
 import { BeastPageComponent } from './beast-page/beast-page.component';
 import {SharedModule} from "../../../shared/shared.module";
+import { CharacteristicBlockComponent } from './beast-page/components/characteristic-block/characteristic-block.component';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import {SharedModule} from "../../../shared/shared.module";
     TitleTextItemComponent,
     FiltersModalComponent,
     BeastPageComponent,
+    CharacteristicBlockComponent,
   ],
   imports: [
     HttpClientModule,

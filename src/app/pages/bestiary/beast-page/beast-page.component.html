@@ -37,48 +37,12 @@
               ; </p>
           </div>
           <div class="flex items-center justify-around flex-wrap gap-2">
-            <div
-              class="grid grid-rows-2 overflow-hidden text-[#FAFD5D] text-3xl w-[120px] h-[120px] rounded-xl border-2 border-[#FAFD5D]">
-              <div class="bg-[#1C1E25] border-b border-[#FAFD5D] flex items-center justify-center">{{'STR' | transloco}}</div>
-              <div class="flex items-center justify-center">{{creature.stat_block.strength}} (<span
-                class="text-[#1DAEFF]">{{calculateModificator(creature.stat_block.strength)}}</span>)
-              </div>
-            </div>
-            <div
-              class="grid grid-rows-2 overflow-hidden text-[#FAFD5D] text-3xl w-[120px] h-[120px] rounded-xl border-2 border-[#FAFD5D]">
-              <div class="bg-[#1C1E25] border-b border-[#FAFD5D] flex items-center justify-center">{{'DEX' | transloco}}</div>
-              <div class="flex items-center justify-center">{{creature.stat_block.dexterity}} (<span
-                class="text-[#1DAEFF]">{{calculateModificator(creature.stat_block.dexterity)}}</span>)
-              </div>
-            </div>
-            <div
-              class="grid grid-rows-2 overflow-hidden text-[#FAFD5D] text-3xl w-[120px] h-[120px] rounded-xl border-2 border-[#FAFD5D]">
-              <div class="bg-[#1C1E25] border-b border-[#FAFD5D] flex items-center justify-center">{{'CON' | transloco}}</div>
-              <div class="flex items-center justify-center">{{creature.stat_block.constitution}} (<span
-                class="text-[#1DAEFF]">{{calculateModificator(creature.stat_block.constitution)}}</span>)
-              </div>
-            </div>
-            <div
-              class="grid grid-rows-2 overflow-hidden text-[#FAFD5D] text-3xl w-[120px] h-[120px] rounded-xl border-2 border-[#FAFD5D]">
-              <div class="bg-[#1C1E25] border-b border-[#FAFD5D] flex items-center justify-center">{{'INT' | transloco}}</div>
-              <div class="flex items-center justify-center">{{creature.stat_block.intelligence}} (<span
-                class="text-[#1DAEFF]">{{calculateModificator(creature.stat_block.intelligence)}}</span>)
-              </div>
-            </div>
-            <div
-              class="grid grid-rows-2 overflow-hidden text-[#FAFD5D] text-3xl w-[120px] h-[120px] rounded-xl border-2 border-[#FAFD5D]">
-              <div class="bg-[#1C1E25] border-b border-[#FAFD5D] flex items-center justify-center">{{'WIS' | transloco}}</div>
-              <div class="flex items-center justify-center">{{creature.stat_block.wisdom}} (<span
-                class="text-[#1DAEFF]">{{calculateModificator(creature.stat_block.wisdom)}}</span>)
-              </div>
-            </div>
-            <div
-              class="grid grid-rows-2 overflow-hidden text-[#FAFD5D] text-3xl w-[120px] h-[120px] rounded-xl border-2 border-[#FAFD5D]">
-              <div class="bg-[#1C1E25] border-b border-[#FAFD5D] flex items-center justify-center">{{'CHA' | transloco}}</div>
-              <div class="flex items-center justify-center">{{creature.stat_block.charisma}} (<span
-                class="text-[#1DAEFF]">{{calculateModificator(creature.stat_block.charisma)}}</span>)
-              </div>
-            </div>
+            <app-characteristic-block [title]="'STR'" [characteristicValue]="creature.stat_block.strength"/>
+            <app-characteristic-block [title]="'DEX'" [characteristicValue]="creature.stat_block.dexterity"/>
+            <app-characteristic-block [title]="'CON'" [characteristicValue]="creature.stat_block.constitution"/>
+            <app-characteristic-block [title]="'INT'" [characteristicValue]="creature.stat_block.intelligence"/>
+            <app-characteristic-block [title]="'WIS'" [characteristicValue]="creature.stat_block.wisdom"/>
+            <app-characteristic-block [title]="'CHA'" [characteristicValue]="creature.stat_block.charisma"/>
           </div>
           <div *ngIf="defineCreatureMeasures(MeasureCode.saving_throws).length"
                class="flex items-center flex-wrap gap-1">
