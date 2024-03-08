@@ -92,10 +92,10 @@
             <p class="text-white text-xl 768:text-2xl">+{{creature.mastery_bonus}}</p>
           </div>
         </div>
-        <div class="w-full h-auto">
-          <app-border-outline [height]="'h-auto'" class="relative">
-            <div class="w-full h-auto flex items-center justify-center">
-              <img [src]="baseUrl + '/uploads/' + creature.image" class="w-full h-full object-contain" alt="">
+        <div class="w-full min-h-full">
+          <app-border-outline [height]="'h-full'" class="relative h-full block">
+            <div class="w-full min-h-full flex items-center justify-center">
+              <img [src]="baseUrl + '/uploads/' + creature.image" class="w-full h-full object-contain text-center" alt="no image">
             </div>
           </app-border-outline>
         </div>
