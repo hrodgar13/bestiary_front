@@ -94,6 +94,20 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .vu-select {
+  mat-option {
+    background: #1e232d;
+    border: 2px solid #E2A23B;
+
+
+    &:first-child {
+      border-radius: 15px 15px 0 0;
+    }
+
+    &:last-child {
+      border-radius: 0 0 15px 15px;
+    }
+  }
+
   .mat-mdc-select-trigger {
     color: #B1A79C !important;
 

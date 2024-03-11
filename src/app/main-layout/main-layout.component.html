@@ -1,4 +1,4 @@
-<mat-drawer-container class="example-container h-full">
+<mat-drawer-container class="example-container">
   <mat-drawer #drawer position="end">
     <div class="p-4 w-full h-full primary-bg flex flex-col gap-3">
       <div class="playfair-font text-[#E2A23B] font-bold">
@@ -19,7 +19,7 @@
       <div class="fixed w-full top-0 z-50  bg-[#00000033]">
         <app-header (onSwitchDrawer)="drawer.toggle()"></app-header>
       </div>
-      <div class="h-full mb-8">
+      <div class="h-full">
         <router-outlet></router-outlet>
       </div>
     </div>

@@ -13,8 +13,10 @@ import {Measure} from "../../../../../../../shared/interfaces/creature/get/measu
 export class MultiSelectItemComponent extends DestroySubscription implements OnInit{
   @Input() displayMeasure!: Measure
   @Output() deleteItem = new EventEmitter<Measure>()
+  @Input() alwaysShowMsr: boolean = false;
 
   currentLanguageLabel: string | null = ''
+
 
   constructor(
     private readonly translocoService: TranslocoService

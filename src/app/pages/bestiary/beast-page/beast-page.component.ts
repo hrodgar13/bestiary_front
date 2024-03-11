@@ -48,16 +48,6 @@ export class BeastPageComponent extends DestroySubscription implements OnInit {
     })
   }
 
-  calculateModificator(income: number | null): string {
-    if(income) {
-      const modif = Math.floor((income - 10) / 2)
-
-      return modif < 0 ? `${modif}` : `+${modif}`
-    }
-
-    return '0'
-  }
-
 
   defineValueByAttribute(attr: AttributeCode) {
     return this.creature.attributes.find(item => item.attr_cat === attr)?.name[this.currentLang]
