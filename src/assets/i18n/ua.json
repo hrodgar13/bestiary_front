@@ -74,10 +74,10 @@
   "DEX": "СПР",
 
   "Select damage:": "Виберіть Шкоду:",
-  "Saving throw:": "Кидки протидії:",
+  "Saving throws:": "Кидки протидії:",
   "Select Skill:": "Виберіть Навички:",
   "Select condition:": "Виберіть Стани:",
-  "Select Feel": "Виберіть Відчуття",
+  "Select Feel:": "Виберіть Відчуття:",
   "Select Language:": "Виберіть Мови:",
   "Danger Lvl": "Рівень Небезпеки",
   "Experience": "Досвід",
@@ -101,5 +101,22 @@
   "Have any questions": "Маєте питання",
   "Contact us": "Зв'яжіться з нами",
   "Contact us form": "Зворотній зв'язок",
-  "Login to system": "Увійдіть в систему"
+  "Login to system": "Увійдіть в систему",
+
+  "Select message type": "Виберіть вид звернення",
+  "Type message here": "Ведіть повідомлення",
+  "Confirm": "Підтвердити",
+  "Edit": "Редагувати",
+  "Add": "Додати",
+  "EN": "EN",
+  "UA": "UA",
+  "Admin": "Адмін",
+  "Profile": "Профіль",
+  "Logout": "Вийти",
+  "Creatures": "Істоти",
+  "Attributes": "Атрибути",
+  "Requests": "Звернення",
+  "Show only Admin Requests": "Показувати лише звернення на адміністрування",
+  "No messages for now": "Наразі немає повідомлень",
+  "damage": "шкоду"
 }
