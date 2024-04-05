@@ -4,6 +4,7 @@ import {CreateActionAbility} from "../../../../../../shared/interfaces/creature/
 import {ActionAbilities} from "../../../../../../shared/static/creature/action-abilities.code";
 import {ActionsAbilities} from "../../../../../../shared/interfaces/creature/get/actions-abilities";
 import {EditActionAbility} from "../../../../../../shared/interfaces/creature/create/edit-action-ability";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 
 @Component({
@@ -25,7 +26,8 @@ export class TitleTextInputComponent implements OnInit{
   form!: UntypedFormGroup
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private matSnack: MatSnackBar
   ) {
   }
 
@@ -44,6 +46,11 @@ export class TitleTextInputComponent implements OnInit{
 
   onListChange() {
     if(this.form.invalid) {
+      // TODO Подумати над покращенням цього
+      this.matSnack.open('Title EN and Description EN - required', 'ok', {
+        duration: 4000,
+        verticalPosition: "top"
+      })
       return
     }
 
