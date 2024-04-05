@@ -24,6 +24,7 @@ import {TextAreaInputComponent} from "./components/form-elements/text-area-input
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { AuthLoginComponent } from './components/auth-login/auth-login.component';
 import {MatMenuModule} from "@angular/material/menu";
+import { EditActionAbilityComponent } from './modals/edit-action-ability/edit-action-ability.component';
 
 
 
@@ -43,6 +44,7 @@ import {MatMenuModule} from "@angular/material/menu";
     TextAreaInputComponent,
     PaginatorComponent,
     AuthLoginComponent,
+    EditActionAbilityComponent,
   ],
   exports: [
     BorderOutlineComponent,

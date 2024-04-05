@@ -17,6 +17,7 @@ import {MeasureCode} from "../../../../shared/static/creature/measure.code";
 import {ConfirmDialogComponent} from "../../../../shared/components/confirm-dialog/confirm-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {ActionAbilities} from "../../../../shared/static/creature/action-abilities.code";
+import {EditActionAbility} from "../../../../shared/interfaces/creature/create/edit-action-ability";
 
 @Component({
   selector: 'app-create-beast',
@@ -242,6 +243,14 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit,
 
     if (idx !== -1) {
       this.actionAbilities.splice(idx, 1)
+    }
+  }
+
+  editActionAbility($event: EditActionAbility) {
+    const idx = this.actionAbilities.findIndex(item => item.title.en === $event.old.title.en && item.description.en === $event.old.description.en)
+
+    if (idx !== -1) {
+      this.actionAbilities[idx] = $event.new
     }
   }
 

@@ -1,8 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormBuilder, UntypedFormGroup} from "@angular/forms";
+import {FormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {CreateActionAbility} from "../../../../../../shared/interfaces/creature/create/create-action-ability";
 import {ActionAbilities} from "../../../../../../shared/static/creature/action-abilities.code";
 import {ActionsAbilities} from "../../../../../../shared/interfaces/creature/get/actions-abilities";
+import {EditActionAbility} from "../../../../../../shared/interfaces/creature/create/edit-action-ability";
 
 
 @Component({
@@ -17,6 +18,7 @@ export class TitleTextInputComponent implements OnInit{
 
   @Output() addValue = new EventEmitter<CreateActionAbility>()
   @Output() removeValue = new EventEmitter<CreateActionAbility>()
+  @Output() editValue = new EventEmitter<EditActionAbility>()
 
   titleTextList: ActionsAbilities[] = []
 
@@ -29,9 +31,9 @@ export class TitleTextInputComponent implements OnInit{
 
   ngOnInit() {
     this.form = this.formBuilder.group({
-      titleEN: [],
+      titleEN: ['', Validators.required],
       titleUA: [],
-      descriptionEN: [],
+      descriptionEN: ['', Validators.required],
       descriptionUA: [],
     })
 
@@ -64,5 +66,15 @@ export class TitleTextInputComponent implements OnInit{
   removeElement($event: CreateActionAbility) {
     this.titleTextList.splice(this.titleTextList.findIndex(item => item === $event), 1)
     this.removeValue.emit($event)
+  }
+
+  editItem($event: EditActionAbility) {
+    const idx = this.titleTextList.findIndex(item => item === $event.old)
+
+    if(idx !== -1) {
+      this.titleTextList[idx] = $event.new
+    }
+
+    this.editValue.emit($event)
   }
 }

@@ -28,10 +28,10 @@
       <button class="h-[48px] max-w-[300px] text-center text-2xl bg-[#FAFD5D] font-bold rounded-xl w-full" type="submit">{{'ADD' | transloco}}</button>
     </div>
   </form>
-  <div class="w-full mt-7 h-[200px]">
+  <div class="w-full mt-7 h-[350px]">
     <app-border-outline>
       <div class="rounded-xl bg-[#15181F] h-full mx-4 py-4 flex flex-col items-start gap-1 w-full overflow-y-auto properties-container">
-        <app-title-text-item class="w-full" *ngFor="let item of titleTextList" [titleText]="item" (remove)="removeElement($event)"/>
+        <app-title-text-item class="w-full" *ngFor="let item of titleTextList" [titleText]="item" (remove)="removeElement($event)" (edit)="editItem($event)"/>
       </div>
     </app-border-outline>
   </div>

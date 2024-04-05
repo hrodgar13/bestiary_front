@@ -152,19 +152,44 @@
       </div>
       <div>
         <div class="h-[1px] w-full bg-[#E2A23B]"></div>
-        <app-title-text-input [defaultValues]="filterActionAbilities(ActionAbilities.abilities)" [blockName]="'Abilities'" [actionCode]="ActionCodes.abilities" (addValue)="addActionAbility($event)" (removeValue)="removeActionAbility($event)"/>
+        <app-title-text-input
+          [defaultValues]="filterActionAbilities(ActionAbilities.abilities)"
+          [blockName]="'Abilities'"
+          [actionCode]="ActionCodes.abilities"
+          (addValue)="addActionAbility($event)"
+          (removeValue)="removeActionAbility($event)"
+          (editValue)="editActionAbility($event)"
+        />
         <div class="h-[1px] w-full bg-[#E2A23B]"></div>
       </div>
       <div>
-        <app-title-text-input [defaultValues]="filterActionAbilities(ActionAbilities.actions)" [blockName]="'Actions'" [actionCode]="ActionCodes.actions" (addValue)="addActionAbility($event)" (removeValue)="removeActionAbility($event)"/>
+        <app-title-text-input
+          [defaultValues]="filterActionAbilities(ActionAbilities.actions)"
+          [blockName]="'Actions'" [actionCode]="ActionCodes.actions"
+          (addValue)="addActionAbility($event)"
+          (removeValue)="removeActionAbility($event)"
+          (editValue)="editActionAbility($event)"
+        />
         <div class="h-[1px] w-full bg-[#E2A23B]"></div>
       </div>
       <div>
-        <app-title-text-input [defaultValues]="filterActionAbilities(ActionAbilities.bonusActions)" [blockName]="'Bonus Actions'" [actionCode]="ActionCodes.bonusActions" (addValue)="addActionAbility($event)" (removeValue)="removeActionAbility($event)"/>
+        <app-title-text-input
+          [defaultValues]="filterActionAbilities(ActionAbilities.bonusActions)"
+          [blockName]="'Bonus Actions'" [actionCode]="ActionCodes.bonusActions"
+          (addValue)="addActionAbility($event)"
+          (removeValue)="removeActionAbility($event)"
+          (editValue)="editActionAbility($event)"
+        />
         <div class="h-[1px] w-full bg-[#E2A23B]"></div>
       </div>
       <div>
-        <app-title-text-input [defaultValues]="filterActionAbilities(ActionAbilities.legendaryActions)" [blockName]="'Legendary Actions'" [actionCode]="ActionCodes.legendaryActions" (addValue)="addActionAbility($event)" (removeValue)="removeActionAbility($event)"/>
+        <app-title-text-input
+          [defaultValues]="filterActionAbilities(ActionAbilities.legendaryActions)"
+          [blockName]="'Legendary Actions'" [actionCode]="ActionCodes.legendaryActions"
+          (addValue)="addActionAbility($event)"
+          (removeValue)="removeActionAbility($event)"
+          (editValue)="editActionAbility($event)"
+        />
         <div class="h-[1px] w-full bg-[#E2A23B]"></div>
       </div>
       <div>
