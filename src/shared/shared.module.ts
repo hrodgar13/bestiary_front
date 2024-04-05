@@ -25,6 +25,7 @@ import { PaginatorComponent } from './components/paginator/paginator.component';
 import { AuthLoginComponent } from './components/auth-login/auth-login.component';
 import {MatMenuModule} from "@angular/material/menu";
 import { EditActionAbilityComponent } from './modals/edit-action-ability/edit-action-ability.component';
+import {FiltersModalComponent} from "./modals/filters-modal/filters-modal.component";
 
 
 
@@ -45,6 +46,7 @@ import { EditActionAbilityComponent } from './modals/edit-action-ability/edit-ac
     PaginatorComponent,
     AuthLoginComponent,
     EditActionAbilityComponent,
+    FiltersModalComponent,
   ],
   exports: [
     BorderOutlineComponent,
@@ -58,6 +60,7 @@ import { EditActionAbilityComponent } from './modals/edit-action-ability/edit-ac
     TextAreaInputComponent,
     PaginatorComponent,
     AuthLoginComponent,
+    FiltersModalComponent,
   ],
   imports: [
     CommonModule,
