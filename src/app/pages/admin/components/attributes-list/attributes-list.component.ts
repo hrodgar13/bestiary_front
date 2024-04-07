@@ -77,12 +77,14 @@ export class AttributesListComponent extends DestroySubscription implements OnIn
     const dialogRef = this.dialog.open(PropertyModalComponent, {data})
 
     dialogRef.afterClosed().pipe(takeUntil(this.destroyStream$)).subscribe(data => {
-      const catIdx = this.filters.findIndex(item => item.filter_cat === attr_cat)
+      if(data) {
+        const catIdx = this.filters.findIndex(item => item.filter_cat === attr_cat)
 
-      const attrIdx = this.filters[catIdx].filter_values.findIndex(item => item.id === data.id)
+        const attrIdx = this.filters[catIdx].filter_values.findIndex(item => item.id === data.id)
 
-      if(catIdx !== -1 && attrIdx !== -1) {
-        this.filters[catIdx].filter_values[attrIdx] = data
+        if(catIdx !== -1 && attrIdx !== -1) {
+          this.filters[catIdx].filter_values[attrIdx] = data
+        }
       }
     })
   }

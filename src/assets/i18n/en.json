@@ -118,5 +118,13 @@
   "Requests": "Requests",
   "Show only Admin Requests": "Show only Admin Requests",
   "No messages for now": "No messages for now",
-  "damage": "damage"
+  "damage": "damage",
+  "Scaling from": "Scaling from",
+
+  "strength": "Strength",
+  "dexterity": "Dexterity",
+  "constitution": "Constitution",
+  "intelligence": "Intelligence",
+  "wisdom": "Wisdom",
+  "charisma": "Charisma"
 }

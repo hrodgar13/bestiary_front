@@ -118,5 +118,13 @@
   "Requests": "Звернення",
   "Show only Admin Requests": "Показувати лише звернення на адміністрування",
   "No messages for now": "Наразі немає повідомлень",
-  "damage": "шкоду"
+  "damage": "шкоду",
+  "Scaling from": "Залежить від",
+
+  "strength": "Сила",
+  "dexterity": "Спритність",
+  "constitution": "Тілобудова",
+  "intelligence": "Інтелект",
+  "wisdom": "Мудрість",
+  "charisma": "Харизма"
 }

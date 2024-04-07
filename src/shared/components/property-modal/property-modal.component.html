@@ -9,7 +9,7 @@
                   panelClass="vu-select" [placeholder]="'Scaling from' | transloco">
         <mat-option class="text-[#B1A79C] vu-select" [value]="item"
                     *ngFor="let item of Object.values(characteristicList)">
-          {{item}}
+          {{item | transloco}}
         </mat-option>
       </mat-select>
     </app-border-outline>
