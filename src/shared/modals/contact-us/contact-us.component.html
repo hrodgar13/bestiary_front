@@ -21,9 +21,10 @@
 
 
         <app-text-area-input formControlName="text" class="max-w-[280px] h-full max-h-[110px] w-full"
-                             [placeholder]="'Type message here'"/>
+                             [placeholder]="'Type message here' | transloco"/>
         <button [disabled]="modalForm.invalid" type="submit"
-                class="h-[40px] w-[160px] bg-[#E2A23B] playfair-font font-semibold rounded">Confirm
+                class="h-[40px] w-[160px] bg-[#E2A23B] playfair-font font-semibold rounded">
+          {{'Confirm' | transloco}}
         </button>
     </form>
 </div>

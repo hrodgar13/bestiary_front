@@ -22,6 +22,10 @@ import {InputTextComponent} from "./components/form-elements/input-text/input-te
 import {InputSelectComponent} from "./components/form-elements/input-select/input-select.component";
 import {TextAreaInputComponent} from "./components/form-elements/text-area-input/text-area-input.component";
 import { PaginatorComponent } from './components/paginator/paginator.component';
+import { AuthLoginComponent } from './components/auth-login/auth-login.component';
+import {MatMenuModule} from "@angular/material/menu";
+import { EditActionAbilityComponent } from './modals/edit-action-ability/edit-action-ability.component';
+import {FiltersModalComponent} from "./modals/filters-modal/filters-modal.component";
 
 
 
@@ -40,19 +44,24 @@ import { PaginatorComponent } from './components/paginator/paginator.component';
     ContactUsComponent,
     TextAreaInputComponent,
     PaginatorComponent,
+    AuthLoginComponent,
+    EditActionAbilityComponent,
+    FiltersModalComponent,
   ],
-    exports: [
-        BorderOutlineComponent,
-        LoaderComponent,
-        SwitchLangComponent,
-        CreaturesListComponent,
-        DangerSeparatorComponent,
-        CreaturesFilterComponent,
-        InputTextComponent,
-        InputSelectComponent,
-        TextAreaInputComponent,
-        PaginatorComponent,
-    ],
+  exports: [
+    BorderOutlineComponent,
+    LoaderComponent,
+    SwitchLangComponent,
+    CreaturesListComponent,
+    DangerSeparatorComponent,
+    CreaturesFilterComponent,
+    InputTextComponent,
+    InputSelectComponent,
+    TextAreaInputComponent,
+    PaginatorComponent,
+    AuthLoginComponent,
+    FiltersModalComponent,
+  ],
   imports: [
     CommonModule,
     MatProgressSpinnerModule,
@@ -64,6 +73,7 @@ import { PaginatorComponent } from './components/paginator/paginator.component';
     RouterLink,
     MatIconModule,
     MatButtonModule,
+    MatMenuModule,
   ],
   providers: [
       CreatureListService

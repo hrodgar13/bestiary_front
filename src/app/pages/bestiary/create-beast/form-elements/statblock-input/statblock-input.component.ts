@@ -1,4 +1,4 @@
-import {Component, forwardRef, Input} from '@angular/core';
+import {Component, EventEmitter, forwardRef, Input, Output} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
@@ -16,6 +16,8 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 })
 export class StatblockInputComponent implements ControlValueAccessor {
   @Input() label: any;
+
+  @Output() detectCharacteristicChange = new EventEmitter<number>()
 
   _value: any;
 
@@ -57,6 +59,7 @@ export class StatblockInputComponent implements ControlValueAccessor {
 
       this._value = newValue;
       this.propagateChange(this._value);
+      this.detectCharacteristicChange.emit(Number(newValue) || 0)
     }
   }
 }

@@ -17,7 +17,7 @@ export class AdminComponent {
       title: 'Attributes'
     },
     {
-      title: 'Request',
+      title: 'Requests',
       route: 'requests'
     },
   ];

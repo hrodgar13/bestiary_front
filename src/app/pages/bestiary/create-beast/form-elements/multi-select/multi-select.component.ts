@@ -9,6 +9,7 @@ import {CreateMeasure} from "../../../../../../shared/interfaces/creature/create
 import {Measure} from "../../../../../../shared/interfaces/creature/get/measure";
 import {Attribute} from "../../../../../../shared/interfaces/creature/get/attribute";
 import {MeasureCode} from "../../../../../../shared/static/creature/measure.code";
+import {ScalingCharacteristics} from "../../create-beast.component";
 
 
 @Component({
@@ -26,6 +27,7 @@ export class MultiSelectComponent extends DestroySubscription implements OnInit 
   @Input() amtNullValidator: boolean = false
   @Input() alwaysUseMsr: boolean = false
   @Input() defaultValues: Measure[] = []
+  @Input() beastCharacteristics?: ScalingCharacteristics
 
   @Output() addMeasure = new EventEmitter<CreateMeasure>
   @Output() removeMeasure = new EventEmitter<CreateMeasure>
@@ -34,6 +36,7 @@ export class MultiSelectComponent extends DestroySubscription implements OnInit 
 
   measureForm!: UntypedFormGroup;
   currentSelectedAttribute!: Attribute;
+  @Input() isScalable: boolean = false;
 
   constructor(
     private readonly formBuilder: FormBuilder,
@@ -46,7 +49,7 @@ export class MultiSelectComponent extends DestroySubscription implements OnInit 
 
   ngOnInit() {
     this.measureForm = this.formBuilder.group({
-      amount: [null, this.amtNullValidator ? Validators.required : null],
+      amount: [this.setAmountDefault(), this.amtNullValidator ? Validators.required : null],
       measure: [null]
     })
 
@@ -85,6 +88,10 @@ export class MultiSelectComponent extends DestroySubscription implements OnInit 
 
   setCurrentSelected($event: Attribute) {
     this.currentSelectedAttribute = $event
+
+    this.measureForm.patchValue({
+      amount: this.setAmountDefault()
+    })
   }
 
   removeItemFromList($event: Measure) {
@@ -94,5 +101,9 @@ export class MultiSelectComponent extends DestroySubscription implements OnInit 
       this.selectedItems.splice(idx, 1)
       this.removeMeasure.emit(this.convertMeasureInCreationType($event))
     }
+  }
+
+  private setAmountDefault(): number | 0 {
+    return this.beastCharacteristics && this.currentSelectedAttribute && this.currentSelectedAttribute.scaling_from ? Math.floor(((this.beastCharacteristics[this.currentSelectedAttribute.scaling_from] - 10) / 2 )) + this.beastCharacteristics.mastery_bonus : 0
   }
 }

@@ -5,7 +5,7 @@
       <div class="flex items-start justify-between w-full">
         <app-input-select [attribute_code]="attribute_code" (currentSelected)="setCurrentSelected($event)" class="h-[48px] max-w-[280px] w-full"
                           [placeholder]="placeholder"/>
-        <app-input-green-btn [route]="attribute_code" [title]="'Add'"/>
+        <app-input-green-btn [isScalable]="isScalable" [route]="attribute_code" [title]="'Add'"/>
       </div>
     </div>
     <div class="flex">

@@ -75,18 +75,18 @@
         </div>
       </div>
       <div class="flex items-center justify-between flex-wrap gap-y-4">
-        <app-statblock-input formControlName="strength" label="{{'STR' | transloco}}"
+        <app-statblock-input (detectCharacteristicChange)="setScaleFromCharacteristic(CHARACTERISTIC_CODE.strength, $event)" formControlName="strength" label="{{'STR' | transloco}}"
                              class="h-[130px] max-w-[130px]  640:max-w-[150px] 640:h-[150px] 1280:max-w-[180px] 1280:h-[180px] w-full"/>
         <app-statblock-input formControlName="dexterity" label="{{'DEX' | transloco}}"
-                             class="h-[130px] max-w-[130px]  640:max-w-[150px] 640:h-[150px] 1280:max-w-[180px] 1280:h-[180px] w-full"/>
+                             (detectCharacteristicChange)="setScaleFromCharacteristic(CHARACTERISTIC_CODE.dexterity, $event)"  class="h-[130px] max-w-[130px]  640:max-w-[150px] 640:h-[150px] 1280:max-w-[180px] 1280:h-[180px] w-full"/>
         <app-statblock-input formControlName="constitution" label="{{'CON' | transloco}}"
-                             class="h-[130px] max-w-[130px]  640:max-w-[150px] 640:h-[150px] 1280:max-w-[180px] 1280:h-[180px] w-full"/>
+                             (detectCharacteristicChange)="setScaleFromCharacteristic(CHARACTERISTIC_CODE.constitution, $event)" class="h-[130px] max-w-[130px]  640:max-w-[150px] 640:h-[150px] 1280:max-w-[180px] 1280:h-[180px] w-full"/>
         <app-statblock-input formControlName="intelligence" label="{{'INT' | transloco}}"
-                             class="h-[130px] max-w-[130px]  640:max-w-[150px] 640:h-[150px] 1280:max-w-[180px] 1280:h-[180px] w-full"/>
+                             (detectCharacteristicChange)="setScaleFromCharacteristic(CHARACTERISTIC_CODE.intelligence, $event)"  class="h-[130px] max-w-[130px]  640:max-w-[150px] 640:h-[150px] 1280:max-w-[180px] 1280:h-[180px] w-full"/>
         <app-statblock-input formControlName="wisdom" label="{{'WIS' | transloco}}"
-                             class="h-[130px] max-w-[130px]  640:max-w-[150px] 640:h-[150px] 1280:max-w-[180px] 1280:h-[180px] w-full"/>
+                             (detectCharacteristicChange)="setScaleFromCharacteristic(CHARACTERISTIC_CODE.wisdom, $event)"  class="h-[130px] max-w-[130px]  640:max-w-[150px] 640:h-[150px] 1280:max-w-[180px] 1280:h-[180px] w-full"/>
         <app-statblock-input formControlName="charisma" label="{{'CHA' | transloco}}"
-                             class="h-[130px] max-w-[130px]  640:max-w-[150px] 640:h-[150px] 1280:max-w-[180px] 1280:h-[180px] w-full"/>
+                             (detectCharacteristicChange)="setScaleFromCharacteristic(CHARACTERISTIC_CODE.charisma, $event)"  class="h-[130px] max-w-[130px]  640:max-w-[150px] 640:h-[150px] 1280:max-w-[180px] 1280:h-[180px] w-full"/>
       </div>
       <div class="grid grid-cols-1 gap-4 1280:grid-cols-2">
         <app-multi-select
@@ -98,7 +98,8 @@
           [defaultValues]="filterMeasuresByCategories(MeasuresCodes.saving_throws)"
           (addMeasure)="addMeasure($event)" (removeMeasure)="removeMeasure($event)"
           [enableAmt]="true" [measure_code]="MeasuresCodes.saving_throws"
-          [enableMsr]="false" [placeholder]="'Saving throw:'"
+          [enableMsr]="false" [placeholder]="'Saving throws:'"
+          [isScalable]="true" [beastCharacteristics]="scaling_from"
           label="saving_throws" [attribute_code]="AttributesCodes.saving_throws"/>
         <app-multi-select [enableMsr]="false"
                           [defaultValues]="filterMeasuresByCategories(MeasuresCodes.resists)"
@@ -110,6 +111,7 @@
                           (addMeasure)="addMeasure($event)" (removeMeasure)="removeMeasure($event)"
                           [placeholder]="'Select Skill:'" label="skills"
                           [measure_code]="MeasuresCodes.skills"
+                          [isScalable]="true" [beastCharacteristics]="scaling_from"
                           [attribute_code]="AttributesCodes.skills"/>
         <app-multi-select [enableMsr]="false" [defaultValues]="filterMeasuresByCategories(MeasuresCodes.vulnerabilities)"
                           [measure_code]="MeasuresCodes.vulnerabilities"
@@ -146,25 +148,50 @@
         <div class="flex">
           <div class="flex w-full items-center gap-2">
             <app-label-text [label]="'Mastery bonus'"/>
-            <app-input-number formControlName="mastery_bonus" class="h-[48px]" placeholder="0"/>
+            <app-input-number (inputChange)="setMasteryScaling($event)" formControlName="mastery_bonus" class="h-[48px]" placeholder="0"/>
           </div>
         </div>
       </div>
       <div>
         <div class="h-[1px] w-full bg-[#E2A23B]"></div>
-        <app-title-text-input [defaultValues]="filterActionAbilities(ActionAbilities.abilities)" [blockName]="'Abilities'" [actionCode]="ActionCodes.abilities" (addValue)="addActionAbility($event)" (removeValue)="removeActionAbility($event)"/>
+        <app-title-text-input
+          [defaultValues]="filterActionAbilities(ActionAbilities.abilities)"
+          [blockName]="'Abilities'"
+          [actionCode]="ActionCodes.abilities"
+          (addValue)="addActionAbility($event)"
+          (removeValue)="removeActionAbility($event)"
+          (editValue)="editActionAbility($event)"
+        />
         <div class="h-[1px] w-full bg-[#E2A23B]"></div>
       </div>
       <div>
-        <app-title-text-input [defaultValues]="filterActionAbilities(ActionAbilities.actions)" [blockName]="'Actions'" [actionCode]="ActionCodes.actions" (addValue)="addActionAbility($event)" (removeValue)="removeActionAbility($event)"/>
+        <app-title-text-input
+          [defaultValues]="filterActionAbilities(ActionAbilities.actions)"
+          [blockName]="'Actions'" [actionCode]="ActionCodes.actions"
+          (addValue)="addActionAbility($event)"
+          (removeValue)="removeActionAbility($event)"
+          (editValue)="editActionAbility($event)"
+        />
         <div class="h-[1px] w-full bg-[#E2A23B]"></div>
       </div>
       <div>
-        <app-title-text-input [defaultValues]="filterActionAbilities(ActionAbilities.bonusActions)" [blockName]="'Bonus Actions'" [actionCode]="ActionCodes.bonusActions" (addValue)="addActionAbility($event)" (removeValue)="removeActionAbility($event)"/>
+        <app-title-text-input
+          [defaultValues]="filterActionAbilities(ActionAbilities.bonusActions)"
+          [blockName]="'Bonus Actions'" [actionCode]="ActionCodes.bonusActions"
+          (addValue)="addActionAbility($event)"
+          (removeValue)="removeActionAbility($event)"
+          (editValue)="editActionAbility($event)"
+        />
         <div class="h-[1px] w-full bg-[#E2A23B]"></div>
       </div>
       <div>
-        <app-title-text-input [defaultValues]="filterActionAbilities(ActionAbilities.legendaryActions)" [blockName]="'Legendary Actions'" [actionCode]="ActionCodes.legendaryActions" (addValue)="addActionAbility($event)" (removeValue)="removeActionAbility($event)"/>
+        <app-title-text-input
+          [defaultValues]="filterActionAbilities(ActionAbilities.legendaryActions)"
+          [blockName]="'Legendary Actions'" [actionCode]="ActionCodes.legendaryActions"
+          (addValue)="addActionAbility($event)"
+          (removeValue)="removeActionAbility($event)"
+          (editValue)="editActionAbility($event)"
+        />
         <div class="h-[1px] w-full bg-[#E2A23B]"></div>
       </div>
       <div>

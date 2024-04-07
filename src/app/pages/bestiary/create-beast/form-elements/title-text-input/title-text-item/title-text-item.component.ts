@@ -4,8 +4,13 @@ import {TranslocoService} from "@ngneat/transloco";
 import {takeUntil} from "rxjs";
 import {ConfirmDialogComponent} from "../../../../../../../shared/components/confirm-dialog/confirm-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
-import {ActionAbilities} from "../../../../../../../shared/static/creature/action-abilities.code";
 import {CreateActionAbility} from "../../../../../../../shared/interfaces/creature/create/create-action-ability";
+import {
+  EditActionAbilityComponent
+} from "../../../../../../../shared/modals/edit-action-ability/edit-action-ability.component";
+import {EditActionAbility} from "../../../../../../../shared/interfaces/creature/create/edit-action-ability";
+
+
 
 @Component({
   selector: 'app-title-text-item',
@@ -19,6 +24,7 @@ export class TitleTextItemComponent extends DestroySubscription implements OnIni
   currentLanguageTitle!: string | null;
   currentLanguageDescription!: string | null;
   @Output() remove = new EventEmitter<CreateActionAbility>
+  @Output() edit = new EventEmitter<EditActionAbility>
 
   constructor(
     private dialog: MatDialog,
@@ -55,6 +61,18 @@ export class TitleTextItemComponent extends DestroySubscription implements OnIni
     dialogRef.afterClosed().pipe(takeUntil(this.destroyStream$)).subscribe(data => {
       if(data) {
         this.remove.emit(this.titleText)
+      }
+    })
+  }
+
+  editActionAbility(event: any) {
+    event.stopPropagation()
+
+    const dialogRef = this.dialog.open(EditActionAbilityComponent, {data: this.titleText, panelClass: 'edit-ability-action-modal'})
+
+    dialogRef.afterClosed().pipe(takeUntil(this.destroyStream$)).subscribe((data: CreateActionAbility) => {
+      if(data) {
+        this.edit.emit({new: data, old: this.titleText})
       }
     })
   }

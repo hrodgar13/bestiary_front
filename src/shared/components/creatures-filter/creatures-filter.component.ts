@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {debounceTime, Subject, takeUntil} from "rxjs";
 import {DestroySubscription} from "../../helpers/destroy-subscribtion";
-import {FiltersModalComponent} from "../../../app/pages/bestiary/bestiary-list/filters-modal/filters-modal.component";
 import {OutputCreatureItem} from "../../interfaces/filters/output-creature-item";
 import {MatDialog} from "@angular/material/dialog";
+import {FiltersModalComponent} from "../../modals/filters-modal/filters-modal.component";
 
 @Component({
   selector: 'app-creatures-filter',
