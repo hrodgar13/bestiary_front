@@ -99,7 +99,7 @@
           (addMeasure)="addMeasure($event)" (removeMeasure)="removeMeasure($event)"
           [enableAmt]="true" [measure_code]="MeasuresCodes.saving_throws"
           [enableMsr]="false" [placeholder]="'Saving throws:'"
-          [isScalable]="true"
+          [isScalable]="true" [beastCharacteristics]="scaling_from"
           label="saving_throws" [attribute_code]="AttributesCodes.saving_throws"/>
         <app-multi-select [enableMsr]="false"
                           [defaultValues]="filterMeasuresByCategories(MeasuresCodes.resists)"
@@ -111,6 +111,7 @@
                           (addMeasure)="addMeasure($event)" (removeMeasure)="removeMeasure($event)"
                           [placeholder]="'Select Skill:'" label="skills"
                           [measure_code]="MeasuresCodes.skills"
+                          [isScalable]="true" [beastCharacteristics]="scaling_from"
                           [attribute_code]="AttributesCodes.skills"/>
         <app-multi-select [enableMsr]="false" [defaultValues]="filterMeasuresByCategories(MeasuresCodes.vulnerabilities)"
                           [measure_code]="MeasuresCodes.vulnerabilities"
