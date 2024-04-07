@@ -65,6 +65,7 @@ export class AttributesListComponent extends DestroySubscription implements OnIn
 
   openModal(title: string, attr_cat: string, initData: Translation, attributeId: number, initScaling: CharacteristicCode | null) {
     const data: MatData = {
+      isScalable: !! initScaling,
       title,
       attr_cat,
       initData,

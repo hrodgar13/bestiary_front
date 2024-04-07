@@ -34,6 +34,7 @@ export class MultiSelectComponent extends DestroySubscription implements OnInit 
 
   measureForm!: UntypedFormGroup;
   currentSelectedAttribute!: Attribute;
+  @Input() isScalable: boolean = false;
 
   constructor(
     private readonly formBuilder: FormBuilder,

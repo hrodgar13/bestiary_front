@@ -12,6 +12,7 @@ import {CharacteristicCode} from "../../static/creature/characteristic.code";
 export interface MatData {
   attr_cat: AttributeCode | string,
   title: string,
+  isScalable: boolean,
   initData?: Translation
   initScaling: CharacteristicCode | null,
   attributeId?: number
@@ -28,7 +29,6 @@ export class PropertyModalComponent extends DestroySubscription implements OnIni
 
   characteristicList = CharacteristicCode
 
-  isScalable: boolean = false
   _scalableCharacteristic: CharacteristicCode | null = null
 
 
@@ -47,7 +47,7 @@ export class PropertyModalComponent extends DestroySubscription implements OnIni
     }
 
     this.modalForm = this.formBuilder.group({
-      scalingCharacteristic: [this.data.initScaling || null],
+      scalingCharacteristic: [this.data.initScaling || null, this.data.isScalable ? [Validators.required] : []],
       en: [this.data.initData?.en, Validators.required],
       ua: [this.data.initData?.ua, Validators.required]
     })

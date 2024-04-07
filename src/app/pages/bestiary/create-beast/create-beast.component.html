@@ -99,6 +99,7 @@
           (addMeasure)="addMeasure($event)" (removeMeasure)="removeMeasure($event)"
           [enableAmt]="true" [measure_code]="MeasuresCodes.saving_throws"
           [enableMsr]="false" [placeholder]="'Saving throws:'"
+          [isScalable]="true"
           label="saving_throws" [attribute_code]="AttributesCodes.saving_throws"/>
         <app-multi-select [enableMsr]="false"
                           [defaultValues]="filterMeasuresByCategories(MeasuresCodes.resists)"
