@@ -12,6 +12,8 @@ import {
   PropertyModalComponent
 } from "../../../../../shared/components/property-modal/property-modal.component";
 import {Translation} from "../../../../../shared/interfaces/creature/get/translation";
+import {CharacteristicCode} from "../../../../../shared/static/creature/characteristic.code";
+import {AttributeCode} from "../../../../../shared/static/creature/attributes.code";
 
 @Component({
   selector: 'app-attributes-list',
@@ -58,27 +60,31 @@ export class AttributesListComponent extends DestroySubscription implements OnIn
     const searchableFilter = this.filters.find(item => item.filter_cat === filter_cat)?.filter_values.find(item => item.id === id)
 
     if(searchableFilter) {
-      this.openModal('Edit' || '', filter_cat, searchableFilter.name, searchableFilter.id)
+      this.openModal('Edit' || '', filter_cat, searchableFilter.name, searchableFilter.id, searchableFilter.scaling_from)
     }
   }
 
-  openModal(title: string, attr_cat: string, initData: Translation, attributeId: number) {
+  openModal(title: string, attr_cat: string, initData: Translation, attributeId: number, initScaling: CharacteristicCode | null) {
     const data: MatData = {
+      isScalable: this.detectScalableAttribute(attr_cat),
       title,
       attr_cat,
       initData,
+      initScaling,
       attributeId
     }
 
     const dialogRef = this.dialog.open(PropertyModalComponent, {data})
 
     dialogRef.afterClosed().pipe(takeUntil(this.destroyStream$)).subscribe(data => {
-      const catIdx = this.filters.findIndex(item => item.filter_cat === attr_cat)
+      if(data) {
+        const catIdx = this.filters.findIndex(item => item.filter_cat === attr_cat)
 
-      const attrIdx = this.filters[catIdx].filter_values.findIndex(item => item.id === data.id)
+        const attrIdx = this.filters[catIdx].filter_values.findIndex(item => item.id === data.id)
 
-      if(catIdx !== -1 && attrIdx !== -1) {
-        this.filters[catIdx].filter_values[attrIdx] = data
+        if(catIdx !== -1 && attrIdx !== -1) {
+          this.filters[catIdx].filter_values[attrIdx] = data
+        }
       }
     })
   }
@@ -108,5 +114,9 @@ export class AttributesListComponent extends DestroySubscription implements OnIn
         verticalPosition: "top"
       })
     })
+  }
+
+  private detectScalableAttribute(attr_cat: string) {
+    return attr_cat === AttributeCode.saving_throws || attr_cat === AttributeCode.skills;
   }
 }

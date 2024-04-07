@@ -8,7 +8,7 @@
           {{beasts.dangerLvl ? beasts.dangerLvl : '-'}}
         </div>
         <div class="text-[#B1A79C] overflow-ellipsis overflow-hidden whitespace-nowrap w-full p-3 text-xl poppins-font">
-          {{beast.creatureName && beast.creatureName[currentLanguage] ? beast.creatureName[currentLanguage] : 'No Name'}}
+          {{beast.creatureName && beast.creatureName[currentLanguage] ? beast.creatureName[currentLanguage] : currentLanguage === 'en' ? 'No Name' : 'Без назви'}}
         </div>
         <div class="border rounded mr-1 flex items-center justify-center border-[#E2A23B] min-w-[40px] min-h-[40px]"
              *ngIf="isAdminAuthenticated">

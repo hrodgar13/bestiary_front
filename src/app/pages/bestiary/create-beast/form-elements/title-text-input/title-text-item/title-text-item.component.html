@@ -1,6 +1,13 @@
-<app-border-outline (click)="removeElement()" class="w-full h-full">
-  <div class="flex gap-1 p-3 w-full">
+<app-border-outline (click)="removeElement()" class="w-full h-full cursor-pointer">
+  <div class="flex gap-1 p-3 w-full text-center">
     <p class="text-xl text-[#E2A23B] font-bold break-words">{{ currentLanguageTitle + ':' }}</p>
     <p class="text-xl text-[#FFFFFF] font-bold break-words">{{ currentLanguageDescription }}</p>
+    <div class="min-w-[40px] h-[40px] ml-auto">
+      <app-border-outline>
+        <button (click)="editActionAbility($event)" class="w-full h-full flex items-center justify-center">
+          <mat-icon class="text-[#E2A23B]">edit</mat-icon>
+        </button>
+      </app-border-outline>
+    </div>
   </div>
 </app-border-outline>

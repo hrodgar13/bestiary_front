@@ -1,0 +1,29 @@
+<div class="max-w-[1200px] max-h-[100vh] overflow-y-auto w-full h-full p-5">
+  <form [formGroup]="editForm" (ngSubmit)="submitData()">
+    <div>
+      <div class="flex items-start gap-5 w-full flex-col 1024:flex-row">
+        <h4 class="poppins-font text-[#FFFFFF] font-semibold text-xl min-w-[150px]">{{'Title EN' | transloco}}</h4>
+        <app-input-text formControlName="titleEN" class="h-[48px] max-w-[280px] w-[100%]"/>
+      </div>
+      <div class="flex items-start gap-5 mt-5 w-full flex-col 1024:flex-row">
+        <h4 class="poppins-font text-[#FFFFFF] font-semibold text-xl min-w-[150px]">{{'Description EN' | transloco}}</h4>
+        <app-text-area-input formControlName="descEN" class="h-[240px] w-[100%]"/>
+      </div>
+    </div>
+    <div class="mt-6">
+      <div class="flex items-start gap-5 w-full flex-col 1024:flex-row">
+        <h4 class="poppins-font text-[#FFFFFF] font-semibold text-xl min-w-[150px]">{{'Title UA' | transloco}}</h4>
+        <app-input-text formControlName="titleUA" class="h-[48px] max-w-[280px] w-[100%]"/>
+      </div>
+      <div class="flex items-start gap-5 mt-5 w-full flex-col 1024:flex-row">
+        <h4 class="poppins-font text-[#FFFFFF] font-semibold text-xl min-w-[150px]">{{'Description UA' | transloco}}</h4>
+        <app-text-area-input formControlName="descUA" class="h-[240px] w-[100%]"/>
+      </div>
+    </div>
+    <div class="w-full flex items-center justify-center">
+      <button type="submit" class="h-[48px] max-w-[300px] text-center text-2xl bg-[#FAFD5D] mt-5 font-bold rounded-xl w-full">
+        {{'Edit' | transloco}}
+      </button>
+    </div>
+  </form>
+</div>

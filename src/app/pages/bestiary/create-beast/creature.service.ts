@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {ApiService} from "../../../../shared/services/api.service";
-import {CreateAttribute} from "../../../../shared/interfaces/creature/create/create-attribute";
 import {Creature} from "../../../../shared/interfaces/creature/get/creature";
 import {FileUpload} from "../../../../shared/interfaces/file/file-upload.interface";
 
