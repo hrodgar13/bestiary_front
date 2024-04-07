@@ -12,6 +12,7 @@ import {
   PropertyModalComponent
 } from "../../../../../shared/components/property-modal/property-modal.component";
 import {Translation} from "../../../../../shared/interfaces/creature/get/translation";
+import {CharacteristicCode} from "../../../../../shared/static/creature/characteristic.code";
 
 @Component({
   selector: 'app-attributes-list',
@@ -58,15 +59,16 @@ export class AttributesListComponent extends DestroySubscription implements OnIn
     const searchableFilter = this.filters.find(item => item.filter_cat === filter_cat)?.filter_values.find(item => item.id === id)
 
     if(searchableFilter) {
-      this.openModal('Edit' || '', filter_cat, searchableFilter.name, searchableFilter.id)
+      this.openModal('Edit' || '', filter_cat, searchableFilter.name, searchableFilter.id, searchableFilter.scalingFrom)
     }
   }
 
-  openModal(title: string, attr_cat: string, initData: Translation, attributeId: number) {
+  openModal(title: string, attr_cat: string, initData: Translation, attributeId: number, initScaling: CharacteristicCode | null) {
     const data: MatData = {
       title,
       attr_cat,
       initData,
+      initScaling,
       attributeId
     }
 

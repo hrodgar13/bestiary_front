@@ -29,6 +29,7 @@ export class InputGreenBtnComponent extends DestroySubscription{
   openModal() {
     const data: MatData = {
       title: this.title,
+      initScaling: null,
       attr_cat: this.route
     }
 

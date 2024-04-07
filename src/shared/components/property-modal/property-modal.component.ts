@@ -7,11 +7,13 @@ import {DestroySubscription} from "../../helpers/destroy-subscribtion";
 import {CreateAttribute} from "../../interfaces/creature/create/create-attribute";
 import {Translation} from "../../interfaces/creature/get/translation";
 import {ApiService} from "../../services/api.service";
+import {CharacteristicCode} from "../../static/creature/characteristic.code";
 
 export interface MatData {
   attr_cat: AttributeCode | string,
   title: string,
   initData?: Translation
+  initScaling: CharacteristicCode | null,
   attributeId?: number
 }
 
@@ -23,6 +25,12 @@ export interface MatData {
 export class PropertyModalComponent extends DestroySubscription implements OnInit {
   modalForm!: FormGroup;
   title: string = 'ADD'
+
+  characteristicList = CharacteristicCode
+
+  isScalable: boolean = false
+  _scalableCharacteristic: CharacteristicCode | null = null
+
 
   constructor(
     public dialogRef: MatDialogRef<PropertyModalComponent>,
@@ -39,6 +47,7 @@ export class PropertyModalComponent extends DestroySubscription implements OnIni
     }
 
     this.modalForm = this.formBuilder.group({
+      scalingCharacteristic: [this.data.initScaling || null],
       en: [this.data.initData?.en, Validators.required],
       ua: [this.data.initData?.ua, Validators.required]
     })
@@ -54,7 +63,8 @@ export class PropertyModalComponent extends DestroySubscription implements OnIni
       name: {
         en: this.modalForm.get('en')?.value,
         ua: this.modalForm.get('ua')?.value
-      }
+      },
+      scaling_from: this._scalableCharacteristic
     }
 
     if(!this.data.attributeId) {
@@ -68,4 +78,6 @@ export class PropertyModalComponent extends DestroySubscription implements OnIni
       })
     }
   }
+
+  protected readonly Object = Object;
 }
