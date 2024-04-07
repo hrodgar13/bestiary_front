@@ -13,6 +13,7 @@ import {
 } from "../../../../../shared/components/property-modal/property-modal.component";
 import {Translation} from "../../../../../shared/interfaces/creature/get/translation";
 import {CharacteristicCode} from "../../../../../shared/static/creature/characteristic.code";
+import {AttributeCode} from "../../../../../shared/static/creature/attributes.code";
 
 @Component({
   selector: 'app-attributes-list',
@@ -59,13 +60,13 @@ export class AttributesListComponent extends DestroySubscription implements OnIn
     const searchableFilter = this.filters.find(item => item.filter_cat === filter_cat)?.filter_values.find(item => item.id === id)
 
     if(searchableFilter) {
-      this.openModal('Edit' || '', filter_cat, searchableFilter.name, searchableFilter.id, searchableFilter.scalingFrom)
+      this.openModal('Edit' || '', filter_cat, searchableFilter.name, searchableFilter.id, searchableFilter.scaling_from)
     }
   }
 
   openModal(title: string, attr_cat: string, initData: Translation, attributeId: number, initScaling: CharacteristicCode | null) {
     const data: MatData = {
-      isScalable: !! initScaling,
+      isScalable: this.detectScalableAttribute(attr_cat),
       title,
       attr_cat,
       initData,
@@ -111,5 +112,9 @@ export class AttributesListComponent extends DestroySubscription implements OnIn
         verticalPosition: "top"
       })
     })
+  }
+
+  private detectScalableAttribute(attr_cat: string) {
+    return attr_cat === AttributeCode.saving_throws || attr_cat === AttributeCode.skills;
   }
 }

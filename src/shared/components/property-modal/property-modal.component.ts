@@ -29,9 +29,6 @@ export class PropertyModalComponent extends DestroySubscription implements OnIni
 
   characteristicList = CharacteristicCode
 
-  _scalableCharacteristic: CharacteristicCode | null = null
-
-
   constructor(
     public dialogRef: MatDialogRef<PropertyModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: MatData,
@@ -64,7 +61,7 @@ export class PropertyModalComponent extends DestroySubscription implements OnIni
         en: this.modalForm.get('en')?.value,
         ua: this.modalForm.get('ua')?.value
       },
-      scaling_from: this._scalableCharacteristic
+      scaling_from: this.modalForm.get('scalingCharacteristic')?.value
     }
 
     if(!this.data.attributeId) {

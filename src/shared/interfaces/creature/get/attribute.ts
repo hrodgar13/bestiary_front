@@ -6,7 +6,7 @@ import {CharacteristicCode} from "../../../static/creature/characteristic.code";
 export interface Attribute {
     id: number
     attr_cat: string
-    scalingFrom: CharacteristicCode | null
+    scaling_from: CharacteristicCode | null
     name: Translation
     measures: Measure[]
     creatures: Creature[];
