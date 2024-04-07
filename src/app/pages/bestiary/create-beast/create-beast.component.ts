@@ -18,6 +18,17 @@ import {ConfirmDialogComponent} from "../../../../shared/components/confirm-dial
 import {MatDialog} from "@angular/material/dialog";
 import {ActionAbilities} from "../../../../shared/static/creature/action-abilities.code";
 import {EditActionAbility} from "../../../../shared/interfaces/creature/create/edit-action-ability";
+import {CharacteristicCode} from "../../../../shared/static/creature/characteristic.code";
+
+export interface ScalingCharacteristics {
+  [CharacteristicCode.strength]: number
+  [CharacteristicCode.dexterity]: number
+  [CharacteristicCode.constitution]: number
+  [CharacteristicCode.intelligence]: number
+  [CharacteristicCode.wisdom]: number
+  [CharacteristicCode.charisma]: number
+  mastery_bonus: number
+}
 
 @Component({
   selector: 'app-create-beast',
@@ -25,6 +36,18 @@ import {EditActionAbility} from "../../../../shared/interfaces/creature/create/e
   styleUrls: ['./create-beast.component.scss']
 })
 export class CreateBeastComponent extends DestroySubscription implements OnInit, OnDestroy {
+  CHARACTERISTIC_CODE = CharacteristicCode
+
+  scaling_from: ScalingCharacteristics = {
+    strength: 0,
+    dexterity: 0,
+    constitution: 0,
+    intelligence: 0,
+    wisdom: 0,
+    charisma: 0,
+    mastery_bonus: 0
+  }
+
   interval = interval(5 * 60 * 1000)
 
   AttributesCodes = AttributeCode
@@ -104,6 +127,16 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit,
       size: [this.defineSingleAttribute(this.creaturePayload, AttributeCode.size)],
       type: [this.defineSingleAttribute(this.creaturePayload, AttributeCode.type)],
     })
+
+    this.scaling_from = {
+      strength: this.creaturePayload?.stat_block.strength || 0,
+      dexterity: this.creaturePayload?.stat_block.dexterity || 0,
+      constitution: this.creaturePayload?.stat_block.constitution || 0,
+      intelligence: this.creaturePayload?.stat_block.intelligence || 0,
+      wisdom: this.creaturePayload?.stat_block.wisdom || 0,
+      charisma: this.creaturePayload?.stat_block.charisma || 0,
+      mastery_bonus: this.creaturePayload?.mastery_bonus || 0,
+    }
   }
 
   sendForm(finishedStatus?: boolean) {
@@ -290,5 +323,13 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit,
   setPhoto(event: string) {
     this.creatureImage = event
     this.sendForm()
+  }
+
+  setScaleFromCharacteristic(characteristic: CharacteristicCode, $event: number) {
+    this.scaling_from[characteristic] = $event
+  }
+
+  setMasteryScaling($event: number) {
+    this.scaling_from.mastery_bonus = $event
   }
 }

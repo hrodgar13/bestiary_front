@@ -75,18 +75,18 @@
         </div>
       </div>
       <div class="flex items-center justify-between flex-wrap gap-y-4">
-        <app-statblock-input formControlName="strength" label="{{'STR' | transloco}}"
+        <app-statblock-input (detectCharacteristicChange)="setScaleFromCharacteristic(CHARACTERISTIC_CODE.strength, $event)" formControlName="strength" label="{{'STR' | transloco}}"
                              class="h-[130px] max-w-[130px]  640:max-w-[150px] 640:h-[150px] 1280:max-w-[180px] 1280:h-[180px] w-full"/>
         <app-statblock-input formControlName="dexterity" label="{{'DEX' | transloco}}"
-                             class="h-[130px] max-w-[130px]  640:max-w-[150px] 640:h-[150px] 1280:max-w-[180px] 1280:h-[180px] w-full"/>
+                             (detectCharacteristicChange)="setScaleFromCharacteristic(CHARACTERISTIC_CODE.dexterity, $event)"  class="h-[130px] max-w-[130px]  640:max-w-[150px] 640:h-[150px] 1280:max-w-[180px] 1280:h-[180px] w-full"/>
         <app-statblock-input formControlName="constitution" label="{{'CON' | transloco}}"
-                             class="h-[130px] max-w-[130px]  640:max-w-[150px] 640:h-[150px] 1280:max-w-[180px] 1280:h-[180px] w-full"/>
+                             (detectCharacteristicChange)="setScaleFromCharacteristic(CHARACTERISTIC_CODE.constitution, $event)" class="h-[130px] max-w-[130px]  640:max-w-[150px] 640:h-[150px] 1280:max-w-[180px] 1280:h-[180px] w-full"/>
         <app-statblock-input formControlName="intelligence" label="{{'INT' | transloco}}"
-                             class="h-[130px] max-w-[130px]  640:max-w-[150px] 640:h-[150px] 1280:max-w-[180px] 1280:h-[180px] w-full"/>
+                             (detectCharacteristicChange)="setScaleFromCharacteristic(CHARACTERISTIC_CODE.intelligence, $event)"  class="h-[130px] max-w-[130px]  640:max-w-[150px] 640:h-[150px] 1280:max-w-[180px] 1280:h-[180px] w-full"/>
         <app-statblock-input formControlName="wisdom" label="{{'WIS' | transloco}}"
-                             class="h-[130px] max-w-[130px]  640:max-w-[150px] 640:h-[150px] 1280:max-w-[180px] 1280:h-[180px] w-full"/>
+                             (detectCharacteristicChange)="setScaleFromCharacteristic(CHARACTERISTIC_CODE.wisdom, $event)"  class="h-[130px] max-w-[130px]  640:max-w-[150px] 640:h-[150px] 1280:max-w-[180px] 1280:h-[180px] w-full"/>
         <app-statblock-input formControlName="charisma" label="{{'CHA' | transloco}}"
-                             class="h-[130px] max-w-[130px]  640:max-w-[150px] 640:h-[150px] 1280:max-w-[180px] 1280:h-[180px] w-full"/>
+                             (detectCharacteristicChange)="setScaleFromCharacteristic(CHARACTERISTIC_CODE.charisma, $event)"  class="h-[130px] max-w-[130px]  640:max-w-[150px] 640:h-[150px] 1280:max-w-[180px] 1280:h-[180px] w-full"/>
       </div>
       <div class="grid grid-cols-1 gap-4 1280:grid-cols-2">
         <app-multi-select
@@ -147,7 +147,7 @@
         <div class="flex">
           <div class="flex w-full items-center gap-2">
             <app-label-text [label]="'Mastery bonus'"/>
-            <app-input-number formControlName="mastery_bonus" class="h-[48px]" placeholder="0"/>
+            <app-input-number (inputChange)="setMasteryScaling($event)" formControlName="mastery_bonus" class="h-[48px]" placeholder="0"/>
           </div>
         </div>
       </div>
