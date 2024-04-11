@@ -1,12 +1,12 @@
 import {ChangeDetectorRef, Component, Inject, OnInit} from '@angular/core';
-import {DestroySubscription} from "../../../../../shared/helpers/destroy-subscribtion";
-import {BestiaryService} from "../../bestiary.service";
 import {takeUntil} from "rxjs";
 import {TranslocoService} from "@ngneat/transloco";
-import {Attribute} from "../../../../../shared/interfaces/creature/get/attribute";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {OutputCreatureItem} from "../../../../../shared/interfaces/filters/output-creature-item";
-import {CreatureListFilter} from "../../../../../shared/interfaces/filters/creature-list-filter";
+import {ApiService} from "../../services/api.service";
+import {DestroySubscription} from "../../helpers/destroy-subscribtion";
+import {CreatureListFilter} from "../../interfaces/filters/creature-list-filter";
+import {OutputCreatureItem} from "../../interfaces/filters/output-creature-item";
+import {Attribute} from "../../interfaces/creature/get/attribute";
 
 @Component({
   selector: 'app-filters-modal',
@@ -22,7 +22,7 @@ export class FiltersModalComponent extends DestroySubscription implements OnInit
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: OutputCreatureItem[],
     public dialogRef: MatDialogRef<FiltersModalComponent>,
-    private readonly bestiaryService: BestiaryService,
+    private readonly apiService: ApiService,
     private readonly translocoService: TranslocoService,
   ) {
     super();
@@ -31,7 +31,7 @@ export class FiltersModalComponent extends DestroySubscription implements OnInit
   ngOnInit(): void {
     this.getActiveLang()
 
-    this.bestiaryService.getFilters().pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+    this.apiService.getFilters().pipe(takeUntil(this.destroyStream$)).subscribe(data => {
       this.selectedFilters = this.data
       this.filters = data
     })

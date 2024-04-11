@@ -27,7 +27,6 @@ import {
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {TranslocoPipe} from "@ngneat/transloco";
 import {CreatureService} from "./create-beast/creature.service";
-import { FiltersModalComponent } from './bestiary-list/filters-modal/filters-modal.component';
 import { BeastPageComponent } from './beast-page/beast-page.component';
 import {SharedModule} from "../../../shared/shared.module";
 import { CharacteristicBlockComponent } from './beast-page/components/characteristic-block/characteristic-block.component';
@@ -50,7 +49,6 @@ import { CharacteristicBlockComponent } from './beast-page/components/characteri
     StatblockInputComponent,
     TitleTextInputComponent,
     TitleTextItemComponent,
-    FiltersModalComponent,
     BeastPageComponent,
     CharacteristicBlockComponent,
   ],

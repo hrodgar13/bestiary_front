@@ -1,5 +1,5 @@
 <div *ngIf="currentLanguageLabel" class="delete-cursor bg-[#15181F] flex items-start rounded-xl text-base border-2 border-[#E2A23B] px-2 text-[#B1A79C] h-auto" (click)="removeElement()">
   <div>
-    {{currentLanguageLabel + ' ' + (displayMeasure.amt ? displayMeasure.amt : '') + ' ' + (displayMeasure.isMeasureEnable && displayMeasure.amt || alwaysShowMsr ? ('ft' | transloco) : '')}}
+    {{currentLanguageLabel + ' ' + (displayMeasure.amt ? displayMeasure.amt : '') + ' ' + (displayMeasure.isMeasureEnable && displayMeasure.amt || alwaysShowMsr && displayMeasure.amt ? ('ft' | transloco) : '')}}
   </div>
 </div>

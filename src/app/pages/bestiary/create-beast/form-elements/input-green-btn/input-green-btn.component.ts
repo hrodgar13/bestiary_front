@@ -18,6 +18,7 @@ export class InputGreenBtnComponent extends DestroySubscription{
   @Output() modalClose = new EventEmitter<any>()
   @Input() route: AttributeCode | string = ''
   @Input() title = ''
+  @Input() isScalable: boolean = false
 
   constructor(
     private dialog: MatDialog,
@@ -29,6 +30,8 @@ export class InputGreenBtnComponent extends DestroySubscription{
   openModal() {
     const data: MatData = {
       title: this.title,
+      isScalable: this.isScalable,
+      initScaling: null,
       attr_cat: this.route
     }
 

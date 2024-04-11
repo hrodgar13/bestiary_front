@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import {HeaderModule} from "./header/header.module";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSidenavModule} from "@angular/material/sidenav";
 import { TranslocoRootModule } from './transloco-root.module';
@@ -15,6 +14,7 @@ import {HomeModule} from "./pages/home/home.module";
 import {MainLayoutComponent} from "./main-layout/main-layout.component";
 import {ApiInterceptor} from "../shared/interceptors/api.interceptor";
 import {MatSelectModule} from "@angular/material/select";
+import {HeaderModule} from "./header/header.module";
 
 @NgModule({
   declarations: [
