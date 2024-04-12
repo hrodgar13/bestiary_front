@@ -26,6 +26,7 @@ import { AuthLoginComponent } from './components/auth-login/auth-login.component
 import {MatMenuModule} from "@angular/material/menu";
 import { EditActionAbilityComponent } from './modals/edit-action-ability/edit-action-ability.component';
 import {FiltersModalComponent} from "./modals/filters-modal/filters-modal.component";
+import { TextRedactorComponent } from './components/text-redactor/text-redactor.component';
 
 
 
@@ -47,6 +48,7 @@ import {FiltersModalComponent} from "./modals/filters-modal/filters-modal.compon
     AuthLoginComponent,
     EditActionAbilityComponent,
     FiltersModalComponent,
+    TextRedactorComponent,
   ],
   exports: [
     BorderOutlineComponent,
@@ -61,6 +63,7 @@ import {FiltersModalComponent} from "./modals/filters-modal/filters-modal.compon
     PaginatorComponent,
     AuthLoginComponent,
     FiltersModalComponent,
+    TextRedactorComponent,
   ],
   imports: [
     CommonModule,
