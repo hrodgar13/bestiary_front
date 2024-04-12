@@ -28,6 +28,7 @@ import { EditActionAbilityComponent } from './modals/edit-action-ability/edit-ac
 import {FiltersModalComponent} from "./modals/filters-modal/filters-modal.component";
 import { TextRedactorComponent } from './components/text-redactor/text-redactor.component';
 import { D20IconComponent } from './static/d20-icon/d20-icon.component';
+import { TextRedactorReaderPipe } from './pipes/text-redactor/text-redactor-reader.pipe';
 
 
 
@@ -51,6 +52,7 @@ import { D20IconComponent } from './static/d20-icon/d20-icon.component';
     FiltersModalComponent,
     TextRedactorComponent,
     D20IconComponent,
+    TextRedactorReaderPipe,
   ],
   exports: [
     BorderOutlineComponent,
