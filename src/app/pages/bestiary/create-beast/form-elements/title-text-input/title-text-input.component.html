@@ -11,7 +11,7 @@
           </div>
         </div>
         <div class="mt-2 w-auto">
-          <app-text-redactor />
+          <app-text-redactor [assignedFormControl]="getControl('descriptionEN')"/>
         </div>
         <div class="mt-2 h-[140px]">
           <app-text-area-input formControlName="descriptionEN" [placeholder]="'Description EN'"/>
@@ -23,7 +23,7 @@
           <app-input-text formControlName="titleUA" class="h-[48px]" [placeholder]="'Title UA'"/>
         </div>
         <div class="mt-2 w-auto">
-          <app-text-redactor />
+          <app-text-redactor [assignedFormControl]="getControl('descriptionUA')" />
         </div>
         <div class="mt-2 h-[140px]">
           <app-text-area-input formControlName="descriptionUA" [placeholder]="'Description UA'"/>

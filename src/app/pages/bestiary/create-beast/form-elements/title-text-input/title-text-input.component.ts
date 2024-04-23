@@ -84,4 +84,8 @@ export class TitleTextInputComponent implements OnInit{
 
     this.editValue.emit($event)
   }
+
+  getControl(controlName: string) {
+    return this.form.get(controlName);
+  }
 }
