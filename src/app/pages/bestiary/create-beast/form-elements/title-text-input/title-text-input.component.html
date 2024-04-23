@@ -10,9 +10,6 @@
             <app-input-text formControlName="titleEN" class="h-[48px]" [placeholder]="'Title EN'"/>
           </div>
         </div>
-        <div class="mt-2 w-auto">
-          <app-text-redactor [assignedFormControl]="getControl('descriptionEN')"/>
-        </div>
         <div class="mt-2 h-[140px]">
           <app-text-area-input formControlName="descriptionEN" [placeholder]="'Description EN'"/>
         </div>
@@ -21,9 +18,6 @@
         <div class="flex items-center justify-end gap-2">
           <app-label-text [label]="'Title UA'"/>
           <app-input-text formControlName="titleUA" class="h-[48px]" [placeholder]="'Title UA'"/>
-        </div>
-        <div class="mt-2 w-auto">
-          <app-text-redactor [assignedFormControl]="getControl('descriptionUA')" />
         </div>
         <div class="mt-2 h-[140px]">
           <app-text-area-input formControlName="descriptionUA" [placeholder]="'Description UA'"/>
