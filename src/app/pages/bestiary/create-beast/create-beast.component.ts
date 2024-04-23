@@ -84,11 +84,12 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit,
   captureSelection() {
     const selection = window.getSelection();
     if (selection && selection.rangeCount > 0) {
-      this.selectedRange = selection.getRangeAt(0);
-      this.textManagementService.setSelectedText(selection.toString());
-      this.textManagementService.setSelectedRange(this.selectedRange); // Store the range in the service
+      const selectedText = selection.toString();
+      this.textManagementService.setSelectedText(selectedText);
+      this.textManagementService.setSelectedRange(selection.getRangeAt(0));
     }
   }
+
 
   restoreSelection() {
     const selection = window.getSelection();

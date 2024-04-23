@@ -72,15 +72,40 @@ export class TextRedactorComponent extends DestroySubscription implements AfterV
   }
 
   replaceSelectedText(range: Range, modifiedText: string) {
-    range.deleteContents();
-    const newNode = document.createElement('span');
-    newNode.innerHTML = modifiedText;
-    range.insertNode(newNode);
+    let container = range.startContainer;
 
-    const sel = window.getSelection();
-    sel?.removeAllRanges();
-    sel?.addRange(range);
+    // Ensure the container is an Element or ascend to its parent if it's not
+    while (container && container.nodeType !== Node.ELEMENT_NODE && container.parentNode) {
+      container = container.parentNode;
+    }
+
+    // Once confirmed as an Element, cast to Element type and find the textarea
+    if (container && container.nodeType === Node.ELEMENT_NODE) {
+      const element = container as Element; // Cast to Element explicitly
+      const textarea = element.querySelector('textarea');
+
+      if (textarea instanceof HTMLTextAreaElement) {
+        this.updateTextArea(textarea, range, modifiedText);
+      }
+    }
   }
+
+  private updateTextArea(textarea: HTMLTextAreaElement, range: Range, modifiedText: string) {
+    // Get positions based on the textarea properties
+    const startPos = textarea.selectionStart;
+    const endPos = textarea.selectionEnd;
+    const textValue = textarea.value;
+
+    // Replace the text in the textarea
+    textarea.value = textValue.substring(0, startPos) + modifiedText + textValue.substring(endPos);
+    textarea.setSelectionRange(startPos, startPos + modifiedText.length);
+    textarea.focus(); // Optionally set focus back to the textarea
+    // this.textManagementService.clearSelectedText();
+    // this.textManagementService.clearSelectedRange();
+  }
+
+
+
   // private validateAssignedFormControl(selectedText: string | undefined) {
   //   if(selectedText && this.assignedFormControl.value) {
   //     return !!this.assignedFormControl.value.includes(selectedText)
