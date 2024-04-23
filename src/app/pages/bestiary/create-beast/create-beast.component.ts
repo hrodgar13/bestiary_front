@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, UntypedFormGroup} from "@angular/forms"
 import {CreatureService} from "./creature.service";
 import {interval, takeUntil} from "rxjs";
@@ -19,6 +19,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {ActionAbilities} from "../../../../shared/static/creature/action-abilities.code";
 import {EditActionAbility} from "../../../../shared/interfaces/creature/create/edit-action-ability";
 import {CharacteristicCode} from "../../../../shared/static/creature/characteristic.code";
+import {TextManagementService} from "../../../../shared/services/text-management.service";
 
 export interface ScalingCharacteristics {
   [CharacteristicCode.strength]: number
@@ -65,6 +66,7 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit,
 
   constructor(
     private readonly formBuilder: FormBuilder,
+    private textManagementService: TextManagementService,
     private readonly creatureService: CreatureService,
     private readonly matSnack: MatSnackBar,
     private route: ActivatedRoute,
@@ -72,6 +74,28 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit,
     private dialog: MatDialog
   ) {
     super()
+  }
+
+  @ViewChild('CreateBeastDrawer') drawer: any;
+  private savedRange: Range | null = null;
+
+  private selectedRange: Range | null = null;
+
+  captureSelection() {
+    const selection = window.getSelection();
+    if (selection && selection.rangeCount > 0) {
+      this.selectedRange = selection.getRangeAt(0);
+      this.textManagementService.setSelectedText(selection.toString());
+      this.textManagementService.setSelectedRange(this.selectedRange); // Store the range in the service
+    }
+  }
+
+  restoreSelection() {
+    const selection = window.getSelection();
+    if (this.savedRange && selection) {
+      selection.removeAllRanges(); // Clears current selection
+      selection.addRange(this.savedRange); // Adds the saved range back to the selection
+    }
   }
 
   ngOnInit(): void {
