@@ -1,0 +1,20 @@
+<div class="p-2 gap-2 flex flex-col items-center justify-center">
+  <div class="flex gap-2">
+    <button (click)=" this.setStyle('bold')" type="button" [class.bg-[#E2A23B]]="isFilterActive('bold')" [class]="'h-[32px] w-[32px] rounded flex items-center justify-center border border-[#E2A23B]'">
+      <mat-icon [class]="isFilterActive('bold') ? 'text-[#15181F]' : 'text-[#E2A23B]'">
+        format_bold
+      </mat-icon>
+    </button>
+    <button (click)=" this.setStyle('underline');" [class.bg-[#E2A23B]]="isFilterActive('underline')" type="button" class="h-[32px] w-[32px] rounded flex items-center justify-center border border-[#E2A23B]">
+      <mat-icon [class]="isFilterActive('underline') ? 'text-[#15181F]' : 'text-[#E2A23B]'">
+        text_format
+      </mat-icon>
+    </button>
+    <button [class.bg-[#E2A23B]]="isFilterActive('italic')" (click)=" this.setStyle('italic');" type="button" class="h-[32px] w-[32px] rounded flex items-center justify-center border border-[#E2A23B]">
+      <mat-icon [class]="isFilterActive('italic') ? 'text-[#15181F]' : 'text-[#E2A23B]'">
+        format_italic
+      </mat-icon>
+    </button>
+  </div>
+  <div class="border-2 rounded p-1 border-[#E2A23B] bg-[#15181F] text-[#B1A79C]" [innerHTML]="editableHTML"></div>
+</div>

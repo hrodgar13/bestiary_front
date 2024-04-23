@@ -29,6 +29,7 @@ import {FiltersModalComponent} from "./modals/filters-modal/filters-modal.compon
 import { TextRedactorComponent } from './components/text-redactor/text-redactor.component';
 import { D20IconComponent } from './static/d20-icon/d20-icon.component';
 import { TextRedactorReaderPipe } from './pipes/text-redactor/text-redactor-reader.pipe';
+import { FontRedactorModalComponent } from './modals/font-redactor-modal/font-redactor-modal.component';
 
 
 
@@ -53,6 +54,7 @@ import { TextRedactorReaderPipe } from './pipes/text-redactor/text-redactor-read
     TextRedactorComponent,
     D20IconComponent,
     TextRedactorReaderPipe,
+    FontRedactorModalComponent,
   ],
   exports: [
     BorderOutlineComponent,
