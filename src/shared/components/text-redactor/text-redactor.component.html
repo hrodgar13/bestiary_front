@@ -19,7 +19,7 @@
   </div>
   <div class="w-full h-[48px]">
     <app-border-outline class="h-full w-full">
-      <input [(ngModel)]="editableText" (input)="updateValue()" [placeholder]="'Type text here...' | transloco" class="text-[#B1A79C] outline-0 bg-transparent w-full h-full px-2 font-semibold" type="text">
+      <input [ngStyle]="inputStyles" [(ngModel)]="editableText" (input)="updateValue()" [placeholder]="'Type text here...' | transloco" class="outline-0 bg-transparent w-full h-full px-2" type="text">
     </app-border-outline>
   </div>
 </div>

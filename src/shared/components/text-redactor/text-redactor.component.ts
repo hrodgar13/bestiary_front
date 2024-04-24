@@ -14,7 +14,12 @@ import {FormControl} from "@angular/forms";
   styleUrls: ['./text-redactor.component.scss']
 })
 export class TextRedactorComponent extends DestroySubscription implements OnInit{
-
+  inputStyles = {
+    color: '#B1A79C',
+    'font-weight': 'normal',
+    'font-style': 'none',
+    'text-decoration': 'none'
+  };
   @Input() assignedFormControl!: any
 
   window = window
@@ -46,7 +51,6 @@ export class TextRedactorComponent extends DestroySubscription implements OnInit
     const regex = /{%\s*custom_font_style="([^"]*)"\s*custom_font_color="([^"]*)"\s*value="([^"]*)"\s*%}/;
     const match = this._value.match(regex);
     if (match && match.length > 3) {
-      // Ensure we're updating only the value field and keeping the rest intact
       this._value = `{% custom_font_style="${match[1]}" custom_font_color="${match[2]}" value="${this.editableText.replace(/"/g, '&quot;')}" %}`;
     }
   }
@@ -64,6 +68,7 @@ export class TextRedactorComponent extends DestroySubscription implements OnInit
 
     dialogRef.afterClosed().pipe(takeUntil(this.destroyStream$)).subscribe(data => {
       this._value = data
+      this.updateInputStylesFromCode(data);
     })
   }
 
@@ -74,5 +79,24 @@ export class TextRedactorComponent extends DestroySubscription implements OnInit
     }
     this.clipboard.copy(value);
     this.snack.open('Text copied to clipboard!', 'OK', { duration: 3000 });
+  }
+
+  private updateInputStylesFromCode(code: string): void {
+    const regex = /{%\s*custom_font_style="([^"]*)"\s*custom_font_color="([^"]*)"\s*value="([^"]*)"\s*%}/;
+    const match = code.match(regex);
+    if (match) {
+      const fontStyles = match[1].split(' ');
+      const color = match[2];
+
+      // Reset styles
+      this.inputStyles = {
+        'font-weight': fontStyles.includes('bold') ? 'bold' : 'normal',
+        'font-style': fontStyles.includes('italic') ? 'italic' : 'normal',
+        'text-decoration': fontStyles.includes('underline') ? 'underline' : 'none',
+        'color': color || '#B1A79C' // Default to initial if no color is specified
+      };
+
+      console.log(this.inputStyles)
+    }
   }
 }
