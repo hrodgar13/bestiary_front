@@ -30,6 +30,7 @@ import { TextRedactorComponent } from './components/text-redactor/text-redactor.
 import { D20IconComponent } from './static/d20-icon/d20-icon.component';
 import { TextRedactorReaderPipe } from './pipes/text-redactor/text-redactor-reader.pipe';
 import { FontRedactorModalComponent } from './modals/font-redactor-modal/font-redactor-modal.component';
+import {ClipboardModule} from "@angular/cdk/clipboard";
 
 
 
@@ -83,6 +84,7 @@ import { FontRedactorModalComponent } from './modals/font-redactor-modal/font-re
     MatIconModule,
     MatButtonModule,
     MatMenuModule,
+    ClipboardModule
   ],
   providers: [
       CreatureListService

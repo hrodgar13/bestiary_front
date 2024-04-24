@@ -28,7 +28,7 @@ export class FontRedactorModalComponent implements OnInit, OnDestroy {
   }
 
   updateText(): void {
-    this.editableText = `{% custom_font_style="${this.data.custom_font_style ? this.data.custom_font_style : ''}" custom_font_color="${this.data.custom_font_color ? this.data.custom_font_color : ''}" value="${this.data.editingLine}" %}`;
+    this.editableText = this.data.editingLine
     this.updateHTML();
   }
 
@@ -50,22 +50,29 @@ export class FontRedactorModalComponent implements OnInit, OnDestroy {
   }
 
   setStyle(value: string): void {
-    if (this.data.custom_font_style?.includes(value)) {
-      this.data.custom_font_style = this.data.custom_font_style.replace(value, '').trim();
-    } else {
-      this.data.custom_font_style += ' ' + value;
+    const regex = /{%\s*custom_font_style="([^"]*)"\s*custom_font_color="([^"]*)"\s*value="([^"]*)"\s*%}/;
+    let match = this.editableText.match(regex);
+    if (match) {
+      let styles = match[1].split(' ').filter(s => s); // Convert style string to array and filter out empty entries
+      const color = match[2];
+      const textValue = match[3];
+
+      if (styles.includes(value)) {
+        styles = styles.filter(s => s !== value); // Remove style if it exists
+      } else {
+        styles.push(value); // Add style if it doesn't exist
+      }
+
+      // Reconstruct the editableText with updated styles
+      this.editableText = `{% custom_font_style="${styles.join(' ')}" custom_font_color="${color}" value="${textValue}" %}`;
+      this.updateHTML(); // Update the display HTML
     }
-    this.updateText();
   }
 
-  isFilterActive(keyWord: string) {
+  isFilterActive(keyWord: string): boolean {
     const regex = /{%\s*custom_font_style="([^"]*)"\s*custom_font_color="([^"]*)"\s*value="([^"]*)"\s*%}/;
     const match = this.editableText.match(regex);
-
-    if (match) {
-      return match[1].includes(keyWord)
-    }
-
-    return false
+    return match ? match[1].includes(keyWord) : false;
   }
+
 }

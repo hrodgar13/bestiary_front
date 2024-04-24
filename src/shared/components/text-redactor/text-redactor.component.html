@@ -1,15 +1,25 @@
-<div class="flex gap-2">
-  <button (click)="formatText()" type="button" class="h-[32px] w-[32px] rounded flex items-center justify-center border border-[#E2A23B]">
-    <mat-icon class="text-[#E2A23B]">
-      text_format
-    </mat-icon>
-  </button>
-  <button type="button" class="h-[32px] w-[32px] rounded flex items-center justify-center border border-[#E2A23B]">
-    <mat-icon class="text-[#E2A23B]">
-      color_lens
-    </mat-icon>
-  </button>
-  <button type="button" class="h-[32px] w-[32px] rounded flex items-center justify-center border border-[#E2A23B]">
-    <app-d20-icon/>
-  </button>
+<div class="flex flex-col gap-2">
+  <div class="flex justify-center gap-2 items-center">
+    <button (click)="formatText()" type="button" class="h-[32px] w-[32px] rounded flex items-center justify-center border border-[#E2A23B]">
+      <mat-icon class="text-[#E2A23B]">
+        text_format
+      </mat-icon>
+    </button>
+    <button type="button" class="h-[32px] w-[32px] rounded flex items-center justify-center border border-[#E2A23B]">
+      <mat-icon class="text-[#E2A23B]">
+        color_lens
+      </mat-icon>
+    </button>
+    <button type="button" class="h-[32px] w-[32px] rounded flex items-center justify-center border border-[#E2A23B]">
+      <app-d20-icon/>
+    </button>
+    <button type="button" (click)="copyToClipboard(_value)" class="h-[32px] w-[32px] rounded flex items-center justify-center border border-[#E2A23B]">
+      <mat-icon class="text-[#E2A23B]">file_copy</mat-icon>
+    </button>
+  </div>
+  <div class="w-full h-[48px]">
+    <app-border-outline class="h-full w-full">
+      <input [(ngModel)]="editableText" (input)="updateValue()" [placeholder]="'Type text here...' | transloco" class="text-[#B1A79C] outline-0 bg-transparent w-full h-full px-2 font-semibold" type="text">
+    </app-border-outline>
+  </div>
 </div>
