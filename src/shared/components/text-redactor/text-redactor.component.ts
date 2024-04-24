@@ -7,6 +7,7 @@ import {DestroySubscription} from "../../helpers/destroy-subscribtion";
 import {takeUntil} from "rxjs";
 import { Clipboard } from '@angular/cdk/clipboard';
 import {FormControl} from "@angular/forms";
+import {ColorRedactorModalComponent} from "../../modals/color-redactor-modal/color-redactor-modal.component";
 
 @Component({
   selector: 'app-text-redactor',
@@ -71,6 +72,24 @@ export class TextRedactorComponent extends DestroySubscription implements OnInit
       this.updateInputStylesFromCode(data);
     })
   }
+
+  openColorPicker() {
+    const dialogRef = this.dialog.open(ColorRedactorModalComponent, {
+      data: { text: this.editableText }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== null) { // null means cancelled
+        this.updateColor(result); // Method to update color in the main component
+      }
+    });
+  }
+
+  updateColor(newColor: string): void {
+    // Update the color in your editableText or wherever it's needed
+    this.editableText = this.editableText.replace(/custom_font_color="[^"]*"/, `custom_font_color="${newColor}"`);
+  }
+
 
   copyToClipboard(value: string) {
     if (!value) {

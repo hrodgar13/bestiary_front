@@ -1,0 +1,10 @@
+<div class="color-picker-container">
+  <input [(colorPicker)]="currentColor" [style.background]="currentColor"
+         (colorPickerChange)="updatePreview($event)" [cpOutputFormat]="'hex'"
+         [cpDialogDisplay]="'inline'"/>
+  <div class="preview-text" [style.color]="currentColor">
+    {{ previewText }}
+  </div>
+  <button (click)="confirmColor()">Confirm</button>
+  <button (click)="cancelColor()">Cancel</button>
+</div>

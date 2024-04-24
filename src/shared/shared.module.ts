@@ -31,6 +31,8 @@ import { D20IconComponent } from './static/d20-icon/d20-icon.component';
 import { TextRedactorReaderPipe } from './pipes/text-redactor/text-redactor-reader.pipe';
 import { FontRedactorModalComponent } from './modals/font-redactor-modal/font-redactor-modal.component';
 import {ClipboardModule} from "@angular/cdk/clipboard";
+import { ColorRedactorModalComponent } from './modals/color-redactor-modal/color-redactor-modal.component';
+import {ColorPickerModule} from "ngx-color-picker";
 
 
 
@@ -56,6 +58,7 @@ import {ClipboardModule} from "@angular/cdk/clipboard";
     D20IconComponent,
     TextRedactorReaderPipe,
     FontRedactorModalComponent,
+    ColorRedactorModalComponent,
   ],
   exports: [
     BorderOutlineComponent,
@@ -73,6 +76,7 @@ import {ClipboardModule} from "@angular/cdk/clipboard";
     TextRedactorComponent,
   ],
   imports: [
+    ColorPickerModule,
     CommonModule,
     MatProgressSpinnerModule,
     MatSlideToggleModule,
