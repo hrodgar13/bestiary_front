@@ -66,7 +66,6 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit,
 
   constructor(
     private readonly formBuilder: FormBuilder,
-    private textManagementService: TextManagementService,
     private readonly creatureService: CreatureService,
     private readonly matSnack: MatSnackBar,
     private route: ActivatedRoute,
@@ -74,29 +73,6 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit,
     private dialog: MatDialog
   ) {
     super()
-  }
-
-  @ViewChild('CreateBeastDrawer') drawer: any;
-  private savedRange: Range | null = null;
-
-  private selectedRange: Range | null = null;
-
-  captureSelection() {
-    const selection = window.getSelection();
-    if (selection && selection.rangeCount > 0) {
-      const selectedText = selection.toString();
-      this.textManagementService.setSelectedText(selectedText);
-      this.textManagementService.setSelectedRange(selection.getRangeAt(0));
-    }
-  }
-
-
-  restoreSelection() {
-    const selection = window.getSelection();
-    if (this.savedRange && selection) {
-      selection.removeAllRanges(); // Clears current selection
-      selection.addRange(this.savedRange); // Adds the saved range back to the selection
-    }
   }
 
   ngOnInit(): void {
