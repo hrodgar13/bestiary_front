@@ -248,3 +248,24 @@ mat-drawer {
 .cdk-overlay-pane.edit-ability-action-modal {
   width: 100%;
 }
+
+.color-picker {
+  margin: 10px 0 ;
+  padding: 10px;
+  background-color: #1e232d !important;
+  border: 2px solid #E2A23B !important;
+
+  .cursor {
+    border: 2px solid #E2A23B !important;
+  }
+
+  .type-policy {
+    top: 227px !important;
+
+    border: 1px solid #E2A23B;
+
+    .type-policy-arrow:before {
+      background-color: #E2A23B !important;
+    }
+  }
+}

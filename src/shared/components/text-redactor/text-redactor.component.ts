@@ -74,11 +74,16 @@ export class TextRedactorComponent extends DestroySubscription implements OnInit
   }
 
   openColorPicker() {
+    if(!this.editableText) {
+      return
+    }
+
     const dialogRef = this.dialog.open(ColorRedactorModalComponent, {
-      data: { text: this.editableText }
+      data: { editingLine: this._value }
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      console.log(result)
       if (result !== null) { // null means cancelled
         this.updateColor(result); // Method to update color in the main component
       }
@@ -86,8 +91,8 @@ export class TextRedactorComponent extends DestroySubscription implements OnInit
   }
 
   updateColor(newColor: string): void {
-    // Update the color in your editableText or wherever it's needed
-    this.editableText = this.editableText.replace(/custom_font_color="[^"]*"/, `custom_font_color="${newColor}"`);
+    this._value = newColor
+    this.updateInputStylesFromCode(this._value)
   }
 
 
@@ -114,8 +119,6 @@ export class TextRedactorComponent extends DestroySubscription implements OnInit
         'text-decoration': fontStyles.includes('underline') ? 'underline' : 'none',
         'color': color || '#B1A79C' // Default to initial if no color is specified
       };
-
-      console.log(this.inputStyles)
     }
   }
 }

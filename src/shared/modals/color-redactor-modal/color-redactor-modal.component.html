@@ -1,10 +1,12 @@
-<div class="color-picker-container">
-  <input [(colorPicker)]="currentColor" [style.background]="currentColor"
+<div class="color-picker-container p-2">
+  <input class="hide-input border-0 outline-0" [(colorPicker)]="currentColor" [style.background]="currentColor"
          (colorPickerChange)="updatePreview($event)" [cpOutputFormat]="'hex'"
          [cpDialogDisplay]="'inline'"/>
-  <div class="preview-text" [style.color]="currentColor">
-    {{ previewText }}
+  <div class="preview-text mt-5 mb-5" [style.color]="currentColor" [innerHTML]="editableHTML">
+    {{ this.data.editingLine | textRedactorReader}}
   </div>
-  <button (click)="confirmColor()">Confirm</button>
-  <button (click)="cancelColor()">Cancel</button>
+  <div class="flex justify-between">
+    <button class="p-2 border-2 rounded text-[#E2A23B] border-[#E2A23B] font-medium" (click)="cancelColor()">Cancel</button>
+    <button class="p-2 border-2 rounded text-[#E2A23B] border-[#E2A23B] font-medium" (click)="confirmColor()">Confirm</button>
+  </div>
 </div>
