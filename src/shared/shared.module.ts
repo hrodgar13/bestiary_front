@@ -33,6 +33,7 @@ import { FontRedactorModalComponent } from './modals/font-redactor-modal/font-re
 import {ClipboardModule} from "@angular/cdk/clipboard";
 import { ColorRedactorModalComponent } from './modals/color-redactor-modal/color-redactor-modal.component';
 import {ColorPickerModule} from "ngx-color-picker";
+import { CreateDiceRollComponent } from './modals/create-dice-roll/create-dice-roll.component';
 
 
 
@@ -59,6 +60,7 @@ import {ColorPickerModule} from "ngx-color-picker";
     TextRedactorReaderPipe,
     FontRedactorModalComponent,
     ColorRedactorModalComponent,
+    CreateDiceRollComponent,
   ],
   exports: [
     BorderOutlineComponent,

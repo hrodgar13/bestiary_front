@@ -168,7 +168,7 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit,
   private prepareCreaturePayload(finished: boolean): CreateCreature {
     return {
       name: {
-        id: this.creaturePayload?.id || undefined,
+        id: this.creaturePayload?.name.id || undefined,
         en: this.creatureForm.get('name_en')?.value,
         ua: this.creatureForm.get('name_ua')?.value,
       },
