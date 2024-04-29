@@ -8,6 +8,7 @@ import {takeUntil} from "rxjs";
 import { Clipboard } from '@angular/cdk/clipboard';
 import {FormControl} from "@angular/forms";
 import {ColorRedactorModalComponent} from "../../modals/color-redactor-modal/color-redactor-modal.component";
+import {CreateDiceRollComponent} from "../../modals/create-dice-roll/create-dice-roll.component";
 
 @Component({
   selector: 'app-text-redactor',
@@ -87,6 +88,14 @@ export class TextRedactorComponent extends DestroySubscription implements OnInit
       if (result !== null) { // null means cancelled
         this.updateColor(result); // Method to update color in the main component
       }
+    });
+  }
+
+  openDiceGenerator() {
+    const dialogRef = this.dialog.open(CreateDiceRollComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result)
     });
   }
 

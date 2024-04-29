@@ -10,7 +10,7 @@
         color_lens
       </mat-icon>
     </button>
-    <button type="button" class="h-[32px] w-[32px] rounded flex items-center justify-center border border-[#E2A23B]">
+    <button (click)="openDiceGenerator()" type="button" class="h-[32px] w-[32px] rounded flex items-center justify-center border border-[#E2A23B]">
       <app-d20-icon/>
     </button>
     <button type="button" (click)="copyToClipboard(_value)" class="h-[32px] w-[32px] rounded flex items-center justify-center border border-[#E2A23B]">
