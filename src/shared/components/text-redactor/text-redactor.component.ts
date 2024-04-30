@@ -95,7 +95,7 @@ export class TextRedactorComponent extends DestroySubscription implements OnInit
     const dialogRef = this.dialog.open(CreateDiceRollComponent);
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result)
+      this.copyToClipboard(result)
     });
   }
 

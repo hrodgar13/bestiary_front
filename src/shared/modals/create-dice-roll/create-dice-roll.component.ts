@@ -61,7 +61,7 @@ export class CreateDiceRollComponent extends DestroySubscription implements OnIn
 
     const payload = `{% roll_dice_amt="${this.form.get('amt')?.value}" roll_dice_side="${this.form.get('dice')?.value}" roll_bonus="${this.form.get('bonus')?.value}" %}`
 
-    console.log(payload)
+    this.closeModal(payload)
   }
 
   getFormValue(field: string) {
