@@ -6,18 +6,13 @@ import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
   templateUrl: './dice-roll-snack.component.html',
   styleUrls: ['./dice-roll-snack.component.scss']
 })
-export class DiceRollSnackComponent implements OnInit, AfterViewInit {
+export class DiceRollSnackComponent implements AfterViewInit {
   @Input() message: SafeHtml = `<span></span>`;
   @Input() duration: number = 5000; // duration the snackbar will remain visible
 
   constructor() { }
 
-  ngOnInit(): void {
-    // this.safeMessage = this.sanitizer.bypassSecurityTrustHtml(this.message);
-  }
-
   ngAfterViewInit() {
-    // console.log(this.message)
     setTimeout(() => {
       this.close();
     }, this.duration);

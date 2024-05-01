@@ -17,7 +17,6 @@ let appInjector: Injector; // Global variable to store the injector
 
 platformBrowserDynamic().bootstrapModule(AppModule)
   .then(ref => {
-    // Store the injector globally once the application is bootstrapped
     appInjector = ref.injector;
   })
   .catch(err => console.error(err));

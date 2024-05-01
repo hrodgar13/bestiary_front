@@ -84,7 +84,6 @@ export class TextRedactorComponent extends DestroySubscription implements OnInit
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result)
       if (result !== null) { // null means cancelled
         this.updateColor(result); // Method to update color in the main component
       }

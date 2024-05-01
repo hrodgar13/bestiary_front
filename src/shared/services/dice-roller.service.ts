@@ -19,7 +19,6 @@ export class DiceRollerService {
     total += bonus;
 
     const message = this.createMessage(amount, sides, bonus, total);
-    console.log(message) // Shows
     this.snackbarService.show(message, 5000);
     this.onDiceRolled.emit(`Rolled ${amount}d${sides}+${bonus}: ${total}`);
   }
