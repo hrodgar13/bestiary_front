@@ -35,6 +35,7 @@ import { ColorRedactorModalComponent } from './modals/color-redactor-modal/color
 import {ColorPickerModule} from "ngx-color-picker";
 import { CreateDiceRollComponent } from './modals/create-dice-roll/create-dice-roll.component';
 import {InputNumberComponent} from "./components/form-elements/input-number/input-number.component";
+import { DiceRollSnackComponent } from './components/dice-roll-snack/dice-roll-snack.component';
 
 
 
@@ -62,7 +63,8 @@ import {InputNumberComponent} from "./components/form-elements/input-number/inpu
     FontRedactorModalComponent,
     ColorRedactorModalComponent,
     CreateDiceRollComponent,
-    InputNumberComponent
+    InputNumberComponent,
+    DiceRollSnackComponent
   ],
     exports: [
         BorderOutlineComponent,

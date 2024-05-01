@@ -26,7 +26,9 @@ export class TextRedactorReaderPipe implements PipeTransform {
       const [_, amt, side, bonus] = diceMatch;
       const diceText = `(${amt}d${side}+${bonus})`;
       const diceStyle = 'color: #1DAEFF; cursor: pointer; text-decoration: underline;';
-      return this.sanitizer.bypassSecurityTrustHtml(`<span style="${diceStyle}" onclick="alert('Dice roll result: ${this.rollDice(+amt, +side, +bonus)}')">${diceText}</span>`);
+      return this.sanitizer.bypassSecurityTrustHtml(
+        `<span style="${diceStyle}" onclick="window.rollDiceGlobal(${amt}, ${side}, ${bonus})">${diceText}</span>`
+      );
     }
 
     return value;  // Return original value if no matches
