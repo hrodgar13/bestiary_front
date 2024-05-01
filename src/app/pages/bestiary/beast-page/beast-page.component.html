@@ -28,7 +28,7 @@
           </div>
           <div class="text-xl flex items-center gap-1 flex-wrap">
             <p class="text-[#E2A23B]">{{'Hits' | transloco}}: </p>
-            <p class="text-white">{{creature.hits}} (<span class="text-[#1DAEFF]">{{creature.hits_in_dice}}</span>)</p>
+            <p class="text-white">{{creature.hits}} <span [innerHTML]="(creature.hits_in_dice ? creature.hits_in_dice : '') | textRedactorReader"></span></p>
           </div>
           <div class="text-xl flex items-center gap-1 flex-wrap">
             <p class="text-[#E2A23B]">{{'speeds' | transloco | titlecase}}: </p>
