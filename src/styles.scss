@@ -269,3 +269,9 @@ mat-drawer {
     }
   }
 }
+
+app-dice-roll-snack {
+  display: block;
+  position: fixed;
+  z-index: 1000;
+}
