@@ -18,7 +18,7 @@ export class TextRedactorReaderPipe implements PipeTransform {
     return this.sanitizer.bypassSecurityTrustHtml(value.replace(templateRegex, (match, p1, amt, side, bonus, fontStyle, fontColor, textValue) => {
       if (amt) { // Dice roll formatting
         const diceText = `(${amt}d${side}${!bonus ? '' : bonus > 0 ? '+'+bonus : bonus})`;
-        const diceStyle = 'color: #1DAEFF; cursor: pointer; text-decoration: underline;';
+        const diceStyle = 'color: #1DAEFF; cursor: pointer;';
         return `<span style="${diceStyle}" onclick="window.rollDiceGlobal(${amt}, ${side}, ${bonus})">${diceText}</span>`;
       } else { // Style formatting
         let styleString = this.buildStyleString(fontStyle, fontColor);
