@@ -108,7 +108,7 @@
         <p class="playfair-font text-4xl text-[#E2A23B]">{{'Abilities' | transloco}}</p>
         <div *ngFor="let action of defineActionAbilities(ActionAbilities.abilities)"
              class="text-xl flex flex-col items-start gap-1 pt-3">
-          <p class="text-white text-xl 768:text-2xl"><span class="text-[#E2A23B]">{{action.title[currentLang]}}: </span>{{action.description[currentLang]}}</p>
+          <p class="text-white text-xl 768:text-2xl"><span class="text-[#E2A23B]">{{action.title[currentLang]}}:</span><span [innerHTML]="action.description[currentLang] | textRedactorReader"></span></p>
         </div>
       </div>
       <div *ngIf="defineActionAbilities(ActionAbilities.actions).length" class="h-[1px] w-full bg-[#E2A23B]"></div>
@@ -116,7 +116,7 @@
         <p class="playfair-font text-4xl text-[#E2A23B]">{{'Actions' | transloco}}</p>
         <div *ngFor="let action of defineActionAbilities(ActionAbilities.actions)"
              class="text-xl flex flex-col items-start gap-1 pt-3">
-          <p class="text-white text-xl 768:text-2xl"><span class="text-[#E2A23B]">{{action.title[currentLang]}}: </span>{{action.description[currentLang]}}</p>
+          <p class="text-white text-xl 768:text-2xl"><span class="text-[#E2A23B]">{{action.title[currentLang]}}: </span> <span [innerHTML]="action.description[currentLang] | textRedactorReader"></span></p>
         </div>
       </div>
       <div *ngIf="defineActionAbilities(ActionAbilities.bonusActions).length" class="h-[1px] w-full bg-[#E2A23B]"></div>
@@ -124,7 +124,7 @@
         <p class="playfair-font text-4xl text-[#E2A23B]">{{'Bonus Actions' | transloco}}</p>
         <div *ngFor="let action of defineActionAbilities(ActionAbilities.bonusActions)"
              class="text-xl flex flex-col items-start gap-1 pt-3">
-          <p class="text-white text-xl 768:text-2xl"><span class="text-[#E2A23B]">{{action.title[currentLang]}}: </span>{{action.description[currentLang]}}</p>
+          <p class="text-white text-xl 768:text-2xl"><span class="text-[#E2A23B]">{{action.title[currentLang]}}: </span><span [innerHTML]="action.description[currentLang] | textRedactorReader"></span></p>
         </div>
       </div>
       <div *ngIf="defineActionAbilities(ActionAbilities.legendaryActions).length"
@@ -133,7 +133,7 @@
         <p class="playfair-font text-4xl text-[#E2A23B]">{{'Legendary Actions' | transloco}}</p>
         <div *ngFor="let action of defineActionAbilities(ActionAbilities.legendaryActions)"
              class="text-xl flex flex-col items-start gap-1 pt-3">
-          <p class="text-white text-xl 768:text-2xl"><span class="text-[#E2A23B]">{{action.title[currentLang]}}: </span>{{action.description[currentLang]}}</p>
+          <p class="text-white text-xl 768:text-2xl"><span class="text-[#E2A23B]">{{action.title[currentLang]}}: </span><span [innerHTML]="action.description[currentLang] | textRedactorReader"></span></p>
         </div>
       </div>
       <div *ngIf="defineCreatureMeasures(MeasureCode.regions).length" class="h-[1px] w-full bg-[#E2A23B]"></div>

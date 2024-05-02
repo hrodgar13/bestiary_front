@@ -11,21 +11,9 @@ export class DiceRollerService {
 
   constructor(private snackbarService: SnackbarService) {}
 
-  rollDice(amount: number, sides: number, bonus: number): void {
+  rollDice(amount: number = 1, sides: number = 20, bonus: number = 0): void {
     let total = 0;
-    for (let i = 0; i < amount; i++) {
-      total += Math.floor(Math.random() * sides) + 1;
-    }
-    total += bonus;
-
-    const message = this.createMessage(amount, sides, bonus, total);
-    this.snackbarService.show(message, 5000);
-    this.onDiceRolled.emit(`Rolled ${amount}d${sides}+${bonus}: ${total}`);
-  }
-
-  private createMessage(amount: number, sides: number, bonus: number, total: number): string {
-    // Prepare the message with dice results, highlighting max rolls and min rolls
-    let diceResults = [];
+    let diceResults: string[] = [];
     for (let i = 0; i < amount; i++) {
       let roll = Math.floor(Math.random() * sides) + 1;
       if (roll === sides) { // Max roll
@@ -35,7 +23,17 @@ export class DiceRollerService {
       } else {
         diceResults.push(`[${roll}]`);
       }
+      total += roll;
     }
-    return `${diceResults.join(' + ')} + ${bonus} = <span style="color:#FAFD5D; font-size: 32px;">${total}</span>`;
+    total += bonus;
+
+    const message = this.createMessage(diceResults, bonus, total);
+    this.snackbarService.show(message, 5000);
+    this.onDiceRolled.emit(`Rolled ${amount}d${sides}+${bonus}: ${total}`);
+  }
+
+  private createMessage(diceResults: string[], bonus: number, total: number): string {
+    // Prepare the message with dice results, highlighting max rolls and min rolls
+    return `${diceResults.join(' + ')} ${!bonus ? '' : bonus > 0 ? '+'+bonus : bonus} = <span style="color:#FAFD5D; font-size: 32px;">${total}</span>`;
   }
 }
