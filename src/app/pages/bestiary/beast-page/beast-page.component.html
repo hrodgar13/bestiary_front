@@ -62,7 +62,7 @@
             <p class="text-[#E2A23B] text-xl 768:text-2xl">{{'Saving throws:' | transloco}}</p>
             <p class="text-white text-xl 768:text-2xl"
                *ngFor="let st of defineCreatureMeasures(MeasureCode.saving_throws)">{{validateEmptyName(st)}} <span
-              *ngIf="st.amt" class="text-[#1DAEFF]">{{(st.amt > 0 ? '+' + st.amt : st.amt) }}; </span></p>
+              *ngIf="st.amt" class="text-[#1DAEFF] cursor-pointer" (click)="rollDice(st.amt)">{{(st.amt > 0 ? '+' + st.amt : st.amt) }}; </span></p>
           </div>
           <div *ngIf="defineCreatureMeasures(MeasureCode.immunities).length"
                class="text-xl flex items-center gap-1  flex-wrap">
