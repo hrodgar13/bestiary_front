@@ -9,6 +9,7 @@ import { Clipboard } from '@angular/cdk/clipboard';
 import {FormControl} from "@angular/forms";
 import {ColorRedactorModalComponent} from "../../modals/color-redactor-modal/color-redactor-modal.component";
 import {CreateDiceRollComponent} from "../../modals/create-dice-roll/create-dice-roll.component";
+import {AddLinkComponent} from "../../modals/add-link/add-link.component";
 
 @Component({
   selector: 'app-text-redactor',
@@ -128,5 +129,21 @@ export class TextRedactorComponent extends DestroySubscription implements OnInit
         'color': color || '#B1A79C' // Default to initial if no color is specified
       };
     }
+  }
+
+  addLink() {
+    if(!this.editableText) {
+      return
+    }
+
+    const dialogRef = this.dialog.open(AddLinkComponent, {
+      data: { editingLine: this._value }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== null) {
+        this.updateColor(result);
+      }
+    });
   }
 }

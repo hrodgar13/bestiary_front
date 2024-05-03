@@ -38,14 +38,6 @@ import {MAT_SNACK_BAR_DEFAULT_OPTIONS} from "@angular/material/snack-bar";
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true},
-    {
-      provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
-      useValue: {
-        duration: 3000,
-        horizontalPosition: 'right', // Set horizontal position
-        verticalPosition: 'bottom',  // Set vertical position
-      }
-    }
   ],
   bootstrap: [AppComponent]
 })

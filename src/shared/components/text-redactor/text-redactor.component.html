@@ -10,8 +10,10 @@
         color_lens
       </mat-icon>
     </button>
-    <button (click)="openDiceGenerator()" type="button" class="h-[32px] w-[32px] rounded flex items-center justify-center border border-[#E2A23B]">
-      <app-d20-icon/>
+    <button (click)="addLink()" type="button" class="h-[32px] w-[32px] rounded flex items-center justify-center border border-[#E2A23B]">
+      <mat-icon class="text-[#E2A23B]">
+        link
+      </mat-icon>
     </button>
     <button type="button" (click)="copyToClipboard(_value)" class="h-[32px] w-[32px] rounded flex items-center justify-center border border-[#E2A23B]">
       <mat-icon class="text-[#E2A23B]">file_copy</mat-icon>
@@ -22,4 +24,7 @@
       <input [ngStyle]="inputStyles" [(ngModel)]="editableText" (input)="updateValue()" [placeholder]="'Type text here...' | transloco" class="outline-0 bg-transparent w-full h-full px-2" type="text">
     </app-border-outline>
   </div>
+  <button (click)="openDiceGenerator()" type="button" class="h-[64px] w-[64px] rounded flex items-center justify-center border border-[#E2A23B]">
+    <app-d20-icon/>
+  </button>
 </div>
