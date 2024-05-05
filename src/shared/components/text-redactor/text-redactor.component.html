@@ -1,0 +1,30 @@
+<div class="flex flex-col gap-2">
+  <div class="flex justify-center gap-2 items-center">
+    <button (click)="formatText()" type="button" class="h-[32px] w-[32px] rounded flex items-center justify-center border border-[#E2A23B]">
+      <mat-icon class="text-[#E2A23B]">
+        text_format
+      </mat-icon>
+    </button>
+    <button (click)="openColorPicker()" type="button" class="h-[32px] w-[32px] rounded flex items-center justify-center border border-[#E2A23B]">
+      <mat-icon class="text-[#E2A23B]">
+        color_lens
+      </mat-icon>
+    </button>
+    <button (click)="addLink()" type="button" class="h-[32px] w-[32px] rounded flex items-center justify-center border border-[#E2A23B]">
+      <mat-icon class="text-[#E2A23B]">
+        link
+      </mat-icon>
+    </button>
+    <button type="button" (click)="copyToClipboard(_value)" class="h-[32px] w-[32px] rounded flex items-center justify-center border border-[#E2A23B]">
+      <mat-icon class="text-[#E2A23B]">file_copy</mat-icon>
+    </button>
+  </div>
+  <div class="w-full h-[48px]">
+    <app-border-outline class="h-full w-full">
+      <input [ngStyle]="inputStyles" [(ngModel)]="editableText" (input)="updateValue()" [placeholder]="'Type text here...' | transloco" class="outline-0 bg-transparent w-full h-full px-2" type="text">
+    </app-border-outline>
+  </div>
+  <button (click)="openDiceGenerator()" type="button" class="h-[64px] w-[64px] rounded flex items-center justify-center border border-[#E2A23B]">
+    <app-d20-icon/>
+  </button>
+</div>

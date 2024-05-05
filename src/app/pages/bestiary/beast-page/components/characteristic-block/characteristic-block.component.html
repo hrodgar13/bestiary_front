@@ -1,7 +1,7 @@
 <div
-  class="grid grid-rows-2 overflow-hidden text-[#FAFD5D] text-3xl w-[120px] h-[120px] rounded-xl border-2 border-[#FAFD5D]">
+  class="grid grid-rows-2 overflow-hidden text-[#FAFD5D] text-xl 640:text-3xl 640:w-[130px] 640:h-[130px] w-[100px] h-[100px] rounded-xl border-2 border-[#FAFD5D]">
   <div class="bg-[#1C1E25] border-b border-[#FAFD5D] flex items-center justify-center">{{title | transloco}}</div>
   <div class="flex items-center justify-center">{{characteristicValue}} (<span
-    class="text-[#1DAEFF]">{{calculateModificator(characteristicValue)}}</span>)
+    class="text-[#1DAEFF] cursor-pointer" (click)="rollDice()">{{calculateModificator(characteristicValue)}}</span>)
   </div>
 </div>
