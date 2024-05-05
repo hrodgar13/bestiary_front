@@ -10,6 +10,7 @@ import {FormControl} from "@angular/forms";
 import {ColorRedactorModalComponent} from "../../modals/color-redactor-modal/color-redactor-modal.component";
 import {CreateDiceRollComponent} from "../../modals/create-dice-roll/create-dice-roll.component";
 import {AddLinkComponent} from "../../modals/add-link/add-link.component";
+import {TEXT_REDACTOR_REGEX} from "../../static/constants";
 
 @Component({
   selector: 'app-text-redactor',
@@ -38,23 +39,23 @@ export class TextRedactorComponent extends DestroySubscription implements OnInit
   }
 
   ngOnInit() {
-    this._value = `{% custom_font_style="" custom_font_color="" value="" %}`;
+    this._value = `{% custom_font_style="" custom_font_color="" value="" external_link="" %}`;
     this.parseValue();
   }
 
   parseValue() {
-    const regex = /{%\s*custom_font_style="([^"]*)"\s*custom_font_color="([^"]*)"\s*value="([^"]*)"\s*%}/;
+    const regex = TEXT_REDACTOR_REGEX;
     const match = this._value.match(regex);
-    if (match && match.length > 3) {
+    if (match && match.length > 4) {
       this.editableText = match[3];  // Only update if the structure is correct
     }
   }
 
   updateValue() {
-    const regex = /{%\s*custom_font_style="([^"]*)"\s*custom_font_color="([^"]*)"\s*value="([^"]*)"\s*%}/;
+    const regex = TEXT_REDACTOR_REGEX;
     const match = this._value.match(regex);
-    if (match && match.length > 3) {
-      this._value = `{% custom_font_style="${match[1]}" custom_font_color="${match[2]}" value="${this.editableText.replace(/"/g, '&quot;')}" %}`;
+    if (match && match.length > 4) {
+      this._value = `{% custom_font_style="${match[1]}" custom_font_color="${match[2]}" value="${this.editableText.replace(/"/g, '&quot;')}" external_link="${match[4]}" %}`;
     }
   }
 
@@ -85,8 +86,8 @@ export class TextRedactorComponent extends DestroySubscription implements OnInit
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result !== null) { // null means cancelled
-        this.updateColor(result); // Method to update color in the main component
+      if (result !== null) {
+        this.updateColor(result);
       }
     });
   }
@@ -115,7 +116,7 @@ export class TextRedactorComponent extends DestroySubscription implements OnInit
   }
 
   private updateInputStylesFromCode(code: string): void {
-    const regex = /{%\s*custom_font_style="([^"]*)"\s*custom_font_color="([^"]*)"\s*value="([^"]*)"\s*%}/;
+    const regex = TEXT_REDACTOR_REGEX;
     const match = code.match(regex);
     if (match) {
       const fontStyles = match[1].split(' ');

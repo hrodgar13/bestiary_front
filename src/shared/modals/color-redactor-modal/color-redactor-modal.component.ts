@@ -2,6 +2,7 @@ import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {TextRedactorInitData} from "../../interfaces/technical/text-redactor-init-data.interface";
 import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
+import {TEXT_REDACTOR_REGEX} from "../../static/constants";
 
 @Component({
   selector: 'app-color-redactor-modal',
@@ -32,7 +33,7 @@ export class ColorRedactorModalComponent implements OnInit{
   }
 
   updateHTML(): void {
-    const regex = /{%\s*custom_font_style="([^"]*)"\s*custom_font_color="([^"]*)"\s*value="([^"]*)"\s*%}/;
+    const regex = TEXT_REDACTOR_REGEX;
     const match = this.data.editingLine.match(regex);
     if (match) {
       const styles = match[1].split(' ').reduce((styleString, style) => {

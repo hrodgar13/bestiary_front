@@ -3,6 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {TextRedactorInitData} from "../../interfaces/technical/text-redactor-init-data.interface";
 import {DestroySubscription} from "../../helpers/destroy-subscribtion";
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import {TEXT_REDACTOR_REGEX} from "../../static/constants";
 
 @Component({
   selector: 'app-font-redactor-modal',
@@ -33,7 +34,7 @@ export class FontRedactorModalComponent implements OnInit, OnDestroy {
   }
 
   updateHTML(): void {
-    const regex = /{%\s*custom_font_style="([^"]*)"\s*custom_font_color="([^"]*)"\s*value="([^"]*)"\s*%}/;
+    const regex = TEXT_REDACTOR_REGEX;
     const match = this.editableText.match(regex);
     if (match) {
       const styles = match[1].split(' ').reduce((styleString, style) => {
@@ -50,7 +51,7 @@ export class FontRedactorModalComponent implements OnInit, OnDestroy {
   }
 
   setStyle(value: string): void {
-    const regex = /{%\s*custom_font_style="([^"]*)"\s*custom_font_color="([^"]*)"\s*value="([^"]*)"\s*%}/;
+    const regex = TEXT_REDACTOR_REGEX;
     let match = this.editableText.match(regex);
     if (match) {
       let styles = match[1].split(' ').filter(s => s); // Convert style string to array and filter out empty entries
@@ -64,13 +65,13 @@ export class FontRedactorModalComponent implements OnInit, OnDestroy {
       }
 
       // Reconstruct the editableText with updated styles
-      this.editableText = `{% custom_font_style="${styles.join(' ')}" custom_font_color="${color}" value="${textValue}" %}`;
+      this.editableText = `{% custom_font_style="${styles.join(' ')}" custom_font_color="${color}" value="${textValue}" external_link="${match[4]}" %}`;
       this.updateHTML(); // Update the display HTML
     }
   }
 
   isFilterActive(keyWord: string): boolean {
-    const regex = /{%\s*custom_font_style="([^"]*)"\s*custom_font_color="([^"]*)"\s*value="([^"]*)"\s*%}/;
+    const regex = TEXT_REDACTOR_REGEX;
     const match = this.editableText.match(regex);
     return match ? match[1].includes(keyWord) : false;
   }
