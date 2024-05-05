@@ -37,13 +37,19 @@ export class FontRedactorModalComponent implements OnInit, OnDestroy {
     const regex = TEXT_REDACTOR_REGEX;
     const match = this.editableText.match(regex);
     if (match) {
+      const href = match[4]
       const styles = match[1].split(' ').reduce((styleString, style) => {
         if (style === 'bold') styleString += 'font-weight: bold; ';
         if (style === 'italic') styleString += 'font-style: italic; ';
         if (style === 'underline') styleString += 'text-decoration: underline; ';
         return styleString;
       }, '');
-      const htmlString = `<span style="${styles} color: ${match[2]};">${match[3]}</span>`;
+        let htmlString = ''
+        if(match[4]) {
+            htmlString = `<a href="${href}" style="${styles} color: ${match[2]};">${match[3]}</a>`;
+        } else {
+            htmlString = `<span style="${styles} color: ${match[2]};">${match[3]}</span>`;
+        }
       this.editableHTML = this.sanitizer.bypassSecurityTrustHtml(htmlString);
     } else {
       this.editableHTML = '';
