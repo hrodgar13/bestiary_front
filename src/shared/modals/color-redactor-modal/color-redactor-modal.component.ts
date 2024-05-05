@@ -3,6 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {TextRedactorInitData} from "../../interfaces/technical/text-redactor-init-data.interface";
 import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
 import {TEXT_REDACTOR_REGEX} from "../../static/constants";
+import {TextManagementService} from "../../services/text-management.service";
 
 @Component({
   selector: 'app-color-redactor-modal',
@@ -16,7 +17,8 @@ export class ColorRedactorModalComponent implements OnInit{
   constructor(
     private sanitizer: DomSanitizer,
     @Inject(MAT_DIALOG_DATA) public data: TextRedactorInitData,
-    public dialogRef: MatDialogRef<ColorRedactorModalComponent>
+    public dialogRef: MatDialogRef<ColorRedactorModalComponent>,
+    private textManagement: TextManagementService
   ) {}
 
   ngOnInit() {
@@ -33,24 +35,8 @@ export class ColorRedactorModalComponent implements OnInit{
   }
 
   updateHTML(): void {
-    const regex = TEXT_REDACTOR_REGEX;
-    const match = this.data.editingLine.match(regex);
-    if (match) {
-      const href = match[4]
-      const styles = match[1].split(' ').reduce((styleString, style) => {
-        if (style === 'bold') styleString += 'font-weight: bold; ';
-        if (style === 'italic') styleString += 'font-style: italic; ';
-        if (style === 'underline') styleString += 'text-decoration: underline; ';
-        return styleString;
-      }, '');
-      let htmlString = ''
-      if(match[4]) {
-        htmlString = `<a href="${href}" style="${styles} color: ${this.currentColor};">${match[3]}</a>`;
-      } else {
-        htmlString = `<span style="${styles} color: ${this.currentColor};">${match[3]}</span>`;
-      }
-      this.editableHTML = this.sanitizer.bypassSecurityTrustHtml(htmlString);
-    }
+    const code = this.data.editingLine.replace(/(custom_font_color=")[^"]*"/, `$1${this.currentColor}"`)
+    this.editableHTML = this.textManagement.updateHTML(code,2)
   }
 
   updatePreview(color: string): void {

@@ -3,6 +3,7 @@ import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {TextRedactorInitData} from "../../interfaces/technical/text-redactor-init-data.interface";
 import {TEXT_REDACTOR_REGEX} from "../../static/constants";
+import {TextManagementService} from "../../services/text-management.service";
 
 @Component({
   selector: 'app-add-link',
@@ -16,7 +17,8 @@ export class AddLinkComponent  implements OnInit, OnDestroy {
   constructor(
     private sanitizer: DomSanitizer,
     @Inject(MAT_DIALOG_DATA) public data: TextRedactorInitData,
-    public dialogRef: MatDialogRef<AddLinkComponent>
+    public dialogRef: MatDialogRef<AddLinkComponent>,
+    private textManagement: TextManagementService
   ) { }
 
   ngOnInit(): void {
@@ -34,25 +36,7 @@ export class AddLinkComponent  implements OnInit, OnDestroy {
   }
 
   updateHTML(): void {
-    const regex = TEXT_REDACTOR_REGEX;
-    const match = this.editableText.match(regex);
-    if (match) {
-      const styles = match[1].split(' ').reduce((styleString, style) => {
-        if (style === 'bold') styleString += 'font-weight: bold; ';
-        if (style === 'italic') styleString += 'font-style: italic; ';
-        if (style === 'underline') styleString += 'text-decoration: underline; ';
-        return styleString;
-      }, '');
-      let htmlString = ''
-      if(match[4]) {
-        htmlString = `<a href="${this.link}" style="${styles} color: ${match[2]};">${match[3]}</a>`;
-      } else {
-        htmlString = `<span style="${styles} color: ${match[2]};">${match[3]}</span>`;
-      }
-      this.editableHTML = this.sanitizer.bypassSecurityTrustHtml(htmlString);
-    } else {
-      this.editableHTML = '';
-    }
+    this.editableHTML = this.textManagement.updateHTML(this.editableText,4)
   }
 
   detectLinkChanges() {

@@ -143,7 +143,6 @@ export class TextRedactorComponent extends DestroySubscription implements OnInit
 
     dialogRef.afterClosed().subscribe(result => {
       if (result !== null) {
-        console.log(result)
         this._value = result
       }
     });

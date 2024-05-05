@@ -4,6 +4,7 @@ import {TextRedactorInitData} from "../../interfaces/technical/text-redactor-ini
 import {DestroySubscription} from "../../helpers/destroy-subscribtion";
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import {TEXT_REDACTOR_REGEX} from "../../static/constants";
+import {TextManagementService} from "../../services/text-management.service";
 
 @Component({
   selector: 'app-font-redactor-modal',
@@ -15,6 +16,7 @@ export class FontRedactorModalComponent implements OnInit, OnDestroy {
   editableHTML!: SafeHtml;
 
   constructor(
+      private textManager: TextManagementService,
     private sanitizer: DomSanitizer,
     @Inject(MAT_DIALOG_DATA) public data: TextRedactorInitData,
     public dialogRef: MatDialogRef<FontRedactorModalComponent>
@@ -34,26 +36,7 @@ export class FontRedactorModalComponent implements OnInit, OnDestroy {
   }
 
   updateHTML(): void {
-    const regex = TEXT_REDACTOR_REGEX;
-    const match = this.editableText.match(regex);
-    if (match) {
-      const href = match[4]
-      const styles = match[1].split(' ').reduce((styleString, style) => {
-        if (style === 'bold') styleString += 'font-weight: bold; ';
-        if (style === 'italic') styleString += 'font-style: italic; ';
-        if (style === 'underline') styleString += 'text-decoration: underline; ';
-        return styleString;
-      }, '');
-        let htmlString = ''
-        if(match[4]) {
-            htmlString = `<a href="${href}" style="${styles} color: ${match[2]};">${match[3]}</a>`;
-        } else {
-            htmlString = `<span style="${styles} color: ${match[2]};">${match[3]}</span>`;
-        }
-      this.editableHTML = this.sanitizer.bypassSecurityTrustHtml(htmlString);
-    } else {
-      this.editableHTML = '';
-    }
+   this.editableHTML = this.textManager.updateHTML(this.editableText, 1)
   }
 
   setStyle(value: string): void {
