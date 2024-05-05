@@ -14,7 +14,7 @@ export class TextManagementService {
     ) {
     }
 
-    updateHTML(editable_text: string, regex_number: number) {
+    updateHTML(editable_text: string) {
         const regex = TEXT_REDACTOR_REGEX;
         const match = editable_text.match(regex);
         if (match) {

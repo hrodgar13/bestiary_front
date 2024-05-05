@@ -36,7 +36,7 @@ export class ColorRedactorModalComponent implements OnInit{
 
   updateHTML(): void {
     const code = this.data.editingLine.replace(/(custom_font_color=")[^"]*"/, `$1${this.currentColor}"`)
-    this.editableHTML = this.textManagement.updateHTML(code,2)
+    this.editableHTML = this.textManagement.updateHTML(code)
   }
 
   updatePreview(color: string): void {

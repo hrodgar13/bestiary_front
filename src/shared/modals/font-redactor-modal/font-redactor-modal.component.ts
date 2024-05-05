@@ -36,7 +36,7 @@ export class FontRedactorModalComponent implements OnInit, OnDestroy {
   }
 
   updateHTML(): void {
-   this.editableHTML = this.textManager.updateHTML(this.editableText, 1)
+   this.editableHTML = this.textManager.updateHTML(this.editableText)
   }
 
   setStyle(value: string): void {

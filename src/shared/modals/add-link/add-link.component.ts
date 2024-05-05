@@ -36,7 +36,7 @@ export class AddLinkComponent  implements OnInit, OnDestroy {
   }
 
   updateHTML(): void {
-    this.editableHTML = this.textManagement.updateHTML(this.editableText,4)
+    this.editableHTML = this.textManagement.updateHTML(this.editableText)
   }
 
   detectLinkChanges() {
