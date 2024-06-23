@@ -11,7 +11,6 @@ import {MultiSelectComponent} from './create-beast/form-elements/multi-select/mu
 import {MatButtonModule} from "@angular/material/button";
 import {LabelTextComponent} from './create-beast/form-elements/label-text/label-text.component';
 import {InputGreenBtnComponent} from './create-beast/form-elements/input-green-btn/input-green-btn.component';
-import {InputNumberComponent} from './create-beast/form-elements/input-number/input-number.component';
 import {HttpClientModule} from "@angular/common/http";
 import {
   MultiSelectItemComponent
@@ -30,43 +29,44 @@ import {CreatureService} from "./create-beast/creature.service";
 import { BeastPageComponent } from './beast-page/beast-page.component';
 import {SharedModule} from "../../../shared/shared.module";
 import { CharacteristicBlockComponent } from './beast-page/components/characteristic-block/characteristic-block.component';
+import {MatSidenavModule} from "@angular/material/sidenav";
 
 
 @NgModule({
-  providers: [
-    BestiaryService,
-    CreatureService,
-  ],
-  declarations: [
-    CreateBeastComponent,
-    BestiaryListComponent,
-    MultiSelectComponent,
-    LabelTextComponent,
-    InputGreenBtnComponent,
-    InputNumberComponent,
-    MultiSelectItemComponent,
-    InputFileComponent,
-    StatblockInputComponent,
-    TitleTextInputComponent,
-    TitleTextItemComponent,
-    BeastPageComponent,
-    CharacteristicBlockComponent,
-  ],
-  imports: [
-    HttpClientModule,
-    CommonModule,
-    BestiaryRoutingModule,
-    MatIconModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatSelectModule,
-    MatButtonModule,
-    MatSnackBarModule,
-    MatDialogModule,
-    MatButtonToggleModule,
-    TranslocoPipe,
-    SharedModule
-  ]
+    providers: [
+        BestiaryService,
+        CreatureService,
+    ],
+    declarations: [
+        CreateBeastComponent,
+        BestiaryListComponent,
+        MultiSelectComponent,
+        LabelTextComponent,
+        InputGreenBtnComponent,
+        MultiSelectItemComponent,
+        InputFileComponent,
+        StatblockInputComponent,
+        TitleTextInputComponent,
+        TitleTextItemComponent,
+        BeastPageComponent,
+        CharacteristicBlockComponent,
+    ],
+    imports: [
+        HttpClientModule,
+        CommonModule,
+        BestiaryRoutingModule,
+        MatIconModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatSelectModule,
+        MatButtonModule,
+        MatSnackBarModule,
+        MatDialogModule,
+        MatButtonToggleModule,
+        TranslocoPipe,
+        SharedModule,
+        MatSidenavModule
+    ]
 })
 export class BestiaryModule {
 }

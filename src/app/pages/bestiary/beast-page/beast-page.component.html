@@ -28,7 +28,8 @@
           </div>
           <div class="text-xl flex items-center gap-1 flex-wrap">
             <p class="text-[#E2A23B]">{{'Hits' | transloco}}: </p>
-            <p class="text-white">{{creature.hits}} (<span class="text-[#1DAEFF]">{{creature.hits_in_dice}}</span>)</p>
+            <p class="text-white">{{creature.hits}} <span
+              [innerHTML]="(creature.hits_in_dice ? creature.hits_in_dice : '') | textRedactorReader"></span></p>
           </div>
           <div class="text-xl flex items-center gap-1 flex-wrap">
             <p class="text-[#E2A23B]">{{'speeds' | transloco | titlecase}}: </p>
@@ -36,7 +37,19 @@
                *ngFor="let speed of defineCreatureMeasures(MeasureCode.speeds)">{{validateEmptyName(speed)}} {{speed.amt}} {{'ft' | transloco}}
               ; </p>
           </div>
-          <div class="flex items-center justify-around flex-wrap gap-2">
+          <div class="480:flex hidden flex-wrap gap-2">
+            <div class="flex justify-around  flex-wrap gap-2">
+              <app-characteristic-block [title]="'STR'" [characteristicValue]="creature.stat_block.strength"/>
+              <app-characteristic-block [title]="'DEX'" [characteristicValue]="creature.stat_block.dexterity"/>
+              <app-characteristic-block [title]="'CON'" [characteristicValue]="creature.stat_block.constitution"/>
+            </div>
+            <div class="flex justify-around flex-wrap gap-2">
+              <app-characteristic-block [title]="'INT'" [characteristicValue]="creature.stat_block.intelligence"/>
+              <app-characteristic-block [title]="'WIS'" [characteristicValue]="creature.stat_block.wisdom"/>
+              <app-characteristic-block [title]="'CHA'" [characteristicValue]="creature.stat_block.charisma"/>
+            </div>
+          </div>
+          <div class="480:hidden flex flex-wrap gap-2">
             <app-characteristic-block [title]="'STR'" [characteristicValue]="creature.stat_block.strength"/>
             <app-characteristic-block [title]="'DEX'" [characteristicValue]="creature.stat_block.dexterity"/>
             <app-characteristic-block [title]="'CON'" [characteristicValue]="creature.stat_block.constitution"/>
@@ -49,14 +62,16 @@
             <p class="text-[#E2A23B] text-xl 768:text-2xl">{{'Saving throws:' | transloco}}</p>
             <p class="text-white text-xl 768:text-2xl"
                *ngFor="let st of defineCreatureMeasures(MeasureCode.saving_throws)">{{validateEmptyName(st)}} <span
-              *ngIf="st.amt" class="text-[#1DAEFF]">{{(st.amt > 0 ? '+' + st.amt : st.amt) }}; </span></p>
+              *ngIf="st.amt" class="text-[#1DAEFF] cursor-pointer" (click)="rollDice(st.amt)">{{(st.amt > 0 ? '+' + st.amt : st.amt) }}; </span></p>
           </div>
-          <div *ngIf="defineCreatureMeasures(MeasureCode.immunities).length" class="text-xl flex items-center gap-1  flex-wrap">
+          <div *ngIf="defineCreatureMeasures(MeasureCode.immunities).length"
+               class="text-xl flex items-center gap-1  flex-wrap">
             <p class="text-[#E2A23B] text-xl 768:text-2xl">{{'immunities_damage' | transloco | titlecase}}:</p>
             <p class="text-white text-xl 768:text-2xl"
                *ngFor="let im of defineCreatureMeasures(MeasureCode.immunities)">{{validateEmptyName(im)}}; </p>
           </div>
-          <div *ngIf="defineCreatureMeasures(MeasureCode.resists).length" class="text-xl flex items-center gap-1 flex-wrap">
+          <div *ngIf="defineCreatureMeasures(MeasureCode.resists).length"
+               class="text-xl flex items-center gap-1 flex-wrap">
             <p class="text-[#E2A23B] text-xl 768:text-2xl">{{'resists_damage' | transloco | titlecase}}:</p>
             <p class="text-white text-xl 768:text-2xl"
                *ngFor="let res of defineCreatureMeasures(MeasureCode.resists)">{{validateEmptyName(res)}}; </p>
@@ -67,21 +82,26 @@
             <p class="text-white text-xl 768:text-2xl"
                *ngFor="let vul of defineCreatureMeasures(MeasureCode.vulnerabilities)">{{validateEmptyName(vul)}}; </p>
           </div>
-          <div *ngIf="defineCreatureMeasures(MeasureCode.conditions).length" class="text-xl flex items-center gap-1 flex-wrap">
+          <div *ngIf="defineCreatureMeasures(MeasureCode.conditions).length"
+               class="text-xl flex items-center gap-1 flex-wrap">
             <p class="text-[#E2A23B] text-xl 768:text-2xl">{{'conditions' | transloco | titlecase}}:</p>
             <p class="text-white text-xl 768:text-2xl"
                *ngFor="let con of defineCreatureMeasures(MeasureCode.conditions)">{{validateEmptyName(con)}}; </p>
           </div>
-          <div *ngIf="defineCreatureMeasures(MeasureCode.feelings).length" class="text-xl flex items-center gap-1 flex-wrap">
+          <div *ngIf="defineCreatureMeasures(MeasureCode.feelings).length"
+               class="text-xl flex items-center gap-1 flex-wrap">
             <p class="text-[#E2A23B] text-xl 768:text-2xl">{{'feelings' | transloco | titlecase}}:</p>
             <p class="text-white text-xl 768:text-2xl"
-               *ngFor="let sens of defineCreatureMeasures(MeasureCode.feelings)">{{validateEmptyName(sens)}} {{(sens.amt) }}{{(sens.isMeasureEnable ? ' ft' : '')}};</p>
+               *ngFor="let sens of defineCreatureMeasures(MeasureCode.feelings)">{{validateEmptyName(sens)}} {{(sens.amt) }}{{(sens.isMeasureEnable ? ' ft' : '')}}
+              ;</p>
           </div>
-          <div *ngIf=" defineCreatureMeasures(MeasureCode.languages).length" class="text-xl flex items-center gap-1 flex-wrap">
+          <div *ngIf=" defineCreatureMeasures(MeasureCode.languages).length"
+               class="text-xl flex items-center gap-1 flex-wrap">
             <p class="text-[#E2A23B] text-xl 768:text-2xl">{{'languages' | transloco | titlecase}}:</p>
             <p class="text-white text-xl 768:text-2xl"
                *ngFor="let lang of defineCreatureMeasures(MeasureCode.languages)">{{validateEmptyName(lang)}} <span
-              *ngIf="lang.amt">{{(lang.amt > 0 ? lang.amt : lang.amt) }}</span>{{(lang.amt ? 'ft' : '' | transloco)}}; </p>
+              *ngIf="lang.amt">{{(lang.amt > 0 ? lang.amt : lang.amt) }}</span>{{(lang.amt ? 'ft' : '' | transloco)}};
+            </p>
           </div>
           <div *ngIf="creature.danger_lvl && creature.experience" class="text-xl flex items-center gap-1 flex-wrap">
             <p class="text-[#E2A23B] text-xl 768:text-2xl">{{'Challenge level' | transloco}}:</p>
@@ -95,7 +115,8 @@
         <div class="w-full min-h-full">
           <app-border-outline [height]="'h-full'" class="relative h-full block">
             <div class="w-full min-h-full flex items-center justify-center">
-              <img *ngIf="creature.image; else noImage" [src]="baseUrl + '/uploads/' + creature.image" class="w-full h-full object-contain text-center" alt="no image">
+              <img *ngIf="creature.image; else noImage" [src]="baseUrl + '/uploads/' + creature.image"
+                   class="w-full h-full object-contain text-center" alt="no image">
               <ng-template #noImage>
                 <img src="assets/images/no-image.png" class="w-full h-full object-contain text-center" alt="no image">
               </ng-template>
@@ -108,7 +129,8 @@
         <p class="playfair-font text-4xl text-[#E2A23B]">{{'Abilities' | transloco}}</p>
         <div *ngFor="let action of defineActionAbilities(ActionAbilities.abilities)"
              class="text-xl flex flex-col items-start gap-1 pt-3">
-          <p class="text-white text-xl 768:text-2xl"><span class="text-[#E2A23B]">{{action.title[currentLang]}}: </span>{{action.description[currentLang]}}</p>
+          <p class="text-white text-xl 768:text-2xl"><span class="text-[#E2A23B]">{{action.title[currentLang]}}
+            :</span><span [innerHTML]="action.description[currentLang] | textRedactorReader"></span></p>
         </div>
       </div>
       <div *ngIf="defineActionAbilities(ActionAbilities.actions).length" class="h-[1px] w-full bg-[#E2A23B]"></div>
@@ -116,7 +138,8 @@
         <p class="playfair-font text-4xl text-[#E2A23B]">{{'Actions' | transloco}}</p>
         <div *ngFor="let action of defineActionAbilities(ActionAbilities.actions)"
              class="text-xl flex flex-col items-start gap-1 pt-3">
-          <p class="text-white text-xl 768:text-2xl"><span class="text-[#E2A23B]">{{action.title[currentLang]}}: </span>{{action.description[currentLang]}}</p>
+          <p class="text-white text-xl 768:text-2xl"><span class="text-[#E2A23B]">{{action.title[currentLang]}}: </span>
+            <span [innerHTML]="action.description[currentLang] | textRedactorReader"></span></p>
         </div>
       </div>
       <div *ngIf="defineActionAbilities(ActionAbilities.bonusActions).length" class="h-[1px] w-full bg-[#E2A23B]"></div>
@@ -124,7 +147,8 @@
         <p class="playfair-font text-4xl text-[#E2A23B]">{{'Bonus Actions' | transloco}}</p>
         <div *ngFor="let action of defineActionAbilities(ActionAbilities.bonusActions)"
              class="text-xl flex flex-col items-start gap-1 pt-3">
-          <p class="text-white text-xl 768:text-2xl"><span class="text-[#E2A23B]">{{action.title[currentLang]}}: </span>{{action.description[currentLang]}}</p>
+          <p class="text-white text-xl 768:text-2xl"><span class="text-[#E2A23B]">{{action.title[currentLang]}}: </span><span
+            [innerHTML]="action.description[currentLang] | textRedactorReader"></span></p>
         </div>
       </div>
       <div *ngIf="defineActionAbilities(ActionAbilities.legendaryActions).length"
@@ -133,7 +157,8 @@
         <p class="playfair-font text-4xl text-[#E2A23B]">{{'Legendary Actions' | transloco}}</p>
         <div *ngFor="let action of defineActionAbilities(ActionAbilities.legendaryActions)"
              class="text-xl flex flex-col items-start gap-1 pt-3">
-          <p class="text-white text-xl 768:text-2xl"><span class="text-[#E2A23B]">{{action.title[currentLang]}}: </span>{{action.description[currentLang]}}</p>
+          <p class="text-white text-xl 768:text-2xl"><span class="text-[#E2A23B]">{{action.title[currentLang]}}: </span><span
+            [innerHTML]="action.description[currentLang] | textRedactorReader"></span></p>
         </div>
       </div>
       <div *ngIf="defineCreatureMeasures(MeasureCode.regions).length" class="h-[1px] w-full bg-[#E2A23B]"></div>

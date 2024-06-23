@@ -1,0 +1,28 @@
+<form [formGroup]="form" (ngSubmit)="copyResult()" class="p-2 flex flex-col gap-5 items-center justify-center">
+  <h2 class="text-3xl text-[#E2A23B] playfair-font">{{'Roll generator'}}</h2>
+  <div class="flex gap-2 items-center">
+    <h2 class="text-[#B1A79C] text-2xl">Roll: </h2>
+    <app-input-number formControlName="amt" class="h-[48px] w-[80px]" [placeholder]="'Amount'"></app-input-number>
+    <h2 class="text-[#B1A79C] text-2xl">d</h2>
+    <app-border-outline class="h-[48px] w-[80px]">
+      <mat-select formControlName="dice" class="text-[#B1A79C] vu-select outline-0 bg-transparent w-[80px] px-2 font-semibold"
+                  panelClass="vu-select" [placeholder]="'Dice' | transloco">
+        <mat-option class="text-[#B1A79C] vu-select" [value]="dice" *ngFor="let dice of DICE_SIDES">
+          {{dice}}
+        </mat-option>
+      </mat-select>
+    </app-border-outline>
+    <app-input-number formControlName="bonus" class="h-[48px] w-[80px]" [placeholder]="'Bonus'"></app-input-number>
+  </div>
+  <div class="border-2 w-full rounded p-1 border-[#E2A23B] bg-[#15181F] text-[#B1A79C]">
+    ({{this.getFormValue('amt')}}{{'d' | transloco}}{{this.getFormValue('dice')}}{{this.getFormValue('bonus')}})
+  </div>
+  <div class="flex justify-between w-full">
+    <button (click)="closeModal(null)" type="button" class="h-[48px] max-w-[120px] w-full text-[#E2A23B] rounded flex items-center justify-center border-2 border-[#E2A23B]">
+     Cancel
+    </button>
+    <button type="submit" class="h-[48px] max-w-[120px] w-full text-[#E2A23B] rounded flex items-center justify-center border border-[#E2A23B]">
+      Copy
+    </button>
+  </div>
+</form>

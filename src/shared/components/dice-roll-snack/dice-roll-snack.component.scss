@@ -1,0 +1,30 @@
+.snackbar {
+  animation: slideFadeInOut 5s ease-in-out forwards;
+}
+
+@keyframes slideFadeInOut {
+  0%, 100% { opacity: 0; transform: translateX(100%); }
+  10% { opacity: 1; transform: translateX(0); }
+  90% { opacity: 1; transform: translateX(0); }
+}
+
+
+.timer {
+  height: 2px;
+  background-color: #E2A23B;
+  width: 100%;
+  animation: countdown linear var(--duration, 5000ms) forwards;
+}
+
+@keyframes countdown {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}
+
+.snackbar span {
+  color: inherit;
+}

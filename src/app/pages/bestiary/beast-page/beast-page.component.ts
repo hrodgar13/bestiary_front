@@ -11,6 +11,7 @@ import {ActionAbilities} from "../../../../shared/static/creature/action-abiliti
 import {ActionsAbilities} from "../../../../shared/interfaces/creature/get/actions-abilities";
 import {environment} from "../../../../environments/environment";
 import {TranslocoService} from "@ngneat/transloco";
+import {DiceRollerService} from "../../../../shared/services/dice-roller.service";
 
 @Component({
   selector: 'app-beast-page',
@@ -28,7 +29,8 @@ export class BeastPageComponent extends DestroySubscription implements OnInit {
   constructor(
     private readonly bestiaryService: BestiaryService,
     private readonly attribute_code: ActivatedRoute,
-    private readonly transloco: TranslocoService
+    private readonly transloco: TranslocoService,
+    private diceRoller: DiceRollerService
   ) {
     super();
   }
@@ -80,5 +82,9 @@ export class BeastPageComponent extends DestroySubscription implements OnInit {
         this.currentLang = data
       }
     })
+  }
+
+  rollDice(amt: number) {
+    this.diceRoller.rollDice(1,20, amt)
   }
 }
