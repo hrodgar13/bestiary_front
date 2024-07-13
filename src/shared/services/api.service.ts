@@ -7,10 +7,7 @@ import {Attribute} from "../interfaces/creature/get/attribute";
 import {CreatureListFilter} from "../interfaces/filters/creature-list-filter";
 import {
   FilteredCreatureDataMetaDto,
-  FilteredCreatureList,
-  FilteredCreatureListItem
 } from "../interfaces/filters/creatures.list";
-import {OutputCreatureItem} from "../interfaces/filters/output-creature-item";
 import {FileUpload} from "../interfaces/file/file-upload.interface";
 import {MessageI} from "../interfaces/message.interface";
 import {Translation} from "@ngneat/transloco";
@@ -116,5 +113,9 @@ export class ApiService {
 
         return params.set(key.filter_cat, key.filter_values.map(item => item.id).toString());
       }, new HttpParams())
+  }
+
+  deleteActionAbility(id: number): Observable<MessageI> {
+    return this.http.delete<MessageI>(`api/creature/action-ability/${id}`);
   }
 }

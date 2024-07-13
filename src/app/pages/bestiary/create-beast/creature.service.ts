@@ -3,6 +3,7 @@ import {Observable} from "rxjs";
 import {ApiService} from "../../../../shared/services/api.service";
 import {Creature} from "../../../../shared/interfaces/creature/get/creature";
 import {FileUpload} from "../../../../shared/interfaces/file/file-upload.interface";
+import {MessageI} from "../../../../shared/interfaces/message.interface";
 
 @Injectable()
 export class CreatureService {
@@ -31,5 +32,9 @@ export class CreatureService {
 
   removePhoto(selectedImage: string): Observable<any> {
       return  this.apiService.removePhoto(selectedImage)
+  }
+
+  deleteActionAbility(id: number): Observable<MessageI> {
+    return this.apiService.deleteActionAbility(id)
   }
 }

@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, UntypedFormGroup} from "@angular/forms"
 import {CreatureService} from "./creature.service";
 import {interval, takeUntil} from "rxjs";
@@ -19,7 +19,6 @@ import {MatDialog} from "@angular/material/dialog";
 import {ActionAbilities} from "../../../../shared/static/creature/action-abilities.code";
 import {EditActionAbility} from "../../../../shared/interfaces/creature/create/edit-action-ability";
 import {CharacteristicCode} from "../../../../shared/static/creature/characteristic.code";
-import {TextManagementService} from "../../../../shared/services/text-management.service";
 
 export interface ScalingCharacteristics {
   [CharacteristicCode.strength]: number
@@ -273,10 +272,24 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit,
   }
 
   removeActionAbility($event: CreateActionAbility) {
-    const idx = this.actionAbilities.findIndex(item => item === $event)
+    const idx = this.actionAbilities.findIndex(item => item.id === $event.id)
 
     if (idx !== -1) {
       this.actionAbilities.splice(idx, 1)
+    }
+
+    if(!!$event && !!$event.id) {
+      this.creatureService.deleteActionAbility($event.id).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+        this.matSnack.open(data.message, 'ok', {
+          verticalPosition: "top",
+          duration: 3000
+        })
+      }, err => {
+        this.matSnack.open(err.error.message, 'ok', {
+          verticalPosition: "top",
+          duration: 3000
+        })
+      })
     }
   }
 
