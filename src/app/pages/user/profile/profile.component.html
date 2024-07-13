@@ -1,1 +1,20 @@
-<p>profile works!</p>
+<div *ngIf="user" class="pt-6 px-[100px] h-full w-full">
+  <app-border-outline [bg]="'#1E232D'">
+    <div class="h-full w-full p-9 flex">
+      <div class="left-block flex h-full w-full flex-col gap-14">
+        <div class="flex gap-11">
+          <button class="w-[360px] h-[360px]">
+            <app-visualise-avatar maxw="360px" [avatarUrl]="user.avatarUrl"/>
+          </button>
+          <div>
+
+          </div>
+        </div>
+        <div class="flex"></div>
+      </div>
+      <div class="right-block">
+
+      </div>
+    </div>
+  </app-border-outline>
+</div>

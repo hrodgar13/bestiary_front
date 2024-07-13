@@ -5,6 +5,7 @@ import {Token, TokenDecoded} from "../interfaces/user/token.interface";
 import {RegisterData} from "../interfaces/user/create-user.interface";
 import {LoginInterface} from "../interfaces/user/login.interface";
 import jwt_decode from 'jwt-decode'
+import {MOCK_USER_PROFILE, UserProfile} from "../interfaces/user/user-profile.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -82,5 +83,9 @@ export class AuthService {
     }
 
     return false
+  }
+
+  getUserInfo() : UserProfile {
+    return MOCK_USER_PROFILE
   }
 }

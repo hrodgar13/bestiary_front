@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import {AuthService} from "../../services/auth.service";
 import {takeUntil} from "rxjs";
 import {DestroySubscription} from "../../helpers/destroy-subscribtion";
+import {UserProfile} from "../../interfaces/user/user-profile.interface";
 
 @Component({
   selector: 'app-auth-login',
@@ -13,6 +14,7 @@ export class AuthLoginComponent  extends DestroySubscription implements OnInit {
 
   isAuthed: boolean = this.auth.isAuthenticated();
   isAdmin = this.auth.isAdminAuthenticated();
+  user?: UserProfile;
 
   constructor(
     private router: Router,
@@ -29,6 +31,9 @@ export class AuthLoginComponent  extends DestroySubscription implements OnInit {
   detectTokenChange() {
     this.auth.accessToken$.pipe(takeUntil(this.destroyStream$)).subscribe((data) => {
       this.updateToken(data)
+      if(data) {
+        this.user = this.auth.getUserInfo()
+      }
     })
   }
 

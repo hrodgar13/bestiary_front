@@ -37,6 +37,7 @@ import {CreateDiceRollComponent} from './modals/create-dice-roll/create-dice-rol
 import {InputNumberComponent} from "./components/form-elements/input-number/input-number.component";
 import {DiceRollSnackComponent} from './components/dice-roll-snack/dice-roll-snack.component';
 import { AddLinkComponent } from './modals/add-link/add-link.component';
+import { VisualiseAvatarComponent } from './components/visualise-avatar/visualise-avatar.component';
 
 
 @NgModule({
@@ -65,7 +66,8 @@ import { AddLinkComponent } from './modals/add-link/add-link.component';
     CreateDiceRollComponent,
     InputNumberComponent,
     DiceRollSnackComponent,
-    AddLinkComponent
+    AddLinkComponent,
+    VisualiseAvatarComponent
   ],
   exports: [
     BorderOutlineComponent,
@@ -83,7 +85,8 @@ import { AddLinkComponent } from './modals/add-link/add-link.component';
     TextRedactorComponent,
     InputNumberComponent,
     TextRedactorReaderPipe,
-    DiceRollSnackComponent
+    DiceRollSnackComponent,
+    VisualiseAvatarComponent
   ],
   imports: [
     ColorPickerModule,
