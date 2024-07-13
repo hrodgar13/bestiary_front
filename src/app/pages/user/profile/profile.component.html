@@ -33,19 +33,19 @@
             My universe and settings
           </a>
           <a
-            class="bg-[#15181F] border-2 border-[#E2A23B] text-[#B1A79C] text-[16px] w-[33%] flex items-center justify-center font-normal"
+            class="bg-[#15181F] line-through border-2 border-[#E2A23B] text-[#B1A79C] text-[16px] w-[33%] flex items-center justify-center font-normal"
             [routerLink]="'../' + 'games'">
             My Games
           </a>
           <a
-            class="bg-[#15181F] border-2 border-[#E2A23B] text-[#B1A79C] text-[16px] w-[33%] flex items-center justify-center font-normal"
+            class="bg-[#15181F] border-2 line-through border-[#E2A23B] text-[#B1A79C] text-[16px] w-[33%] flex items-center justify-center font-normal"
             [routerLink]="'../' + 'creatures'">
             My creatures
           </a>
         </div>
       </div>
       <div class="right-block w-full max-w-[292px]">
-<!--        TODO create subscribtion part-->
+<!--        TODO create subscription part-->
         <div class="bg-[#15181F] cursor-not-allowed border-2 border-[#E2A23B] w-full p-5 flex flex-col items-center gap-[10px]">
           <img class="h-[340px]" [src]="getUserSubImage(user.subscription.type)" alt="">
           <div class="flex flex-col items-center gap-[5px]">
