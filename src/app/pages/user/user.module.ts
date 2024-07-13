@@ -4,10 +4,15 @@ import { UserComponent } from './user.component';
 import {UserRoutingModule} from "./user-routing.module";
 import { ProfileComponent } from './profile/profile.component';
 import {SharedModule} from "../../../shared/shared.module";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {UserService} from "./user.service";
 
 
 
 @NgModule({
+  providers: [
+    UserService
+  ],
   declarations: [
     UserComponent,
     ProfileComponent
@@ -16,6 +21,8 @@ import {SharedModule} from "../../../shared/shared.module";
     CommonModule,
     UserRoutingModule,
     SharedModule,
+    ReactiveFormsModule,
+    FormsModule,
   ]
 })
 export class UserModule { }
