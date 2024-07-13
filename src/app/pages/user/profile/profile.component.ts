@@ -21,4 +21,11 @@ export class ProfileComponent extends DestroySubscription implements OnInit{
     this.user = this.authService.getUserInfo()
   }
 
+  getUserSubImage(type: string): string {
+    if(type === 'The Adventurer') {
+      return 'assets/images/adv-sub.png'
+    }
+
+    return 'assets/images/adv-sub.png'
+  }
 }
