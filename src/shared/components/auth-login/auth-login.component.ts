@@ -4,6 +4,7 @@ import {AuthService} from "../../services/auth.service";
 import {takeUntil} from "rxjs";
 import {DestroySubscription} from "../../helpers/destroy-subscribtion";
 import {UserProfile} from "../../interfaces/user/user-profile.interface";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-auth-login',
@@ -11,10 +12,10 @@ import {UserProfile} from "../../interfaces/user/user-profile.interface";
   styleUrls: ['./auth-login.component.scss']
 })
 export class AuthLoginComponent  extends DestroySubscription implements OnInit {
-
   isAuthed: boolean = this.auth.isAuthenticated();
   isAdmin = this.auth.isAdminAuthenticated();
   user?: UserProfile;
+  baseUrl: string = environment.baseUrl;
 
   constructor(
     private router: Router,
