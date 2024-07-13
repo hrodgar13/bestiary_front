@@ -6,6 +6,9 @@ import { ProfileComponent } from './profile/profile.component';
 import {SharedModule} from "../../../shared/shared.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {UserService} from "./user.service";
+import { UniverseSettingsComponent } from './universe-settings/universe-settings.component';
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {TranslocoPipe} from "@ngneat/transloco";
 
 
 
@@ -15,7 +18,8 @@ import {UserService} from "./user.service";
   ],
   declarations: [
     UserComponent,
-    ProfileComponent
+    ProfileComponent,
+    UniverseSettingsComponent
   ],
   imports: [
     CommonModule,
@@ -23,6 +27,8 @@ import {UserService} from "./user.service";
     SharedModule,
     ReactiveFormsModule,
     FormsModule,
+    MatSidenavModule,
+    TranslocoPipe,
   ]
 })
 export class UserModule { }

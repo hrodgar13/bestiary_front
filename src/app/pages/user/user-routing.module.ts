@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from "../../../shared/guards/auth.guard";
 import {UserComponent} from "./user.component";
 import {ProfileComponent} from "./profile/profile.component";
+import {UniverseSettingsComponent} from "./universe-settings/universe-settings.component";
 
 const routes: Routes = [
   {
@@ -19,6 +20,10 @@ const routes: Routes = [
         path: 'profile',
         component: ProfileComponent
       },
+      {
+        path: 'universes',
+        component: UniverseSettingsComponent
+      }
     ]
   },
   ];
