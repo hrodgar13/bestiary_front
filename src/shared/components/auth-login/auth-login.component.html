@@ -35,7 +35,7 @@
   </div>
   <mat-menu class="rounded-[10px]" #loginMenu>
     <button *ngIf="isAdmin" mat-menu-item [routerLink]="['/' + 'admin']" >{{'Admin' | transloco}}</button>
-    <button [routerLink]="['/' + 'user']" mat-menu-item>{{'Profile' | transloco}}</button>
+    <button [routerLink]="['/' + 'user/profile']" mat-menu-item>{{'Profile' | transloco}}</button>
     <button (click)="logout()" mat-menu-item>{{'Logout' | transloco}}</button>
   </mat-menu>
 </div>
