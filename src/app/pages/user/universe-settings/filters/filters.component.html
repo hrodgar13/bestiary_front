@@ -1,0 +1,22 @@
+<div class="flex flex-col h-full w-full gap-[25px]">
+  <h2 class="playfair-font text-[#E2A23B] text-[36px]">Filters</h2>
+  <div class="w-full flex items-center poppins-font border-2 border-[#E2A23B] rounded-[20px] p-2.5">
+    <input [(ngModel)]="searchInput" (ngModelChange)="setNameFilter()"
+           class="w-full h-full text-[#B1A79C] bg-transparent outline-0" type="text" placeholder="{{'Search' | transloco}}..."/>
+    <mat-icon *ngIf="searchInput" (click)="clearInputFilter()" class="text-[#E2A23B]">close</mat-icon>
+  </div>
+  <div class="w-full max-h-[48px] border-2 border-[#E2A23B] flex items-center h-full poppins-font p-2.5 rounded-[20px]">
+    <mat-select (selectionchange)="addCategoryToFilter($event)" class="text-[#B1A79C] vu-select outline-0 bg-transparent w-full px-2 poppins-font font-semibold"
+                panelClass="vu-select backdrop-remover" [placeholder]="'Choose category' | transloco">
+      <mat-option class="text-[#B1A79C] vu-select" [value]="item"
+                  *ngFor="let item of categories">
+        {{item}}
+      </mat-option>
+    </mat-select>
+  </div>
+  <div class="w-full border-2 border-[#E2A23B] gap-2 flex poppins-font p-4 rounded-[20px] max-w-[218px] h-[148px]">
+    <div (click)="removeCategoryFromFilter(item)" class="border-2 p-1 border-[#E2A23B] text-[16px] poppins-font font-bold max-h-[24px]" *ngFor="let item of selectedCategories">
+      {{item}}
+    </div>
+  </div>
+</div>

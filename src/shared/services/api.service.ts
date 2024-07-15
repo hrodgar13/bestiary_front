@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {BehaviorSubject, Observable} from "rxjs";
+import {BehaviorSubject, Observable, of} from "rxjs";
 import {CreateAttribute} from "../interfaces/creature/create/create-attribute";
 import {Creature} from "../interfaces/creature/get/creature";
 import {Attribute} from "../interfaces/creature/get/attribute";
@@ -13,6 +13,7 @@ import {MessageI} from "../interfaces/message.interface";
 import {Translation} from "@ngneat/transloco";
 import {CreateRequest} from "../interfaces/request/create-request.interface";
 import {RequestDataMetaI} from "../interfaces/request/request.data-meta.interface";
+import {UNIVERSE_FILTERING_CATEGORIES} from "../interfaces/universes/universe.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -117,5 +118,9 @@ export class ApiService {
 
   deleteActionAbility(id: number): Observable<MessageI> {
     return this.http.delete<MessageI>(`api/creature/action-ability/${id}`);
+  }
+
+  getUniverseFilterCategories() {
+    return of(UNIVERSE_FILTERING_CATEGORIES);
   }
 }

@@ -17,4 +17,7 @@ export class UserService {
     return  this.apiService.removePhoto(selectedImage)
   }
 
+  getUniverseFilterCategories(): Observable<string[]> {
+    return this.apiService.getUniverseFilterCategories()
+  }
 }

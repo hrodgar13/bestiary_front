@@ -9,6 +9,11 @@ import {UserService} from "./user.service";
 import { UniverseSettingsComponent } from './universe-settings/universe-settings.component';
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {TranslocoPipe} from "@ngneat/transloco";
+import { FiltersComponent } from './universe-settings/filters/filters.component';
+import {MatIconModule} from "@angular/material/icon";
+import {MatSelectModule} from "@angular/material/select";
+import {MatLegacyOptionModule} from "@angular/material/legacy-core";
+import {MatLegacySelectModule} from "@angular/material/legacy-select";
 
 
 
@@ -19,7 +24,8 @@ import {TranslocoPipe} from "@ngneat/transloco";
   declarations: [
     UserComponent,
     ProfileComponent,
-    UniverseSettingsComponent
+    UniverseSettingsComponent,
+    FiltersComponent
   ],
   imports: [
     CommonModule,
@@ -29,6 +35,8 @@ import {TranslocoPipe} from "@ngneat/transloco";
     FormsModule,
     MatSidenavModule,
     TranslocoPipe,
+    MatIconModule,
+    MatSelectModule,
   ]
 })
 export class UserModule { }

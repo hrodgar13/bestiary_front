@@ -94,46 +94,19 @@ export const MOCK_UNIVERSE: UniverseInterface = {
         id: 0,
         title: '',
         type: 'text',
-        metadata: JSON.parse(`
-          {
-            "description": "Здрастуйте, мій шановний читачу. Сьогодні день нашого знайомства.Мене звуть Лайош, і я сценарист
-              цього твору. В мої обов'язки входить продумування, планування та створення сюжетів, написання новел,
-              а в майбутньому, можливо, навіть сценаріїв.Другий член нашої маленької команди - Олівець. Наш найкращий
-              дизайнер, художник і людина, яка допомагає мені у написанні сценарію. Відповідає за все, що у нас
-              виглядає стильно."
-          }
-        `)
+        metadata: JSON.parse(`{"description": "Здрастуйте, мій шановний читачу. Сьогодні день нашого знайомства. Мене звуть Лайош, і я сценарист цього твору. В мої обов'язки входить продумування, планування та створення сюжетів, написання новел, а в майбутньому, можливо, навіть сценаріїв. Другий член нашої маленької команди - Олівець. Наш найкращий дизайнер, художник і людина, яка допомагає мені у написанні сценарію. Відповідає за все, що у нас виглядає стильно."}`)
       },
       {
         id: 1,
         title: '',
         type: 'text',
-        metadata: JSON.parse(`
-          {
-            "description": "
-              Viribus Unitis (Об'єднаними зусиллями, латинь) - це всесвіт, у якому відбуваються
-              події коміксів і новел, що наразі знаходяться в розробці. Це всесвіт у жанрі темного фентезі,
-               де є магія (хоча й не зовсім у класичному її розумінні), досить велике різноманіття рас і
-                народностей. Поступово, у процесі викладання постів, буде презентована карта, опис держав,
-                міст, народностей, історій тощо.
-              "
-          }
-        `)
+        metadata: JSON.parse(`{"description": "Viribus Unitis (Об'єднаними зусиллями, латинь) - це всесвіт, у якому відбуваються події коміксів і новел, що наразі знаходяться в розробці. Це всесвіт у жанрі темного фентезі, де є магія (хоча й не зовсім у класичному її розумінні), досить велике різноманіття рас і  народностей. Поступово, у процесі викладання постів, буде презентована карта, опис держав, міст, народностей, історій тощо."}`)
       },
       {
         id: 2,
         title: '',
         type: 'text',
-        metadata: JSON.parse(`
-          {
-            "description": "Події у рамках цього всесвіту, які будуть демонструватися тут, матимуть відтінок (18+),
-             тому ми настійно рекомендуємо всім, хто не досяг цього віку, залишити цей канал. Це не формальне
-             попередження - ми справді створюємо твори не для неповнолітніх, і тут вас очікуватимуть
-             не стільки кров і кишки, скільки питання, на які дуже складно дати відповіді. Усі персонажі
-             та місця вигадані, будь-які збіги випадкові. Ми раді вітати всіх любителів всесвітів у жанрі
-             фентезі!"
-          }
-        `)
+        metadata: JSON.parse(`{"description": "Події у рамках цього всесвіту, які будуть демонструватися тут, матимуть відтінок (18+), тому ми настійно рекомендуємо всім, хто не досяг цього віку, залишити цей канал. Це не формальне попередження - ми справді створюємо твори не для неповнолітніх, і тут вас очікуватимуть не стільки кров і кишки, скільки питання, на які дуже складно дати відповіді. Усі персонажі та місця вигадані, будь-які збіги випадкові. Ми раді вітати всіх любителів всесвітів у жанрі фентезі!"}`)
       },
     ],
     images: [
@@ -161,12 +134,10 @@ export const MOCK_UNIVERSE: UniverseInterface = {
               id: 3,
               type: 'image',
               title: '',
-              metadata: JSON.parse(`{
-                 "imageUrl": "calman.png"
-                 "width": 279
-                 "height": 390
-                 "photoAlignment": "right"
-              }`)
+              metadata: JSON.parse(`{"imageUrl": "calman.png",
+                 "width": 279,
+                 "height": 390,
+                 "photoAlignment": "right"}`)
             },
             {
               id: 4,
@@ -190,19 +161,13 @@ export const MOCK_UNIVERSE: UniverseInterface = {
               id: 7,
               title: "Цитата",
               type: "text",
-              metadata: JSON.parse(`{"description": "\"Ульріх, мені приснився дракон\""}`)
+              metadata: JSON.parse(`{"description": "\\"Ульріх, мені приснився дракон\\""}`)
             },
             {
               id: 8,
               title: "Біографія",
               type: "text",
-              metadata: JSON.parse(`{"description": "Lorem ipsum dolor sit amet, consectetur
-                adipisicing elit. A adipisci dolore, enim exercitationem facere id impedit modi mollitia
-                nesciunt odit perspiciatis quas quis rem vero vitae voluptas voluptatibus? Autem culpa
-                eaque illum in labore libero molestiae quod! adipisicing elit. A adipisci dolore, enim
-                exercitationem facere id impedit modi mollitia nesciunt odit perspiciatis quas quis
-                rem vero vitae voluptas voluptatibus? Autem culpa eaque illum in labore libero molestiae quod!"
-              }`)
+              metadata: JSON.parse(`{"description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci dolore, enim exercitationem facere id impedit modi mollitia nesciunt odit perspiciatis quas quis rem vero vitae voluptas voluptatibus? Autem culpa  eaque illum in labore libero molestiae quod! adipisicing elit. A adipisci dolore, enim exercitationem facere id impedit modi mollitia nesciunt odit perspiciatis quas quis rem vero vitae voluptas voluptatibus? Autem culpa eaque illum in labore libero molestiae quod!" }`)
             }
           ]
         }
@@ -211,3 +176,14 @@ export const MOCK_UNIVERSE: UniverseInterface = {
   ],
   timeline: null,
 }
+
+export const UNIVERSE_FILTERING_CATEGORIES: string[] = [
+  'fantasy',
+  'mystic',
+  'dark fantasy',
+  'horror',
+  'grandma',
+  'post apocalypse',
+  'multiple plans',
+  'mushrooms'
+];
