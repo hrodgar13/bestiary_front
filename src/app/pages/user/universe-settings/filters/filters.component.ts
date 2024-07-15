@@ -44,6 +44,8 @@ export class FiltersComponent extends DestroySubscription implements OnInit{
   addCategoryToFilter($event: any) {
     const isPersist = this.selectedCategories.find(item => item === $event)
 
+    console.log(isPersist)
+
     if(!isPersist) {
       this.selectedCategories.push($event)
       this.changeCategoriesFilterList.emit(this.selectedCategories)
