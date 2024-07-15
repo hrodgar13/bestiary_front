@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {ApiService} from "../../../shared/services/api.service";
 import {Observable} from "rxjs";
+import {UniverseListItem} from "../../../shared/interfaces/universes/universe.interface";
 
 @Injectable()
 export class UserService {
@@ -19,5 +20,9 @@ export class UserService {
 
   getUniverseFilterCategories(): Observable<string[]> {
     return this.apiService.getUniverseFilterCategories()
+  }
+
+  getUniverses(): Observable<UniverseListItem[]> {
+    return this.apiService.getUniverses()
   }
 }

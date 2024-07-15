@@ -13,7 +13,7 @@ import {MessageI} from "../interfaces/message.interface";
 import {Translation} from "@ngneat/transloco";
 import {CreateRequest} from "../interfaces/request/create-request.interface";
 import {RequestDataMetaI} from "../interfaces/request/request.data-meta.interface";
-import {UNIVERSE_FILTERING_CATEGORIES} from "../interfaces/universes/universe.interface";
+import {MOCK_UNIVERSE_LIST, UNIVERSE_FILTERING_CATEGORIES} from "../interfaces/universes/universe.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -122,5 +122,9 @@ export class ApiService {
 
   getUniverseFilterCategories() {
     return of(UNIVERSE_FILTERING_CATEGORIES);
+  }
+
+  getUniverses() {
+    return of(MOCK_UNIVERSE_LIST);
   }
 }

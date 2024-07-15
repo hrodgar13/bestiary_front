@@ -12,8 +12,7 @@ import {TranslocoPipe} from "@ngneat/transloco";
 import { FiltersComponent } from './universe-settings/filters/filters.component';
 import {MatIconModule} from "@angular/material/icon";
 import {MatSelectModule} from "@angular/material/select";
-import {MatLegacyOptionModule} from "@angular/material/legacy-core";
-import {MatLegacySelectModule} from "@angular/material/legacy-select";
+import { UniverseListComponent } from './universe-settings/universe-list/universe-list.component';
 
 
 
@@ -25,7 +24,8 @@ import {MatLegacySelectModule} from "@angular/material/legacy-select";
     UserComponent,
     ProfileComponent,
     UniverseSettingsComponent,
-    FiltersComponent
+    FiltersComponent,
+    UniverseListComponent
   ],
   imports: [
     CommonModule,

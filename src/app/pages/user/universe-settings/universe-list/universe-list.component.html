@@ -1,0 +1,23 @@
+<div class="p-8 w-full h-full">
+  <app-border-outline [bg]="'#1E232D'">
+    <div class="flex flex-col gap-8 p-9 w-full">
+      <h2 class="text-[#E2A23B] text-[36px] playfair-font font-[7500]">My worlds, universes and settings</h2>
+      <div class="h-[170px] bg-[#1C1E25] flex justify-between rounded-[20px] overflow-hidden" *ngFor="let universe of universes">
+        <div class="p-9 flex w-full flex-col">
+          <h2 class="text-[#E2A23B] text-[36px] playfair-font font-semibold">{{universe.title}}</h2>
+          <div class="flex gap-4 flex-wrap">
+            <div class="border-2 p-1 px-2 border-[#E2A23B] rounded-full text-[#B1A79C] text-[16px] poppins-font font-bold leading-[16px] max-h-[28px]" *ngFor="let item of universe.filterCategories">
+              {{item}}
+            </div>
+          </div>
+        </div>
+        <div class="flex max-w-[150px] items-end ">
+          <img class="object-contain" [src]="universe.imageUrl" alt="">
+        </div>
+      </div>
+      <button class="h-[80px] w-full bg-[#FAFD5D] poppins-font uppercase text-[24px] font-[700] rounded-[10px]">
+        create a new
+      </button>
+    </div>
+  </app-border-outline>
+</div>

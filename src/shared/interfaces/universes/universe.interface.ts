@@ -79,7 +79,7 @@ export const MOCK_UNIVERSE_LIST: UniverseListItem[] = [
     id: 1,
     title: 'Bioshy',
     filterCategories: ['post apocalypse', 'mystic', 'multiple plans', 'mushrooms'],
-    imageUrl: 'https://i.pinimg.com/564x/d3/54/fb/d354fb8630f1cdadcd062116ad838917.jpgg'
+    imageUrl: 'https://i.pinimg.com/564x/d3/54/fb/d354fb8630f1cdadcd062116ad838917.jpg'
   }
 ]
 
