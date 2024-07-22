@@ -2,7 +2,7 @@
   <app-border-outline [bg]="'#1E232D'">
     <div class="flex flex-col gap-8 p-9 w-full">
       <h2 class="text-[#E2A23B] text-[36px] playfair-font font-[7500]">My worlds, universes and settings</h2>
-      <div class="h-[170px] bg-[#1C1E25] flex justify-between rounded-[20px] overflow-hidden" *ngFor="let universe of universes">
+      <div  (mouseenter)="onMouseEvent(true, universe.id)" (mouseleave)="onMouseEvent(false, null)" [class.hovered]="isHovered && universe.id === hoveredUniverse" [routerLink]="'' + universe.id" class="animated-div h-[170px] bg-[#1C1E25] cursor-pointer flex justify-between rounded-[20px] overflow-hidden" *ngFor="let universe of universes">
         <div class="p-9 flex w-full flex-col">
           <h2 class="text-[#E2A23B] text-[36px] playfair-font font-semibold">{{universe.title}}</h2>
           <div class="flex gap-4 flex-wrap">

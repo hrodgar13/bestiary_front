@@ -1,0 +1,8 @@
+.animated-div {
+  transition: transform 0.3s ease;
+}
+
+.animated-div.hovered {
+  transform: scale(1.03);
+  background: linear-gradient(to bottom right, #FAFD5D 5%, #1C1E25 15%, #1C1E25 100%);
+}

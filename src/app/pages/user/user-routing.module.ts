@@ -4,6 +4,7 @@ import {AuthGuard} from "../../../shared/guards/auth.guard";
 import {UserComponent} from "./user.component";
 import {ProfileComponent} from "./profile/profile.component";
 import {UniverseSettingsComponent} from "./universe-settings/universe-settings.component";
+import {UniverseComponent} from "./universe-settings/universe/universe.component";
 
 const routes: Routes = [
   {
@@ -23,6 +24,10 @@ const routes: Routes = [
       {
         path: 'universes',
         component: UniverseSettingsComponent
+      },
+      {
+        path: 'universes/:id',
+        component: UniverseComponent
       }
     ]
   },

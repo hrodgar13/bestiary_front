@@ -13,6 +13,7 @@ import { FiltersComponent } from './universe-settings/filters/filters.component'
 import {MatIconModule} from "@angular/material/icon";
 import {MatSelectModule} from "@angular/material/select";
 import { UniverseListComponent } from './universe-settings/universe-list/universe-list.component';
+import { UniverseComponent } from './universe-settings/universe/universe.component';
 
 
 
@@ -25,7 +26,8 @@ import { UniverseListComponent } from './universe-settings/universe-list/univers
     ProfileComponent,
     UniverseSettingsComponent,
     FiltersComponent,
-    UniverseListComponent
+    UniverseListComponent,
+    UniverseComponent
   ],
   imports: [
     CommonModule,

@@ -9,4 +9,12 @@ import {UniverseListItem} from "../../../../../shared/interfaces/universes/unive
 export class UniverseListComponent{
 
   @Input() universes: UniverseListItem[] = []
+
+  isHovered = false;
+  hoveredUniverse: number | null = null
+
+  onMouseEvent(state: boolean, universeId: number | null) {
+    this.isHovered = state;
+    this.hoveredUniverse = universeId
+  }
 }
