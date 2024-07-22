@@ -1,8 +1,13 @@
 .animated-div {
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, background-size 0.3s ease;
+  background: linear-gradient(to bottom right, #1C1E25 5%, #1C1E25 15%, #1C1E25 100%);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 
-.animated-div.hovered {
+.animated-div:hover {
   transform: scale(1.03);
-  background: linear-gradient(to bottom right, #FAFD5D 5%, #1C1E25 15%, #1C1E25 100%);
+  background: linear-gradient(to bottom right, #FAFD5D 1%, #1C1E25 10%, #1C1E25 100%);
+  background-size: 200% 200%;
 }
+
