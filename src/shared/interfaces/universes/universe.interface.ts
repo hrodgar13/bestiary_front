@@ -138,7 +138,7 @@ export const MOCK_UNIVERSE: UniverseInterface = {
               id: 3,
               order: 3,
               type: 'image',
-              title: 'Calman',
+              title: 'Кальман',
               metadata: JSON.parse(`{"imageUrl": "calman.png",
                  "width": 279,
                  "height": 390,
@@ -178,6 +178,21 @@ export const MOCK_UNIVERSE: UniverseInterface = {
               title: "Біографія",
               type: "text",
               metadata: JSON.parse(`{"description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci dolore, enim exercitationem facere id impedit modi mollitia nesciunt odit perspiciatis quas quis rem vero vitae voluptas voluptatibus? Autem culpa  eaque illum in labore libero molestiae quod! adipisicing elit. A adipisci dolore, enim exercitationem facere id impedit modi mollitia nesciunt odit perspiciatis quas quis rem vero vitae voluptas voluptatibus? Autem culpa eaque illum in labore libero molestiae quod!" }`)
+            },
+            {
+              id: 8,
+              order: 9,
+              title: "Список",
+              type: "list",
+              metadata: JSON.parse(JSON.stringify({
+                type: 'symbol',
+                listItems: [
+                  'A adipisci dolore, enim exercitationem facere id impedit modi mollitia nesciunt odit perspiciatis quas quis rem vero vitae voluptas voluptatibus?',
+                  'A adipisci dolore, enim exercitationem facere id impedit modi mollitia nesciunt odit perspiciatis quas quis rem vero vitae voluptas voluptatibus?',
+                  'A adipisci dolore, enim exercitationem facere id impedit modi mollitia nesciunt odit perspiciatis quas quis rem vero vitae voluptas voluptatibus?',
+                  'A adipisci dolore, enim exercitationem facere id impedit modi mollitia nesciunt odit perspiciatis quas quis rem vero vitae voluptas voluptatibus?'
+                ]
+              }))
             }
           ]
         }

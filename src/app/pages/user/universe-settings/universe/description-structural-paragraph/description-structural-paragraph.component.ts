@@ -87,4 +87,6 @@ export class DescriptionStructuralParagraphComponent implements OnInit{
       listItems: metadata.listItems
     }
   }
+
+  protected readonly String = String;
 }

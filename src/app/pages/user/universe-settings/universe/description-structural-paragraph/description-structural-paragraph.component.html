@@ -32,17 +32,17 @@
   </p>
 </div>
 
-<div class="pb-5 poppins-font" *ngIf="paragraph.type === 'list'">
-  <h3 class="text-[#E2A23B] text-[36px]" *ngIf="paragraph.title">{{paragraph.title}}</h3>
-<!--  <ul *ngIf="paragraph.metadata.type === 'number'">-->
-<!--    <li *ngFor="let item of paragraph.metadata.listItems; let i = index">{{i + 1}}. {{item}}</li>-->
-<!--  </ul>-->
-<!--  <ul *ngIf="paragraph.metadata.type === 'letter'">-->
-<!--    <li *ngFor="let item of paragraph.metadata.listItems; let i = index">{{String.fromCharCode(97 + i)}}. {{item}}</li>-->
-<!--  </ul>-->
-<!--  <ul *ngIf="paragraph.metadata.type === 'symbol'">-->
-<!--    <li *ngFor="let item of paragraph.metadata.listItems">&#8226; {{item}}</li>-->
-<!--  </ul>-->
+<div class="pb-5 poppins-font" *ngIf="paragraph.type === 'list' && listParagraphOptions">
+  <h3 class="text-[#E2A23B] playfair-font text-[36px]" *ngIf="paragraph.title">{{paragraph.title}}</h3>
+  <ul *ngIf="listParagraphOptions.type === 'number'">
+    <li class="text-[28px] playfair-font text-[#B1A79C]" *ngFor="let item of listParagraphOptions.listItems; let i = index"><span class="text-[28px] text-[#E2A23B]">{{i + 1}})</span> {{item}}</li>
+  </ul>
+  <ul *ngIf="listParagraphOptions.type === 'letter'">
+    <li class="text-[28px] playfair-font text-[#B1A79C]" *ngFor="let item of listParagraphOptions.listItems; let i = index"><span class="text-[28px] text-[#E2A23B]">{{String.fromCharCode(97 + i)}})</span> {{item}} </li>
+  </ul>
+  <ul *ngIf="listParagraphOptions.type === 'symbol'">
+    <li class="text-[28px] playfair-font text-[#B1A79C]" *ngFor="let item of listParagraphOptions.listItems"><span class="text-[28px] text-[#E2A23B]">&#8226;</span> {{item}}</li>
+  </ul>
 </div>
 
 <div class="pb-5 poppins-font" *ngIf="paragraph.type === 'date' && dateParagraphOptions">
