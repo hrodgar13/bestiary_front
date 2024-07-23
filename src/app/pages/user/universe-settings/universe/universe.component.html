@@ -1,1 +1,25 @@
-<p>universe works!</p>
+<div class="pt-8 px-[100px]" *ngIf="universe; else loader">
+  <div class="border-2 min-h-[80vh] border-[#E2A23B] w-full h-full bg-[#1E232D] p-9">
+    <h2 class="text-[#E2A23B] playfair-font text-[48px]">{{universe.hat.universeName}}</h2>
+    <div>
+      <img
+        *ngFor="let image of universe.hat.images"
+        [src]="[baseUrl + '/uploads/' + image]"
+        [ngClass]="{
+      'image-left': universe.hat.imagePosition === 'left',
+      'image-right': universe.hat.imagePosition === 'right',
+    }"
+        alt="Universe Image"
+      />
+      <div *ngFor="let descriptionElement of universe.hat.description">
+        <div class="pb-5  poppins-font" *ngIf="descriptionElement.type === 'text'">
+          <h3 class="text-[#E2A23B] text-[36px]" *ngIf="descriptionElement.title">{{descriptionElement.title}}</h3>
+          <p class="text-[20px] text-white">{{convertTextJsonToText(descriptionElement.metadata)}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #loader>
+  <app-loader />
+</ng-template>

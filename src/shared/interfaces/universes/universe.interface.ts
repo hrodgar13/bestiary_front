@@ -15,6 +15,7 @@ export interface UniverseHatInterface {
 
 export interface UniverseStructureParagraphInterface {
   id: number
+  order: number
   title: string
   type: 'text' | 'number' | 'date' | 'image' | 'list'
   metadata: JSON
@@ -92,18 +93,21 @@ export const MOCK_UNIVERSE: UniverseInterface = {
     description: [
       {
         id: 0,
+        order: 0,
         title: '',
         type: 'text',
         metadata: JSON.parse(`{"description": "Здрастуйте, мій шановний читачу. Сьогодні день нашого знайомства. Мене звуть Лайош, і я сценарист цього твору. В мої обов'язки входить продумування, планування та створення сюжетів, написання новел, а в майбутньому, можливо, навіть сценаріїв. Другий член нашої маленької команди - Олівець. Наш найкращий дизайнер, художник і людина, яка допомагає мені у написанні сценарію. Відповідає за все, що у нас виглядає стильно."}`)
       },
       {
         id: 1,
+        order: 1,
         title: '',
         type: 'text',
         metadata: JSON.parse(`{"description": "Viribus Unitis (Об'єднаними зусиллями, латинь) - це всесвіт, у якому відбуваються події коміксів і новел, що наразі знаходяться в розробці. Це всесвіт у жанрі темного фентезі, де є магія (хоча й не зовсім у класичному її розумінні), досить велике різноманіття рас і  народностей. Поступово, у процесі викладання постів, буде презентована карта, опис держав, міст, народностей, історій тощо."}`)
       },
       {
         id: 2,
+        order: 2,
         title: '',
         type: 'text',
         metadata: JSON.parse(`{"description": "Події у рамках цього всесвіту, які будуть демонструватися тут, матимуть відтінок (18+), тому ми настійно рекомендуємо всім, хто не досяг цього віку, залишити цей канал. Це не формальне попередження - ми справді створюємо твори не для неповнолітніх, і тут вас очікуватимуть не стільки кров і кишки, скільки питання, на які дуже складно дати відповіді. Усі персонажі та місця вигадані, будь-які збіги випадкові. Ми раді вітати всіх любителів всесвітів у жанрі фентезі!"}`)
@@ -132,6 +136,7 @@ export const MOCK_UNIVERSE: UniverseInterface = {
           information: [
             {
               id: 3,
+              order: 3,
               type: 'image',
               title: '',
               metadata: JSON.parse(`{"imageUrl": "calman.png",
@@ -141,30 +146,35 @@ export const MOCK_UNIVERSE: UniverseInterface = {
             },
             {
               id: 4,
+              order: 4,
               title: "Народився",
               type: "date",
               metadata: JSON.parse(`{"year": "1078"}`)
             },
             {
               id: 5,
+              order: 5,
               title: "Помер",
               type: "date",
               metadata: JSON.parse(`{"year": "1154"}`)
             },
             {
               id: 6,
+              order: 6,
               title: "Місце народження",
               type: "text",
               metadata: JSON.parse(`{"description": "Озерна Імперія"}`)
             },
             {
               id: 7,
+              order: 7,
               title: "Цитата",
               type: "text",
               metadata: JSON.parse(`{"description": "\\"Ульріх, мені приснився дракон\\""}`)
             },
             {
               id: 8,
+              order: 8,
               title: "Біографія",
               type: "text",
               metadata: JSON.parse(`{"description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci dolore, enim exercitationem facere id impedit modi mollitia nesciunt odit perspiciatis quas quis rem vero vitae voluptas voluptatibus? Autem culpa  eaque illum in labore libero molestiae quod! adipisicing elit. A adipisci dolore, enim exercitationem facere id impedit modi mollitia nesciunt odit perspiciatis quas quis rem vero vitae voluptas voluptatibus? Autem culpa eaque illum in labore libero molestiae quod!" }`)

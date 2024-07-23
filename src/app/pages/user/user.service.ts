@@ -25,4 +25,8 @@ export class UserService {
   getUniverses(): Observable<UniverseListItem[]> {
     return this.apiService.getUniverses()
   }
+
+  getUniverseById(universeId: string) {
+    return this.apiService.getUniverseById(universeId)
+  }
 }
