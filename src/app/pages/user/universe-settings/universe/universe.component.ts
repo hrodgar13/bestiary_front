@@ -4,7 +4,6 @@ import {ActivatedRoute} from "@angular/router";
 import {takeUntil} from "rxjs";
 import {UserService} from "../../user.service";
 import {
-  TextMetadataMetadataParagraphInterface,
   UniverseInterface
 } from "../../../../../shared/interfaces/universes/universe.interface";
 import {environment} from "../../../../../environments/environment";
@@ -39,11 +38,5 @@ export class UniverseComponent extends DestroySubscription implements OnInit{
     this.userService.getUniverseById(universeId).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
       this.universe = data
     })
-  }
-
-  convertTextJsonToText(metadata: JSON) {
-    // @ts-ignore
-    let obj = metadata as TextMetadataMetadataParagraphInterface
-    return obj.description
   }
 }

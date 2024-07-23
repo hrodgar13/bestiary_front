@@ -21,7 +21,7 @@ export interface UniverseStructureParagraphInterface {
   metadata: JSON
 }
 
-export interface TextMetadataMetadataParagraphInterface {
+export interface TextMetadataParagraphInterface {
   description: string
 }
 
@@ -128,7 +128,7 @@ export const MOCK_UNIVERSE: UniverseInterface = {
     {
       id: 1,
       title: 'Важливі Люди',
-      isOpened: true,
+      isOpened: false,
       items: [
         {
           id: 0,
@@ -138,7 +138,7 @@ export const MOCK_UNIVERSE: UniverseInterface = {
               id: 3,
               order: 3,
               type: 'image',
-              title: '',
+              title: 'Calman',
               metadata: JSON.parse(`{"imageUrl": "calman.png",
                  "width": 279,
                  "height": 390,

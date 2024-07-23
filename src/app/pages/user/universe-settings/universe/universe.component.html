@@ -12,10 +12,10 @@
         alt="Universe Image"
       />
       <div *ngFor="let descriptionElement of universe.hat.description">
-        <div class="pb-5  poppins-font" *ngIf="descriptionElement.type === 'text'">
-          <h3 class="text-[#E2A23B] text-[36px]" *ngIf="descriptionElement.title">{{descriptionElement.title}}</h3>
-          <p class="text-[20px] text-white">{{convertTextJsonToText(descriptionElement.metadata)}}</p>
-        </div>
+        <app-description-structural-paragraph [paragraph]="descriptionElement"/>
+      </div>
+      <div class="flex gap-11 flex-col w-full h-full">
+        <app-universe-category *ngFor="let category of universe.categories" class="w-full h-full" [category]="category" />
       </div>
     </div>
   </div>

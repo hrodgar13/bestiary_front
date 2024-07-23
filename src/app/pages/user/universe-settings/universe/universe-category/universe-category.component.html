@@ -1,0 +1,36 @@
+<div class="border-2 rounded-[20px] border-[#FAFD5D] flex flex-col w-full bg-[#1C1E25] p-8">
+  <div (click)="openCategory()" class="cursor-pointer flex justify-between items-center">
+    <h2 class="text-[36px] text-[#E2A23B] playfair-font">{{category.title}}</h2>
+    <div class="transition duration-300" [class.open]="category.isOpened" >
+      <svg width="60" height="33" viewBox="0 0 60 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line y1="-2" x2="42.5341" y2="-2" transform="matrix(-0.708892 -0.705317 0.708892 -0.705317 60 30)"
+              stroke="#FAFD5D" stroke-width="4"/>
+        <line y1="-2" x2="42.5341" y2="-2"
+              transform="matrix(-0.708892 0.705317 -0.708892 -0.705317 30.1514 3.05176e-05)" stroke="#FAFD5D"
+              stroke-width="4"/>
+      </svg>
+    </div>
+  </div>
+  <div class="mt-10 flex flex-col gap-9" *ngIf="category.isOpened" @slideInOut>
+    <div class="border-2 bg-[#1E232D] rounded-[20px] border-[#E2A23B] w-full h-full p-4">
+      <input class="poppins-font text-[#B1A79C] w-full text-[16px] bg-transparent outline-0 border-0" placeholder="Search by name:" type="text">
+    </div>
+
+    <div class="border-2 bg-[#1E232D] rounded-[20px] border-[#E2A23B] w-full h-full p-4" *ngFor="let item of category.items">
+      <div class="flex justify-between items-center">
+        <h2 class="text-[#E2A23B] playfair-font text-[48px]">{{item.title}}</h2>
+        <div class="flex gap-4">
+          <button class="flex items-center justify-center w-[48px] h-[48px] border-2 bg-[#1E232D] rounded-[12px] border-[#E2A23B]">
+            <mat-icon class="text-[#E2A23B]">edit</mat-icon>
+          </button>
+          <button class="flex items-center justify-center w-[48px] h-[48px] border-2 bg-[#1E232D] rounded-[12px] border-[#E2A23B]">
+            <mat-icon class="text-[#E2A23B]">delete</mat-icon>
+          </button>
+        </div>
+      </div>
+      <div>
+        <app-description-structural-paragraph *ngFor="let paragraph of item.information" [paragraph]="paragraph"/>
+      </div>
+    </div>
+  </div>
+</div>

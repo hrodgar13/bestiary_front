@@ -14,6 +14,8 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatSelectModule} from "@angular/material/select";
 import { UniverseListComponent } from './universe-settings/universe-list/universe-list.component';
 import { UniverseComponent } from './universe-settings/universe/universe.component';
+import { DescriptionStructuralParagraphComponent } from './universe-settings/universe/description-structural-paragraph/description-structural-paragraph.component';
+import { UniverseCategoryComponent } from './universe-settings/universe/universe-category/universe-category.component';
 
 
 
@@ -27,7 +29,9 @@ import { UniverseComponent } from './universe-settings/universe/universe.compone
     UniverseSettingsComponent,
     FiltersComponent,
     UniverseListComponent,
-    UniverseComponent
+    UniverseComponent,
+    DescriptionStructuralParagraphComponent,
+    UniverseCategoryComponent
   ],
   imports: [
     CommonModule,
