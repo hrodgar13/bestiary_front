@@ -21,7 +21,7 @@
     }"
         alt="Universe Image"
       />
-      <div *ngFor="let descriptionElement of universe.hat.description">
+      <div *ngFor="let descriptionElement of sortedByOrder(universe.hat.description)">
         <app-description-structural-paragraph [paragraph]="descriptionElement"/>
       </div>
       <div class="flex gap-11 flex-col w-full h-full">

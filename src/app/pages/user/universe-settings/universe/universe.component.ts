@@ -4,7 +4,7 @@ import {ActivatedRoute} from "@angular/router";
 import {takeUntil} from "rxjs";
 import {UserService} from "../../user.service";
 import {
-  UniverseInterface
+  UniverseInterface, UniverseStructureParagraphInterface
 } from "../../../../../shared/interfaces/universes/universe.interface";
 import {environment} from "../../../../../environments/environment";
 
@@ -38,5 +38,11 @@ export class UniverseComponent extends DestroySubscription implements OnInit{
     this.userService.getUniverseById(universeId).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
       this.universe = data
     })
+  }
+
+  sortedByOrder(information: UniverseStructureParagraphInterface[]) {
+    information.sort((a, b) => a.order - b.order)
+
+    return information
   }
 }
