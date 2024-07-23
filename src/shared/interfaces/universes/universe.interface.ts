@@ -136,7 +136,7 @@ export const MOCK_UNIVERSE: UniverseInterface = {
           information: [
             {
               id: 3,
-              order: 3,
+              order: 1,
               type: 'image',
               title: 'Кальман',
               metadata: JSON.parse(`{"imageUrl": "calman.png",
@@ -146,42 +146,42 @@ export const MOCK_UNIVERSE: UniverseInterface = {
             },
             {
               id: 4,
-              order: 4,
+              order: 2,
               title: "Народився",
               type: "date",
               metadata: JSON.parse(`{"year": "1078"}`)
             },
             {
               id: 5,
-              order: 5,
+              order: 3,
               title: "Помер",
               type: "date",
               metadata: JSON.parse(`{"year": "1154"}`)
             },
             {
               id: 6,
-              order: 6,
+              order: 4,
               title: "Місце народження",
               type: "text",
               metadata: JSON.parse(`{"description": "Озерна Імперія"}`)
             },
             {
               id: 7,
-              order: 7,
+              order: 5,
               title: "Цитата",
               type: "text",
               metadata: JSON.parse(`{"description": "\\"Ульріх, мені приснився дракон\\""}`)
             },
             {
               id: 8,
-              order: 8,
+              order: 6,
               title: "Біографія",
               type: "text",
               metadata: JSON.parse(`{"description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci dolore, enim exercitationem facere id impedit modi mollitia nesciunt odit perspiciatis quas quis rem vero vitae voluptas voluptatibus? Autem culpa  eaque illum in labore libero molestiae quod! adipisicing elit. A adipisci dolore, enim exercitationem facere id impedit modi mollitia nesciunt odit perspiciatis quas quis rem vero vitae voluptas voluptatibus? Autem culpa eaque illum in labore libero molestiae quod!" }`)
             },
             {
               id: 8,
-              order: 9,
+              order: 7,
               title: "Список",
               type: "list",
               metadata: JSON.parse(JSON.stringify({

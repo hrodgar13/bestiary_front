@@ -1,5 +1,8 @@
 import {Component, Input} from '@angular/core';
-import {UniverseCategoryInterface} from "../../../../../../shared/interfaces/universes/universe.interface";
+import {
+  UniverseCategoryInterface,
+  UniverseStructureParagraphInterface
+} from "../../../../../../shared/interfaces/universes/universe.interface";
 import {animate, state, style, transition, trigger} from "@angular/animations";
 
 @Component({
@@ -28,5 +31,11 @@ export class UniverseCategoryComponent {
 
   openCategory() {
     this.category.isOpened = !this.category.isOpened
+  }
+
+  sortedByOrder(information: UniverseStructureParagraphInterface[]) {
+    information.sort((a, b) => a.order - b.order)
+
+    return information
   }
 }

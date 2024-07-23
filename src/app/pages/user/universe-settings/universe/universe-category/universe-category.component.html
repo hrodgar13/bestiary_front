@@ -29,7 +29,7 @@
         </div>
       </div>
       <div>
-        <app-description-structural-paragraph *ngFor="let paragraph of item.information" [paragraph]="paragraph"/>
+        <app-description-structural-paragraph *ngFor="let paragraph of sortedByOrder(item.information)" [paragraph]="paragraph"/>
       </div>
     </div>
   </div>
