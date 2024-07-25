@@ -17,7 +17,7 @@ import {
   MOCK_UNIVERSE,
   MOCK_UNIVERSE_LIST,
   UNIVERSE_FILTERING_CATEGORIES,
-  UniverseInterface
+  UniverseInterface, UniverseListItem
 } from "../interfaces/universes/universe.interface";
 
 @Injectable({
@@ -129,8 +129,8 @@ export class ApiService {
     return of(UNIVERSE_FILTERING_CATEGORIES);
   }
 
-  getUniverses() {
-    return of(MOCK_UNIVERSE_LIST);
+  getUniverses(): Observable<UniverseListItem[]> {
+    return this.http.get<UniverseListItem[]>(`api/settings/universe-list`);
   }
 
   getUniverseById(universeId: string): Observable<UniverseInterface> {

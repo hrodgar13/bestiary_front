@@ -207,8 +207,8 @@ export const UNIVERSE_FILTERING_CATEGORIES: string[] = [
   'mystic',
   'dark fantasy',
   'horror',
-  'grandma',
+  'historical',
   'post apocalypse',
   'multiple plans',
-  'mushrooms'
+  'steam punk'
 ];
