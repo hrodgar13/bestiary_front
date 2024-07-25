@@ -46,12 +46,15 @@
       </div>
       <div class="right-block w-full max-w-[292px]">
 <!--        TODO create subscription part-->
-        <div class="bg-[#15181F] cursor-not-allowed border-2 border-[#E2A23B] w-full p-5 flex flex-col items-center gap-[10px]">
+        <div *ngIf="user.subscription" class="bg-[#15181F] cursor-not-allowed border-2 border-[#E2A23B] w-full p-5 flex flex-col items-center gap-[10px]">
           <img class="h-[340px]" [src]="getUserSubImage(user.subscription.type)" alt="">
           <div class="flex flex-col items-center gap-[5px]">
             <p class="text-[#FAFD5D] text-[32px]">{{user.subscription.type}}</p>
-            <p class="text-[#FAFD5D] text-[22px]">expires
-              in: {{user.subscription.dateOfExpire | date: 'MM-dd-yyyy'}}</p>
+            <p *ngIf="user.dateOfExpireSub; else noSub" class="text-[#FAFD5D] text-[22px]">expires
+              in: {{user.dateOfExpireSub | date: 'MM-dd-yyyy'}}</p>
+            <ng-template #noSub>
+              <p class="text-[#FAFD5D] text-[22px]">--:--:--</p>
+            </ng-template>
           </div>
         </div>
       </div>

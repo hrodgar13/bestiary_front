@@ -33,7 +33,7 @@ export class AuthLoginComponent  extends DestroySubscription implements OnInit {
     this.auth.accessToken$.pipe(takeUntil(this.destroyStream$)).subscribe((data) => {
       this.updateToken(data)
       if(data) {
-        this.user = this.auth.getUserInfo()
+        this.getUserInfo()
       }
     })
   }
@@ -47,5 +47,12 @@ export class AuthLoginComponent  extends DestroySubscription implements OnInit {
   logout() {
     this.auth.logout()
     this.router.navigate(['..'])
+  }
+
+  private getUserInfo() {
+    this.auth.getUserInfo().pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+      this.user = data
+      this.auth.userProfile$.next(this.user)
+    })
   }
 }

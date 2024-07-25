@@ -13,7 +13,7 @@ import {MOCK_USER_PROFILE, UserProfile} from "../interfaces/user/user-profile.in
 export class AuthService {
 
   accessToken$ = new BehaviorSubject<string | null>(localStorage.getItem('auth-token') ? localStorage.getItem('auth-token') : null)
-
+  userProfile$ = new BehaviorSubject<UserProfile | null>(null)
   private access_token: string | null = null
 
   constructor(
@@ -85,7 +85,7 @@ export class AuthService {
     return false
   }
 
-  getUserInfo() : UserProfile {
-    return MOCK_USER_PROFILE
+  getUserInfo() : Observable<UserProfile> {
+    return this.http.get<UserProfile>('api/user/profile')
   }
 }

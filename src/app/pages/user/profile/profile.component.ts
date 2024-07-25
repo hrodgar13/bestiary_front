@@ -12,7 +12,7 @@ import {environment} from "../../../../environments/environment";
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent extends DestroySubscription implements OnInit{
+export class ProfileComponent extends DestroySubscription implements OnInit {
   user: UserProfile | null = null;
   name?: string
   email = ''
@@ -30,14 +30,11 @@ export class ProfileComponent extends DestroySubscription implements OnInit{
   }
 
   ngOnInit() {
-    this.user = this.authService.getUserInfo()
-    this.name = this.user.name
-    this.email = this.user.email
-    this.avatarUrl = this.user.avatarUrl
+    this.getUserInfo()
   }
 
   getUserSubImage(type: string): string {
-    if(type === 'The Adventurer') {
+    if (type === 'The Adventurer') {
       return 'assets/images/adv-sub.png'
     }
 
@@ -46,7 +43,7 @@ export class ProfileComponent extends DestroySubscription implements OnInit{
 
   submitProfileChanges() {
     //todo add backend method
-    if(this.user) {
+    if (this.user) {
       this.user.email = this.email
       this.user.name = this.name
     }
@@ -93,10 +90,22 @@ export class ProfileComponent extends DestroySubscription implements OnInit{
   }
 
   private removeOldPhoto() {
-    if(this.avatarUrl) {
+    if (this.avatarUrl) {
       this.userService.removePhoto(this.avatarUrl).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
 
       })
     }
+  }
+
+  private getUserInfo() {
+    this.authService.userProfile$.pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+      if (data) {
+        this.user = data
+        this.name = this.user.name
+        this.email = this.user.email
+        this.avatarUrl = this.user.avatarUrl
+      }
+    })
+
   }
 }
