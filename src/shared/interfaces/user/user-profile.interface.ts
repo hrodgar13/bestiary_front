@@ -27,3 +27,8 @@ export interface DungeonMasterSubscription {
   type: string
   subPhotoUrl: string
 }
+
+export interface UpdateProfileDto {
+  avatarUrl?: string
+  name?: string
+}

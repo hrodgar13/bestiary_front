@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {DestroySubscription} from "../../../../shared/helpers/destroy-subscribtion";
-import {UserProfile} from "../../../../shared/interfaces/user/user-profile.interface";
+import {UpdateProfileDto, UserProfile} from "../../../../shared/interfaces/user/user-profile.interface";
 import {AuthService} from "../../../../shared/services/auth.service";
 import {UserService} from "../user.service";
 import {takeUntil} from "rxjs";
@@ -42,11 +42,7 @@ export class ProfileComponent extends DestroySubscription implements OnInit {
   }
 
   submitProfileChanges() {
-    //todo add backend method
-    if (this.user) {
-      this.user.email = this.email
-      this.user.name = this.name
-    }
+    this.updateProfile({name: this.name})
   }
 
   loadFile(event: any) {
@@ -78,6 +74,7 @@ export class ProfileComponent extends DestroySubscription implements OnInit {
           verticalPosition: "top"
         });
         this.avatarUrl = data.fileName;
+        this.updateProfile({avatarUrl: data.fileName})
       },
       (error) => {
         this.matSnack.open(error.error.message, '', {
@@ -107,5 +104,20 @@ export class ProfileComponent extends DestroySubscription implements OnInit {
       }
     })
 
+  }
+
+  private updateProfile(data: UpdateProfileDto) {
+    this.authService.updateProfile(data).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+      if (data) {
+        this.user!.name = this.name
+        this.user!.email = this.email
+        this.user!.avatarUrl = this.avatarUrl
+        this.authService.userProfile$.next(this.user)
+      }
+    }, err => {
+      this.name = this.user!.name
+      this.email = this.user!.email
+      this.avatarUrl = this.user!.avatarUrl
+    })
   }
 }

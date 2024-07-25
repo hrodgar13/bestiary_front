@@ -5,7 +5,7 @@ import {Token, TokenDecoded} from "../interfaces/user/token.interface";
 import {RegisterData} from "../interfaces/user/create-user.interface";
 import {LoginInterface} from "../interfaces/user/login.interface";
 import jwt_decode from 'jwt-decode'
-import {MOCK_USER_PROFILE, UserProfile} from "../interfaces/user/user-profile.interface";
+import {MOCK_USER_PROFILE, UpdateProfileDto, UserProfile} from "../interfaces/user/user-profile.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -87,5 +87,9 @@ export class AuthService {
 
   getUserInfo() : Observable<UserProfile> {
     return this.http.get<UserProfile>('api/user/profile')
+  }
+
+  updateProfile(user: UpdateProfileDto): Observable<any> {
+    return this.http.post<any>('api/user/profile/update', user)
   }
 }
