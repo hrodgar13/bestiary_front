@@ -16,26 +16,26 @@
           Create Header
         </button>
     </ng-template>
-    <div>
+    <div *ngIf="universe">
       <img
         *ngFor="let image of universe.hat.images"
         [src]="[baseUrl + '/uploads/' + image]"
         [ngClass]="{
       'image-left': universe.hat.imagePosition === 'left',
       'image-right': universe.hat.imagePosition === 'right',
-    }"
+      }"
         alt="Universe Image"
       />
       <div *ngFor="let descriptionElement of sortedByOrder(universe.hat.description)">
         <app-description-structural-paragraph [paragraph]="descriptionElement"/>
       </div>
-      <div class="flex gap-11 flex-col w-full h-full">
+      <div class="flex  gap-11 flex-col w-full h-full">
         <app-universe-category *ngFor="let category of universe.categories" class="w-full h-full" [category]="category" />
-        <button class="w-full poppins-font h-20 bg-[#FAFD5D] rounded-[10px] text-[24px] font-semibold">
-          Create Category
-        </button>
       </div>
     </div>
+    <button class="w-full mt-[20px] poppins-font h-20 bg-[#FAFD5D] rounded-[10px] text-[24px] font-semibold">
+      Create Category
+    </button>
   </div>
 </div>
 <!--<ng-template #loader>-->
