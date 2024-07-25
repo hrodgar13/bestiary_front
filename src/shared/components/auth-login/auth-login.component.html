@@ -1,6 +1,6 @@
 <div *ngIf="isAuthed; else loginBth">
   <div class="w-[50px] h-[50px]" [matMenuTriggerFor]="loginMenu">
-    <app-visualise-avatar class="max-w-[50px] max-h-[50px]" [avatarUrl]="baseUrl + '/uploads/' + user?.avatarUrl"/>
+    <app-visualise-avatar class="max-w-[50px] max-h-[50px]" [avatarUrl]="user?.avatarUrl"/>
   </div>
   <mat-menu class="rounded-[10px]" #loginMenu>
     <button *ngIf="isAdmin" mat-menu-item [routerLink]="['/' + 'admin']" >{{'Admin' | transloco}}</button>

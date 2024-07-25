@@ -1,6 +1,6 @@
 <div class="w-full h-full max-w-[{{maxw}}] max-w-[{{maxw}}] rounded-full border-2 border-[#E2A23B] bg-[#1E232DFF] flex items-center justify-center cursor-pointer overflow-hidden">
   <div class="max-w-[{{maxw}}] max-w-[{{maxw}}]" *ngIf="avatarUrl; else noAvatar">
-    <img [src]="avatarUrl" alt="" class="object-cover">
+    <img [src]="baseUrl + '/uploads/' + avatarUrl" alt="" class="object-cover">
   </div>
   <ng-template #noAvatar>
     <div class="p-[10%]">

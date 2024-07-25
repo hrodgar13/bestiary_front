@@ -6,7 +6,7 @@
           <div>
             <button class="w-[360px] h-[360px] relative rounded-full overflow-hidden">
               <input (change)="loadFile($event)" type="file" class="opacity-0 cursor-pointer absolute top-0 left-0 right-0 bottom-0">
-              <app-visualise-avatar maxw="360px" class="cursor-pointer" [avatarUrl]="this.baseUrl + '/uploads/' + avatarUrl"/>
+              <app-visualise-avatar maxw="360px" class="cursor-pointer" [avatarUrl]="avatarUrl"/>
             </button>
           </div>
           <div class="flex flex-col gap-8">

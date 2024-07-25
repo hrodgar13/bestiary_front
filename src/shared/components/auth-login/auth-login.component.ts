@@ -15,7 +15,6 @@ export class AuthLoginComponent  extends DestroySubscription implements OnInit {
   isAuthed: boolean = this.auth.isAuthenticated();
   isAdmin = this.auth.isAdminAuthenticated();
   user?: UserProfile;
-  baseUrl: string = environment.baseUrl;
 
   constructor(
     private router: Router,
