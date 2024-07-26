@@ -15,9 +15,12 @@
           <img class="object-contain" [src]="universe.imageUrl" alt="">
         </div>
       </div>
-      <a [routerLink]="'new'" class="h-[80px] w-full bg-[#FAFD5D] flex justify-center items-center poppins-font uppercase text-[24px] font-[700] rounded-[10px]">
+      <button *ngIf="!loading; else loader" (click)="createUniverse()" class="h-[80px] w-full bg-[#FAFD5D] flex justify-center items-center poppins-font uppercase text-[24px] font-[700] rounded-[10px]">
         create a new
-      </a>
+      </button>
+      <ng-template #loader>
+        <app-loader />
+      </ng-template>
     </div>
   </app-border-outline>
 </div>

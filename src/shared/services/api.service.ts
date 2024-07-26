@@ -14,6 +14,7 @@ import {Translation} from "@ngneat/transloco";
 import {CreateRequest} from "../interfaces/request/create-request.interface";
 import {RequestDataMetaI} from "../interfaces/request/request.data-meta.interface";
 import {
+  CreateUniverse,
   MOCK_UNIVERSE,
   MOCK_UNIVERSE_LIST,
   UNIVERSE_FILTERING_CATEGORIES,
@@ -134,6 +135,10 @@ export class ApiService {
   }
 
   getUniverseById(universeId: string): Observable<UniverseInterface> {
-    return of(MOCK_UNIVERSE)
+    return this.http.get<UniverseInterface>(`api/settings/universe/${universeId}`)
+  }
+
+  createUniverse(): Observable<CreateUniverse> {
+    return this.http.post<CreateUniverse>(`api/settings/universe`, {})
   }
 }

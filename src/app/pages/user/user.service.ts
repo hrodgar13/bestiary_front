@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {ApiService} from "../../../shared/services/api.service";
 import {Observable} from "rxjs";
-import {UniverseListItem} from "../../../shared/interfaces/universes/universe.interface";
+import {CreateUniverse, UniverseListItem} from "../../../shared/interfaces/universes/universe.interface";
 
 @Injectable()
 export class UserService {
@@ -28,5 +28,9 @@ export class UserService {
 
   getUniverseById(universeId: string) {
     return this.apiService.getUniverseById(universeId)
+  }
+
+  createUniverse(): Observable<CreateUniverse> {
+    return this.apiService.createUniverse()
   }
 }

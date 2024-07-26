@@ -1,6 +1,6 @@
-<div class="pt-8 px-[100px]">
+<div *ngIf="universe" class="pt-8 px-[100px]">
   <div class="border-2 min-h-[80vh] border-[#E2A23B] w-full h-full bg-[#1E232D] p-9">
-    <div *ngIf="universe; else createHeader" class="flex justify-between items-center">
+    <div *ngIf="universe.hat; else createHeader" class="flex justify-between items-center">
       <h2 class="text-[#E2A23B] playfair-font text-[48px]">{{universe.hat.universeName}}</h2>
       <div class="flex gap-5 items-center">
         <button class="flex items-center justify-center w-[48px] h-[48px] border-2 bg-[#1E232D] rounded-[12px] border-[#E2A23B]">
@@ -12,11 +12,11 @@
       </div>
     </div>
     <ng-template #createHeader>
-        <button class="w-full poppins-font h-20 bg-[#FAFD5D] rounded-[10px] text-[24px] font-semibold">
+        <a class="w-full poppins-font flex items-center justify-center h-20 bg-[#FAFD5D] rounded-[10px] text-[24px] font-semibold">
           Create Header
-        </button>
+        </a>
     </ng-template>
-    <div *ngIf="universe">
+    <div *ngIf="universe && universe.hat">
       <img
         *ngFor="let image of universe.hat.images"
         [src]="[baseUrl + '/uploads/' + image]"

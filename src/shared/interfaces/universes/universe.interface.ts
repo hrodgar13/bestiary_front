@@ -1,7 +1,7 @@
 export interface UniverseInterface {
   id: number
-  hat: UniverseHatInterface
-  categories: UniverseCategoryInterface[]
+  hat?: UniverseHatInterface
+  categories?: UniverseCategoryInterface[]
   timeline: any
 }
 
@@ -212,3 +212,8 @@ export const UNIVERSE_FILTERING_CATEGORIES: string[] = [
   'multiple plans',
   'steam punk'
 ];
+
+
+export interface CreateUniverse {
+  id: number
+}

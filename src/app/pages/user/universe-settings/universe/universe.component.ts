@@ -28,7 +28,7 @@ export class UniverseComponent extends DestroySubscription implements OnInit{
   ngOnInit() {
     this.route.params.pipe(takeUntil(this.destroyStream$)).subscribe(data => {
       const universeId = data['id']
-      if(universeId && universeId !== 'new') {
+      if(universeId) {
         this.getUniverse(universeId)
       }
     })
