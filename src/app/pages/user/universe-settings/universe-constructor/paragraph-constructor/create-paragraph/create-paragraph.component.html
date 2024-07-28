@@ -22,7 +22,7 @@
       <app-create-text (textChange)="setMetadata($event)" *ngIf="type === 'text'"/>
       <app-create-number (sendData)="setMetadata($event)" *ngIf="type === 'number'" />
       <app-create-date (sendData)="setMetadata($event)" *ngIf="type === 'date'" />
-      <app-create-image *ngIf="type === 'image'" />
+      <app-create-image (sendData)="setMetadata($event)" *ngIf="type === 'image'" />
       <app-create-list  *ngIf="type === 'list'" />
   </div>
 </form>

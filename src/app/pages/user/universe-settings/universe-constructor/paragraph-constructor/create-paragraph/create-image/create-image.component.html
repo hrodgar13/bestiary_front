@@ -1,1 +1,25 @@
-<p>create-image works!</p>
+<div class="flex flex-col gap-[30px]">
+  <div class="flex gap-6">
+    <div class="border-2 border-[#E2A23B] p-3 min-w-[168px] h-[48px] rounded-[10px]">
+      <input type="number" [(ngModel)]="payload.width" [placeholder]="'Width'" (input)="propagateData()" class="w-full outline-0 bg-transparent poppins-font text-[16px] font-semibold text-[#B1A79C]">
+    </div>
+    <div class="border-2 border-[#E2A23B] p-3 min-w-[168px] h-[48px] rounded-[10px]">
+      <input type="number" [(ngModel)]="payload.height" [placeholder]="'Height'" (input)="propagateData()" class="w-full outline-0 bg-transparent poppins-font text-[16px] font-semibold text-[#B1A79C]">
+    </div>
+    <div class="flex gap-5">
+      <button (click)="setPhotoAlignment('left')" [disabled]="payload.photoAlignment === 'left'" class="photo-alignment w-[48px] h-[48px] flex items-center justify-center border-2 disabled:border-[#B1A79C] border-[#E2A23B] rounded-[10px]">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0V4.57143H32V0H0ZM0 9.14286V13.7143H22.8571V9.14286H0ZM0 18.2857V22.8571H32V18.2857H0ZM0 27.4286V32H22.8571V27.4286H0Z"/>
+        </svg>
+      </button>
+      <button (click)="setPhotoAlignment('right')" [disabled]="payload.photoAlignment === 'right'" class="photo-alignment w-[48px] h-[48px] flex items-center justify-center border-2 disabled:border-[#B1A79C] border-[#E2A23B] rounded-[10px]">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M32 0V4.57143H0V0H32ZM32 9.14286V13.7143H9.14286V9.14286H32ZM32 18.2857V22.8571H0V18.2857H32ZM32 27.4286V32H9.14286V27.4286H32Z"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+  <div class="h-[500px] max-w-[500px] cursor-pointer w-full">
+    <app-input-file [currentImage]="preloadedImage" class="h-[500px] max-w-[500px]" (fileLoaded)="setPhoto($event)"/>
+  </div>
+</div>

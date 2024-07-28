@@ -36,9 +36,9 @@ export interface DateMetadataParagraphInterface {
 }
 
 export interface ImageMetadataParagraphInterface {
-  imageUrl: string
-  width: number
-  height: number
+  imageUrl?: string
+  width?: number
+  height?: number
   photoAlignment: 'left' | 'center' | 'right'
 }
 
