@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
+import {NumberMetadataParagraphInterface} from "../../../../../../../../shared/interfaces/universes/universe.interface";
 
 @Component({
   selector: 'app-create-number',
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./create-number.component.scss']
 })
 export class CreateNumberComponent {
+  metadata: NumberMetadataParagraphInterface = {value: 0};
 
+  @Output() sendData = new EventEmitter<string>
+
+  propagateData() {
+    this.sendData.emit(JSON.stringify(this.metadata))
+  }
 }
