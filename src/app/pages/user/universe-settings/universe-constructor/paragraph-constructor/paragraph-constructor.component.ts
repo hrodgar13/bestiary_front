@@ -9,4 +9,7 @@ import {UniverseStructureParagraphInterface} from "../../../../../../shared/inte
 export class ParagraphConstructorComponent {
   @Input() structuralParagraphs: UniverseStructureParagraphInterface[] = [];
 
+  addParagraph($event: UniverseStructureParagraphInterface) {
+    this.structuralParagraphs.push($event)
+  }
 }

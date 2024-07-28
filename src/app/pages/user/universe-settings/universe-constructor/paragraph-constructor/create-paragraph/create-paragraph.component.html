@@ -3,14 +3,19 @@
     <div class="max-w-[280px] w-full h-[48px] border-2 border-[#E2A23B] rounded-[10px] p-3">
       <input [(ngModel)]="paragraphPayload.title" class="h-full w-full text-[16px] text-[#B1A79C] poppins-font bg-transparent outline-0" [placeholder]="'Setting Name'">
     </div>
-    <div class="max-w-[280px] w-full h-[48px] border-2 border-[#E2A23B] rounded-[10px] p-3">
-      <mat-select [(ngModel)]="paragraphPayload.type" (ngModelChange)="clearMetadata()" class="text-[#B1A79C] vu-select outline-0 bg-transparent w-full px-2 poppins-font font-semibold"
-                  panelClass="vu-select backdrop-remover" [placeholder]="'Choose Type' | transloco">
-        <mat-option class="text-[#B1A79C] vu-select" [value]="item"
-                    *ngFor="let item of Object.values(metadataFieldTypes)">
-          {{item | titlecase}}
-        </mat-option>
-      </mat-select>
+    <div class="flex items-center gap-5">
+      <div class="min-w-[280px] w-full h-[48px] border-2 border-[#E2A23B] rounded-[10px] p-3">
+        <mat-select [(ngModel)]="paragraphPayload.type" (selectionchange)="clearMetadata()" class="text-[#B1A79C] vu-select outline-0 bg-transparent w-full px-2 poppins-font font-semibold"
+                    panelClass="vu-select backdrop-remover" [placeholder]="'Choose Type' | transloco">
+          <mat-option class="text-[#B1A79C] vu-select" [value]="item"
+                      *ngFor="let item of metadataFieldTypes">
+            {{item | titlecase}}
+          </mat-option>
+        </mat-select>
+      </div>
+      <button (click)="addParagraph()" class="min-w-[48px] min-h-[48px] bg-[#E2A23B] rounded-[10px] flex items-center justify-center">
+        <mat-icon>done</mat-icon>
+      </button>
     </div>
   </div>
   <div class="w-full h-full">

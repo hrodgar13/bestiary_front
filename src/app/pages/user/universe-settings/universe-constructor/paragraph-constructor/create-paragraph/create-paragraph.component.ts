@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {
   METADATA_FIELD_TYPE,
   UniverseStructureParagraphInterface
@@ -16,9 +16,9 @@ export class CreateParagraphComponent {
     title: "",
     type: "text"
   };
-  metadataFieldTypes = METADATA_FIELD_TYPE;
+  metadataFieldTypes = Object.values(METADATA_FIELD_TYPE);
 
-  protected readonly Object = Object;
+  @Output() sendParagraph = new EventEmitter<UniverseStructureParagraphInterface>
 
   setMetadata($event: string) {
     this.paragraphPayload.metadata = JSON.parse($event)
@@ -26,5 +26,9 @@ export class CreateParagraphComponent {
 
   clearMetadata() {
     this.paragraphPayload.metadata = JSON.parse("{}")
+  }
+
+  addParagraph() {
+    this.sendParagraph.emit(this.paragraphPayload)
   }
 }
