@@ -1,0 +1,23 @@
+<div class="w-full h-full flex flex-col gap-5">
+  <div class="flex items-center justify-between w-full h-full">
+    <div class="max-w-[280px] w-full h-[48px] border-2 border-[#E2A23B] rounded-[10px] p-3">
+      <input [(ngModel)]="paragraphPayload.title" class="h-full w-full text-[16px] text-[#B1A79C] poppins-font bg-transparent outline-0" [placeholder]="'Setting Name'">
+    </div>
+    <div class="max-w-[280px] w-full h-[48px] border-2 border-[#E2A23B] rounded-[10px] p-3">
+      <mat-select [(ngModel)]="paragraphPayload.type" (ngModelChange)="clearMetadata()" class="text-[#B1A79C] vu-select outline-0 bg-transparent w-full px-2 poppins-font font-semibold"
+                  panelClass="vu-select backdrop-remover" [placeholder]="'Choose Type' | transloco">
+        <mat-option class="text-[#B1A79C] vu-select" [value]="item"
+                    *ngFor="let item of Object.values(metadataFieldTypes)">
+          {{item | titlecase}}
+        </mat-option>
+      </mat-select>
+    </div>
+  </div>
+  <div class="w-full h-full">
+      <app-create-text (textChange)="setMetadata($event)" *ngIf="paragraphPayload.type === 'text'"/>
+      <app-create-number *ngIf="paragraphPayload.type === 'number'" />
+      <app-create-date *ngIf="paragraphPayload.type === 'date'" />
+      <app-create-image *ngIf="paragraphPayload.type === 'image'" />
+      <app-create-list  *ngIf="paragraphPayload.type === 'list'" />
+  </div>
+</div>

@@ -14,7 +14,7 @@ export interface UniverseHatInterface {
 }
 
 export interface UniverseStructureParagraphInterface {
-  id: number
+  id?: number
   order: number
   title: string
   type: 'text' | 'number' | 'date' | 'image' | 'list'
@@ -216,4 +216,12 @@ export const UNIVERSE_FILTERING_CATEGORIES: string[] = [
 
 export interface CreateUniverse {
   id: number
+}
+
+export enum METADATA_FIELD_TYPE {
+  text = 'text',
+  number = 'number',
+  date = 'date',
+  image = 'image',
+  list = 'list'
 }

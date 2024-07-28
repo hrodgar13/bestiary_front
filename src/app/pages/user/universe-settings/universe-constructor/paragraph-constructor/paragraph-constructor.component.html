@@ -1,1 +1,8 @@
-<p>paragraph-constructor works!</p>
+<div class="flex flex-col gap-5">
+  <div *ngIf="structuralParagraphs.length > 0" class="bg-[#15181F] h-full w-full p-4 border-2 border-[#E2A23B] rounded-[10px]">
+    <app-description-structural-paragraph *ngFor="let paragraph of structuralParagraphs" [paragraph]="paragraph"/>
+  </div>
+  <div class="flex flex-col gap-5 bg-[#15181F] h-full w-full p-4 border-2 border-[#E2A23B] rounded-[10px]">
+    <app-create-paragraph />
+  </div>
+</div>
