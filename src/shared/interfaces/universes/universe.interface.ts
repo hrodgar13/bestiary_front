@@ -6,7 +6,7 @@ export interface UniverseInterface {
 }
 
 export interface UniverseHatInterface {
-  id: number
+  id?: number
   universeName: string
   description: UniverseStructureParagraphInterface[]
   images: string[]
