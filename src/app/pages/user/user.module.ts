@@ -16,6 +16,9 @@ import { UniverseListComponent } from './universe-settings/universe-list/univers
 import { UniverseComponent } from './universe-settings/universe/universe.component';
 import { DescriptionStructuralParagraphComponent } from './universe-settings/universe/description-structural-paragraph/description-structural-paragraph.component';
 import { UniverseCategoryComponent } from './universe-settings/universe/universe-category/universe-category.component';
+import { HeaderConstructorComponent } from './universe-settings/universe-constructor/header-constructor/header-constructor.component';
+import { ParagraphConstructorComponent } from './universe-settings/universe-constructor/paragraph-constructor/paragraph-constructor.component';
+import { UniverseBodyComponent } from './universe-settings/universe/universe-body/universe-body.component';
 
 
 
@@ -31,7 +34,10 @@ import { UniverseCategoryComponent } from './universe-settings/universe/universe
     UniverseListComponent,
     UniverseComponent,
     DescriptionStructuralParagraphComponent,
-    UniverseCategoryComponent
+    UniverseCategoryComponent,
+    HeaderConstructorComponent,
+    ParagraphConstructorComponent,
+    UniverseBodyComponent
   ],
   imports: [
     CommonModule,

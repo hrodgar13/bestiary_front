@@ -5,6 +5,10 @@ import {UserComponent} from "./user.component";
 import {ProfileComponent} from "./profile/profile.component";
 import {UniverseSettingsComponent} from "./universe-settings/universe-settings.component";
 import {UniverseComponent} from "./universe-settings/universe/universe.component";
+import {
+  HeaderConstructorComponent
+} from "./universe-settings/universe-constructor/header-constructor/header-constructor.component";
+import {UniverseBodyComponent} from "./universe-settings/universe/universe-body/universe-body.component";
 
 const routes: Routes = [
   {
@@ -26,8 +30,18 @@ const routes: Routes = [
         component: UniverseSettingsComponent
       },
       {
-        path: 'universes/:id',
-        component: UniverseComponent
+        path: 'universe',
+        component: UniverseComponent,
+        children: [
+          {
+            path: ':id',
+            component: UniverseBodyComponent
+          },
+          {
+            path: ':id/header',
+            component: HeaderConstructorComponent
+          }
+        ]
       }
     ]
   },
