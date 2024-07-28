@@ -30,9 +30,9 @@ export interface NumberMetadataParagraphInterface {
 }
 
 export interface DateMetadataParagraphInterface {
-  year: number
-  month: number
-  day: number
+  year?: number
+  month?: number
+  day?: number
 }
 
 export interface ImageMetadataParagraphInterface {

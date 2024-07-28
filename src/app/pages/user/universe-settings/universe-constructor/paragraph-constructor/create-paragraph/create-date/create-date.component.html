@@ -1,1 +1,11 @@
-<p>create-date works!</p>
+<div class="flex gap-4">
+  <div class="border-2 border-[#E2A23B] p-3 min-w-[168px] h-[48px] rounded-[10px]">
+    <input type="number" [(ngModel)]="payload.year" [placeholder]="'Year'" (input)="propagateData()" class="w-full outline-0 bg-transparent poppins-font text-[16px] font-semibold text-[#B1A79C]">
+  </div>
+  <div class="border-2 border-[#E2A23B] p-3 min-w-[168px] h-[48px] rounded-[10px]">
+    <input type="number" [(ngModel)]="payload.month" [placeholder]="'Month'"  (input)="propagateData()" class="w-full outline-0 bg-transparent poppins-font text-[16px] font-semibold text-[#B1A79C]">
+  </div>
+  <div class="border-2 border-[#E2A23B] p-3 min-w-[168px] h-[48px] rounded-[10px]">
+    <input type="number" [(ngModel)]="payload.day"  [placeholder]="'Day'" (input)="propagateData()" class="w-full outline-0 bg-transparent poppins-font text-[16px] font-semibold text-[#B1A79C]">
+  </div>
+</div>
