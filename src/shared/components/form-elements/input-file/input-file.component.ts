@@ -1,9 +1,11 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {DestroySubscription} from "../../../../../../shared/helpers/destroy-subscribtion";
-import {CreatureService} from "../../creature.service";
-import {environment} from "../../../../../../environments/environment";
+
 import {takeUntil} from "rxjs";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {DestroySubscription} from "../../../helpers/destroy-subscribtion";
+import {environment} from "../../../../environments/environment";
+import {CreatureService} from "../../../../app/pages/bestiary/create-beast/creature.service";
+import {ApiService} from "../../../services/api.service";
 
 
 @Component({
@@ -14,13 +16,14 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 export class InputFileComponent extends DestroySubscription{
 
   @Input() currentImage: string | null = null
+  @Input() removeLastUploaded = true
   @Output() fileLoaded = new EventEmitter<string>()
   selectedImage: File | null = null
   baseUrl: string = environment.baseUrl;
   base64Image: string | null = null;
 
   constructor(
-    private beastService: CreatureService,
+    private apiService: ApiService,
     private matSnack: MatSnackBar
   ) {
     super();
@@ -46,9 +49,11 @@ export class InputFileComponent extends DestroySubscription{
       return;
     }
 
-    this.removeOldPhoto()
+    if(this.removeLastUploaded) {
+      this.removeOldPhoto()
+    }
 
-    this.beastService.uploadPhoto(this.selectedImage).pipe(takeUntil(this.destroyStream$)).subscribe(
+    this.apiService.uploadPhoto(this.selectedImage).pipe(takeUntil(this.destroyStream$)).subscribe(
       (data) => {
         this.matSnack.open('File upload', '', {
           duration: 3000,
@@ -70,7 +75,7 @@ export class InputFileComponent extends DestroySubscription{
 
   private removeOldPhoto() {
     if(this.currentImage) {
-      this.beastService.removePhoto(this.currentImage).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+      this.apiService.removePhoto(this.currentImage).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
 
       })
     }

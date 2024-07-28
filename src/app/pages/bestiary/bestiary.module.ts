@@ -17,7 +17,6 @@ import {
 } from './create-beast/form-elements/multi-select/multi-select-item/multi-select-item.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatDialogModule} from "@angular/material/dialog";
-import {InputFileComponent} from './create-beast/form-elements/input-file/input-file.component';
 import {StatblockInputComponent} from './create-beast/form-elements/statblock-input/statblock-input.component';
 import {TitleTextInputComponent} from './create-beast/form-elements/title-text-input/title-text-input.component';
 import {
@@ -44,7 +43,6 @@ import {MatSidenavModule} from "@angular/material/sidenav";
         LabelTextComponent,
         InputGreenBtnComponent,
         MultiSelectItemComponent,
-        InputFileComponent,
         StatblockInputComponent,
         TitleTextInputComponent,
         TitleTextItemComponent,

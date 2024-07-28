@@ -38,6 +38,7 @@ import {InputNumberComponent} from "./components/form-elements/input-number/inpu
 import {DiceRollSnackComponent} from './components/dice-roll-snack/dice-roll-snack.component';
 import { AddLinkComponent } from './modals/add-link/add-link.component';
 import { VisualiseAvatarComponent } from './components/visualise-avatar/visualise-avatar.component';
+import {InputFileComponent} from "./components/form-elements/input-file/input-file.component";
 
 
 @NgModule({
@@ -67,7 +68,8 @@ import { VisualiseAvatarComponent } from './components/visualise-avatar/visualis
     InputNumberComponent,
     DiceRollSnackComponent,
     AddLinkComponent,
-    VisualiseAvatarComponent
+    VisualiseAvatarComponent,
+    InputFileComponent
   ],
   exports: [
     BorderOutlineComponent,
@@ -86,7 +88,8 @@ import { VisualiseAvatarComponent } from './components/visualise-avatar/visualis
     InputNumberComponent,
     TextRedactorReaderPipe,
     DiceRollSnackComponent,
-    VisualiseAvatarComponent
+    VisualiseAvatarComponent,
+    InputFileComponent
   ],
   imports: [
     ColorPickerModule,
