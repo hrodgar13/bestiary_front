@@ -1,10 +1,17 @@
 import { Injectable } from '@angular/core';
 import {ApiService} from "../../../shared/services/api.service";
-import {Observable} from "rxjs";
-import {CreateUniverse, UniverseListItem} from "../../../shared/interfaces/universes/universe.interface";
+import {BehaviorSubject, Observable} from "rxjs";
+import {
+  CreateUniverse,
+  MOCK_UNIVERSE,
+  UniverseInterface,
+  UniverseListItem
+} from "../../../shared/interfaces/universes/universe.interface";
 
 @Injectable()
 export class UserService {
+
+  universe$ = new BehaviorSubject<UniverseInterface | null>(null)
 
   constructor(
     private readonly apiService: ApiService
@@ -26,7 +33,7 @@ export class UserService {
     return this.apiService.getUniverses()
   }
 
-  getUniverseById(universeId: string) {
+  getUniverseById(universeId: number) {
     return this.apiService.getUniverseById(universeId)
   }
 

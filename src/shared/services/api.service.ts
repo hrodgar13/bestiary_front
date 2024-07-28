@@ -134,7 +134,7 @@ export class ApiService {
     return this.http.get<UniverseListItem[]>(`api/settings/universe-list`);
   }
 
-  getUniverseById(universeId: string): Observable<UniverseInterface> {
+  getUniverseById(universeId: number): Observable<UniverseInterface> {
     return this.http.get<UniverseInterface>(`api/settings/universe/${universeId}`)
   }
 

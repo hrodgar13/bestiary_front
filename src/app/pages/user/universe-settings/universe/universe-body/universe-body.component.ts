@@ -29,20 +29,31 @@ export class UniverseBodyComponent extends DestroySubscription implements OnInit
     this.route.params.pipe(takeUntil(this.destroyStream$)).subscribe(data => {
       const universeId = data['id']
       if(universeId) {
-        this.getUniverse(universeId)
+        this.detectHashedUniverse(universeId)
       }
     })
   }
 
-  private getUniverse(universeId: string) {
+  private getUniverse(universeId: number) {
     this.userService.getUniverseById(universeId).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
-      this.universe = data
+      this.userService.universe$.next(data)
     })
   }
+
 
   sortedByOrder(information: UniverseStructureParagraphInterface[]) {
     information.sort((a, b) => a.order - b.order)
 
     return information
+  }
+
+  private detectHashedUniverse(universeId: number) {
+    this.userService.universe$.pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+      if(data && Number(data.id) === Number(universeId)) {
+        this.universe = data
+      } else {
+        this.getUniverse(universeId)
+      }
+    })
   }
 }
