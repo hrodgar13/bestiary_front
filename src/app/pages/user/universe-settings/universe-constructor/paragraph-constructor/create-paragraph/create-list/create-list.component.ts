@@ -29,4 +29,14 @@ export class CreateListComponent {
     this.listObject.type = type
     this.sendData.emit(JSON.stringify(this.listObject))
   }
+
+  removeItem(item: string) {
+    const idx = this.listObject.listItems.findIndex(elem => elem === item)
+
+    if(idx !== -1) {
+      this.listObject.listItems.splice(idx, 1)
+
+      this.sendData.emit(JSON.stringify(this.listObject))
+    }
+  }
 }

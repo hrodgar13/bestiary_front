@@ -1,10 +1,10 @@
 <div class="flex flex-col gap-5">
-  <div *ngIf="structuralParagraphs.length > 0" class="bg-[#15181F] h-full w-full p-4 border-2 border-[#E2A23B] rounded-[10px]">
+  <div class="flex flex-col gap-5 bg-[#15181F] h-full w-full p-4 border-2 border-[#E2A23B] rounded-[10px]">
+    <app-create-paragraph (sendParagraph)="addParagraph($event)"/>
+  </div>
+  <div *ngIf="structuralParagraphs.length > 0" class="bg-[#15181F] h-full w-full p-4 border-2 border-[#E2A23B] rounded-[10px] max-h-[1000px] overflow-y-auto">
     <div *ngFor="let paragraph of structuralParagraphs">
       <app-description-structural-paragraph [paragraph]="paragraph"/>
     </div>
-  </div>
-  <div class="flex flex-col gap-5 bg-[#15181F] h-full w-full p-4 border-2 border-[#E2A23B] rounded-[10px]">
-    <app-create-paragraph (sendParagraph)="addParagraph($event)"/>
   </div>
 </div>

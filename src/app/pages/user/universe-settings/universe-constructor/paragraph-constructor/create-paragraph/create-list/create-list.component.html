@@ -33,17 +33,17 @@
   </div>
   <div class="border-[#E2A23B] h-[175px] border-2 rounded-[10px] poppins-font p-4 overflow-y-auto">
     <ul *ngIf="listObject.type === 'number'">
-      <li class="text-[28px] playfair-font text-[#B1A79C]"
+      <li (click)="removeItem(item)" class="text-[28px] playfair-font text-[#B1A79C] p-1 rounded hover:border-2 hover:border-[#E2A23B] transition duration-300"
           *ngFor="let item of listObject.listItems; let i = index"><span
         class="text-[28px] text-[#E2A23B]">{{i + 1}})</span> {{item}}</li>
     </ul>
     <ul *ngIf="listObject.type === 'letter'">
-      <li class="text-[28px] playfair-font text-[#B1A79C]"
+      <li (click)="removeItem(item)" class="text-[28px] playfair-font text-[#B1A79C] p-1 rounded hover:border-2 hover:border-[#E2A23B] transition duration-300"
           *ngFor="let item of listObject.listItems; let i = index"><span
         class="text-[28px] text-[#E2A23B]">{{String.fromCharCode(97 + i)}})</span> {{item}} </li>
     </ul>
     <ul *ngIf="listObject.type === 'symbol'">
-      <li class="text-[28px] playfair-font text-[#B1A79C]" *ngFor="let item of listObject.listItems"><span
+      <li (click)="removeItem(item)" class="text-[28px] playfair-font text-[#B1A79C] p-1 rounded hover:border-2 hover:border-[#E2A23B] transition duration-300" *ngFor="let item of listObject.listItems"><span
         class="text-[28px] text-[#E2A23B]">&#8226;</span> {{item}}</li>
     </ul>
   </div>
