@@ -1,7 +1,7 @@
 <form [formGroup]="form" (ngSubmit)="addParagraph()" class="w-full h-full flex flex-col gap-5">
   <div class="flex items-center justify-between w-full h-full">
     <div class="max-w-[280px] w-full h-[48px] border-2 border-[#E2A23B] rounded-[10px] p-3">
-      <input formControlName="name" class="h-full w-full text-[16px] text-[#B1A79C] poppins-font bg-transparent outline-0" [placeholder]="'Setting Name'">
+      <input formControlName="name" class="h-full w-full text-[16px] text-[#B1A79C] poppins-font bg-transparent outline-0" [placeholder]="'Title'">
     </div>
     <div class="flex items-center gap-5">
       <div class="min-w-[280px] w-full h-[48px] border-2 border-[#E2A23B] rounded-[10px] p-3">
@@ -23,6 +23,6 @@
       <app-create-number (sendData)="setMetadata($event)" *ngIf="type === 'number'" />
       <app-create-date (sendData)="setMetadata($event)" *ngIf="type === 'date'" />
       <app-create-image (sendData)="setMetadata($event)" *ngIf="type === 'image'" />
-      <app-create-list  *ngIf="type === 'list'" />
+      <app-create-list (sendData)="setMetadata($event)" *ngIf="type === 'list'" />
   </div>
 </form>
