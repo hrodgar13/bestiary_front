@@ -4,7 +4,10 @@ import {UserService} from "../../../user.service";
 import {takeUntil} from "rxjs";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {environment} from "../../../../../../environments/environment";
-import {UniverseHatInterface} from "../../../../../../shared/interfaces/universes/universe.interface";
+import {
+  UniverseHatInterface,
+  UniverseStructureParagraphInterface
+} from "../../../../../../shared/interfaces/universes/universe.interface";
 import {ActivatedRoute} from "@angular/router";
 
 @Component({
@@ -86,6 +89,13 @@ export class HeaderConstructorComponent extends DestroySubscription implements O
 
   setPhotoAlignment(alignment: 'left' | 'right') {
     this.hatPayload.imagePosition = alignment
+  }
+
+  saveHeader() {
     console.log(this.hatPayload)
+  }
+
+  setHatPayload(descriptions: UniverseStructureParagraphInterface[]) {
+    this.hatPayload.description = descriptions
   }
 }
