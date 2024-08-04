@@ -9,60 +9,72 @@ import {DestroySubscription} from "../../../../../../shared/helpers/destroy-subs
 import {ParagraphActionsModalComponent} from "../modals/paragraph-actions-modal/paragraph-actions-modal.component";
 
 @Component({
-    selector: 'app-paragraph-constructor',
-    templateUrl: './paragraph-constructor.component.html',
-    styleUrls: ['./paragraph-constructor.component.scss']
+  selector: 'app-paragraph-constructor',
+  templateUrl: './paragraph-constructor.component.html',
+  styleUrls: ['./paragraph-constructor.component.scss']
 })
 export class ParagraphConstructorComponent extends DestroySubscription implements OnInit {
-    @Input() structuralParagraphs: UniverseStructureParagraphInterface[] = [];
-    @Output() detectSPChange = new EventEmitter<UniverseStructureParagraphInterface[]>
-    sortedParagraphs: UniverseStructureParagraphInterface[] = [];
-    private paragraphForEdit!: UniverseStructureParagraphInterface;
+  @Input() structuralParagraphs: UniverseStructureParagraphInterface[] = [];
+  @Output() detectSPChange = new EventEmitter<UniverseStructureParagraphInterface[]>
+  sortedParagraphs: UniverseStructureParagraphInterface[] = [];
+  paragraphForEdit: UniverseStructureParagraphInterface = {
+    metadata: JSON.parse('{"description": ""}'),
+    order: 0,
+    title: "",
+    type: "text"
+  };
 
-    constructor(
-        private readonly cdr: ChangeDetectorRef,
-        private readonly dialog: MatDialog
-    ) {
-      super()
+  constructor(
+    private readonly cdr: ChangeDetectorRef,
+    private readonly dialog: MatDialog
+  ) {
+    super()
+  }
+
+  ngOnInit() {
+    this.sortedParagraphs = this.sortParagraphsByOrder()
+  }
+
+  addParagraph($event: UniverseStructureParagraphInterface) {
+    const paragraph: UniverseStructureParagraphInterface = $event
+    const idx = this.sortedParagraphs.findIndex(item => paragraph.order === item.order)
+
+
+    if (paragraph.order !== 0 && idx !== -1) {
+      this.sortedParagraphs[idx] = paragraph
+    } else {
+      paragraph.order = this.sortedParagraphs.length
+
+      this.sortedParagraphs.push(paragraph)
+
+      this.detectSPChange.emit(this.sortedParagraphs)
     }
 
-    ngOnInit() {
-        this.sortedParagraphs = this.sortParagraphsByOrder()
-    }
+  }
 
-    addParagraph($event: UniverseStructureParagraphInterface) {
-        const paragraph: UniverseStructureParagraphInterface = $event
+  sortParagraphsByOrder() {
+    return this.structuralParagraphs.sort((a, b) => a.order - b.order);
+  }
 
-        paragraph.order = this.sortedParagraphs.length
-
-        this.sortedParagraphs.push(paragraph)
-
-        this.detectSPChange.emit(this.sortedParagraphs)
-    }
-
-    sortParagraphsByOrder() {
-        return this.structuralParagraphs.sort((a, b) => a.order - b.order);
-    }
-
-    removeParagraph(paragraph: UniverseStructureParagraphInterface) {
-        const idx = this.sortedParagraphs.findIndex(item => item.order === paragraph.order)
+  removeParagraph(paragraph: UniverseStructureParagraphInterface) {
+    const idx = this.sortedParagraphs.findIndex(item => item.order === paragraph.order)
 
 
-        if (idx !== -1) {
-            const deleted = this.sortedParagraphs.splice(idx, 1)
+    if (idx !== -1) {
+      const deleted = this.sortedParagraphs.splice(idx, 1)
 
-            this.sortedParagraphs = this.sortedParagraphs.map(item => {
-                if (item.order > deleted[0].order) {
-                    return {...item, order: item.order - 1}
-                } else {
-                    return item
-                }
-            })
-
-            this.cdr.detectChanges()
-            this.detectSPChange.emit(this.sortedParagraphs)
+      this.sortedParagraphs = this.sortedParagraphs.map(item => {
+        if (item.order > deleted[0].order) {
+          return {...item, order: item.order - 1}
+        } else {
+          return item
         }
+      })
+
+      this.cdr.detectChanges()
+      this.detectSPChange.emit(this.sortedParagraphs)
     }
+  }
 
   moveElement(move: 'up' | 'down', paragraph: UniverseStructureParagraphInterface, event: Event) {
     event.stopPropagation()
@@ -96,9 +108,9 @@ export class ParagraphConstructorComponent extends DestroySubscription implement
     const dialogRef = this.dialog.open(ParagraphActionsModalComponent)
 
     dialogRef.afterClosed().pipe(takeUntil(this.destroyStream$)).subscribe((action: 'delete' | 'edit' | null) => {
-      if(action === "delete") {
+      if (action === "delete") {
         this.removeParagraph(paragraph)
-      } else if(action === "edit") {
+      } else if (action === "edit") {
         this.paragraphForEdit = paragraph
       } else {
         return

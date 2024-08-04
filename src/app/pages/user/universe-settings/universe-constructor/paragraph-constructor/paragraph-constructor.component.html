@@ -1,6 +1,6 @@
 <div class="flex flex-col gap-5">
   <div class="flex flex-col gap-5 bg-[#15181F] h-full w-full p-4 border-2 border-[#E2A23B] rounded-[10px]">
-    <app-create-paragraph  (sendParagraph)="addParagraph($event)"/>
+    <app-create-paragraph [paragraphPayload]="paragraphForEdit" (sendParagraph)="addParagraph($event)"/>
   </div>
   <div *ngIf="sortedParagraphs.length > 0" class="bg-[#15181F] h-full w-full p-4 border-2 border-[#E2A23B] rounded-[10px] max-h-[1000px] overflow-y-auto">
     <div class="paragraph relative border-2 border-transparent hover:border-[#E2A23B] cursor-pointer box-content transition duration-300" (click)="callContextMenu(paragraph)" *ngFor="let paragraph of sortedParagraphs">

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {
   METADATA_FIELD_TYPE,
   UniverseStructureParagraphInterface
@@ -10,31 +10,28 @@ import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
   templateUrl: './create-paragraph.component.html',
   styleUrls: ['./create-paragraph.component.scss']
 })
-export class CreateParagraphComponent implements OnInit{
-  paragraphPayload: UniverseStructureParagraphInterface = {
+export class CreateParagraphComponent implements OnInit, OnChanges{
+  @Input() paragraphPayload: UniverseStructureParagraphInterface = {
     metadata: JSON.parse('{"description": ""}'),
     order: 0,
     title: "",
     type: "text"
   };
   metadataFieldTypes = Object.values(METADATA_FIELD_TYPE);
-  form!: UntypedFormGroup;
-  type: METADATA_FIELD_TYPE = METADATA_FIELD_TYPE.text;
+  title: string = '';
+  type:  'text' | 'number' | 'date' | 'image' | 'list' = METADATA_FIELD_TYPE.text;
   metadata: JSON = JSON.parse("{}");
 
   @Output() sendParagraph = new EventEmitter<UniverseStructureParagraphInterface>
 
-
-  constructor(
-    private formBuilder: UntypedFormBuilder
-  ) {
+  ngOnInit() {
+    this.initializeProperties()
   }
 
-  ngOnInit() {
-    this.form = this.formBuilder.group({
-      name: [this.paragraphPayload.title],
-      type: [this.paragraphPayload.type]
-    })
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['paragraphPayload'] && !changes['paragraphPayload'].isFirstChange()) {
+      this.initializeProperties();
+    }
   }
 
   setMetadata($event: string) {
@@ -47,14 +44,20 @@ export class CreateParagraphComponent implements OnInit{
 
   addParagraph() {
     const payload: UniverseStructureParagraphInterface = {
-      type: this.form.get('type')?.value,
-      title: this.form.get('name')?.value,
+      type: this.type,
+      title: this.title,
       metadata: this.metadata,
-      order: 0,
+      order: this.paragraphPayload.order,
     }
 
     console.log(payload)
 
     this.sendParagraph.emit(payload)
+  }
+
+  private initializeProperties() {
+    this.title = this.paragraphPayload.title;
+    this.type = this.paragraphPayload.type;
+    this.metadata = this.paragraphPayload.metadata;
   }
 }
