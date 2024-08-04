@@ -30,8 +30,9 @@ export class CreateImageComponent implements OnInit{
 
   setPhoto($event: { url: string, width: number, height: number }) {
     this.payload.imageUrl = $event.url
-    this.payload.width = $event.width
-    this.payload.height = $event.height
+    //TODO get deal with width and height
+    // this.payload.width = $event.width
+    // this.payload.height = $event.height
     this.propagateData()
   }
 }
