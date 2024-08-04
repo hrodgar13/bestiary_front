@@ -37,8 +37,8 @@ export class HeaderConstructorComponent extends DestroySubscription implements O
     this.getUniverseId()
   }
 
-  addFileToList($event: string) {
-    this.hatPayload.images.push($event)
+  addFileToList($event: { url: string, width: number, height: number }) {
+    this.hatPayload.images.push($event.url)
   }
 
   deleteImageFromUpload(imageName: string) {

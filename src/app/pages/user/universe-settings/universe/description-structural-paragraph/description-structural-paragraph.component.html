@@ -5,11 +5,16 @@
   </p>
 </div>
 
-<div class="pb-5 poppins-font flex flex-col justify-center items-center gap-2" *ngIf="paragraph.type === 'image' && imageParagraphOptions"
+<div class="pb-5 poppins-font flex flex-col justify-center items-center gap-2"
+     *ngIf="paragraph.type === 'image' && imageParagraphOptions"
      [ngClass]="{
       'image-left': imageParagraphOptions.photoAlignment === 'left',
       'image-right': imageParagraphOptions.photoAlignment === 'right',
     }"
+     [ngStyle]="{
+            'width': imageParagraphOptions.width ? imageParagraphOptions.width + 'px' : 'auto',
+            'height': imageParagraphOptions.height ? imageParagraphOptions.height + 'px' : 'auto'
+         }"
 >
   <img
     class="w-full h-full"
@@ -21,7 +26,7 @@
     alt="IMG"
   />
   <p *ngIf="paragraph.title" class="text-white text-xl 768:text-2xl playfair-font">
-    <span class="text-[#E2A23B] text-[36px] pr-4" >{{paragraph.title}}</span>
+    <span class="text-[#E2A23B] text-[36px] pr-4">{{paragraph.title}}</span>
   </p>
 </div>
 
@@ -35,13 +40,18 @@
 <div class="pb-5 poppins-font" *ngIf="paragraph.type === 'list' && listParagraphOptions">
   <h3 class="text-[#E2A23B] playfair-font text-[36px]" *ngIf="paragraph.title">{{paragraph.title}}</h3>
   <ul *ngIf="listParagraphOptions.type === 'number'">
-    <li class="text-[28px] playfair-font text-[#B1A79C]" *ngFor="let item of listParagraphOptions.listItems; let i = index"><span class="text-[28px] text-[#E2A23B]">{{i + 1}})</span> {{item}}</li>
+    <li class="text-[28px] playfair-font text-[#B1A79C]"
+        *ngFor="let item of listParagraphOptions.listItems; let i = index"><span
+      class="text-[28px] text-[#E2A23B]">{{i + 1}})</span> {{item}}</li>
   </ul>
   <ul *ngIf="listParagraphOptions.type === 'letter'">
-    <li class="text-[28px] playfair-font text-[#B1A79C]" *ngFor="let item of listParagraphOptions.listItems; let i = index"><span class="text-[28px] text-[#E2A23B]">{{String.fromCharCode(97 + i)}})</span> {{item}} </li>
+    <li class="text-[28px] playfair-font text-[#B1A79C]"
+        *ngFor="let item of listParagraphOptions.listItems; let i = index"><span
+      class="text-[28px] text-[#E2A23B]">{{String.fromCharCode(97 + i)}})</span> {{item}} </li>
   </ul>
   <ul *ngIf="listParagraphOptions.type === 'symbol'">
-    <li class="text-[28px] playfair-font text-[#B1A79C]" *ngFor="let item of listParagraphOptions.listItems"><span class="text-[28px] text-[#E2A23B]">&#8226;</span> {{item}}</li>
+    <li class="text-[28px] playfair-font text-[#B1A79C]" *ngFor="let item of listParagraphOptions.listItems"><span
+      class="text-[28px] text-[#E2A23B]">&#8226;</span> {{item}}</li>
   </ul>
 </div>
 

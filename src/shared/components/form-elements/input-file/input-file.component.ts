@@ -17,7 +17,7 @@ export class InputFileComponent extends DestroySubscription{
 
   @Input() currentImage: string | null = null
   @Input() removeLastUploaded = true
-  @Output() fileLoaded = new EventEmitter<string>()
+  @Output() fileLoaded = new EventEmitter<{url: string, width: number, height: number}>()
   selectedImage: File | null = null
   baseUrl: string = environment.baseUrl;
   base64Image: string | null = null;
@@ -37,14 +37,23 @@ export class InputFileComponent extends DestroySubscription{
 
       reader.onload = () => {
         this.base64Image = reader.result as string;
+
+        const img = new Image();
+        img.onload = () => {
+          const width = img.width;
+          const height = img.height;
+          console.log(`Image Width: ${width}, Image Height: ${height}`);
+
+          this.uploadImage(width, height);
+        };
+        img.src = this.base64Image;
       };
 
       reader.readAsDataURL(this.selectedImage);
-      this.uploadImage();
     }
   }
 
-  uploadImage(): void {
+  uploadImage(width: number, height: number): void {
     if (!this.selectedImage) {
       return;
     }
@@ -60,7 +69,7 @@ export class InputFileComponent extends DestroySubscription{
           verticalPosition: "top"
         });
         this.currentImage = data.fileName;
-        this.fileLoaded.emit(this.currentImage)
+        this.fileLoaded.emit({url: this.currentImage, width, height})
       },
       (error) => {
         this.matSnack.open(error.error.message, '', {

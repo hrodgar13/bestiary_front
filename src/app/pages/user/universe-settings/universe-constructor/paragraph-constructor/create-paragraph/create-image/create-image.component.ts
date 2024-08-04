@@ -28,8 +28,10 @@ export class CreateImageComponent implements OnInit{
     this.propagateData()
   }
 
-  setPhoto($event: string) {
-    this.payload.imageUrl = $event
+  setPhoto($event: { url: string, width: number, height: number }) {
+    this.payload.imageUrl = $event.url
+    this.payload.width = $event.width
+    this.payload.height = $event.height
     this.propagateData()
   }
 }

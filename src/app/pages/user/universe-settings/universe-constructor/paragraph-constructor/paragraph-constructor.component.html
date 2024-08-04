@@ -3,8 +3,14 @@
     <app-create-paragraph (sendParagraph)="addParagraph($event)"/>
   </div>
   <div *ngIf="sortedParagraphs.length > 0" class="bg-[#15181F] h-full w-full p-4 border-2 border-[#E2A23B] rounded-[10px] max-h-[1000px] overflow-y-auto">
-    <div class="relative hover:bg-gray-600 transition duration-300" (click)="removeParagraph(paragraph)" *ngFor="let paragraph of sortedParagraphs">
+    <div class="paragraph relative border-2 border-transparent hover:border-[#E2A23B] cursor-pointer box-content transition duration-300" (click)="removeParagraph(paragraph)" *ngFor="let paragraph of sortedParagraphs">
       <app-description-structural-paragraph [paragraph]="paragraph"/>
+      <button [class]="paragraph.type === 'image' && getImageAlignment(paragraph.metadata) === 'left' ? 'left-0' : 'right-0'" (click)="moveElement('up', paragraph, $event)" class="absolute hover:bg-[#E2A23B] top-0 z-10 h-[30px] w-[30px] rounded border border-[#E2A23B] flex items-center justify-center">
+        <mat-icon class="text-[#E2A23B] h-[20px] w-[20px] hover:text-black" >keyboard_arrow_up</mat-icon>
+      </button>
+      <button [class]="paragraph.type === 'image' && getImageAlignment(paragraph.metadata) === 'left' ? 'left-0' : 'right-0'" (click)="moveElement('down', paragraph, $event)" class="absolute hover:bg-[#E2A23B] bottom-0 z-10 h-[30px] w-[30px] rounded border border-[#E2A23B] flex items-center justify-center">
+        <mat-icon class="text-[#E2A23B] h-[20px] w-[20px] hover:text-black">keyboard_arrow_down</mat-icon>
+      </button>
     </div>
   </div>
 </div>

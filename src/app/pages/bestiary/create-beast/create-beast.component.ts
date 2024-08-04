@@ -334,8 +334,8 @@ export class CreateBeastComponent extends DestroySubscription implements OnInit,
     return []
   }
 
-  setPhoto(event: string) {
-    this.creatureImage = event
+  setPhoto(event: {url: string, width: number, height: number}) {
+    this.creatureImage = event.url
     this.sendForm()
   }
 
