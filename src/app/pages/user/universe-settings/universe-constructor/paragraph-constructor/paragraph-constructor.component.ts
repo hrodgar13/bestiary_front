@@ -43,7 +43,7 @@ export class ParagraphConstructorComponent extends DestroySubscription implement
     if (paragraph.order !== 0 && idx !== -1) {
       this.sortedParagraphs[idx] = paragraph
     } else {
-      paragraph.order = this.sortedParagraphs.length
+      paragraph.order = this.sortedParagraphs.length + 1
 
       this.sortedParagraphs.push(paragraph)
 

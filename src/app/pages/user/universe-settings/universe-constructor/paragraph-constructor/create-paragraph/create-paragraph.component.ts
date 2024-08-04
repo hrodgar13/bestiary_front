@@ -3,7 +3,6 @@ import {
   METADATA_FIELD_TYPE,
   UniverseStructureParagraphInterface
 } from "../../../../../../../shared/interfaces/universes/universe.interface";
-import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-create-paragraph',
@@ -50,9 +49,16 @@ export class CreateParagraphComponent implements OnInit, OnChanges{
       order: this.paragraphPayload.order,
     }
 
-    console.log(payload)
-
     this.sendParagraph.emit(payload)
+
+    this.paragraphPayload = {
+      type: this.type,
+      title: '',
+      order: 0,
+      metadata: JSON.parse('{}')
+    }
+
+    this.title = ''
   }
 
   private initializeProperties() {

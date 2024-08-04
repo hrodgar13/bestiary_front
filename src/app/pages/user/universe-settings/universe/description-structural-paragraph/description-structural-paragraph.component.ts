@@ -36,7 +36,6 @@ export class DescriptionStructuralParagraphComponent implements OnInit{
       }
       case "text": {
         this.convertTextJsonToText(this.paragraph.metadata)
-        console.log(this.paragraph, this.textParagraphOptions)
         break;
       }
       case "number": {

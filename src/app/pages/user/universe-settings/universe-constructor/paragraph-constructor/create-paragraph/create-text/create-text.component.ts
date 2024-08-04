@@ -1,17 +1,36 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 
 @Component({
   selector: 'app-create-text',
   templateUrl: './create-text.component.html',
   styleUrls: ['./create-text.component.scss']
 })
-export class CreateTextComponent {
+export class CreateTextComponent implements OnInit, OnChanges{
   text: string = ''
 
-  @Output() textChange = new EventEmitter<string>
+  @Input() initMetadata: JSON = JSON.parse('{"description": ""}')
+
+  @Output() sendData = new EventEmitter<string>
+
+  ngOnInit() {
+    this.initVariables()
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['initMetadata']) {
+      console.log('init Changes')
+      this.initVariables();
+    }
+  }
+
+  initVariables() {
+    const initMeta = JSON.parse(JSON.stringify(this.initMetadata))
+    console.log(initMeta)
+    this.text = initMeta.description
+  }
 
   propagateText() {
-    this.textChange.emit(JSON.stringify({
+    this.sendData.emit(JSON.stringify({
       description: this.text
     }))
   }
