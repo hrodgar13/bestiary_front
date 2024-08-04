@@ -20,12 +20,12 @@ import { HeaderConstructorComponent } from './universe-settings/universe-constru
 import { ParagraphConstructorComponent } from './universe-settings/universe-constructor/paragraph-constructor/paragraph-constructor.component';
 import { UniverseBodyComponent } from './universe-settings/universe/universe-body/universe-body.component';
 import { CreateParagraphComponent } from './universe-settings/universe-constructor/paragraph-constructor/create-paragraph/create-paragraph.component';
-import {MatLegacySelectModule} from "@angular/material/legacy-select";
 import { CreateTextComponent } from './universe-settings/universe-constructor/paragraph-constructor/create-paragraph/create-text/create-text.component';
 import { CreateNumberComponent } from './universe-settings/universe-constructor/paragraph-constructor/create-paragraph/create-number/create-number.component';
 import { CreateDateComponent } from './universe-settings/universe-constructor/paragraph-constructor/create-paragraph/create-date/create-date.component';
 import { CreateImageComponent } from './universe-settings/universe-constructor/paragraph-constructor/create-paragraph/create-image/create-image.component';
 import { CreateListComponent } from './universe-settings/universe-constructor/paragraph-constructor/create-paragraph/create-list/create-list.component';
+import { ParagraphActionsModalComponent } from './universe-settings/universe-constructor/modals/paragraph-actions-modal/paragraph-actions-modal.component';
 
 
 
@@ -50,7 +50,8 @@ import { CreateListComponent } from './universe-settings/universe-constructor/pa
     CreateNumberComponent,
     CreateDateComponent,
     CreateImageComponent,
-    CreateListComponent
+    CreateListComponent,
+    ParagraphActionsModalComponent
   ],
   imports: [
     CommonModule,

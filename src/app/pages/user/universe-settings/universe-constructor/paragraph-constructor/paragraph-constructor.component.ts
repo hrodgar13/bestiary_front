@@ -3,20 +3,27 @@ import {
   ImageMetadataParagraphInterface,
   UniverseStructureParagraphInterface
 } from "../../../../../../shared/interfaces/universes/universe.interface";
+import {takeUntil} from "rxjs";
+import {MatDialog} from "@angular/material/dialog";
+import {DestroySubscription} from "../../../../../../shared/helpers/destroy-subscribtion";
+import {ParagraphActionsModalComponent} from "../modals/paragraph-actions-modal/paragraph-actions-modal.component";
 
 @Component({
     selector: 'app-paragraph-constructor',
     templateUrl: './paragraph-constructor.component.html',
     styleUrls: ['./paragraph-constructor.component.scss']
 })
-export class ParagraphConstructorComponent implements OnInit {
+export class ParagraphConstructorComponent extends DestroySubscription implements OnInit {
     @Input() structuralParagraphs: UniverseStructureParagraphInterface[] = [];
     @Output() detectSPChange = new EventEmitter<UniverseStructureParagraphInterface[]>
     sortedParagraphs: UniverseStructureParagraphInterface[] = [];
+    private paragraphForEdit!: UniverseStructureParagraphInterface;
 
     constructor(
-        private readonly cdr: ChangeDetectorRef
+        private readonly cdr: ChangeDetectorRef,
+        private readonly dialog: MatDialog
     ) {
+      super()
     }
 
     ngOnInit() {
@@ -79,11 +86,23 @@ export class ParagraphConstructorComponent implements OnInit {
     this.cdr.detectChanges();
   }
 
-  protected readonly JSON = JSON;
-
   getImageAlignment(metadata: JSON) {
     const meta: ImageMetadataParagraphInterface = JSON.parse(JSON.stringify(metadata))
 
     return meta.photoAlignment
+  }
+
+  callContextMenu(paragraph: UniverseStructureParagraphInterface) {
+    const dialogRef = this.dialog.open(ParagraphActionsModalComponent)
+
+    dialogRef.afterClosed().pipe(takeUntil(this.destroyStream$)).subscribe((action: 'delete' | 'edit' | null) => {
+      if(action === "delete") {
+        this.removeParagraph(paragraph)
+      } else if(action === "edit") {
+        this.paragraphForEdit = paragraph
+      } else {
+        return
+      }
+    })
   }
 }
