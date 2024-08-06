@@ -17,7 +17,7 @@ import {
   CreateUniverse,
   MOCK_UNIVERSE,
   MOCK_UNIVERSE_LIST,
-  UNIVERSE_FILTERING_CATEGORIES,
+  UNIVERSE_FILTERING_CATEGORIES, UniverseHatInterface,
   UniverseInterface, UniverseListItem
 } from "../interfaces/universes/universe.interface";
 
@@ -140,5 +140,9 @@ export class ApiService {
 
   createUniverse(): Observable<CreateUniverse> {
     return this.http.post<CreateUniverse>(`api/settings/universe`, {})
+  }
+
+  updateUniverseHat(hatPayload: UniverseHatInterface, universeId: number) {
+    return this.http.post(`api/settings/universe/${universeId}/hat`, hatPayload)
   }
 }

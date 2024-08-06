@@ -3,7 +3,7 @@ import {ApiService} from "../../../shared/services/api.service";
 import {BehaviorSubject, Observable} from "rxjs";
 import {
   CreateUniverse,
-  MOCK_UNIVERSE,
+  MOCK_UNIVERSE, UniverseHatInterface,
   UniverseInterface,
   UniverseListItem
 } from "../../../shared/interfaces/universes/universe.interface";
@@ -39,5 +39,9 @@ export class UserService {
 
   createUniverse(): Observable<CreateUniverse> {
     return this.apiService.createUniverse()
+  }
+
+  createUniverseHat(hatPayload: UniverseHatInterface, universeId: number) {
+    return this.apiService.updateUniverseHat(hatPayload, universeId)
   }
 }

@@ -24,6 +24,7 @@ export class HeaderConstructorComponent extends DestroySubscription implements O
     imagePosition: "right"
   }
   baseUrl: string = environment.baseUrl;
+  universeId: number = 0
 
   constructor(
     private readonly userService: UserService,
@@ -61,6 +62,7 @@ export class HeaderConstructorComponent extends DestroySubscription implements O
     this.route.params.pipe(takeUntil(this.destroyStream$)).subscribe(data => {
       const id = data['id']
       if(id) {
+        this.universeId = id
         this.getHatFromHashedUniverse(id)
       }
     })
@@ -93,6 +95,10 @@ export class HeaderConstructorComponent extends DestroySubscription implements O
 
   saveHeader() {
     console.log(this.hatPayload)
+
+    this.userService.createUniverseHat(this.hatPayload, this.universeId).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+      console.log(data)
+    })
   }
 
   setHatPayload(descriptions: UniverseStructureParagraphInterface[]) {
