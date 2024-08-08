@@ -39,6 +39,7 @@ import {DiceRollSnackComponent} from './components/dice-roll-snack/dice-roll-sna
 import { AddLinkComponent } from './modals/add-link/add-link.component';
 import { VisualiseAvatarComponent } from './components/visualise-avatar/visualise-avatar.component';
 import {InputFileComponent} from "./components/form-elements/input-file/input-file.component";
+import { ImageSwiperComponent } from './components/image-swiper/image-swiper.component';
 
 
 @NgModule({
@@ -69,28 +70,30 @@ import {InputFileComponent} from "./components/form-elements/input-file/input-fi
     DiceRollSnackComponent,
     AddLinkComponent,
     VisualiseAvatarComponent,
-    InputFileComponent
+    InputFileComponent,
+    ImageSwiperComponent
   ],
-  exports: [
-    BorderOutlineComponent,
-    LoaderComponent,
-    SwitchLangComponent,
-    CreaturesListComponent,
-    DangerSeparatorComponent,
-    CreaturesFilterComponent,
-    InputTextComponent,
-    InputSelectComponent,
-    TextAreaInputComponent,
-    PaginatorComponent,
-    AuthLoginComponent,
-    FiltersModalComponent,
-    TextRedactorComponent,
-    InputNumberComponent,
-    TextRedactorReaderPipe,
-    DiceRollSnackComponent,
-    VisualiseAvatarComponent,
-    InputFileComponent
-  ],
+    exports: [
+        BorderOutlineComponent,
+        LoaderComponent,
+        SwitchLangComponent,
+        CreaturesListComponent,
+        DangerSeparatorComponent,
+        CreaturesFilterComponent,
+        InputTextComponent,
+        InputSelectComponent,
+        TextAreaInputComponent,
+        PaginatorComponent,
+        AuthLoginComponent,
+        FiltersModalComponent,
+        TextRedactorComponent,
+        InputNumberComponent,
+        TextRedactorReaderPipe,
+        DiceRollSnackComponent,
+        VisualiseAvatarComponent,
+        InputFileComponent,
+        ImageSwiperComponent
+    ],
   imports: [
     ColorPickerModule,
     CommonModule,
@@ -104,7 +107,7 @@ import {InputFileComponent} from "./components/form-elements/input-file/input-fi
     MatIconModule,
     MatButtonModule,
     MatMenuModule,
-    ClipboardModule
+    ClipboardModule,
   ],
   providers: [
     CreatureListService

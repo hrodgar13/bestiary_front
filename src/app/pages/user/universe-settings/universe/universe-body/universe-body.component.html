@@ -12,15 +12,12 @@
   </div>
 
   <div *ngIf="universe && universe.hat">
-    <img
-      *ngFor="let image of universe.hat.images"
-      [src]="[baseUrl + '/uploads/' + image]"
-      [ngClass]="{
+    <div [ngClass]="{
       'image-left': universe.hat.imagePosition === 'left',
       'image-right': universe.hat.imagePosition === 'right',
-      }"
-      alt="Universe Image"
-    />
+      }">
+      <app-image-swiper [images]="universe.hat.images"/>
+    </div>
     <div *ngFor="let descriptionElement of sortedByOrder(universe.hat.description)">
       <app-description-structural-paragraph [paragraph]="descriptionElement"/>
     </div>

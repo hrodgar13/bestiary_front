@@ -4,6 +4,7 @@ import {DestroySubscription} from "../../../../../shared/helpers/destroy-subscri
 import {UserService} from "../../user.service";
 import {takeUntil} from "rxjs";
 import {Router} from "@angular/router";
+import {environment} from "../../../../../environments/environment";
 
 @Component({
   selector: 'app-universe-list',
@@ -24,6 +25,7 @@ export class UniverseListComponent extends DestroySubscription{
   isHovered = false;
   hoveredUniverse: number | null = null
   loading: boolean = false;
+  baseUrl = environment.baseUrl;
 
   onMouseEvent(state: boolean, universeId: number | null) {
     this.isHovered = state;

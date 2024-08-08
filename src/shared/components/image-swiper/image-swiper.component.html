@@ -1,0 +1,9 @@
+<div class="clearfix overflow-hidden">
+  <div class="swiper-container">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide" *ngFor="let image of images">
+        <img [src]="baseUrl + '/uploads/' + image" alt="Universe Image">
+      </div>
+    </div>
+  </div>
+</div>

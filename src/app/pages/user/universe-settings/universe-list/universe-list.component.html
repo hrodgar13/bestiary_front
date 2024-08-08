@@ -12,7 +12,7 @@
           </div>
         </div>
         <div class="flex max-w-[150px] items-end ">
-          <img class="object-contain" [src]="universe.imageUrl" alt="">
+          <img class="object-contain" [src]="baseUrl + '/uploads/' + universe.imageUrl" alt="">
         </div>
       </div>
       <button *ngIf="!loading; else loader" (click)="createUniverse()" class="h-[80px] w-full bg-[#FAFD5D] flex justify-center items-center poppins-font uppercase text-[24px] font-[700] rounded-[10px]">

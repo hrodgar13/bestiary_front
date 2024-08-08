@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DestroySubscription} from "../../../../../../shared/helpers/destroy-subscribtion";
 import {
+  UniverseHatInterface,
   UniverseInterface,
   UniverseStructureParagraphInterface
 } from "../../../../../../shared/interfaces/universes/universe.interface";
