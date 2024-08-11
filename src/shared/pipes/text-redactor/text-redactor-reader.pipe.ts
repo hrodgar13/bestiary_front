@@ -15,8 +15,6 @@ export class TextRedactorReaderPipe implements PipeTransform {
 
     const templateRegex = /{%\s*(roll_dice_amt="(\d+)"\s*roll_dice_side="(\d+)"\s*roll_bonus="(\d*)"|custom_font_style="([^"]*)"\s*custom_font_color="([^"]*)"\s*value="([^"]*)"\s*external_link="([^"]*)")\s*%}/g;
 
-    console.log(value)
-
     return this.sanitizer.bypassSecurityTrustHtml(value.replace(templateRegex, (match, p1, amt, side, bonus, fontStyle, fontColor, textValue) => {
       if (amt) { // Dice roll formatting
         const diceText = `(${amt}d${side}${!bonus ? '' : bonus > 0 ? '+'+bonus : bonus})`;

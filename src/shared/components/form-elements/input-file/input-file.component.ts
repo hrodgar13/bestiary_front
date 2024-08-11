@@ -42,7 +42,6 @@ export class InputFileComponent extends DestroySubscription{
         img.onload = () => {
           const width = img.width;
           const height = img.height;
-          console.log(`Image Width: ${width}, Image Height: ${height}`);
 
           this.uploadImage(width, height);
         };

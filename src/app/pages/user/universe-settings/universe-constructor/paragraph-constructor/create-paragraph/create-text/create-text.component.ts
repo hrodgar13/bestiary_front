@@ -18,14 +18,12 @@ export class CreateTextComponent implements OnInit, OnChanges{
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['initMetadata']) {
-      console.log('init Changes')
       this.initVariables();
     }
   }
 
   initVariables() {
     const initMeta = JSON.parse(JSON.stringify(this.initMetadata))
-    console.log(initMeta)
     this.text = initMeta.description
   }
 

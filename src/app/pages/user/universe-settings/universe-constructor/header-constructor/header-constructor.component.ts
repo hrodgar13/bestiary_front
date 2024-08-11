@@ -25,6 +25,7 @@ export class HeaderConstructorComponent extends DestroySubscription implements O
   }
   baseUrl: string = environment.baseUrl;
   universeId: number = 0
+  loading = true;
 
   constructor(
     private readonly userService: UserService,
@@ -78,6 +79,9 @@ export class HeaderConstructorComponent extends DestroySubscription implements O
       } else {
         this.getUniverseById(id)
       }
+      this.loading = false
+    }, error => {
+      this.loading = false
     })
   }
 
@@ -94,8 +98,6 @@ export class HeaderConstructorComponent extends DestroySubscription implements O
   }
 
   saveHeader() {
-    console.log(this.hatPayload)
-
     this.userService.createUniverseHat(this.hatPayload, this.universeId).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
       console.log(data)
     })

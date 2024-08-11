@@ -50,7 +50,7 @@
     Description Constructor
   </h2>
   <div class="bg-[#15181F] h-full w-full p-2 border-2 border-[#E2A23B] rounded-[10px]">
-    <app-paragraph-constructor (detectSPChange)="setHatPayload($event)" class="w-full h-full" />
+    <app-paragraph-constructor *ngIf="!loading" [structuralParagraphs]="hatPayload.description" (detectSPChange)="setHatPayload($event)" class="w-full h-full" />
   </div>
   <button (click)="saveHeader()" class="w-full mt-[20px] poppins-font h-20 bg-[#FAFD5D] rounded-[10px] text-[24px] font-semibold">
     Save

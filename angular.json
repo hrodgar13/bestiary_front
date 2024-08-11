@@ -30,7 +30,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css",
+              "src/styles.scss",
               "node_modules/swiper/swiper-bundle.css"
             ],
             "scripts": []
@@ -123,7 +123,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css",
+              "src/styles.scss",
               "node_modules/swiper/swiper-bundle.css"
             ],
             "scripts": []

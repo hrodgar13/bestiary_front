@@ -1,4 +1,13 @@
-import {ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges
+} from '@angular/core';
 import {
   ImageMetadataParagraphInterface,
   UniverseStructureParagraphInterface
@@ -13,7 +22,7 @@ import {ParagraphActionsModalComponent} from "../modals/paragraph-actions-modal/
   templateUrl: './paragraph-constructor.component.html',
   styleUrls: ['./paragraph-constructor.component.scss']
 })
-export class ParagraphConstructorComponent extends DestroySubscription implements OnInit {
+export class ParagraphConstructorComponent extends DestroySubscription implements OnInit, OnChanges {
   @Input() structuralParagraphs: UniverseStructureParagraphInterface[] = [];
   @Output() detectSPChange = new EventEmitter<UniverseStructureParagraphInterface[]>
   sortedParagraphs: UniverseStructureParagraphInterface[] = [];
@@ -33,6 +42,12 @@ export class ParagraphConstructorComponent extends DestroySubscription implement
 
   ngOnInit() {
     this.sortedParagraphs = this.sortParagraphsByOrder()
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['structuralParagraphs']) {
+      this.sortedParagraphs = this.sortParagraphsByOrder()
+    }
   }
 
   addParagraph($event: UniverseStructureParagraphInterface) {
