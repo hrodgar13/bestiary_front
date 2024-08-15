@@ -16,6 +16,7 @@ import {takeUntil} from "rxjs";
 import {MatDialog} from "@angular/material/dialog";
 import {DestroySubscription} from "../../../../../../shared/helpers/destroy-subscribtion";
 import {ParagraphActionsModalComponent} from "../modals/paragraph-actions-modal/paragraph-actions-modal.component";
+import {environment} from "../../../../../../environments/environment";
 
 @Component({
   selector: 'app-paragraph-constructor',
@@ -24,6 +25,9 @@ import {ParagraphActionsModalComponent} from "../modals/paragraph-actions-modal/
 })
 export class ParagraphConstructorComponent extends DestroySubscription implements OnInit, OnChanges {
   @Input() structuralParagraphs: UniverseStructureParagraphInterface[] = [];
+  @Input() showPlaceForImage = false
+  @Input() position: 'left' | 'right' = 'right'
+
   @Output() detectSPChange = new EventEmitter<UniverseStructureParagraphInterface[]>
   sortedParagraphs: UniverseStructureParagraphInterface[] = [];
   paragraphForEdit: UniverseStructureParagraphInterface = {
@@ -32,6 +36,13 @@ export class ParagraphConstructorComponent extends DestroySubscription implement
     title: "",
     type: "text"
   };
+  @Input() presetImageOptions!: {
+    width: number,
+    height: number,
+    position: 'left' | 'right'
+  };
+
+  baseUrl = environment.baseUrl
 
   constructor(
     private readonly cdr: ChangeDetectorRef,

@@ -16,6 +16,8 @@ import {environment} from "../../../../../../environments/environment";
 })
 export class DescriptionStructuralParagraphComponent implements OnInit{
   @Input() paragraph!: UniverseStructureParagraphInterface
+  @Input() position: 'left' | 'right' = "right";
+  @Input() showPlaceForImage = false
 
   textParagraphOptions!: TextMetadataParagraphInterface
   numberParagraphOptions!: NumberMetadataParagraphInterface
