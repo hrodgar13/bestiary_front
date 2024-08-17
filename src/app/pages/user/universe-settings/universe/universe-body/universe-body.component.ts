@@ -23,6 +23,7 @@ export class UniverseBodyComponent extends DestroySubscription implements OnInit
   baseUrl: string = environment.baseUrl;
   categoryCreationMode: boolean = false;
   categoryCreateForm!: UntypedFormGroup;
+  editingModeEnabled = false
 
   constructor(
     private readonly formBuilder: UntypedFormBuilder,
@@ -44,6 +45,8 @@ export class UniverseBodyComponent extends DestroySubscription implements OnInit
     this.categoryCreateForm = this.formBuilder.group({
       categoryName: [null, Validators.required]
     })
+
+    this.detectEditingModeStatus()
   }
 
   private getUniverse(universeId: number) {
@@ -63,6 +66,9 @@ export class UniverseBodyComponent extends DestroySubscription implements OnInit
     this.userService.universe$.pipe(takeUntil(this.destroyStream$)).subscribe(data => {
       if(data && Number(data.id) === Number(universeId)) {
         this.universe = data
+
+        const needToEnableEditMode = this.universe.categories && this.universe.categories.length > 0 && this.universe.hat
+        this.userService.editMode$.next(!needToEnableEditMode)
       } else {
         this.getUniverse(universeId)
       }
@@ -92,6 +98,12 @@ export class UniverseBodyComponent extends DestroySubscription implements OnInit
         duration: 3000,
         verticalPosition: "top"
       })
+    })
+  }
+
+  private detectEditingModeStatus() {
+    this.userService.editMode$.pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+      this.editingModeEnabled = data
     })
   }
 }

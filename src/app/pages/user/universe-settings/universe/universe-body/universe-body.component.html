@@ -1,7 +1,7 @@
 <div *ngIf="universe" class="w-full h-full">
   <div *ngIf="universe.hat; else createHeader" class="flex justify-between items-center">
     <h2 class="text-[#E2A23B] playfair-font text-[48px]">{{universe.hat.universeName}}</h2>
-    <div class="flex gap-5 items-center">
+    <div *ngIf="editingModeEnabled" class="flex gap-5 items-center">
       <a [routerLink]="['./' + 'header']" class="flex items-center justify-center w-[48px] h-[48px] border-2 bg-[#1E232D] rounded-[12px] border-[#E2A23B]">
         <mat-icon class="text-[#E2A23B]">edit</mat-icon>
       </a>
@@ -30,15 +30,17 @@
       Create Header
     </a>
   </ng-template>
-  <button *ngIf="!categoryCreationMode; else createCategory" (click)="openCloseCategoryCreationMode(true)" class="w-full mt-[20px] poppins-font h-20 bg-[#FAFD5D] rounded-[10px] text-[24px] font-semibold">
-    Create Category
-  </button>
-  <ng-template #createCategory>
-    <form [formGroup]="categoryCreateForm" (ngSubmit)="sendCategory()" class="h-[100px] w-full rounded-[20px] bg-[#1C1E25] border-2 border-[#FAFD5D] flex justify-between items-center p-4">
-      <input formControlName="categoryName" type="text" class="w-full max-w-[480px] text-[#B1A79C] h-[48px] rounded-[10px] bg-[#1C1E25] border-2 border-[#E2A23B] outline-none p-1" placeholder="Type category name here...">
-      <button type="submit" class="min-w-[48px] min-h-[48px] bg-[#E2A23B] rounded-[10px] flex items-center justify-center">
-        <mat-icon>done</mat-icon>
-      </button>
-    </form>
-  </ng-template>
+  <div *ngIf="editingModeEnabled">
+    <button *ngIf="!categoryCreationMode; else createCategory" (click)="openCloseCategoryCreationMode(true)" class="w-full mt-[20px] poppins-font h-20 bg-[#FAFD5D] rounded-[10px] text-[24px] font-semibold">
+      Create Category
+    </button>
+    <ng-template #createCategory>
+      <form [formGroup]="categoryCreateForm" (ngSubmit)="sendCategory()" class="h-[100px] mt-[20px] w-full rounded-[20px] bg-[#1C1E25] border-2 border-[#FAFD5D] flex justify-between items-center p-4">
+        <input formControlName="categoryName" type="text" class="w-full max-w-[480px] text-[#B1A79C] h-[48px] rounded-[10px] bg-[#1C1E25] border-2 border-[#E2A23B] outline-none p-1" placeholder="Type category name here...">
+        <button type="submit" class="min-w-[48px] min-h-[48px] bg-[#E2A23B] rounded-[10px] flex items-center justify-center">
+          <mat-icon>done</mat-icon>
+        </button>
+      </form>
+    </ng-template>
+  </div>
 </div>
