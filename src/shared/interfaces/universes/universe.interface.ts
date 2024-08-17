@@ -48,10 +48,10 @@ export interface ListMetadataParagraphInterface {
 }
 
 export interface UniverseCategoryInterface {
-  id: number
+  id?: number
   title: string
-  isOpened: boolean
-  items: UniverseCategoryItem[]
+  isOpened?: boolean
+  items?: UniverseCategoryItem[]
 }
 
 export interface UniverseCategoryItem {

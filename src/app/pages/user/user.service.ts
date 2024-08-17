@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {ApiService} from "../../../shared/services/api.service";
 import {BehaviorSubject, Observable} from "rxjs";
 import {
   CreateUniverse,
-  MOCK_UNIVERSE, UniverseHatInterface,
+  MOCK_UNIVERSE, UniverseCategoryInterface, UniverseHatInterface,
   UniverseInterface,
   UniverseListItem
 } from "../../../shared/interfaces/universes/universe.interface";
@@ -11,37 +11,42 @@ import {
 @Injectable()
 export class UserService {
 
-  universe$ = new BehaviorSubject<UniverseInterface | null>(null)
+    universe$ = new BehaviorSubject<UniverseInterface | null>(null)
 
-  constructor(
-    private readonly apiService: ApiService
-  ) { }
+    constructor(
+        private readonly apiService: ApiService
+    ) {
+    }
 
-  uploadAvatar(selectedImage: File) {
-    return this.apiService.uploadPhoto(selectedImage)
-  }
+    uploadAvatar(selectedImage: File) {
+        return this.apiService.uploadPhoto(selectedImage)
+    }
 
-  removePhoto(selectedImage: string): Observable<any> {
-    return  this.apiService.removePhoto(selectedImage)
-  }
+    removePhoto(selectedImage: string): Observable<any> {
+        return this.apiService.removePhoto(selectedImage)
+    }
 
-  getUniverseFilterCategories(): Observable<string[]> {
-    return this.apiService.getUniverseFilterCategories()
-  }
+    getUniverseFilterCategories(): Observable<string[]> {
+        return this.apiService.getUniverseFilterCategories()
+    }
 
-  getUniverses(): Observable<UniverseListItem[]> {
-    return this.apiService.getUniverses()
-  }
+    getUniverses(): Observable<UniverseListItem[]> {
+        return this.apiService.getUniverses()
+    }
 
-  getUniverseById(universeId: number) {
-    return this.apiService.getUniverseById(universeId)
-  }
+    getUniverseById(universeId: number) {
+        return this.apiService.getUniverseById(universeId)
+    }
 
-  createUniverse(): Observable<CreateUniverse> {
-    return this.apiService.createUniverse()
-  }
+    createUniverse(): Observable<CreateUniverse> {
+        return this.apiService.createUniverse()
+    }
 
-  createUniverseHat(hatPayload: UniverseHatInterface, universeId: number) {
-    return this.apiService.updateUniverseHat(hatPayload, universeId)
-  }
+    createUniverseHat(hatPayload: UniverseHatInterface, universeId: number) {
+        return this.apiService.updateUniverseHat(hatPayload, universeId)
+    }
+
+    createCategory(payload: UniverseCategoryInterface, universeId: number) {
+        return this.apiService.createCategory(payload, universeId)
+    }
 }
