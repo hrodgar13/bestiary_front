@@ -12,6 +12,7 @@ import {
 export class UserService {
 
     universe$ = new BehaviorSubject<UniverseInterface | null>(null)
+    editMode$ = new BehaviorSubject<boolean>(false);
 
     constructor(
         private readonly apiService: ApiService

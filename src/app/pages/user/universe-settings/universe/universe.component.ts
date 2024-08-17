@@ -1,18 +1,29 @@
 import {Component, OnInit} from '@angular/core';
 import {DestroySubscription} from "../../../../../shared/helpers/destroy-subscribtion";
-import {ActivatedRoute} from "@angular/router";
-import {takeUntil} from "rxjs";
 import {UserService} from "../../user.service";
-import {
-  UniverseInterface, UniverseStructureParagraphInterface
-} from "../../../../../shared/interfaces/universes/universe.interface";
-import {environment} from "../../../../../environments/environment";
+import {takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-universe',
   templateUrl: './universe.component.html',
   styleUrls: ['./universe.component.scss']
 })
-export class UniverseComponent {
+export class UniverseComponent extends DestroySubscription implements OnInit{
+  editMode: boolean = false;
 
+  constructor(
+    private readonly userService: UserService
+  ) {
+    super();
+  }
+
+  ngOnInit() {
+    this.userService.editMode$.pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+      this.editMode = data
+    })
+  }
+
+  setEditMode(status: boolean) {
+    this.userService.editMode$.next(status)
+  }
 }

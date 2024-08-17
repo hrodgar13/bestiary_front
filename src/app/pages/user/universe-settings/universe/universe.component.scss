@@ -15,3 +15,12 @@
   clear: both;
   display: table;
 }
+
+
+.openMenu {
+  transform: translate3d(262px, 0, 0);
+
+  svg {
+    rotate: 180deg;
+  }
+}
