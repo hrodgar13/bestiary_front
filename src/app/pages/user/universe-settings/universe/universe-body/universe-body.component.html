@@ -22,7 +22,7 @@
       <app-description-structural-paragraph [paragraph]="descriptionElement"/>
     </div>
     <div class="flex  gap-11 flex-col w-full h-full">
-      <app-universe-category *ngFor="let category of universe.categories" class="w-full h-full" [category]="category" />
+      <app-universe-category [editingModeEnabled]="editingModeEnabled" *ngFor="let category of universe.categories" class="w-full h-full" [category]="category" />
     </div>
   </div>
   <ng-template #createHeader>

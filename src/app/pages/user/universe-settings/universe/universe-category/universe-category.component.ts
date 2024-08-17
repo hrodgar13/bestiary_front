@@ -28,6 +28,7 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
 })
 export class UniverseCategoryComponent {
   @Input() category!: UniverseCategoryInterface
+  @Input() editingModeEnabled = false
 
   openCategory() {
     this.category.isOpened = !this.category.isOpened

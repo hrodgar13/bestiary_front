@@ -32,5 +32,8 @@
         <app-description-structural-paragraph *ngFor="let paragraph of sortedByOrder(item.information)" [paragraph]="paragraph"/>
       </div>
     </div>
+    <a *ngIf="editingModeEnabled || !category.items || category.items?.length === 0" [routerLink]="['./' + 'category/' + category.id + '/item' + '/new']" class="w-full cursor-pointer poppins-font flex items-center justify-center h-20 bg-[#FAFD5D] rounded-[10px] text-[24px] font-semibold">
+      Create Write
+    </a>
   </div>
 </div>

@@ -26,6 +26,7 @@ import { CreateDateComponent } from './universe-settings/universe-constructor/pa
 import { CreateImageComponent } from './universe-settings/universe-constructor/paragraph-constructor/create-paragraph/create-image/create-image.component';
 import { CreateListComponent } from './universe-settings/universe-constructor/paragraph-constructor/create-paragraph/create-list/create-list.component';
 import { ParagraphActionsModalComponent } from './universe-settings/universe-constructor/modals/paragraph-actions-modal/paragraph-actions-modal.component';
+import { CategoryItemConstructorComponent } from './universe-settings/universe-constructor/category-item-constructor/category-item-constructor.component';
 
 
 
@@ -51,7 +52,8 @@ import { ParagraphActionsModalComponent } from './universe-settings/universe-con
     CreateDateComponent,
     CreateImageComponent,
     CreateListComponent,
-    ParagraphActionsModalComponent
+    ParagraphActionsModalComponent,
+    CategoryItemConstructorComponent
   ],
   imports: [
     CommonModule,

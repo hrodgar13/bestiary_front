@@ -9,6 +9,9 @@ import {
   HeaderConstructorComponent
 } from "./universe-settings/universe-constructor/header-constructor/header-constructor.component";
 import {UniverseBodyComponent} from "./universe-settings/universe/universe-body/universe-body.component";
+import {
+  CategoryItemConstructorComponent
+} from "./universe-settings/universe-constructor/category-item-constructor/category-item-constructor.component";
 
 const routes: Routes = [
   {
@@ -40,6 +43,10 @@ const routes: Routes = [
           {
             path: ':id/header',
             component: HeaderConstructorComponent
+          },
+          {
+            path: ':id/category/:categoryId/item/:itemId',
+            component: CategoryItemConstructorComponent
           }
         ]
       }
