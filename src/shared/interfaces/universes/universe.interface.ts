@@ -55,7 +55,7 @@ export interface UniverseCategoryInterface {
 }
 
 export interface UniverseCategoryItem {
-  id: number
+  id?: number
   title: string
   information: UniverseStructureParagraphInterface[]
 }

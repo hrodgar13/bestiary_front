@@ -1,0 +1,22 @@
+<div class="h-full w-full flex flex-col gap-10">
+  <h2 class="playfair-font text-[#E2A23B] text-[48px] font-semibold">
+    Category item name
+  </h2>
+  <div class="w-full flex items-center poppins-font border-2 border-[#E2A23B] rounded-[10px] p-2.5 max-w-[280px]">
+    <input [(ngModel)]="categoryItem.title"
+           class="w-full h-full text-[#B1A79C] bg-transparent outline-0" type="text"
+           placeholder="{{'Title' | transloco}}..."/>
+  </div>
+  <h2 class="playfair-font text-[#E2A23B] text-[48px] font-semibold">
+    Description Constructor
+  </h2>
+  <div class="bg-[#15181F] h-full w-full p-2 border-2 border-[#E2A23B] rounded-[10px]">
+    <app-paragraph-constructor [structuralParagraphs]="categoryItem.information"
+                               (detectSPChange)="setCategoryItemDescription($event)" class="w-full h-full"/>
+  </div>
+  <button (click)="saveItem()"
+          class="w-full mt-[20px] poppins-font h-20 bg-[#FAFD5D] rounded-[10px] text-[24px] font-semibold">
+    Save
+  </button>
+</div>
+

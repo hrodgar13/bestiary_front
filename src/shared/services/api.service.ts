@@ -6,7 +6,7 @@ import {Creature} from "../interfaces/creature/get/creature";
 import {Attribute} from "../interfaces/creature/get/attribute";
 import {CreatureListFilter} from "../interfaces/filters/creature-list-filter";
 import {
-    FilteredCreatureDataMetaDto,
+  FilteredCreatureDataMetaDto,
 } from "../interfaces/filters/creatures.list";
 import {FileUpload} from "../interfaces/file/file-upload.interface";
 import {MessageI} from "../interfaces/message.interface";
@@ -17,136 +17,140 @@ import {
   CreateUniverse,
   MOCK_UNIVERSE,
   MOCK_UNIVERSE_LIST,
-  UNIVERSE_FILTERING_CATEGORIES, UniverseCategoryInterface, UniverseHatInterface,
+  UNIVERSE_FILTERING_CATEGORIES, UniverseCategoryInterface, UniverseCategoryItem, UniverseHatInterface,
   UniverseInterface, UniverseListItem
 } from "../interfaces/universes/universe.interface";
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class ApiService {
 
-    greenBtnChange$ = new BehaviorSubject<string>('')
+  greenBtnChange$ = new BehaviorSubject<string>('')
 
-    constructor(
-        private http: HttpClient
-    ) {
+  constructor(
+    private http: HttpClient
+  ) {
+  }
+
+  createCreature(creaturePayload: any): Observable<Creature> {
+    return this.http.post<Creature>(`api/creature`, creaturePayload);
+  }
+
+  getCreaturesList(filter: CreatureListFilter[], search: string, perPage: number, finished?: string): Observable<FilteredCreatureDataMetaDto> {
+    let params: HttpParams = this.transformArrayInParams(filter)
+
+    if (finished) {
+      params = params.set('finished', finished)
     }
 
-    createCreature(creaturePayload: any): Observable<Creature> {
-        return this.http.post<Creature>(`api/creature`, creaturePayload);
-    }
+    params = params.set('search', search)
+      .set('perPage', perPage)
 
-    getCreaturesList(filter: CreatureListFilter[], search: string, perPage: number, finished?: string): Observable<FilteredCreatureDataMetaDto> {
-        let params: HttpParams = this.transformArrayInParams(filter)
+    return this.http.get<FilteredCreatureDataMetaDto>(`api/creature/list`, {params});
+  }
 
-        if (finished) {
-            params = params.set('finished', finished)
-        }
+  getCreatureById(id: number): Observable<Creature> {
+    return this.http.get<Creature>(`api/creature/list/${id}`)
+  }
 
-        params = params.set('search', search)
-            .set('perPage', perPage)
+  patchCreature(creatureId: number, creaturePayload: any) {
+    return this.http.patch(`api/creature/${creatureId}`, creaturePayload)
+  }
 
-        return this.http.get<FilteredCreatureDataMetaDto>(`api/creature/list`, {params});
-    }
+  createAttribute(payload: CreateAttribute): Observable<Attribute> {
+    return this.http.post<Attribute>(`api/attribute`, payload)
+  }
 
-    getCreatureById(id: number): Observable<Creature> {
-        return this.http.get<Creature>(`api/creature/list/${id}`)
-    }
+  getDataForSelect(route: string): Observable<Attribute[]> {
+    return this.http.get<Attribute[]>(`api/attribute/${route}`)
+  }
 
-    patchCreature(creatureId: number, creaturePayload: any) {
-        return this.http.patch(`api/creature/${creatureId}`, creaturePayload)
-    }
+  getFilters(): Observable<CreatureListFilter[]> {
+    return this.http.get<CreatureListFilter[]>(`api/attribute`)
+  }
 
-    createAttribute(payload: CreateAttribute): Observable<Attribute> {
-        return this.http.post<Attribute>(`api/attribute`, payload)
-    }
+  uploadPhoto(file: File): Observable<FileUpload> {
+    const formData = new FormData();
+    formData.append('file', file);
 
-    getDataForSelect(route: string): Observable<Attribute[]> {
-        return this.http.get<Attribute[]>(`api/attribute/${route}`)
-    }
+    return this.http.post<FileUpload>('api/file-upload', formData);
+  }
 
-    getFilters(): Observable<CreatureListFilter[]> {
-        return this.http.get<CreatureListFilter[]>(`api/attribute`)
-    }
+  removePhoto(selectedImage: string) {
+    return this.http.delete<any>(`api/file-upload/remove/${selectedImage}`);
+  }
 
-    uploadPhoto(file: File): Observable<FileUpload> {
-        const formData = new FormData();
-        formData.append('file', file);
+  deleteFilter(id: number) {
+    return this.http.delete<MessageI>(`api/attribute/${id}`)
+  }
 
-        return this.http.post<FileUpload>('api/file-upload', formData);
-    }
+  editAttribute(payload: Translation, id: number): Observable<Attribute> {
+    return this.http.patch<Attribute>(`api/attribute/${id}`, payload)
+  }
 
-    removePhoto(selectedImage: string) {
-        return this.http.delete<any>(`api/file-upload/remove/${selectedImage}`);
-    }
+  sendMessage(payload: CreateRequest): Observable<MessageI> {
+    return this.http.post<MessageI>(`api/message`, payload)
+  }
 
-    deleteFilter(id: number) {
-        return this.http.delete<MessageI>(`api/attribute/${id}`)
-    }
+  getReqList(perPage: number, onlyAdminRequest: boolean = false): Observable<RequestDataMetaI> {
 
-    editAttribute(payload: Translation, id: number): Observable<Attribute> {
-        return this.http.patch<Attribute>(`api/attribute/${id}`, payload)
-    }
+    const params: HttpParams = new HttpParams()
+      .set('onlyAdminRequest', onlyAdminRequest)
+      .set('perPage', perPage)
 
-    sendMessage(payload: CreateRequest): Observable<MessageI> {
-        return this.http.post<MessageI>(`api/message`, payload)
-    }
+    return this.http.get<RequestDataMetaI>(`api/message/list`, {params})
+  }
 
-    getReqList(perPage: number, onlyAdminRequest: boolean = false): Observable<RequestDataMetaI> {
+  deleteMessage(id: number): Observable<MessageI> {
+    return this.http.delete<MessageI>(`api/message/${id}`)
+  }
 
-        const params: HttpParams = new HttpParams()
-            .set('onlyAdminRequest', onlyAdminRequest)
-            .set('perPage', perPage)
+  changeReadStatus(id: number) {
+    return this.http.patch(`api/message/read/${id}`, {})
+  }
 
-        return this.http.get<RequestDataMetaI>(`api/message/list`, {params})
-    }
+  setAsAdmin(id: number): Observable<MessageI> {
+    return this.http.patch<MessageI>(`api/auth/role/admin/${id}`, {})
+  }
 
-    deleteMessage(id: number): Observable<MessageI> {
-        return this.http.delete<MessageI>(`api/message/${id}`)
-    }
+  private transformArrayInParams(filter: CreatureListFilter[]): HttpParams {
+    return filter
+      .reduce((params, key) => {
 
-    changeReadStatus(id: number) {
-        return this.http.patch(`api/message/read/${id}`, {})
-    }
+        return params.set(key.filter_cat, key.filter_values.map(item => item.id).toString());
+      }, new HttpParams())
+  }
 
-    setAsAdmin(id: number): Observable<MessageI> {
-        return this.http.patch<MessageI>(`api/auth/role/admin/${id}`, {})
-    }
+  deleteActionAbility(id: number): Observable<MessageI> {
+    return this.http.delete<MessageI>(`api/creature/action-ability/${id}`);
+  }
 
-    private transformArrayInParams(filter: CreatureListFilter[]): HttpParams {
-        return filter
-            .reduce((params, key) => {
+  getUniverseFilterCategories() {
+    return of(UNIVERSE_FILTERING_CATEGORIES);
+  }
 
-                return params.set(key.filter_cat, key.filter_values.map(item => item.id).toString());
-            }, new HttpParams())
-    }
+  getUniverses(): Observable<UniverseListItem[]> {
+    return this.http.get<UniverseListItem[]>(`api/settings/universe-list`);
+  }
 
-    deleteActionAbility(id: number): Observable<MessageI> {
-        return this.http.delete<MessageI>(`api/creature/action-ability/${id}`);
-    }
+  getUniverseById(universeId: number): Observable<UniverseInterface> {
+    return this.http.get<UniverseInterface>(`api/settings/universe/${universeId}`)
+  }
 
-    getUniverseFilterCategories() {
-        return of(UNIVERSE_FILTERING_CATEGORIES);
-    }
+  createUniverse(): Observable<CreateUniverse> {
+    return this.http.post<CreateUniverse>(`api/settings/universe`, {})
+  }
 
-    getUniverses(): Observable<UniverseListItem[]> {
-        return this.http.get<UniverseListItem[]>(`api/settings/universe-list`);
-    }
+  updateUniverseHat(hatPayload: UniverseHatInterface, universeId: number) {
+    return this.http.post(`api/settings/universe/${universeId}/hat`, hatPayload)
+  }
 
-    getUniverseById(universeId: number): Observable<UniverseInterface> {
-        return this.http.get<UniverseInterface>(`api/settings/universe/${universeId}`)
-    }
+  createCategory(payload: UniverseCategoryInterface, universeId: number): Observable<UniverseCategoryInterface> {
+    return this.http.post<UniverseCategoryInterface>(`api/settings/universe/${universeId}/category`, payload)
+  }
 
-    createUniverse(): Observable<CreateUniverse> {
-        return this.http.post<CreateUniverse>(`api/settings/universe`, {})
-    }
-
-    updateUniverseHat(hatPayload: UniverseHatInterface, universeId: number) {
-        return this.http.post(`api/settings/universe/${universeId}/hat`, hatPayload)
-    }
-
-    createCategory(payload: UniverseCategoryInterface, universeId: number): Observable<UniverseCategoryInterface> {
-        return this.http.post<UniverseCategoryInterface>(`api/settings/universe/${universeId}/category`, payload)
-    }
+  createCategoryItem(payload: UniverseCategoryItem, universeId: number, categoryId: number): Observable<UniverseCategoryItem> {
+    return this.http.post<UniverseCategoryItem>(`api/settings/universe/${universeId}/category/${categoryId}/item`, payload)
+  }
 }

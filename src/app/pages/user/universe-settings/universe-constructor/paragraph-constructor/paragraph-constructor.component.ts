@@ -26,7 +26,7 @@ import {environment} from "../../../../../../environments/environment";
 export class ParagraphConstructorComponent extends DestroySubscription implements OnInit, OnChanges {
   @Input() structuralParagraphs: UniverseStructureParagraphInterface[] = [];
   @Input() showPlaceForImage = false
-  @Input() position: 'left' | 'right' = 'right'
+  @Input() position?: 'left' | 'right'
 
   @Output() detectSPChange = new EventEmitter<UniverseStructureParagraphInterface[]>
   sortedParagraphs: UniverseStructureParagraphInterface[] = [];

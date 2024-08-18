@@ -99,7 +99,7 @@ export class HeaderConstructorComponent extends DestroySubscription implements O
 
   saveHeader() {
     this.userService.createUniverseHat(this.hatPayload, this.universeId).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
-      console.log(data)
+
     })
   }
 
