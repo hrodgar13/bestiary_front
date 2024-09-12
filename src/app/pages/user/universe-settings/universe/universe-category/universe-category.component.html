@@ -13,13 +13,13 @@
   </div>
   <div class="mt-10 flex flex-col gap-9" *ngIf="category.isOpened" @slideInOut>
     <div class="border-2 bg-[#1E232D] rounded-[20px] border-[#E2A23B] w-full h-full p-4">
-      <input class="poppins-font text-[#B1A79C] w-full text-[16px] bg-transparent outline-0 border-0" placeholder="Search by name:" type="text">
+      <input [(ngModel)]="title" (ngModelChange)="setNameFilter()" class="poppins-font text-[#B1A79C] w-full text-[16px] bg-transparent outline-0 border-0" placeholder="Search by name:" type="text">
     </div>
 
     <div class="border-2 bg-[#1E232D] rounded-[20px] border-[#E2A23B] w-full h-full p-4" *ngFor="let item of category.items">
       <div class="flex justify-between items-center">
         <h2 class="text-[#E2A23B] playfair-font text-[48px]">{{item.title}}</h2>
-        <div class="flex gap-4">
+        <div *ngIf="editingModeEnabled" class="flex gap-4">
           <button class="flex items-center justify-center w-[48px] h-[48px] border-2 bg-[#1E232D] rounded-[12px] border-[#E2A23B]">
             <mat-icon class="text-[#E2A23B]">edit</mat-icon>
           </button>
@@ -36,4 +36,7 @@
       Create Write
     </a>
   </div>
+</div>
+<div *ngIf="paginationLoading">
+  <app-loader></app-loader>
 </div>

@@ -17,8 +17,13 @@ import {
   CreateUniverse,
   MOCK_UNIVERSE,
   MOCK_UNIVERSE_LIST,
-  UNIVERSE_FILTERING_CATEGORIES, UniverseCategoryInterface, UniverseCategoryItem, UniverseHatInterface,
-  UniverseInterface, UniverseListItem
+  UNIVERSE_FILTERING_CATEGORIES,
+  UniverseCategoryInterface,
+  UniverseCategoryInterfaceMeta,
+  UniverseCategoryItem,
+  UniverseHatInterface,
+  UniverseInterface,
+  UniverseListItem
 } from "../interfaces/universes/universe.interface";
 
 @Injectable({
@@ -152,5 +157,13 @@ export class ApiService {
 
   createCategoryItem(payload: UniverseCategoryItem, universeId: number, categoryId: number): Observable<UniverseCategoryItem> {
     return this.http.post<UniverseCategoryItem>(`api/settings/universe/${universeId}/category/${categoryId}/item`, payload)
+  }
+
+  getCategoryItems(universeId: number, categoryId: number, page: number, title: string): Observable<UniverseCategoryInterfaceMeta> {
+    const params: HttpParams = new HttpParams()
+      .set('title', title)
+      .set('page', page)
+
+    return this.http.get<UniverseCategoryInterfaceMeta>(`api/settings/universe/${universeId}/category/${categoryId}`, {params})
   }
 }

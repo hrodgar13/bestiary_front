@@ -225,3 +225,8 @@ export enum METADATA_FIELD_TYPE {
   image = 'image',
   list = 'list'
 }
+
+export interface UniverseCategoryInterfaceMeta {
+  total: number
+  items: UniverseCategoryItem[]
+}

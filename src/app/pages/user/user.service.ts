@@ -3,7 +3,7 @@ import {ApiService} from "../../../shared/services/api.service";
 import {BehaviorSubject, Observable} from "rxjs";
 import {
   CreateUniverse,
-  MOCK_UNIVERSE, UniverseCategoryInterface, UniverseCategoryItem, UniverseHatInterface,
+  MOCK_UNIVERSE, UniverseCategoryInterface, UniverseCategoryInterfaceMeta, UniverseCategoryItem, UniverseHatInterface,
   UniverseInterface,
   UniverseListItem
 } from "../../../shared/interfaces/universes/universe.interface";
@@ -13,6 +13,7 @@ export class UserService {
 
   universe$ = new BehaviorSubject<UniverseInterface | null>(null)
   editMode$ = new BehaviorSubject<boolean>(false);
+  universeCategories$ = new BehaviorSubject<UniverseCategoryInterfaceMeta[] | null>(null);
 
   constructor(
     private readonly apiService: ApiService
@@ -53,5 +54,9 @@ export class UserService {
 
   createCategoryItem(payload: UniverseCategoryItem, universeId: number, categoryId: number) {
     return this.apiService.createCategoryItem(payload, universeId, categoryId)
+  }
+
+  getCategoryItems(universeId: number, categoryId: number, page: number, title: string) {
+    return this.apiService.getCategoryItems(universeId, categoryId, page, title)
   }
 }
