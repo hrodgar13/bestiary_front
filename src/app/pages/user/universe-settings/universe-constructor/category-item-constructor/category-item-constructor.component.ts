@@ -37,6 +37,11 @@ export class CategoryItemConstructorComponent extends DestroySubscription implem
       if(data['id'] && data['categoryId']) {
         this.universeId = data['id']
         this.categoryId = data['categoryId']
+        const itemId = data['itemId']
+
+        if(!!Number(itemId)) {
+          this.getCategoryItemById(this.universeId, this.categoryId, itemId)
+        }
       }
     })
 
@@ -55,6 +60,13 @@ export class CategoryItemConstructorComponent extends DestroySubscription implem
         verticalPosition: "top",
         duration: 3000
       })
+    })
+  }
+
+  private getCategoryItemById(universeId: number, categoryId: number, itemId: number) {
+    this.userService.getCategoryItemById(universeId, categoryId, itemId).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+      this.categoryItem = data
+      console.log(this.categoryItem)
     })
   }
 }

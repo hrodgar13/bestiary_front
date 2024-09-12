@@ -166,4 +166,8 @@ export class ApiService {
 
     return this.http.get<UniverseCategoryInterfaceMeta>(`api/settings/universe/${universeId}/category/${categoryId}`, {params})
   }
+
+  getCategoryItemById(universeId: number, categoryId: number, itemId: number): Observable<UniverseCategoryItem> {
+    return this.http.get<UniverseCategoryItem>(`api/settings/universe/${universeId}/category/${categoryId}/item/${itemId}`)
+  }
 }

@@ -59,4 +59,8 @@ export class UserService {
   getCategoryItems(universeId: number, categoryId: number, page: number, title: string) {
     return this.apiService.getCategoryItems(universeId, categoryId, page, title)
   }
+
+  getCategoryItemById(universeId: number, categoryId: number, itemId: number): Observable<UniverseCategoryItem> {
+    return this.apiService.getCategoryItemById(universeId, categoryId, itemId)
+  }
 }

@@ -20,9 +20,9 @@
       <div class="flex justify-between items-center">
         <h2 class="text-[#E2A23B] playfair-font text-[48px]">{{item.title}}</h2>
         <div *ngIf="editingModeEnabled" class="flex gap-4">
-          <button class="flex items-center justify-center w-[48px] h-[48px] border-2 bg-[#1E232D] rounded-[12px] border-[#E2A23B]">
+          <a [routerLink]="['./' + 'category/' + category.id + '/item' + '/' + item.id]" class="flex items-center justify-center w-[48px] h-[48px] border-2 bg-[#1E232D] rounded-[12px] border-[#E2A23B]">
             <mat-icon class="text-[#E2A23B]">edit</mat-icon>
-          </button>
+          </a>
           <button class="flex items-center justify-center w-[48px] h-[48px] border-2 bg-[#1E232D] rounded-[12px] border-[#E2A23B]">
             <mat-icon class="text-[#E2A23B]">delete</mat-icon>
           </button>
