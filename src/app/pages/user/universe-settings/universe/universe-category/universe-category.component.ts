@@ -6,7 +6,10 @@ import {
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {DestroySubscription} from "../../../../../../shared/helpers/destroy-subscribtion";
 import {UserService} from "../../../user.service";
-import {debounceTime, Subject, takeUntil} from "rxjs";
+import {debounceTime, Subject, take, takeUntil} from "rxjs";
+import {MatDialog} from "@angular/material/dialog";
+import {ConfirmDialogComponent} from "../../../../../../shared/components/confirm-dialog/confirm-dialog.component";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-universe-category',
@@ -40,7 +43,9 @@ export class UniverseCategoryComponent extends DestroySubscription implements On
   paginationLoading: boolean = false;
 
   constructor(
-    private userService: UserService
+    private userService: UserService,
+    private dialog: MatDialog,
+    private matSnack: MatSnackBar
   ) {
     super()
   }
@@ -103,5 +108,28 @@ export class UniverseCategoryComponent extends DestroySubscription implements On
         this.getCategoryItems()
       }
     }
+  }
+
+  deleteCategoryItem(itemId: number) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        message: 'Are you sure? There is no way back'
+      }
+    })
+
+    dialogRef.afterClosed().pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+      if(data) {
+        this.processDeleteCategoryItem(itemId)
+      }
+    })
+  }
+
+  private processDeleteCategoryItem(itemId: number) {
+    this.userService.deleteCategoryItem(itemId).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+      this.matSnack.open('Item Deleted!', 'ok', {
+        verticalPosition: "top",
+        duration: 3000,
+      })
+    })
   }
 }

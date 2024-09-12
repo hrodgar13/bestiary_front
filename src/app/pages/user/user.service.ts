@@ -63,4 +63,8 @@ export class UserService {
   getCategoryItemById(universeId: number, categoryId: number, itemId: number): Observable<UniverseCategoryItem> {
     return this.apiService.getCategoryItemById(universeId, categoryId, itemId)
   }
+
+  deleteCategoryItem(itemId: number) {
+    return this.apiService.deleteCategoryItem(itemId)
+  }
 }

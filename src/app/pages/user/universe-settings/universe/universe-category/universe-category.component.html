@@ -23,7 +23,7 @@
           <a [routerLink]="['./' + 'category/' + category.id + '/item' + '/' + item.id]" class="flex items-center justify-center w-[48px] h-[48px] border-2 bg-[#1E232D] rounded-[12px] border-[#E2A23B]">
             <mat-icon class="text-[#E2A23B]">edit</mat-icon>
           </a>
-          <button class="flex items-center justify-center w-[48px] h-[48px] border-2 bg-[#1E232D] rounded-[12px] border-[#E2A23B]">
+          <button (click)="deleteCategoryItem(item.id)" class="flex items-center justify-center w-[48px] h-[48px] border-2 bg-[#1E232D] rounded-[12px] border-[#E2A23B]">
             <mat-icon class="text-[#E2A23B]">delete</mat-icon>
           </button>
         </div>

@@ -170,4 +170,8 @@ export class ApiService {
   getCategoryItemById(universeId: number, categoryId: number, itemId: number): Observable<UniverseCategoryItem> {
     return this.http.get<UniverseCategoryItem>(`api/settings/universe/${universeId}/category/${categoryId}/item/${itemId}`)
   }
+
+  deleteCategoryItem(itemId: number) {
+    return this.http.delete(`api/settings/universe/category/item/${itemId}`)
+  }
 }
