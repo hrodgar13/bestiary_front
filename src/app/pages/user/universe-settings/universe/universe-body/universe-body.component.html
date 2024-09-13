@@ -24,7 +24,7 @@
       </div>
     </div>
     <div class="flex mt-10 gap-11 flex-col w-full h-full">
-      <app-universe-category [editingModeEnabled]="editingModeEnabled" *ngFor="let category of universe.categories" class="w-full h-full" [category]="category" [universeId]="universe.id"/>
+      <app-universe-category (categoryDelete)="deleteCategory($event)" [editingModeEnabled]="editingModeEnabled" *ngFor="let category of universe.categories" class="w-full h-full" [category]="category" [universeId]="universe.id"/>
     </div>
   </div>
   <ng-template #createHeader>

@@ -174,4 +174,8 @@ export class ApiService {
   deleteCategoryItem(itemId: number) {
     return this.http.delete(`api/settings/universe/category/item/${itemId}`)
   }
+
+  deleteCategory(categoryId: number) {
+    return this.http.delete(`api/settings/universe/category/${categoryId}`)
+  }
 }

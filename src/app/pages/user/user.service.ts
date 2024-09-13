@@ -67,4 +67,8 @@ export class UserService {
   deleteCategoryItem(itemId: number) {
     return this.apiService.deleteCategoryItem(itemId)
   }
+
+  deleteCategory(categoryId: number) {
+    return this.apiService.deleteCategory(categoryId)
+  }
 }

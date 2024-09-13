@@ -104,4 +104,12 @@ export class UniverseBodyComponent extends DestroySubscription implements OnInit
       console.log(data)
     })
   }
+
+  deleteCategory($event: number) {
+    const idx = this.universe.categories?.findIndex(item => item.id === $event)
+
+    if(idx && idx !== -1) {
+      this.universe.categories?.splice(idx, 1)
+    }
+  }
 }
