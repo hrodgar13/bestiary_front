@@ -7,11 +7,13 @@ import {
   UniverseStructureParagraphInterface
 } from "../../../../../../shared/interfaces/universes/universe.interface";
 import {environment} from "../../../../../../environments/environment";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {UserService} from "../../../user.service";
 import {takeUntil} from "rxjs";
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {ConfirmDialogComponent} from "../../../../../../shared/components/confirm-dialog/confirm-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-universe-body',
@@ -29,7 +31,9 @@ export class UniverseBodyComponent extends DestroySubscription implements OnInit
     private readonly formBuilder: UntypedFormBuilder,
     private readonly route: ActivatedRoute,
     private readonly userService: UserService,
-    private readonly matSnack: MatSnackBar
+    private readonly matSnack: MatSnackBar,
+    private readonly dialog: MatDialog,
+    private readonly router: Router
   ) {
     super();
   }
@@ -111,5 +115,35 @@ export class UniverseBodyComponent extends DestroySubscription implements OnInit
     if(idx && idx !== -1) {
       this.universe.categories?.splice(idx, 1)
     }
+  }
+
+  deleteUniverse() {
+      const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+        data: {
+          message: 'Oh, is this the end? The universe will be deleted'
+        }
+      })
+
+      dialogRef.afterClosed().pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+        if (data) {
+          this.processDeleteUniverse()
+        }
+      })
+
+  }
+  private processDeleteUniverse() {
+    this.userService.deleteUniverse(this.universe.id).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+      this.matSnack.open('Universe Deleted!', 'ok', {
+        verticalPosition: "top",
+        duration: 3000,
+      })
+
+      this.router.navigate(['../user/universes'])
+    }, err => {
+      this.matSnack.open(err.error.message, 'ok', {
+        verticalPosition: "top",
+        duration: 3000,
+      })
+    })
   }
 }
