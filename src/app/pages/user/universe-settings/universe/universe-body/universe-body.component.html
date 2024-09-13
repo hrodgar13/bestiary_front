@@ -11,17 +11,19 @@
     </div>
   </div>
 
-  <div *ngIf="universe && universe.hat">
-    <div [ngClass]="{
+  <div>
+    <div *ngIf="universe && universe.hat" >
+      <div [ngClass]="{
       'image-left': universe.hat.imagePosition === 'left',
       'image-right': universe.hat.imagePosition === 'right',
       }">
-      <app-image-swiper [images]="universe.hat.images"/>
+        <app-image-swiper [images]="universe.hat.images"/>
+      </div>
+      <div *ngFor="let descriptionElement of sortedByOrder(universe.hat.description)">
+        <app-description-structural-paragraph [paragraph]="descriptionElement"/>
+      </div>
     </div>
-    <div *ngFor="let descriptionElement of sortedByOrder(universe.hat.description)">
-      <app-description-structural-paragraph [paragraph]="descriptionElement"/>
-    </div>
-    <div class="flex  gap-11 flex-col w-full h-full">
+    <div class="flex mt-10 gap-11 flex-col w-full h-full">
       <app-universe-category [editingModeEnabled]="editingModeEnabled" *ngFor="let category of universe.categories" class="w-full h-full" [category]="category" [universeId]="universe.id"/>
     </div>
   </div>
@@ -30,7 +32,7 @@
       Create Header
     </a>
   </ng-template>
-  <div *ngIf="editingModeEnabled">
+  <div *ngIf="editingModeEnabled || !universe.categories || !universe.categories.length">
     <button *ngIf="!categoryCreationMode; else createCategory" (click)="openCloseCategoryCreationMode(true)" class="w-full mt-[20px] poppins-font h-20 bg-[#FAFD5D] rounded-[10px] text-[24px] font-semibold">
       Create Category
     </button>

@@ -35,7 +35,7 @@ export class UniverseListComponent extends DestroySubscription{
   createUniverse() {
     this.loading = true
     this.userService.createUniverse().pipe(takeUntil(this.destroyStream$)).subscribe(data => {
-      this.router.navigate(['../user/universes/' + data.id])
+      this.router.navigate(['../user/universe/' + data.id])
       this.loading = false
     }, err => {
       this.loading = false
