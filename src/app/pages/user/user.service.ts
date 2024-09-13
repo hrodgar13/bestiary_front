@@ -12,7 +12,7 @@ import {
 export class UserService {
 
   universe$ = new BehaviorSubject<UniverseInterface | null>(null)
-  editMode$ = new BehaviorSubject<boolean>(false);
+  editMode$ = new BehaviorSubject<boolean>(localStorage.getItem('editingMode') === 'true');
   universeCategories$ = new BehaviorSubject<UniverseCategoryInterfaceMeta[] | null>(null);
 
   constructor(

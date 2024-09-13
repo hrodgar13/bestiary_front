@@ -25,5 +25,6 @@ export class UniverseComponent extends DestroySubscription implements OnInit{
 
   setEditMode(status: boolean) {
     this.userService.editMode$.next(status)
+    localStorage.setItem('editingMode', String(status))
   }
 }
