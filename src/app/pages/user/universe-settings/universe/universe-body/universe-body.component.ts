@@ -139,7 +139,7 @@ export class UniverseBodyComponent extends DestroySubscription implements OnInit
       })
 
       this.router.navigate(['../user/universes'])
-    }, err => {
+    }, (err) => {
       this.matSnack.open(err.error.message, 'ok', {
         verticalPosition: "top",
         duration: 3000,

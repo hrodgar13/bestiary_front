@@ -53,8 +53,13 @@ export class CategoryItemConstructorComponent extends DestroySubscription implem
 
 
   saveItem() {
-    this.userService.createCategoryItem(this.categoryItem, this.universeId, this.categoryId).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+    this.userService.createCategoryItem(this.categoryItem, this.universeId, this.categoryId).pipe(takeUntil(this.destroyStream$)).subscribe((data: any) => {
+      this.categoryItem.id = data.id
 
+      this.matSnack.open(data.message, 'ok', {
+        verticalPosition: "top",
+        duration: 3000
+      })
     }, err => {
       this.matSnack.open(err.error.message, 'ok', {
         verticalPosition: "top",

@@ -98,8 +98,13 @@ export class HeaderConstructorComponent extends DestroySubscription implements O
   }
 
   saveHeader() {
-    this.userService.createUniverseHat(this.hatPayload, this.universeId).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+    this.userService.createUniverseHat(this.hatPayload, this.universeId).pipe(takeUntil(this.destroyStream$)).subscribe((data: any) => {
+      this.hatPayload.id = data.id
 
+      this.matSnack.open(data.message, 'ok', {
+        verticalPosition: "top",
+        duration: 3000
+      })
     })
   }
 
