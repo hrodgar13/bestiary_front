@@ -1,53 +1,37 @@
-<div *ngIf="user" class="pt-6 px-[100px] h-full w-full poppins-font">
+<div *ngIf="user" class="pt-6 px-[20px] 768:px-[100px] h-full w-full poppins-font">
   <app-border-outline [bg]="'#1E232D'">
-    <div class="h-full w-full p-9 flex">
-      <div class="left-block flex h-full w-full flex-col gap-14">
-        <div class="flex gap-11">
-          <div>
-            <button class="w-[360px] h-[360px] relative rounded-full overflow-hidden">
-              <input (change)="loadFile($event)" type="file" class="opacity-0 cursor-pointer absolute top-0 left-0 right-0 bottom-0">
-              <app-visualise-avatar maxw="360px" class="cursor-pointer" [avatarUrl]="avatarUrl"/>
-            </button>
-          </div>
-          <div class="flex flex-col gap-8">
-            <div
-              class="bg-[#15181F] border-2 border-[#E2A23B] text-[#B1A79C] text-[16px] w-full max-w-[360px] h-[50px] p-3 flex items-center justify-center font-normal">
-              <input placeholder="name" [(ngModel)]="name" class="outline-0 border-0 bg-transparent w-full h-full">
-            </div>
-            <div
-              class="bg-[#15181F] cursor-not-allowed border-2 border-[#E2A23B] text-[#B1A79C] text-[16px] w-full max-w-[360px] h-[50px] p-3 flex items-center justify-center font-normal">
-              <input disabled [(ngModel)]="email" placeholder="email"
-                     class="outline-0 cursor-not-allowed  border-0 bg-transparent w-full h-full">
-            </div>
-            <p class="text-[24px] text-[#B1A79C]">Account created: {{user.dateOfCreation | date: 'MM-dd-yyyy'}}</p>
-            <button *ngIf="user.name !== name || user.email !== email" (click)="submitProfileChanges()"
-                    class="bg-[#FAFD5D] font-bold h-[50px] w-[120px]">
-              Save
-            </button>
-          </div>
+    <div class="h-full w-full p-2 480:p-9 gap-3 grid 1024:grid-cols-2 1440:grid-cols-[3fr_1fr]">
+      <!--      <div class="left-block flex h-full w-full flex-col gap-14">-->
+      <div class="flex gap-11 mx-auto 1024:mx-0  1440:flex-row flex-col">
+        <div class="mx-auto">
+          <button class="w-[240px] h-[240px] 480:w-[360px] 480:h-[360px] relative rounded-full overflow-hidden">
+            <input (change)="loadFile($event)" type="file"
+                   class="opacity-0 cursor-pointer absolute top-0 left-0 right-0 bottom-0">
+            <app-visualise-avatar maxw="360px" class="cursor-pointer" [avatarUrl]="avatarUrl"/>
+          </button>
         </div>
-        <div class="flex h-[50px] text-center">
-          <a
-            class="bg-[#15181F] border-2 border-[#E2A23B] text-[#B1A79C] text-[16px] w-[33%] flex items-center justify-center font-normal"
-            [routerLink]="'../' + 'universes'">
-            My universe and settings
-          </a>
-          <a
-            class="bg-[#15181F] line-through border-2 border-[#E2A23B] text-[#B1A79C] text-[16px] w-[33%] flex items-center justify-center font-normal"
-            [routerLink]="'../' + 'games'">
-            My Games
-          </a>
-          <a
-            class="bg-[#15181F] border-2 line-through border-[#E2A23B] text-[#B1A79C] text-[16px] w-[33%] flex items-center justify-center font-normal"
-            [routerLink]="'../' + 'creatures'">
-            My creatures
-          </a>
+        <div class="flex flex-col gap-8 mr-1">
+          <div
+            class="bg-[#15181F] border-2 border-[#E2A23B] text-[#B1A79C] text-[16px] w-full max-w-[360px] h-[50px] p-3 flex items-center justify-center font-normal">
+            <input placeholder="name" [(ngModel)]="name" class="outline-0 border-0 bg-transparent w-full h-full">
+          </div>
+          <div
+            class="bg-[#15181F] cursor-not-allowed border-2 border-[#E2A23B] text-[#B1A79C] text-[16px] w-full max-w-[360px] h-[50px] p-3 flex items-center justify-center font-normal">
+            <input disabled [(ngModel)]="email" placeholder="email"
+                   class="outline-0 cursor-not-allowed  border-0 bg-transparent w-full h-full">
+          </div>
+          <p class="text-[24px] text-[#B1A79C]">Account created: {{user.dateOfCreation | date: 'MM-dd-yyyy'}}</p>
+          <button *ngIf="user.name !== name || user.email !== email" (click)="submitProfileChanges()"
+                  class="bg-[#FAFD5D] font-bold h-[50px] w-[120px]">
+            Save
+          </button>
         </div>
       </div>
-      <div class="right-block w-full max-w-[292px]">
-<!--        TODO create subscription part-->
-        <div *ngIf="user.subscription" class="bg-[#15181F] cursor-not-allowed border-2 border-[#E2A23B] w-full p-5 flex flex-col items-center gap-[10px]">
-          <img class="h-[340px]" [src]="getUserSubImage(user.subscription.type)" alt="">
+      <div class="right-block w-full row-start-3 1024:row-start-auto 1024:max-w-[292px] 1440:row-span-2 mx-auto">
+        <!--        TODO create subscription part-->
+        <div *ngIf="user.subscription"
+             class="bg-[#15181F] cursor-not-allowed border-2 border-[#E2A23B] w-full p-5 flex flex-col items-center gap-[10px]">
+          <img class="w-full 1024:w-auto 1024:h-[340px]" [src]="getUserSubImage(user.subscription.type)" alt="">
           <div class="flex flex-col items-center gap-[5px]">
             <p class="text-[#FAFD5D] text-[32px]">{{user.subscription.type}}</p>
             <p *ngIf="user.dateOfExpireSub; else noSub" class="text-[#FAFD5D] text-[22px]">expires
@@ -58,6 +42,24 @@
           </div>
         </div>
       </div>
+      <div class="flex h-[50px] row-start-2 1024:row-start-auto  1024:col-span-2 1440:row-span-1 text-center flex-wrap 640:flex-nowrap">
+        <a
+          class="bg-[#15181F] border-2 border-[#E2A23B] text-[#B1A79C] text-[16px] w-full 480:w-[50%] h-[48px] 640:h-auto  640:w-[33%] flex items-center justify-center font-normal"
+          [routerLink]="'../' + 'universes'">
+          My universe and settings
+        </a>
+        <a
+          class="bg-[#15181F] line-through border-2 border-[#E2A23B] text-[#B1A79C] text-[16px] h-[48px] 640:h-auto w-full 480:w-[50%] 640:w-[33%] flex items-center justify-center font-normal"
+          [routerLink]="'../' + 'games'">
+          My Games
+        </a>
+        <a
+          class="bg-[#15181F] border-2 line-through border-[#E2A23B] text-[#B1A79C] text-[16px] h-[48px] 640:h-auto w-[100%] 640:w-[33%] flex items-center justify-center font-normal"
+          [routerLink]="'../' + 'creatures'">
+          My creatures
+        </a>
+      </div>
+      <!--      </div>-->
     </div>
   </app-border-outline>
 </div>
