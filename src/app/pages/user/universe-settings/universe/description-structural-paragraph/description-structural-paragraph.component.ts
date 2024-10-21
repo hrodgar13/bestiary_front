@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, HostListener, Input, OnInit} from '@angular/core';
 import {
   DateMetadataParagraphInterface,
   ImageMetadataParagraphInterface,
@@ -24,8 +24,10 @@ export class DescriptionStructuralParagraphComponent implements OnInit{
   imageParagraphOptions!: ImageMetadataParagraphInterface
   listParagraphOptions!: ListMetadataParagraphInterface
   baseUrl: string = environment.baseUrl;
+  multiplier: number = 1;
 
   ngOnInit() {
+    this.onResize()
     switch (this.paragraph.type) {
       case "date": {
         this.convertDateJsonToDate(this.paragraph.metadata)
@@ -90,4 +92,17 @@ export class DescriptionStructuralParagraphComponent implements OnInit{
   }
 
   protected readonly String = String;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(): void {
+    const screenWidth = window.innerWidth;
+
+    if (screenWidth >= 1440) {
+      this.multiplier = 1; // Full size for large screens
+    } else if (screenWidth >= 768 && screenWidth < 1440) {
+      this.multiplier = 0.75; // 75% size for medium screens
+    } else {
+      this.multiplier = 0.5; // 50% size for small screens
+    }
+  }
 }

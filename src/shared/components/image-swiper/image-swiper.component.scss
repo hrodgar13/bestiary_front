@@ -3,6 +3,21 @@
   height: 100%;
   max-width: 400px;
   max-height: 700px;
+
+  @media (min-width: 768px) and (max-width: 1439px) {
+    max-width: 300px; // 75% size on screens between 768px and 1439px
+    max-height: 525px;
+  }
+
+  @media (max-width: 767px) {
+    max-width: 200px; // 50% size on screens below 768px
+    max-height: 350px;
+  }
+
+  @media (max-width: 539px) {
+    max-width: 150px;
+    max-height: 250px;
+  }
 }
 
 .swiper-slide {

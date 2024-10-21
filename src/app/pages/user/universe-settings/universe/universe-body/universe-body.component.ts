@@ -105,7 +105,6 @@ export class UniverseBodyComponent extends DestroySubscription implements OnInit
   private detectEditingModeStatus() {
     this.userService.editMode$.pipe(takeUntil(this.destroyStream$)).subscribe(data => {
       this.editingModeEnabled = data
-      console.log(data)
     })
   }
 

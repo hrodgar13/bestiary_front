@@ -1,12 +1,12 @@
-<div class="p-8 w-full h-full">
+<div class="p-2 640:p-8 w-full h-full">
   <app-border-outline [bg]="'#1E232D'">
-    <div class="flex flex-col gap-8 p-9 w-full">
-      <h2 class="text-[#E2A23B] text-[36px] playfair-font font-[7500]">My worlds, universes and settings</h2>
-      <div  (mouseenter)="onMouseEvent(true, universe.id)" (mouseleave)="onMouseEvent(false, null)" [class.hovered]="isHovered && universe.id === hoveredUniverse" [routerLink]="'../universe/' + universe.id" class="animated-div h-[170px] bg-[#1C1E25] cursor-pointer flex justify-between rounded-[20px] overflow-hidden" *ngFor="let universe of universes">
-        <div class="p-9 flex w-full flex-col">
-          <h2 class="text-[#E2A23B] text-[36px] playfair-font font-semibold">{{universe.title}}</h2>
+    <div class="flex flex-col gap-8 p-4 640:p-9 w-full">
+      <h2 class="text-[#E2A23B] text-[24px] 640:text-[36px] playfair-font font-[7500]">My worlds, universes and settings</h2>
+      <div  (mouseenter)="onMouseEvent(true, universe.id)" (mouseleave)="onMouseEvent(false, null)" [class.hovered]="isHovered && universe.id === hoveredUniverse" [routerLink]="'../universe/' + universe.id" class="animated-div h-[100px] 640:h-[170px] bg-[#1C1E25] cursor-pointer flex justify-between rounded-[20px] overflow-hidden" *ngFor="let universe of universes">
+        <div class="p-4 640:p-9 flex w-full flex-col">
+          <h2 class="text-[#E2A23B] text-[24px] 640:text-[36px] playfair-font font-semibold">{{universe.title}}</h2>
           <div class="flex gap-4 flex-wrap">
-            <div class="border-2 p-1 px-2 border-[#E2A23B] rounded-full text-[#B1A79C] text-[16px] poppins-font font-bold leading-[16px] max-h-[28px]" *ngFor="let item of universe.filterCategories">
+            <div class="border-2 p-1 px-2 border-[#E2A23B] rounded-full text-[#B1A79C] text-[13px] 640:text-[16px] poppins-font font-bold leading-[16px] max-h-[28px]" *ngFor="let item of universe.filterCategories">
               {{item}}
             </div>
           </div>
@@ -15,7 +15,7 @@
           <img class="object-contain" [src]="baseUrl + '/uploads/' + universe.imageUrl" alt="">
         </div>
       </div>
-      <button *ngIf="!loading; else loader" (click)="createUniverse()" class="h-[80px] w-full bg-[#FAFD5D] flex justify-center items-center poppins-font uppercase text-[24px] font-[700] rounded-[10px]">
+      <button *ngIf="!loading; else loader" (click)="createUniverse()" class="h-[40px] 640:h-[80px] w-full bg-[#FAFD5D] flex justify-center items-center poppins-font uppercase text-[16px] 640:text-[24px] font-[700] rounded-[10px]">
         create a new
       </button>
       <ng-template #loader>

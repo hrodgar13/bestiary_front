@@ -1,64 +1,65 @@
-<div class="pb-5 poppins-font flex-col items-start" *ngIf="paragraph.type === 'text' && textParagraphOptions">
+<div class="pb-2 640:pb-3 1024:pb-5 poppins-font flex-col items-start" *ngIf="paragraph.type === 'text' && textParagraphOptions">
   <p class="text-white text-xl 768:text-2xl playfair-font">
-    <span class="text-[#E2A23B] text-[36px] pr-4" *ngIf="paragraph.title">{{paragraph.title}}</span>
-    <span class="text-[28px] text-[#B1A79C]">{{textParagraphOptions.description}}</span>
+    <span class="text-[#E2A23B] text-[20px] 640:text-[24px] 1024:text-[36px] pr-1 640:pr-2 1024:pr-4" *ngIf="paragraph.title">{{paragraph.title}}</span>
+    <span class="text-[18px] 640:text-[20px] 1024:text-[28px] text-[#B1A79C]">{{textParagraphOptions.description}}</span>
   </p>
 </div>
 
-<div class="pb-5 poppins-font flex flex-col justify-center items-center gap-2"
+<div class="pb-2 640:pb-3 1024:pb-5 poppins-font flex flex-col justify-center items-center gap-2"
      *ngIf="paragraph.type === 'image' && imageParagraphOptions"
      [ngClass]="{
       'image-left': imageParagraphOptions.photoAlignment === 'left',
       'image-right': imageParagraphOptions.photoAlignment === 'right',
     }"
      [ngStyle]="{
-            'width': imageParagraphOptions.width ? imageParagraphOptions.width + 'px' : 'auto',
-            'height': imageParagraphOptions.height ? imageParagraphOptions.height + 'px' : 'auto'
+            'width': imageParagraphOptions.width ? (imageParagraphOptions.width * multiplier) + 'px' : 'auto',
+            'height': imageParagraphOptions.height ? (imageParagraphOptions.height * multiplier) + 'px' : 'auto'
          }"
 >
   <img
     class="w-full h-full"
     [src]="baseUrl + '/uploads/' + imageParagraphOptions.imageUrl"
     [ngStyle]="{
-    'width': imageParagraphOptions.width + 'px',
-    'height': imageParagraphOptions.height + 'px'
+    'width': imageParagraphOptions.width ? (imageParagraphOptions.width * multiplier) + 'px' : 'auto',
+    'height': imageParagraphOptions.height ? (imageParagraphOptions.height * multiplier) + 'px' : 'auto'
     }"
     alt="IMG"
   />
   <p *ngIf="paragraph.title" class="text-white text-xl 768:text-2xl playfair-font">
-    <span class="text-[#E2A23B] text-[36px] pr-4">{{paragraph.title}}</span>
+    <span class="text-[#E2A23B] text-[20px] 640:text-[24px] 1024:text-[36px]">{{paragraph.title}}</span>
   </p>
 </div>
 
-<div class="pb-5 poppins-font" *ngIf="paragraph.type === 'number' && numberParagraphOptions">
+
+<div class="pb-2 640:pb-3 1024:pb-5 poppins-font" *ngIf="paragraph.type === 'number' && numberParagraphOptions">
   <p class="text-white text-xl 768:text-2xl playfair-font">
-    <span class="text-[#E2A23B] text-[36px] pr-2" *ngIf="paragraph.title">{{paragraph.title}}</span>
-    <span class="text-[28px] text-[#B1A79C]">{{numberParagraphOptions.value}}</span>
+    <span class="text-[#E2A23B] text-[20px] 640:text-[24px] 1024:text-[36px] pr-1 640:pr-2 1024:pr-4" *ngIf="paragraph.title">{{paragraph.title}}</span>
+    <span class="text-[18px] 640:text-[20px] 1024:text-[28px] text-[#B1A79C]">{{numberParagraphOptions.value}}</span>
   </p>
 </div>
 
-<div class="pb-5 poppins-font" *ngIf="paragraph.type === 'list' && listParagraphOptions">
-  <h3 class="text-[#E2A23B] playfair-font text-[36px]" *ngIf="paragraph.title">{{paragraph.title}}</h3>
+<div class="pb-2 640:pb-3 1024:pb-5 poppins-font" *ngIf="paragraph.type === 'list' && listParagraphOptions">
+  <h3 class="text-[#E2A23B] playfair-font text-[20px] 640:text-[24px] 1024:text-[36px]" *ngIf="paragraph.title">{{paragraph.title}}</h3>
   <ul *ngIf="listParagraphOptions.type === 'number'">
-    <li class="text-[28px] playfair-font text-[#B1A79C]"
+    <li class="text-[18px] 640:text-[20px] 1024:text-[28px] playfair-font text-[#B1A79C]"
         *ngFor="let item of listParagraphOptions.listItems; let i = index"><span
-      class="text-[28px] text-[#E2A23B]">{{i + 1}})</span> {{item}}</li>
+      class="text-[18px] 640:text-[20px] 1024:text-[28px] text-[#E2A23B]">{{i + 1}})</span> {{item}}</li>
   </ul>
   <ul *ngIf="listParagraphOptions.type === 'letter'">
-    <li class="text-[28px] playfair-font text-[#B1A79C]"
+    <li class="text-[18px] 640:text-[20px] 1024:text-[28px] playfair-font text-[#B1A79C]"
         *ngFor="let item of listParagraphOptions.listItems; let i = index"><span
-      class="text-[28px] text-[#E2A23B]">{{String.fromCharCode(97 + i)}})</span> {{item}} </li>
+      class="text-[18px] 640:text-[20px] 1024:text-[28px] text-[#E2A23B]">{{String.fromCharCode(97 + i)}})</span> {{item}} </li>
   </ul>
   <ul *ngIf="listParagraphOptions.type === 'symbol'">
-    <li class="text-[28px] playfair-font text-[#B1A79C]" *ngFor="let item of listParagraphOptions.listItems"><span
-      class="text-[28px] text-[#E2A23B]">&#8226;</span> {{item}}</li>
+    <li class="text-[18px] 640:text-[20px] 1024:text-[28px] playfair-font text-[#B1A79C]" *ngFor="let item of listParagraphOptions.listItems"><span
+      class="text-[18px] 640:text-[20px] 1024:text-[28px] text-[#E2A23B]">&#8226;</span> {{item}}</li>
   </ul>
 </div>
 
-<div class="pb-5 poppins-font" *ngIf="paragraph.type === 'date' && dateParagraphOptions">
+<div class="pb-2 640:pb-3 1024:pb-5 poppins-font" *ngIf="paragraph.type === 'date' && dateParagraphOptions">
   <p class="text-white text-xl 768:text-2xl playfair-font">
-    <span class="text-[#E2A23B] text-[36px] pr-2" *ngIf="paragraph.title">{{paragraph.title}}</span>
-    <span class="text-[36px] text-[#B1A79C]">
+    <span class="text-[#E2A23B] text-[20px] 640:text-[24px] 1024:text-[36px] pr-1 768:pr-2" *ngIf="paragraph.title">{{paragraph.title}}</span>
+    <span class="text-[20px] 640:text-[24px] 1024:text-[36px] text-[#B1A79C]">
       {{dateParagraphOptions.day ? dateParagraphOptions.day + '-' : ''}}
       {{dateParagraphOptions.month ? dateParagraphOptions.month + '-' : ''}}
       {{dateParagraphOptions.year ? dateParagraphOptions.year : ''}}
