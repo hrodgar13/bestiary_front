@@ -1,5 +1,5 @@
-<div class="h-full w-full flex flex-col gap-10">
-  <h2 class="playfair-font text-[#E2A23B] text-[48px] font-semibold">
+<div class="h-full w-full flex flex-col gap-4 768:gap-10 p-3 768:p-0">
+  <h2 class="playfair-font text-[#E2A23B] text-[28px] 640:text-[48px] font-semibold">
     Category item name
   </h2>
   <div class="w-full flex items-center poppins-font border-2 border-[#E2A23B] rounded-[10px] p-2.5 max-w-[280px]">
@@ -7,10 +7,10 @@
            class="w-full h-full text-[#B1A79C] bg-transparent outline-0" type="text"
            placeholder="{{'Title' | transloco}}..."/>
   </div>
-  <h2 class="playfair-font text-[#E2A23B] text-[48px] font-semibold">
+  <h2 class="playfair-font text-[#E2A23B] text-[28px] 640:text-[48px] font-semibold">
     Description Constructor
   </h2>
-  <div class="bg-[#15181F] h-full w-full p-2 border-2 border-[#E2A23B] rounded-[10px]">
+  <div class="bg-[#1E232D] 768:bg-[#15181F] h-full w-full p-0 768:p-2 border-0 768:border-2 border-[#E2A23B] rounded-[10px]">
     <app-paragraph-constructor [structuralParagraphs]="categoryItem.information"
                                (detectSPChange)="setCategoryItemDescription($event)" class="w-full h-full"/>
   </div>
