@@ -13,14 +13,14 @@
         <div class="flex flex-col gap-8 mr-1">
           <div
             class="bg-[#15181F] border-2 border-[#E2A23B] text-[#B1A79C] text-[16px] w-full max-w-[360px] h-[50px] p-3 flex items-center justify-center font-normal">
-            <input placeholder="name" [(ngModel)]="name" class="outline-0 border-0 bg-transparent w-full h-full">
+            <input placeholder="{{'name' | transloco }}" [(ngModel)]="name" class="outline-0 border-0 bg-transparent w-full h-full">
           </div>
           <div
             class="bg-[#15181F] cursor-not-allowed border-2 border-[#E2A23B] text-[#B1A79C] text-[16px] w-full max-w-[360px] h-[50px] p-3 flex items-center justify-center font-normal">
-            <input disabled [(ngModel)]="email" placeholder="email"
+            <input disabled [(ngModel)]="email" placeholder="{{'email' | transloco}}"
                    class="outline-0 cursor-not-allowed  border-0 bg-transparent w-full h-full">
           </div>
-          <p class="text-[24px] text-[#B1A79C]">Account created: {{user.dateOfCreation | date: 'MM-dd-yyyy'}}</p>
+          <p class="text-[24px] text-[#B1A79C]">{{'Account created' | transloco}}: {{user.dateOfCreation | date: 'MM-dd-yyyy'}}</p>
           <button *ngIf="user.name !== name || user.email !== email" (click)="submitProfileChanges()"
                   class="bg-[#FAFD5D] font-bold h-[50px] w-[120px]">
             Save
@@ -46,17 +46,17 @@
         <a
           class="bg-[#15181F] border-2 border-[#E2A23B] text-[#B1A79C] text-[16px] w-full 480:w-[50%] h-[48px] 640:h-auto  640:w-[33%] flex items-center justify-center font-normal"
           [routerLink]="'../' + 'universes'">
-          My universe and settings
+          {{'My universe and settings' | transloco}}
         </a>
         <a
           class="bg-[#15181F] line-through border-2 border-[#E2A23B] text-[#B1A79C] text-[16px] h-[48px] 640:h-auto w-full 480:w-[50%] 640:w-[33%] flex items-center justify-center font-normal"
           [routerLink]="'../' + 'games'">
-          My Games
+          {{'My Games' | transloco}}
         </a>
         <a
           class="bg-[#15181F] border-2 line-through border-[#E2A23B] text-[#B1A79C] text-[16px] h-[48px] 640:h-auto w-[100%] 640:w-[33%] flex items-center justify-center font-normal"
           [routerLink]="'../' + 'creatures'">
-          My creatures
+          {{'My creatures' | transloco}}
         </a>
       </div>
       <!--      </div>-->

@@ -1,6 +1,6 @@
 <div class="h-full w-full flex flex-col gap-4 768:gap-10 p-3 768:p-0">
   <h2 class="playfair-font text-[#E2A23B] text-[28px] 640:text-[48px] font-semibold">
-    Category item name
+    {{'Category item name' | transloco}}
   </h2>
   <div class="w-full flex items-center poppins-font border-2 border-[#E2A23B] rounded-[10px] p-2.5 max-w-[280px]">
     <input [(ngModel)]="categoryItem.title"
@@ -8,7 +8,7 @@
            placeholder="{{'Title' | transloco}}..."/>
   </div>
   <h2 class="playfair-font text-[#E2A23B] text-[28px] 640:text-[48px] font-semibold">
-    Description Constructor
+    {{'Description Constructor' | transloco}}
   </h2>
   <div class="bg-[#1E232D] 768:bg-[#15181F] h-full w-full p-0 768:p-2 border-0 768:border-2 border-[#E2A23B] rounded-[10px]">
     <app-paragraph-constructor [structuralParagraphs]="categoryItem.information"
@@ -16,7 +16,7 @@
   </div>
   <button (click)="saveItem()"
           class="w-full mt-[20px] poppins-font h-20 bg-[#FAFD5D] rounded-[10px] text-[24px] font-semibold">
-    Save
+    {{'Save' | transloco}}
   </button>
 </div>
 

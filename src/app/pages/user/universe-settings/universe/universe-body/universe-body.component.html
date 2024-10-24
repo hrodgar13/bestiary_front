@@ -30,17 +30,17 @@
   <ng-template #createHeader>
     <div class="px-2 768:px-0 pt-4 768:pt-0">
       <a [routerLink]="['./' + 'header']" class="w-full cursor-pointer poppins-font flex items-center justify-center h-14 768:h-20 bg-[#FAFD5D] rounded-[10px] text-[16px] 768:text-[24px] font-semibold">
-        Create Header
+        {{'Create Header' | transloco}}
       </a>
     </div>
   </ng-template>
   <div class="px-2 768:px-0" *ngIf="editingModeEnabled || !universe.categories || !universe.categories.length">
     <button *ngIf="!categoryCreationMode; else createCategory" (click)="openCloseCategoryCreationMode(true)" class="w-full mt-[20px] poppins-font h-14 768:h-20 bg-[#FAFD5D] rounded-[10px] text-[16px] 768:text-[24px] font-semibold">
-      Create Category
+      {{'Create Category' | transloco}}
     </button>
     <ng-template #createCategory>
       <form [formGroup]="categoryCreateForm" (ngSubmit)="sendCategory()" class="h-[100px] mt-[20px] w-full rounded-[20px] bg-[#1C1E25] border-2 border-[#FAFD5D] flex justify-between items-center p-4">
-        <input formControlName="categoryName" type="text" class="w-full max-w-[480px] text-[#B1A79C] h-[48px] rounded-[10px] bg-[#1C1E25] border-2 border-[#E2A23B] outline-none p-1" placeholder="Type category name here...">
+        <input formControlName="categoryName" type="text" class="w-full max-w-[480px] text-[#B1A79C] h-[48px] rounded-[10px] bg-[#1C1E25] border-2 border-[#E2A23B] outline-none p-1" placeholder="{{'Type category name here' | transloco}}...">
         <button type="submit" class="min-w-[48px] min-h-[48px] bg-[#E2A23B] rounded-[10px] flex items-center justify-center">
           <mat-icon>done</mat-icon>
         </button>

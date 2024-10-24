@@ -1,12 +1,12 @@
 <div class="px-1 640:px-0 h-full w-full flex flex-col gap-3 480:gap-10">
   <h2 class="playfair-font text-[#E2A23B] text-[32px] 768:text-[48px] font-semibold">
-    Name and Gallery
+    {{'Name and Gallery' | transloco}}
   </h2>
   <div class="grid grid-cols-1 1280:grid-cols-2 w-full h-full gap-[30px]">
     <div class="flex max-w-[500px] flex-col gap-[30px]">
       <div class="flex w-full gap-4 480:justify-between flex-wrap">
         <div class="max-w-[280px] w-full h-[48px] border-2 border-[#E2A23B] rounded-[10px] p-3">
-          <input [(ngModel)]="hatPayload.universeName" class="h-full w-full text-[16px] text-[#B1A79C] poppins-font bg-transparent outline-0" [placeholder]="'Setting Name'">
+          <input [(ngModel)]="hatPayload.universeName" class="h-full w-full text-[16px] text-[#B1A79C] poppins-font bg-transparent outline-0" [placeholder]="'Setting Name' | transloco">
         </div>
         <div class="flex gap-5">
           <button (click)="setPhotoAlignment('left')" [disabled]="hatPayload.imagePosition === 'left'" class="photo-alignment w-[48px] h-[48px] flex items-center justify-center border-2 disabled:border-[#B1A79C] border-[#E2A23B] rounded-[10px]">
@@ -34,7 +34,7 @@
           <div *ngIf="i === 3" class="w-[200px] 640:w-[240px] rounded-[10px] border-2 border-[#E2A23B] h-[200px] 640:h-[240px] overflow-hidden">
             <ng-container *ngIf="hatPayload.images.length > 4">
               <div class="flex bg-[#15181F] items-center h-full w-full justify-center poppins-font text-[32px] text-[#B1A79C] font-bold">
-                {{ hatPayload.images.length - 3 }} more...
+                {{ hatPayload.images.length - 3 }} {{'more' | transloco}}...
               </div>
             </ng-container>
             <ng-container *ngIf="hatPayload.images.length === 4">
@@ -47,12 +47,12 @@
     </div>
   </div>
   <h2 class="playfair-font text-[#E2A23B] text-[32px] 768:text-[48px] font-semibold">
-    Description Constructor
+    {{'Description Constructor' | transloco}}
   </h2>
   <div class="bg-[#1E232D] 768:bg-[#15181F] h-full w-full p-0 768:p-2 border-0 768:border-2 border-[#E2A23B] rounded-[10px]">
     <app-paragraph-constructor [presetImageOptions]="{width: 350, height: 500, position: hatPayload.imagePosition}" [showPlaceForImage]="true" *ngIf="!loading" [structuralParagraphs]="hatPayload.description" (detectSPChange)="setHatPayload($event)" class="w-full h-full" />
   </div>
   <button (click)="saveHeader()" class="w-full mt-[20px] poppins-font h-20 bg-[#FAFD5D] rounded-[10px] text-[24px] font-semibold">
-    Save
+    {{'Save' | transloco}}
   </button>
 </div>

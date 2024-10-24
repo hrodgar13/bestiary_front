@@ -126,5 +126,41 @@
   "constitution": "Constitution",
   "intelligence": "Intelligence",
   "wisdom": "Wisdom",
-  "charisma": "Charisma"
+  "charisma": "Charisma",
+
+  "name": "Name",
+  "email": "Email",
+  "Account created": "Account created",
+  "My universe and settings": "My universe and settings",
+  "My Games": "My Games",
+  "My creatures": "My creatures",
+
+  "Choose category": "Choose category",
+  "My worlds, universes and settings" : "My worlds, universes and settings",
+  "Search by name": "Search by name",
+
+  "create a new": "create a new",
+  "Create Header": "Create Header",
+  "Create Category": "Create Category",
+  "Run edit mode": "Run edit mode",
+  "Exit edit mode": "Exit edit mode",
+
+  "Name and Gallery": "Name and Gallery",
+  "Setting Name": "Setting Name",
+
+  "more": "more",
+  "Description Constructor": "Description Constructor",
+  "Save": "Save",
+  "Title": "Title",
+
+  "text": "text",
+  "number": "number",
+  "date": "date",
+  "image": "image",
+  "list": "list",
+
+  "Type category name here": "Type category name here",
+  "Create Write": "Create Write",
+
+  "Category item name": "Category item name"
 }

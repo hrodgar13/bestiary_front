@@ -1,7 +1,7 @@
 <div class="w-full h-full flex flex-col gap-5">
   <div class="flex 640:items-center gap-2 640:gap-0 flex-col 640:flex-row justify-between w-full h-full">
     <div class="max-w-[280px] w-full h-[48px] border-2 border-[#E2A23B] rounded-[10px] p-3 640:mr-1">
-      <input [(ngModel)]="title" class="h-full w-full text-[16px] text-[#B1A79C] poppins-font bg-transparent outline-0" [placeholder]="'Title'">
+      <input [(ngModel)]="title" class="h-full w-full text-[16px] text-[#B1A79C] poppins-font bg-transparent outline-0" [placeholder]="'Title' | transloco">
     </div>
     <div class="flex items-center gap-5">
       <div class="min-w-[180px] 640:min-w-[280px] w-full h-[48px] border-2 border-[#E2A23B] rounded-[10px] p-3">
@@ -9,7 +9,7 @@
                     panelClass="vu-select backdrop-remover" [placeholder]="'Choose Type' | transloco">
           <mat-option class="text-[#B1A79C] vu-select" [value]="item"
                       *ngFor="let item of metadataFieldTypes">
-            {{item | titlecase}}
+            {{item | transloco | titlecase}}
           </mat-option>
         </mat-select>
       </div>

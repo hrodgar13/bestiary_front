@@ -126,5 +126,41 @@
   "constitution": "Тілобудова",
   "intelligence": "Інтелект",
   "wisdom": "Мудрість",
-  "charisma": "Харизма"
+  "charisma": "Харизма",
+
+  "name": "Ім'я",
+  "email": "Email",
+  "Account created": "Аккаунт створено",
+  "My universe and settings": "Мої світи і сеттінги",
+  "My Games": "Мої ігри",
+  "My creatures": "Мої істоти",
+
+  "Choose category": "Виберіть категорію",
+  "My worlds, universes and settings" : "Мої світи, всесвіти і сетінги",
+  "Search by name": "Шукати за назвою",
+
+  "create a new": "створити новий",
+  "Create Header": "Створити Заголовок",
+  "Create Category": "Створити категорію",
+  "Run edit mode": "Ввімкнути редактування",
+  "Exit edit mode": "Вимкнути редагування",
+
+  "Name and Gallery": "Назва та Галерея",
+  "Setting Name": "Назва Сеттінгу",
+
+  "more": "ще",
+  "Description Constructor": "Конструктор Опису",
+  "Save": "Зберегти",
+  "Title": "Заголовок",
+
+  "text": "текст",
+  "number": "цифра",
+  "date": "дата",
+  "image": "зображення",
+  "list": "список",
+
+  "Type category name here": "Введіть ім'я категорії",
+  "Create Write": "Створити запис",
+
+  "Category item name": "Назва запису категорії"
 }

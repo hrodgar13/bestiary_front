@@ -1,11 +1,11 @@
 <mat-drawer class="h-full mt-[48px] 768:mt-[112px]" #AdminDrawer>
   <div class="flex flex-col primary-bg w-[262px] h-full p-4 border-2 border-[#E2A23B]">
     <button *ngIf="!editMode; else disableEditModeBtn" (click)="setEditMode(true)" class="w-full mt-[20px] poppins-font h-20 bg-[#FAFD5D] rounded-[10px] text-[24px] font-semibold">
-      Run edit mode
+      {{'Run edit mode' | transloco}}
     </button>
     <ng-template #disableEditModeBtn>
       <button (click)="setEditMode(false)" class="w-full mt-[20px] poppins-font h-20 bg-[#1C1E25] rounded-[10px] border-2 border-[#FAFD5D] text-[24px] text-[#E2A23B] font-semibold">
-        Exit edit mode
+        {{'Exit edit mode' | transloco}}
       </button>
     </ng-template>
   </div>
