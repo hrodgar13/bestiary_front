@@ -20,6 +20,10 @@ export class AdminComponent {
       title: 'Requests',
       route: 'requests'
     },
+    {
+      title: 'Universe tag',
+      route: 'universe-tag'
+    }
   ];
 
 }

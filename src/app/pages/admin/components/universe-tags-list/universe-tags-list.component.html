@@ -1,0 +1,35 @@
+<div class="flex flex-col text-7xl p-4 text-[#E2A23B] gap-4">
+  <div class="flex gap-5 items-center">
+    <h2 class="playfair-font text-xl 768:text-4xl whitespace-nowrap">
+      {{'Universe Tag' | transloco | uppercase}}
+    </h2>
+    <button (click)="openAddTagModal()"
+      class="rounded-xl w-full h-[40px] 768:h-[60px] flex-row bg-gradient-to-r from-[#75e498] to-[#20e074] flex items-center justify-end p-2">
+      <mat-icon class="text-white">add</mat-icon>
+    </button>
+  </div>
+  <div>
+    <div *ngFor="let tag of universeTags">
+      <app-border-outline [bg]="'#1E232D'" class="h-[60px] max-w-[320px] flex">
+        <div class="w-full h-full flex items-center justify-between px-2">
+          <div>
+            <p class="text-[24px]">{{tag.tagName.en}}</p>
+          </div>
+          <div class="flex gap-2 items-center">
+            <app-border-outline>
+              <button (click)="editTag(tag)" class="p-1 w-[30px] h-[30px] flex items-center justify-center">
+                <mat-icon class="text-[#E2A23B]">edit</mat-icon>
+              </button>
+            </app-border-outline>
+            <app-border-outline>
+              <button (click)="removeTag(tag.id)" class="p-1 w-[30px] h-[30px] flex items-center justify-center">
+                <mat-icon class="text-[#E2A23B]">delete</mat-icon>
+              </button>
+            </app-border-outline>
+          </div>
+        </div>
+
+      </app-border-outline>
+    </div>
+  </div>
+</div>
