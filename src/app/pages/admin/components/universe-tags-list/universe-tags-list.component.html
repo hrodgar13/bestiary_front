@@ -8,9 +8,9 @@
       <mat-icon class="text-white">add</mat-icon>
     </button>
   </div>
-  <div>
+  <div class="flex gap-2 flex-wrap">
     <div *ngFor="let tag of universeTags">
-      <app-border-outline [bg]="'#1E232D'" class="h-[60px] max-w-[320px] flex">
+      <app-border-outline [bg]="'#1E232D'" class="h-[60px] min-w-[320px] flex">
         <div class="w-full h-full flex items-center justify-between px-2">
           <div>
             <p class="text-[24px]">{{tag.tagName[currentLanguage]}}</p>

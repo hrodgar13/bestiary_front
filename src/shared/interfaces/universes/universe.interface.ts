@@ -1,5 +1,8 @@
+import {UniverseTagInterface} from "../user/universe-tag.interface";
+
 export interface UniverseInterface {
   id: number
+  filterCategories?: UniverseTagInterface[]
   hat?: UniverseHatInterface
   categories?: UniverseCategoryInterface[]
   timeline: any

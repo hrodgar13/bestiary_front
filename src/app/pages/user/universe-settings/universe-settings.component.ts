@@ -3,6 +3,7 @@ import {DestroySubscription} from "../../../../shared/helpers/destroy-subscribti
 import {UserService} from "../user.service";
 import {takeUntil} from "rxjs";
 import {UniverseListItem} from "../../../../shared/interfaces/universes/universe.interface";
+import {UniverseTagInterface} from "../../../../shared/interfaces/user/universe-tag.interface";
 
 @Component({
   selector: 'app-universe-settings',
@@ -10,8 +11,11 @@ import {UniverseListItem} from "../../../../shared/interfaces/universes/universe
   styleUrls: ['./universe-settings.component.scss']
 })
 export class UniverseSettingsComponent extends DestroySubscription implements OnInit{
-  categories: string[] = [];
+  categories: UniverseTagInterface[] = [];
   universes: UniverseListItem[] = [];
+
+  searchingCategories: UniverseTagInterface[] = []
+  searchingName: string = ''
 
   constructor(
     private readonly userService: UserService
@@ -31,8 +35,20 @@ export class UniverseSettingsComponent extends DestroySubscription implements On
   }
 
   private getUserUniverses() {
-    return this.userService.getUniverses().pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+    return this.userService.getUniverses(this.searchingName, this.searchingCategories).pipe(takeUntil(this.destroyStream$)).subscribe(data => {
       this.universes = data
     })
+  }
+
+  setSearchInput($event: string) {
+    this.searchingName = $event
+
+    this.getUserUniverses()
+  }
+
+  setCategoriesFiltering($event: UniverseTagInterface[]) {
+    this.searchingCategories = $event
+
+    this.getUserUniverses()
   }
 }

@@ -7,6 +7,7 @@ import {
   UniverseInterface,
   UniverseListItem
 } from "../../../shared/interfaces/universes/universe.interface";
+import {UniverseTagInterface} from "../../../shared/interfaces/user/universe-tag.interface";
 
 @Injectable()
 export class UserService {
@@ -28,12 +29,12 @@ export class UserService {
     return this.apiService.removePhoto(selectedImage)
   }
 
-  getUniverseFilterCategories(): Observable<string[]> {
-    return this.apiService.getUniverseFilterCategories()
+  getUniverseFilterCategories(): Observable<UniverseTagInterface[]> {
+    return this.apiService.getUniverseTags()
   }
 
-  getUniverses(): Observable<UniverseListItem[]> {
-    return this.apiService.getUniverses()
+  getUniverses(name: string, categories: UniverseTagInterface[]): Observable<UniverseListItem[]> {
+    return this.apiService.getUniverses(name, categories)
   }
 
   getUniverseById(universeId: number) {
@@ -74,5 +75,16 @@ export class UserService {
 
   deleteUniverse(id: number) {
     return this.apiService.deleteUniverse(id)
+  }
+
+  applyTags(selectedCategories: UniverseTagInterface[], universeId: number) {
+    let selectedTagsIds: number[] = []
+    selectedCategories.map(item => {
+      if(item.id) {
+        selectedTagsIds.push(item.id)
+      }
+    })
+
+    return this.apiService.applyTags(selectedTagsIds, universeId)
   }
 }
