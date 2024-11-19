@@ -7,7 +7,7 @@
           <h2 class="text-[#E2A23B] text-[24px] 640:text-[36px] playfair-font font-semibold">{{universe.title}}</h2>
           <div class="flex gap-4 flex-wrap">
             <div class="border-2 p-1 px-2 border-[#E2A23B] rounded-full text-[#B1A79C] text-[13px] 640:text-[16px] poppins-font font-bold leading-[16px] max-h-[28px]" *ngFor="let item of universe.filterCategories">
-              {{item}}
+              {{item.tagName[currentLanguage]}}
             </div>
           </div>
         </div>

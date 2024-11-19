@@ -68,24 +68,24 @@ export interface UniverseListItem {
   id: number
   title: string
   imageUrl: string
-  filterCategories: string[]
+  filterCategories: UniverseTagInterface[]
 }
 
 
-export const MOCK_UNIVERSE_LIST: UniverseListItem[] = [
-  {
-    id: 0,
-    title: 'Viribus Unitis',
-    filterCategories: ['fantasy', 'dark fantasy', 'horror', 'grandma'],
-    imageUrl: 'https://i.pinimg.com/564x/e9/4a/5b/e94a5bc8ba68e1eef3b3dd7eeb9f2e0f.jpg'
-  },
-  {
-    id: 1,
-    title: 'Bioshy',
-    filterCategories: ['post apocalypse', 'mystic', 'multiple plans', 'mushrooms'],
-    imageUrl: 'https://i.pinimg.com/564x/d3/54/fb/d354fb8630f1cdadcd062116ad838917.jpg'
-  }
-]
+// export const MOCK_UNIVERSE_LIST: UniverseListItem[] = [
+//   {
+//     id: 0,
+//     title: 'Viribus Unitis',
+//     filterCategories: ['fantasy', 'dark fantasy', 'horror', 'grandma'],
+//     imageUrl: 'https://i.pinimg.com/564x/e9/4a/5b/e94a5bc8ba68e1eef3b3dd7eeb9f2e0f.jpg'
+//   },
+//   {
+//     id: 1,
+//     title: 'Bioshy',
+//     filterCategories: ['post apocalypse', 'mystic', 'multiple plans', 'mushrooms'],
+//     imageUrl: 'https://i.pinimg.com/564x/d3/54/fb/d354fb8630f1cdadcd062116ad838917.jpg'
+//   }
+// ]
 
 
 export const MOCK_UNIVERSE: UniverseInterface = {

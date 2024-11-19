@@ -15,9 +15,6 @@ import {CreateRequest} from "../interfaces/request/create-request.interface";
 import {RequestDataMetaI} from "../interfaces/request/request.data-meta.interface";
 import {
   CreateUniverse,
-  MOCK_UNIVERSE,
-  MOCK_UNIVERSE_LIST,
-  UNIVERSE_FILTERING_CATEGORIES,
   UniverseCategoryInterface,
   UniverseCategoryInterfaceMeta,
   UniverseCategoryItem,
