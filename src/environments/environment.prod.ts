@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  baseUrl: 'http://viribus-unitis.api.uk.to'
+  baseUrl: 'http://viribus-unitis.api.mooo.com'
 }

@@ -3,6 +3,8 @@ import {Router} from "@angular/router";
 import {AuthService} from "../../services/auth.service";
 import {takeUntil} from "rxjs";
 import {DestroySubscription} from "../../helpers/destroy-subscribtion";
+import {UserProfile} from "../../interfaces/user/user-profile.interface";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-auth-login',
@@ -10,9 +12,9 @@ import {DestroySubscription} from "../../helpers/destroy-subscribtion";
   styleUrls: ['./auth-login.component.scss']
 })
 export class AuthLoginComponent  extends DestroySubscription implements OnInit {
-
   isAuthed: boolean = this.auth.isAuthenticated();
   isAdmin = this.auth.isAdminAuthenticated();
+  user?: UserProfile;
 
   constructor(
     private router: Router,
@@ -29,6 +31,9 @@ export class AuthLoginComponent  extends DestroySubscription implements OnInit {
   detectTokenChange() {
     this.auth.accessToken$.pipe(takeUntil(this.destroyStream$)).subscribe((data) => {
       this.updateToken(data)
+      if(data) {
+        this.updateUserInfo()
+      }
     })
   }
 
@@ -42,4 +47,23 @@ export class AuthLoginComponent  extends DestroySubscription implements OnInit {
     this.auth.logout()
     this.router.navigate(['..'])
   }
+
+  private updateUserInfo() {
+    this.auth.userProfile$.pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+      if(data) {
+        this.user = data
+      } else {
+        this.getUserInfo()
+      }
+    })
+  }
+
+  private getUserInfo() {
+    this.auth.getUserInfo().pipe(takeUntil(this.destroyStream$)).subscribe(data => {
+      this.user = data
+      this.auth.userProfile$.next(this.user)
+    })
+  }
+
+
 }

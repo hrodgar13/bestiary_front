@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {AuthService} from "../../../shared/services/auth.service";
 import {ApiService} from "../../../shared/services/api.service";
 
@@ -8,7 +8,8 @@ export class AdminService {
   constructor(
     private authService: AuthService,
     private apiService: ApiService
-  ) { }
+  ) {
+  }
 
   isAdmin() {
     return this.authService.isAdminAuthenticated()
@@ -36,5 +37,13 @@ export class AdminService {
 
   setAsAdmin(id: number) {
     return this.apiService.setAsAdmin(id)
+  }
+
+  getUniverseTags() {
+    return this.apiService.getUniverseTags()
+  }
+
+  removeTag(id: number) {
+    return this.apiService.deleteTag(id)
   }
 }

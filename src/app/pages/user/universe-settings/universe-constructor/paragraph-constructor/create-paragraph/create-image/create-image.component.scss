@@ -1,0 +1,15 @@
+.photo-alignment {
+  svg {
+    path {
+      fill: #E2A23B
+    }
+  }
+
+  &:disabled {
+    svg {
+      path {
+        fill: #B1A79C;
+      }
+    }
+  }
+}

@@ -5,6 +5,7 @@ import {Token, TokenDecoded} from "../interfaces/user/token.interface";
 import {RegisterData} from "../interfaces/user/create-user.interface";
 import {LoginInterface} from "../interfaces/user/login.interface";
 import jwt_decode from 'jwt-decode'
+import {MOCK_USER_PROFILE, UpdateProfileDto, UserProfile} from "../interfaces/user/user-profile.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ import jwt_decode from 'jwt-decode'
 export class AuthService {
 
   accessToken$ = new BehaviorSubject<string | null>(localStorage.getItem('auth-token') ? localStorage.getItem('auth-token') : null)
-
+  userProfile$ = new BehaviorSubject<UserProfile | null>(null)
   private access_token: string | null = null
 
   constructor(
@@ -82,5 +83,13 @@ export class AuthService {
     }
 
     return false
+  }
+
+  getUserInfo() : Observable<UserProfile> {
+    return this.http.get<UserProfile>('api/user/profile')
+  }
+
+  updateProfile(user: UpdateProfileDto): Observable<any> {
+    return this.http.post<any>('api/user/profile/update', user)
   }
 }
