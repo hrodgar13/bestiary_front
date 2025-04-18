@@ -1,0 +1,17 @@
+.image-left {
+  float: left;
+  margin-right: 15px;
+  margin-bottom: 10px;
+}
+
+.image-right {
+  float: right;
+  margin-left: 15px;
+  margin-bottom: 10px;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}

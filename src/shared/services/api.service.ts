@@ -1,21 +1,28 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {BehaviorSubject, Observable} from "rxjs";
+import {BehaviorSubject, Observable, of} from "rxjs";
 import {CreateAttribute} from "../interfaces/creature/create/create-attribute";
 import {Creature} from "../interfaces/creature/get/creature";
 import {Attribute} from "../interfaces/creature/get/attribute";
 import {CreatureListFilter} from "../interfaces/filters/creature-list-filter";
 import {
   FilteredCreatureDataMetaDto,
-  FilteredCreatureList,
-  FilteredCreatureListItem
 } from "../interfaces/filters/creatures.list";
-import {OutputCreatureItem} from "../interfaces/filters/output-creature-item";
 import {FileUpload} from "../interfaces/file/file-upload.interface";
 import {MessageI} from "../interfaces/message.interface";
 import {Translation} from "@ngneat/transloco";
 import {CreateRequest} from "../interfaces/request/create-request.interface";
 import {RequestDataMetaI} from "../interfaces/request/request.data-meta.interface";
+import {
+  CreateUniverse,
+  UniverseCategoryInterface,
+  UniverseCategoryInterfaceMeta,
+  UniverseCategoryItem,
+  UniverseHatInterface,
+  UniverseInterface,
+  UniverseListItem
+} from "../interfaces/universes/universe.interface";
+import {UniverseTagInterface} from "../interfaces/user/universe-tag.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -95,7 +102,7 @@ export class ApiService {
       .set('onlyAdminRequest', onlyAdminRequest)
       .set('perPage', perPage)
 
-    return this.http.get<RequestDataMetaI>(`api/message/list`,{params})
+    return this.http.get<RequestDataMetaI>(`api/message/list`, {params})
   }
 
   deleteMessage(id: number): Observable<MessageI> {
@@ -116,5 +123,86 @@ export class ApiService {
 
         return params.set(key.filter_cat, key.filter_values.map(item => item.id).toString());
       }, new HttpParams())
+  }
+
+  deleteActionAbility(id: number): Observable<MessageI> {
+    return this.http.delete<MessageI>(`api/creature/action-ability/${id}`);
+  }
+
+  getUniverses(name: string, categories: UniverseTagInterface[]): Observable<UniverseListItem[]> {
+    let params = new HttpParams().set('title', name)
+
+    const tagIds = categories
+      .map(tag => tag.id)
+      .filter(id => id !== undefined)
+      .join(',');
+
+    params = params.set('tags', tagIds)
+
+    return this.http.get<UniverseListItem[]>(`api/settings/universe-list`, {params});
+  }
+
+  getUniverseById(universeId: number): Observable<UniverseInterface> {
+    return this.http.get<UniverseInterface>(`api/settings/universe/${universeId}`)
+  }
+
+  createUniverse(): Observable<CreateUniverse> {
+    return this.http.post<CreateUniverse>(`api/settings/universe`, {})
+  }
+
+  updateUniverseHat(hatPayload: UniverseHatInterface, universeId: number) {
+    return this.http.post(`api/settings/universe/${universeId}/hat`, hatPayload)
+  }
+
+  createCategory(payload: UniverseCategoryInterface, universeId: number): Observable<UniverseCategoryInterface> {
+    return this.http.post<UniverseCategoryInterface>(`api/settings/universe/${universeId}/category`, payload)
+  }
+
+  createCategoryItem(payload: UniverseCategoryItem, universeId: number, categoryId: number): Observable<UniverseCategoryItem> {
+    return this.http.post<UniverseCategoryItem>(`api/settings/universe/${universeId}/category/${categoryId}/item`, payload)
+  }
+
+  getCategoryItems(universeId: number, categoryId: number, page: number, title: string): Observable<UniverseCategoryInterfaceMeta> {
+    const params: HttpParams = new HttpParams()
+      .set('title', title)
+      .set('page', page)
+
+    return this.http.get<UniverseCategoryInterfaceMeta>(`api/settings/universe/${universeId}/category/${categoryId}`, {params})
+  }
+
+  getCategoryItemById(universeId: number, categoryId: number, itemId: number): Observable<UniverseCategoryItem> {
+    return this.http.get<UniverseCategoryItem>(`api/settings/universe/${universeId}/category/${categoryId}/item/${itemId}`)
+  }
+
+  deleteCategoryItem(itemId: number) {
+    return this.http.delete(`api/settings/universe/category/item/${itemId}`)
+  }
+
+  deleteCategory(categoryId: number) {
+    return this.http.delete(`api/settings/universe/category/${categoryId}`)
+  }
+
+  deleteUniverse(id: number) {
+    return this.http.delete(`api/settings/universe/${id}`)
+  }
+
+  getUniverseTags(): Observable<UniverseTagInterface[]> {
+    return this.http.get<UniverseTagInterface[]>(`api/settings/universe-tag`)
+  }
+
+  createUniverseTag(payload: Translation) {
+    return this.http.post('api/settings/universe-tag', {body: payload})
+  }
+
+  editUniverseTag(payload: Translation, id: number) {
+    return this.http.patch(`api/settings/universe-tag/${id}`, {payload})
+  }
+
+  deleteTag(id: number) {
+    return this.http.delete(`api/settings/universe-tag/${id}`)
+  }
+
+  applyTags(tagsIds: number[], universeId: number) {
+    return this.http.post(`api/settings/universe-tag/apply/${universeId}`, {tagsIds})
   }
 }

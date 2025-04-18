@@ -275,3 +275,9 @@ app-dice-roll-snack {
   position: fixed;
   z-index: 1000;
 }
+
+.backdrop-remover.mat-mdc-select-panel {
+  padding: 0!important;
+  border: 0;
+  border-radius: 20px;
+}

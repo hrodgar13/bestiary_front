@@ -5,6 +5,7 @@ import {AdminGuard} from "../../../shared/guards/admin.guard";
 import {UnfinishedCreaturesListComponent} from "./components/creatures-list/unfinished-creatures-list.component";
 import {AttributesListComponent} from "./components/attributes-list/attributes-list.component";
 import {AdminRequestsListComponent} from "./components/admin-requests-list/admin-requests-list.component";
+import {UniverseTagsListComponent} from "./components/universe-tags-list/universe-tags-list.component";
 
 const routes: Routes = [
   {
@@ -28,6 +29,10 @@ const routes: Routes = [
       {
         path: 'requests',
         component: AdminRequestsListComponent
+      },
+      {
+        path: 'universe-tag',
+        component: UniverseTagsListComponent
       }
     ]
   },

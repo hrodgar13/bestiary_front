@@ -15,7 +15,7 @@ import {MainLayoutComponent} from "./main-layout/main-layout.component";
 import {ApiInterceptor} from "../shared/interceptors/api.interceptor";
 import {MatSelectModule} from "@angular/material/select";
 import {HeaderModule} from "./header/header.module";
-import {MAT_SNACK_BAR_DEFAULT_OPTIONS} from "@angular/material/snack-bar";
+import {UserModule} from "./pages/user/user.module";
 
 @NgModule({
   declarations: [
@@ -35,6 +35,7 @@ import {MAT_SNACK_BAR_DEFAULT_OPTIONS} from "@angular/material/snack-bar";
     RouterModule,
     SharedModule,
     HomeModule,
+    UserModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true},

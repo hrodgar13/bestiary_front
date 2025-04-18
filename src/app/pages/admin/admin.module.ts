@@ -15,7 +15,7 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { MessageRequestModalComponent } from './components/admin-requests-list/modals/message-request.modal/message-request.modal.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
 import { AdminRequestBodyComponent } from './components/admin-requests-list/components/admin-request-body/admin-request-body.component';
@@ -23,6 +23,10 @@ import { AdminRequestItemComponent } from './components/admin-requests-list/comp
 import {
   AdminRequestHeaderComponent
 } from "./components/admin-requests-list/components/admin-reqest-header/admin-request-header.component";
+import { UniverseTagsListComponent } from './components/universe-tags-list/universe-tags-list.component';
+import { AddTagModalComponent } from './components/universe-tags-list/add-tag-modal/add-tag-modal.component';
+import {MatLegacyOptionModule} from "@angular/material/legacy-core";
+import {MatLegacySelectModule} from "@angular/material/legacy-select";
 
 
 @NgModule({
@@ -34,23 +38,28 @@ import {
     MessageRequestModalComponent,
     AdminRequestHeaderComponent,
     AdminRequestBodyComponent,
-    AdminRequestItemComponent
+    AdminRequestItemComponent,
+    UniverseTagsListComponent,
+    AddTagModalComponent
   ],
-  imports: [
-    CommonModule,
-    AdminRoutingModule,
-    MatDialogModule,
-    MatSidenavModule,
-    TranslocoPipe,
-    MatIconModule,
-    SharedModule,
-    MatSnackBarModule,
-    MatProgressSpinnerModule,
-    MatButtonToggleModule,
-    MatSlideToggleModule,
-    FormsModule,
-    MatTooltipModule
-  ],
+    imports: [
+        CommonModule,
+        AdminRoutingModule,
+        MatDialogModule,
+        MatSidenavModule,
+        TranslocoPipe,
+        MatIconModule,
+        SharedModule,
+        MatSnackBarModule,
+        MatProgressSpinnerModule,
+        MatButtonToggleModule,
+        MatSlideToggleModule,
+        FormsModule,
+        MatTooltipModule,
+        MatLegacyOptionModule,
+        MatLegacySelectModule,
+        ReactiveFormsModule
+    ],
   providers: [
     AdminService
   ]
